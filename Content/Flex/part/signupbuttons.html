@@ -1,0 +1,46 @@
+<script cdscript="true" type="text/javascript">
+    cd.flex.addTemplate(
+        "signupbuttons",
+	   null,
+       function (template, part) {
+           //write custom stuff           
+           part.append();
+       },
+       function (part) {
+           part.setupEvent(part.eventKeys.signupredirect, 'click [cdid="btn-firsttimeuserloginsection-signup"]');
+           part.setupEvent(part.eventKeys.facebooksignup, 'click [cdid="btn-firsttimeuserloginsection-facebook-signup"]');
+
+           part.setupState(part.stateKeys.initialize, function (stateData) {
+               if (stateData.showFacebookOnly) {
+                   $('[cdid=signup-btn-container]').hide();
+                   $('[cdid=signup-devidetext-container]').hide();                   
+               }
+               if (stateData.isFacebookRegistration) {
+                   $('[cdid=signup-facebook-container]').hide();
+               }
+            });
+       }
+	  );
+</script>
+
+<div class="partcontent-signupbuttons" cdlegacy="false">
+    <div class="content-firsttimeuserloginsection">
+        <ul>
+            <li class="btn-action-container" cdid="signup-btn-container">
+								<h1 cdresource="first_time_users_message"></h1>
+                <a cdid="btn-firsttimeuserloginsection-signup" class="btn-signup" href="#btn-signup">
+                    <span cdresource="sign_up"></span>
+                </a>
+                
+            </li>
+            <!--<li class="signup-devidetext-container" cdid="signup-devidetext-container">
+                <h1 cdresource="or" class="facebook-title"></h1>
+            </li>-->
+            <li class="facebook-container" cdfacebook="true" cdid="signup-facebook-container">                
+                <a cdid="btn-firsttimeuserloginsection-facebook-signup" class="facebook-button btn-facebook-signup" href="#btn-facebook-signup">
+                    <span cdresource="facebook_register_button"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

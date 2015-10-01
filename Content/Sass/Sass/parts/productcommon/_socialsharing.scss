@@ -1,0 +1,56 @@
+﻿.productDetailsComponent .socialSharing {
+    background-color: #ABABAB;
+    overflow: hidden;
+    border-radius: 4px;
+    width: 175px;
+    margin: 5px 0;
+
+    ul li {
+        float: left;
+        margin: 2px;
+    }
+
+    .shareTitle {
+        color: #fff;
+        font-size: 1em;
+        font-weight: bold;
+        margin: 5px 5px 0 10px;
+
+        @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+			margin: 7px 5px 0 10px;
+        }
+    }
+
+    .facebook a {
+        background-image: url("../Assets/facebook.png");
+        height: 24px;
+        width: 24px;
+        background-size: 100% auto;
+        display: block;
+        text-indent: -5000px;
+        padding-left: 0px;
+        background-repeat: no-repeat;
+        padding-bottom: 0px;
+    }
+
+    .twitter a {
+        background-image: url("../Assets/twitter.png");
+        height: 24px;
+        width: 24px;
+        background-size: 100% auto;
+        display: block;
+        text-indent: -5000px;
+        background-repeat: no-repeat;
+        padding: 0px;
+    }
+
+    .googleplus {
+        margin-top: 6px;
+    }
+
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+        span {
+            font-size: 1.3em;
+        }
+    }
+}

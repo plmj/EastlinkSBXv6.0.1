@@ -1,0 +1,293 @@
+﻿.actionsAndPolicies {
+  display: inline-block;
+  margin-bottom: 10px;
+  overflow: hidden;
+  width: 100%;
+  span {
+    margin-right: 3px;
+  }
+}
+
+.text-only-guidance-rating-container {
+    display: inline;
+    margin-right:2px;
+    border-right: 2px solid gray;
+    padding-right: 3px;
+}
+
+.clientBody, #clientBody {
+    margin: 0;
+    min-width: 300px;
+    overflow: hidden;
+    padding: 0;
+	@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+        margin: 0 15px;
+		width: 94%;
+   }
+
+}
+
+.productComponent {
+  overflow: hidden;
+}
+
+
+.productDetailsComponent {
+    margin-top: 20px;
+    overflow: hidden;
+
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+        width: 100%;
+		.pricingInfo
+		{
+			overflow: hidden;
+			margin-top: 20px;
+			margin-bottom: 20px;
+		}
+		span {
+			font-size: 1.0em;
+		}
+    }
+
+    .section1 {
+        width: 170px;
+        float: left;
+        font-size: .8em;
+
+        .productTitle {
+            display: none;
+        }
+
+        @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+            display: none;
+        }
+    }
+
+    .section2and3 {
+        overflow: hidden;
+
+        @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+            overflow: visible;
+        }
+    }
+
+    .section2 {
+        float: left;
+        width: 440px;
+
+        .productRaterContainer, .pricingContainer .pricingInfo, .promotionalPricingInfo, .metadataContainer, .additionalInfoLink, .previewComponent, .actionContainerSection, .purchasedContainer, .purchasedViewInLibraryContainer, .additionalProperty, .actionsAndPolicies, .pricingContainer, .alreadypurchased, .productImageContainer, .additionalInfoContainer, .relatedPeopleContainer {
+            display: none;
+        }
+
+        @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+            width: 100%; 
+			.productRaterContainer, .pricingContainer .pricingInfo, .promotionalPricingInfo, .metadataContainer, .additionalInfoLink, .previewComponent, .actionContainerSection, .purchasedContainer, .purchasedViewInLibraryContainer, .additionalProperty, .actionsAndPolicies, .pricingContainer, .alreadypurchased, .productImageContainer, .additionalInfoContainer, .relatedPeopleContainer {
+                display: block;
+                width: 100%;
+            }
+
+			.alreadypurchased .purchasedViewInLibraryContainer {
+				display: none;
+			}
+
+            .actionContainerSection {
+                margin-top: 10px;
+            }
+        }
+    }
+
+    .section3 {
+        float: right;
+        margin: 0 0 15px 25px;
+        width: 355px;
+
+        @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+            margin: 20px 0 0 0; 
+			float: left; 
+			width: 100%;
+			.pricingInfo, .promotionalPricingInfo, .previewComponent, .actionContainerSection, .purchasedContainer, .actionsAndPolicies, .pricingContainer, .alreadypurchased {
+					display: none;
+			}
+        }
+    }
+
+    .pricingContainer {
+		float: left;
+		width: 100%;
+        overflow: hidden;
+        float: left;
+		margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    .availability {
+        margin: 5px 0 0 0;
+        font-size: .7em;
+        float: left;
+		& .availableOnContainer {
+			margin-right: 2px;
+		}
+    }
+
+    .pricingInfo {
+        clear: both;
+        overflow: hidden;
+    }
+
+	.instantlyViewableActionContainer .countdownTimerContainer,
+	.orderedLiveEventActionContainer .countdownTimerContainer,
+	.orderableLiveEventActionContainer .countdownTimerContainer
+	{
+	    margin: 0 8px 0px 0;
+	}
+
+	h1 {
+		font-size: 1.6em;
+	}
+
+	h2 {
+		font-size: 1.4em;
+		color: #696969;
+	}
+}
+
+
+@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+    .productDetailsComponent .metadataContainer {
+        margin-bottom: 20px;
+
+        span {
+            font-size: 1.2em;
+        }
+    }
+}
+
+.actions {
+    float: left;
+}
+
+.upgradesContainer {
+	width: 100%;
+    overflow:hidden;
+    float:left; 
+	margin-top: 5px;
+}
+
+.pricingPlanDetailsContainer {
+    float: left;
+    clear: both;
+    width: 285px;
+    min-height: 20px;
+    margin: 5px 0 0 0;
+    padding: 10px;
+    background: #9e9e9e;
+    border-radius: 6px;
+    -moz-border-radius: 6px;
+
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		overflow: hidden;
+		padding: 10px 0;
+		width: 100%;	
+		background: none repeat scroll 0 0 #9E9E9E;
+		border-radius: 6px;
+		clear: both;		
+		font-size:1.2em;	
+    }
+
+	li.expiredPlan {
+	    display: none;
+	}
+}
+
+.htmlProductMetaDataBlock {
+    margin-top: 20px;
+
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		width: 100%;
+		clear: both;
+		padding-top: 20px;
+    }
+
+    li {
+        font-size: 0.9em;
+        padding-top: 5px;
+    }
+
+    h1 {
+        padding-top: 20px;
+    }
+}
+
+.relatedPeople
+{
+    float: left;
+	width: 100%;
+}
+@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+	.productDetailsComponent .relatedPeople
+	{
+		font-size: 1.3em;
+		line-height: 2em;
+	}
+}
+
+.relatedPeopleGroup {
+    margin-bottom: 20px;
+}
+
+.giftProductOptionContainer {
+    float: left;
+    width: 100%;
+}
+
+.relatedMediaContainer {
+    overflow: hidden;
+    width: 680px;
+    margin-top: 30px;
+    display: inline-block;
+
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		overflow: hidden;
+		width: 100%;
+    }
+}
+
+@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+	.productlist-slider
+	{
+		margin: 0 .5em;
+	}
+	.productlist-slider.relatedMediaContainer
+	{
+		margin: 0 0;
+	}
+}
+
+#recommendedProductsContainer {
+    display: block;
+    margin: 15px 0 0;
+    max-width: 994px;
+    margin: 50px 0 0 0;
+}
+
+#crossSellProductsContainer {
+    display: block;
+    margin: 15px 0 0;
+    max-width: 994px;
+    margin: 50px 0 0 0;
+}
+
+@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+    .resultCount {
+		font-size: 1.7em;
+	}
+}
+
+.featuredContentIndividualItem {
+    float: left;
+    margin-right: 17px;
+	@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		text-align: center;
+		height: auto;
+	}
+}

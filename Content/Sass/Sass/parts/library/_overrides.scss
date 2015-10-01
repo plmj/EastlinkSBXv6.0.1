@@ -1,0 +1,26 @@
+﻿// Episodic bundle behavior overrrides
+.showHidePurchasedEpisodesContainer,
+[cdentitled=false] {
+	display: none;
+}
+//purchase upgrade overrides
+.purchaseUpgradeListContainer {
+	left: 220px;
+	bottom: -30px;
+	& .pricingPlanComponent {
+		& .pricingPlanSelectButton {
+			line-height: 20px;
+		}
+	}
+}
+
+.product-details-banner-container {
+	width: 730px;
+	@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+        width: 98%;
+    }
+}
+
+*[cdtype='pricingjson'] {
+	display: none;
+}

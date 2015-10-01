@@ -1,0 +1,54 @@
+.filter-header
+{
+    border-bottom: 2px solid gray;
+    margin-bottom: 10px;   
+}
+.filter-header span
+{
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.reset-filter {
+    display: inline-block;
+    float: right;
+    font-size: 0.7em;
+    margin-top: 2px;
+}
+#dc-group-container {
+    display: inline-block;
+    float: left;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.dc-group {
+    margin-bottom: 5px;
+}
+.toggle-filter-button {
+    display: block;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    /*text-transform: uppercase;*/
+    padding: 4px 8px;
+    -webkit-box-shadow: 0 1px 1px #ccc;
+    -moz-box-shadow: 0 1px 1px #ccc;
+    box-shadow: 0 1px 1px #ccc;
+    background: #ccc;    
+
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		height: 1.5em;
+        line-height: 1.5em;
+        vertical-align: middle;
+        font-size: 1.7em;
+        font-weight: bold;
+    }
+}
+.toggle-filter-button.selected {
+    background: rgb(44, 129, 203);
+    color: white;
+    box-shadow: 0 1px 1px rgb(44, 129, 203);
+}
+.toggle-filter-button:active {
+    color: rgb(44, 129, 203);
+}

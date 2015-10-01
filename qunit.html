@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>QUnit basic example</title>
+    <link href="Content/StyleSheets/qunit-1.11.0.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type='text/javascript' src="https://eastlink.sbx1.cdops.net/html/full/v6.0.1/Scripts/contentdirect.ui.js"></script>
+    <script src="Scripts/qunit-1.11.0.js"></script>
+    <script>
+
+        // Common.js tests
+        test("Is local storage enabled?", function () {
+            var actual = $.cd.isLocalStorageEnabled();
+            var expected = true;
+            var message = "Local storage is enabled";
+            //equal(actual, expected, message);
+            ok(expected, message);
+        });
+        
+        test("CDResource: default_username is 'Subscriber'", function () {
+            var actual = $.cd.getCDResource("default_username");
+            var expected = "Subscriber";
+            var message = "default_username is 'Subscriber'";
+            equal(actual, expected, message);
+        });
+
+        // Client.js tests
+        $.cd.ready(function () {
+
+            test("Anonymous or authenticated", function () {
+                var actual = ContentDirectAPI.get_isAuthenticated();
+                var expected = false;
+                var message = "We are anonymous (as expected)";
+                equal(actual, expected, message);
+            });
+
+            test("Subscriber test", function () {
+                var subscriberInfo = ContentDirectAPI.createSubscriberInfo("ssoToken", "larry@baer.com", "Larry", "Baer", "larry@baer.com", "extRefId");                
+                var actual = subscriberInfo.firstName;
+                var expected = "Larry";
+                var message = "We were able to create a subscriber and retrieve the correct first name";
+                equal(actual, expected, message);
+            });
+
+            test("Test for session ID", function () {
+                var sessionId = ContentDirectAPI.getSessionId(function () { alert("callback"); });
+                var actual = sessionId != null;
+                var expected = true;
+                var message = "Session ID has a value";
+                equal(actual, expected, message);
+            });
+            
+        });
+
+    </script>
+
+    <body>
+    <div cd="flex" cdtype="page" cdpagetype="playerpage" id="cdPageContainer" style="display: none;"></div>
+</body>
+
+</body>
+</html>

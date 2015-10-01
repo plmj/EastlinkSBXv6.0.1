@@ -1,0 +1,41 @@
+﻿<script cdscript="true" type="text/javascript">
+    cd.flex.addTemplate(
+        "uvloginform",
+	   null,
+       function (template, abstractPart) {
+           abstractPart.append();
+           if (this.pageConfiguration.pageName === 'register') {
+               $('[cdid="uvregistrationform-existingaccount-container-link"]').addClass('hidden');
+               $('[cdid="uvregistrationform-existingaccount-container-check"]').removeClass('hidden');
+           }
+       },
+       function (abstractPart) {
+           abstractPart.setupEvent(abstractPart.eventKeys.existinguvaccount, 'click [cdid="uvlogin-subscriber-existinguvaccount-check"]');
+           abstractPart.setupEvent(abstractPart.eventKeys.existinguvaccount, 'click [cdid="uvlogin-subscriber-existinguvaccount-link"]');
+       }
+	  );
+</script>
+
+<div class="partcontent partcontent-uvlogin" cdlegacy="false">
+    <ul class="uvlogin-input-list form-horizontal">
+        <li cdid="uvregistrationform-existingaccount-container-check" class="uvlogin-existingaccount-container hidden form-group">
+            <div class="checkbox input-lg">
+                <label class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <input type="checkbox" cdid="uvlogin-subscriber-existinguvaccount-check" checked><span cdresource="uvlogin_existinguvaccount_label">I already have an existing UltraViolet account</span>
+                </div>
+            </div>
+        </li>
+        <li cdid="uvregistrationform-existingaccount-container-link" class="uvlogin-existingaccount-container form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <a cdid="uvlogin-subscriber-existinguvaccount-link"><span cdresource="uvlogin_create_account_label">I want to create a new UltraViolet account</span></a>
+            </div>
+        </li>
+        <li cdid="uvlogin-validation-summary" class="col-sm-offset-2 validationsummary-uvlogin">            
+        </li>
+        <li cdid="uvlogin-iframe-container" class="uvlogin-master-container">
+            <form></form>
+            <iframe cdid="uvlogin-iframe" class="uvlogin-iframe-container" align="center" frameborder="0" border="0" allowtransparency="true"></iframe>
+        </li>
+    </ul>
+</div>

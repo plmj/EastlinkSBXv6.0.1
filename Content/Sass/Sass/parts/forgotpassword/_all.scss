@@ -1,0 +1,28 @@
+﻿@import "forgotpasswordform";
+
+html {
+    div.pagecontent 
+    {
+        width: 85%;
+        text-align:center;
+        margin: 0 auto;
+        color:#696969;
+        h1 { font-size: 1.8em; }
+    }
+
+    .partcontent {
+        width: 60%;
+        margin: 0 auto;
+        text-align:left;
+
+        label { display:block; }
+        h1 { font-size:1.6em; }
+        input { width:100%; }
+    }
+}
+
+html[dir=rtl] {
+    .partcontent {
+        text-align: right;
+    }
+}

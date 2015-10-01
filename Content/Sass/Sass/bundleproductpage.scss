@@ -1,0 +1,17 @@
+﻿@import "parts/common/all";
+@import "parts/productcommon/all";
+
+@media only screen and (min-width: 541px)
+{
+    #alreadypurchased2 {
+        display:none;
+    }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 540px)
+{
+    #alreadyPurchased
+    {		
+        display:none;
+    }
+}

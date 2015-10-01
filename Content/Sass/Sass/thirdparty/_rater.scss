@@ -1,0 +1,74 @@
+﻿.productRater {
+  height: 33px;
+  margin: 10px 0 0 0;
+}
+
+.ratingButtonContainer {
+  height: 20px;
+}
+
+.loginToRateButton {
+  cursor: pointer;
+  font-size: 1.3em;
+  font-weight: bold;
+  height: 15px;
+  padding: 2px 0 1px;
+  &:hover, &:active {
+    color: #5ACAFA;
+  }
+}
+
+.productDetailsComponent span {
+  &.noRatingsContainer {
+    float: left;
+    font-size: 1em;
+    margin: 5px 0 0;
+  }
+  &.averageRatingContainer, &.peerRatingValue {
+    font-size: 1.0em;
+  }
+  &.rateCount {
+    display: none;
+  }
+}
+
+.ui-rater > span {
+  vertical-align: top;
+}
+
+.starsOff {
+  display: inline-block;
+  height: 18px;
+  background: url('../Assets/stars.png') repeat-x 0 0px;
+  cursor: default;
+}
+
+.starsOn {
+  display: inline-block;
+  height: 18px;
+  background: url('../Assets/stars.png') repeat-x 0 0px;
+  cursor: default;
+  display: block;
+  max-width: 90px;
+  top: 0;
+  background-position: 0 -36px;
+}
+
+.ui-rater-starsHover {
+  background-position: 0 -18px !important;
+}
+
+@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+	.productDetailsComponent .section2 {
+		  .productRater {
+			height: 42px;
+			width: 100%;
+		  }
+		  .loginToRateButton {
+			font-size: 1.4em;
+		  }
+		  .ratingButtonContainer {
+			height: 22px;
+		  }
+	}
+}

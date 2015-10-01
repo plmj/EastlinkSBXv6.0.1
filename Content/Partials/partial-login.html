@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <div cdpartialview="firsttimeuserloginsection">
+        <div class="content-firsttimeuserloginsection">
+            <ul>
+                <li class="btn-action-container">
+                   
+                    <a id="btn-firsttimeuserloginsection-signup" class="mainButton btn-signup" href="#btn-signup">
+                        <span cdresource="sign_up"></span>
+                    </a>
+                </li>
+                <li class="facebook-container" cdfacebook="true">
+                    <h1 cdresource="or" class="facebook-title"></h1>
+                    <a id="btn-firsttimeuserloginsection-facebook-signup" class="facebook-button btn-facebook-signup" href="#btn-facebook-signup">
+                        <span cdresource="facebook_register_button"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div cdpartialview="facebookloginbutton">
+        <div class="content-facebookloginbutton">
+            <div class="facebook-container" cdfacebook="true">
+                <h1 cdresource="or" class="facebook-title"></h1>
+                <a id="btn-facebook-login" class="facebook-button btn-facebook-login" href="#btn-facebook-login">
+                    <span cdresource="facebook_login_button"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div cdpartialview="facebooksignupbutton">
+        <div class="content-facebooksignupbutton">
+            <div class="facebook-container" cdfacebook="true">
+                <a id="btn-facebook-signup" class="facebook-button btn-facebook-signup" href="#btn-facebook-signup">
+                    <span cdresource="facebook_register_button"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div cdpartialview="registrationheader">
+        <div class="content-registrationheader">
+            <ul>
+                <li>
+                    <h1 cdresource="registration_create_header">Create New Account.</h1>
+                </li>
+                <li class="facebook-container" cdfacebook="true">
+                    <a id="btn-registrationheader-facebook-signup" class="facebook-button btn-facebook-signup" href="#btn-facebook-signup">
+                        <span cdresource="facebook_register_button"></span>
+                    </a>
+                    <h1 cdresource="or" class="facebook-title"></h1>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div cdpartialview="facebooklinkbutton">
+        <div class="content-facebooklinkbutton">
+            <div class="facebook-container" cdfacebook="true">
+                <div class="facebooklinkbutton-not-linked" style="display: none;">
+                    <label cdresource="existing_facebook_link_message" class="facebook-title"></label>
+                    <a id="btn-facebook-link" class="facebook-button btn-facebook-link">
+                        <span cdresource="facebook_link_button"></span>
+                    </a>
+                </div>
+                <div class="facebooklinkbutton-linked" style="display: none;">
+                    <span class="icon-facebook-lg" />
+                    <span class="facebook-linked-message" cdresource="facebook_linked"></span>
+                </div>
+            </div>
+        </div>
+</body>
+</html>

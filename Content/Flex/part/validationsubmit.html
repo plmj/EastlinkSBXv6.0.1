@@ -1,0 +1,46 @@
+﻿<script cdscript="true" type="text/javascript">
+    cd.flex.addTemplate(
+        "validationsubmit",
+	   null,
+       function (template, part) {
+           //write custom stuff
+           part.append();
+       },
+       function (part) {
+           part.setupEvent(part.eventKeys.back, 'click [cdid="validationsubmit-back-btn"]');
+           part.setupEvent(part.eventKeys.submit, 'click [cdid="validationsubmit-submit-btn"]');
+
+           part.setupValidation(
+                {
+                    onbefore: function () {
+                        $('.partcontent-validationsubmit .validation-summary').empty().hide();
+                    },
+                    onafter: function (validationErrors) {
+                        cd.hideBlocker();
+                        $.each(validationErrors, function (index, error) {
+                            $('.partcontent-validationsubmit .validation-summary').append('<p>' + error.message + '</p>').show();
+                        });
+                    }
+                }
+          );
+       }
+	  );
+</script>
+
+
+
+<div class="partcontent partcontent-validationsubmit">
+    <div class="form-horizontal form-horizontal-validationsubmit">
+        <div class="form-group">
+            <div>
+                <button cdid="validationsubmit-back-btn" class="btn btn-default btn-validationsubmit-back"><span cdresource="registrationform_back_to_login">Back</span></button>
+            </div>
+            <div>
+                <button cdid="validationsubmit-submit-btn" class="btn btn-default btn-validationsubmit-submit"><span cdresource="continue_registration_button">Continue</span></button>
+            </div>
+        </div>
+        <div class="form-group">
+            <div style="display:none;" class="col-sm-10 col-sm-offset-2 has-error validation-summary validationsummary-validationsubmit" cdid="validationsubmit-validation-summary"></div>
+        </div>
+    </div>
+</div>

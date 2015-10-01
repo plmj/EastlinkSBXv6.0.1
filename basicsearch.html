@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="http://www.facebook.com/2008/fbml">
+	<head>
+		<title>Eastlink Movie Player</title>	
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="P3P" content='CP="CAO DSP COR CURa ADMa DEVa TAIa PSAa PSDa IVAi IVDi CONi OUR SAMo OTRo BUS PHY ONL UNI PUR COM NAV INT DEM CNT STA PRE"' />
+		<meta http-equiv="Page-Enter" content="progid:DXImageTransform.Microsoft.Fade(Duration=0)" />
+		<meta http-equiv="Page-Exit" content="progid:DXImageTransform.Microsoft.Fade(Duration=0)" />	
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+        <link rel="icon" href="favicon.ico" type="image/x-icon">
+		<link href="Content/StyleSheets/cdfull_site.css" rel="stylesheet" type="text/css" />
+		<noscript> 
+			<meta http-equiv="refresh" content="0;URL=dependency.html" />
+		</noscript>
+		<script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script type='text/javascript' src="https://eastlink.sbx1.cdops.net/html/full/v6.0.1/Scripts/contentdirect.ui.js"></script>	 		
+		<script type="text/javascript" src="Scripts/cdfull.js"></script>
+	</head>
+	<body >	
+		<div class="wrapper">
+			<div cdtype="navigationmenu" id="navigationMenuContainer" class="navigation-menu"></div>
+            
+            <div id="contentWrapper">
+                <div class="interiorPageWrapper">
+			        <div class="content">
+				        <div cdtype="pagemenu" cdchildtemplatename="page" id="pagemenu" class="pagingControl"></div>
+                        <div cd="flexf" cdtype="page" cdpagetype="searchpage" id="cdPageContainer" style="display: none;"></div>						
+                        <div id="searchResultContainer" class="productResultContainer">
+                            <div class="pageHeader" style="display:none;">
+                                <div class="title">
+                                    <span cdresource="search_header_search_products">Search Products</span>
+                                </div>
+                                <div class="subtitle">                                
+                                    <span cdresource="enter_keywords_to_search">Enter keywords to search products</span>
+                                </div>
+                                <div class="keyword subContainer">
+                                <div cdtype="search" id="searchcontainer"></div>
+			                    </div>
+			                    <div cdtype="resultlabel" id="resultlabelcontainer"></div>
+                            </div>
+			                <div class="results subContainer">	
+                                <div class="simpleProductList" id="newResult">
+                                    <div cdtype="productlayout" cdtemplatename="productlayout" cdchildtype="partialproduct" class="productlist-slider" id="productlistcontainer"></div>
+                                    <div cdtype="loadmore" class="loadNextBatchContainer" id="loadNextBatchContainerSearch"></div>
+				                </div>
+
+                                <div class="noProductContainer" style="display: none">
+                                    <span cdresource="search_no_keyword_message">Please enter a keyword to perform a search.</span>
+                                </div>
+			                </div>
+			                <div class="validation subContainer">
+				                <div class="validation-summary-valid" id="validationSummary"><ul></ul></div>				
+			                </div>
+                        </div>
+			        </div>				
+		        </div>
+            </div>
+            <div cdtype="footer" id="footerWrapper" class="clearfix" style="display: none;"></div>
+		</div>	
+	</body>
+</html>

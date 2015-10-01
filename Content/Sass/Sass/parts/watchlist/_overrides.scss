@@ -1,0 +1,23 @@
+﻿//purchase upgrade overrides
+.purchaseUpgradesContainer { 
+	margin-left: 33px;
+}
+
+.purchaseUpgradeListContainer {
+	left: 220px;
+	bottom: -30px;
+}
+
+.product-details-banner-container {
+	width: 730px;
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		width: 90%;
+        margin-left: 5%;
+    }
+}
+
+
+
+*[cdtype='pricingjson'] {
+	display: none;
+}

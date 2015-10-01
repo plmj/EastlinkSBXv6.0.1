@@ -1,0 +1,11 @@
+﻿#searchResultContainer
+{
+    width: 100%;
+	  @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		width: 310px;
+	  }
+}
+
+.validation-basic-search{
+	width:200px;
+}

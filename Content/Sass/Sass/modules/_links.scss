@@ -1,0 +1,31 @@
+﻿a {
+	padding: 0px;
+	margin: 0px;
+	cursor:pointer;
+	outline:none; 
+	&:link, &:visited {
+		text-decoration: none;
+		color: #696969;
+		font-weight: bold;
+		cursor:pointer;
+	}
+
+	&:hover, &:active {
+		text-decoration: none;
+		color: #5ACAFA;
+		outline:none;
+		cursor:pointer;
+	}
+}
+
+.hoverEffect {
+    margin: 4px;
+
+    &:focus, &:hover {
+        -moz-box-shadow: 0 0 4px #2C81CB;
+        -webkit-box-shadow: 0 0 4px #2C81CB;
+        box-shadow: 0 0 4px #2C81CB;
+        outline: 5px auto #2C81CB;
+        cursor: pointer;
+    }
+}

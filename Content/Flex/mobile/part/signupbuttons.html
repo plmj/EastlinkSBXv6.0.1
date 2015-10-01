@@ -1,0 +1,34 @@
+<script cdscript="true" type="text/javascript">
+    cd.flex.addTemplate(
+        "signupbuttons",
+	   null,
+       function (template, abstractPart) {
+           //write custom stuff           
+           abstractPart.append();
+       },
+       function (abstractPart) {           
+           abstractPart.setupEvent(abstractPart.eventKeys.signupredirect, 'click [cdid="btn-firsttimeuserloginsection-signup"]');
+           abstractPart.setupEvent(abstractPart.eventKeys.facebooksignup, 'click [cdid="btn-firsttimeuserloginsection-facebook-signup"]');
+       }
+	  );
+</script>
+
+<div class="partcontent-signupbuttons" cdlegacy="false">
+    <div class="content-firsttimeuserloginsection">
+        <ul>
+            <li class="btn-action-container">
+                
+                <a cdid="btn-firsttimeuserloginsection-signup" class="mainButton btn-signup" href="#btn-signup">
+                    <span cdresource="sign_up"></span>
+                </a>
+                <h1 cdresource="first_time_users_message"></h1>
+            </li>
+            <li class="facebook-container" cdfacebook="true">
+                <h1 cdresource="or" class="facebook-title"></h1>
+                <a cdid="btn-firsttimeuserloginsection-facebook-signup" class="facebook-button btn-facebook-signup" href="#btn-facebook-signup">
+                    <span cdresource="facebook_register_button"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

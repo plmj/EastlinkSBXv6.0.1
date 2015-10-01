@@ -1,0 +1,58 @@
+.filter-header
+{
+    border-bottom: 2px solid gray;
+    margin-bottom: 10px;   
+}
+.filter-header span
+{
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.reset-filter {
+    display: inline-block;
+    float: right;
+    font-size: 0.7em;
+    margin-top: 2px;
+}
+.search-button-container {
+	display: inline;
+}
+.keyword-text-box {
+	display: inline-block;
+    float: left;
+    height: 20px;    
+    border: 1px solid #ccc;
+    border-top: none;
+    border-right: none;
+    background-color: transparent;
+    margin-right: 2px;
+    width: 150px;
+	font-size:16px;
+
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+        width: 100%; 
+		border: 1px solid #ccc; 
+		height: 1.7em;  
+		font-size: 1.7em;
+    }
+}
+.filter-search-button {
+    display: inline;
+    float: right;
+    height: 24px;
+    line-height: 24px;
+    min-width: 44px;
+    vertical-align: middle;
+    text-align: center;
+    background: #ccc;
+	border-radius: 5px;
+
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+        display: none;
+    }
+}
+ #searchcontainer {   
+    float: left;
+    width: 100%; 
+    margin-bottom: 20px;
+}

@@ -1,0 +1,9 @@
+﻿.viewing-badges {
+    float: left;
+
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+        display: block; 
+		width: 100%; 
+		float: left;
+    }
+}

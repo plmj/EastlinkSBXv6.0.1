@@ -1,0 +1,9 @@
+﻿<configuration>
+  <players>
+    <player key="6" name="DownloadManager" type="ContentDirect.UI.Storefront.DownloadManager.MainDisplay, ContentDirect.UI.Storefront.DownloadManager"
+            folder="CDFull Videos" systemid="29924b37-83f7-4a85-b83e-32210e65e712" channelid="ba2052cf-7a9b-45a9-b74f-79bf1ff3eeef"
+            helpurl="http://cdfull.cdtv.lab/help.html" libraryurl="http://cdfull.cdtv.lab/mylibrary.html"
+            httppostserviceurl="https://storefront.cdtv.lab/SL/DLM/Current/StorefrontHttpPostService.aspx" dlmxapconfigurl="https://storefront.cdtv.lab/SL/DLM/Current/ClientBin/dlmxapconfig.xml" autodowngradeoutputprotectionfailure="true">
+    </player>
+  </players>
+</configuration>

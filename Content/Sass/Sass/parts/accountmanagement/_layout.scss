@@ -1,0 +1,22 @@
+﻿.accountContent
+{
+	width: 990px;
+	padding: 60px 0 0 0;
+	overflow:hidden;
+	@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		width: 320px;
+		padding: 37px 0;
+	}
+}
+
+.partcontainer-facebooklinkbutton {
+	overflow: hidden;
+	clear: both;
+	float:left;
+	margin-left: 190px;
+    margin-top: -50px;
+	@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		margin-left: 10px;
+		margin-top: -45px;
+	}
+}

@@ -1,0 +1,25 @@
+﻿.peerRatingFilterItem {
+  cursor: pointer;
+  height: 29px;
+  width: 158px;
+  &.min5stars {
+    background: url('../Assets/minStarRatings.png') 0px 0px;
+  }
+  &.min4stars {
+    background: url('../Assets/minStarRatings.png') 0px -25px;
+  }
+  &.min3stars {
+    background: url('../Assets/minStarRatings.png') 0px -50px;
+  }
+  &.min2stars {
+    background: url('../Assets/minStarRatings.png') 0px -75px;
+  }
+  &.min1star {
+    background: url('../Assets/minStarRatings.png') 0px -100px;
+  }
+  &:hover, &.filterSelected {
+    background-color: #2c81cb;
+    border-radius: 7px;
+	color: white;
+  }
+}

@@ -1,0 +1,22 @@
+﻿.productDetailsComponent {
+    .productName span {
+        font-size: 1.6em;
+        font-weight: 100;
+    }
+
+    .seasonAndEpisodeNumber span {
+        font-size: 1.2em;
+        font-weight: 100;
+    }
+
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		.productName
+		{
+			font-size: 1.3em;
+		}
+    }
+}
+
+.productName {
+	font-weight: bold;
+}

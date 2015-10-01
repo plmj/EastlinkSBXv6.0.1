@@ -1,0 +1,20 @@
+.layout-icons-container {
+    width: 100%;
+    vertical-align: middle;
+    float: left;
+    line-height: 2em;
+
+    & i {
+        font-size: 26px;
+        color: #ccc;
+    }
+
+    & .selected {
+        color: #2c81cb;
+    }
+    
+
+    & [cdlayout=grid] {
+        margin-right: 10px;
+    }
+}

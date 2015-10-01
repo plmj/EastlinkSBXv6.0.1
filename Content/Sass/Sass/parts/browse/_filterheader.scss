@@ -1,0 +1,23 @@
+.filter-header {
+  border-bottom: 2px solid gray;
+  margin-bottom: 10px;
+  /*color: #696969;
+  float: left;
+  font-family: 'PT Sans',sans-serif,Arial,Helvetica;
+  font-size: 1em;
+  font-weight: bold;
+  font-style: normal;
+  margin: 0 0 10px 18px;*/
+  span {
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+	  border-bottom: 6px solid gray;
+	  margin-top: 16px;
+	  a, span {
+		font-size: 18px;
+	 }
+  }
+}

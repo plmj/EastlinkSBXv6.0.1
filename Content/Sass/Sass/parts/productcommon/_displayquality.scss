@@ -1,0 +1,20 @@
+﻿ .displayQuality {
+    float: left;
+    height: 16px;
+    width: 29px;
+    margin-top: 8px;
+}
+
+.displayQuality_SD {
+    background-image: url("../Assets/SD.png");
+    width: 29px;
+    background-repeat: no-repeat;
+    text-indent: -9000px;
+}
+
+.displayQuality_HD {
+    background-image: url("../Assets/HD.png");
+    width: 29px;
+    background-repeat: no-repeat;
+    text-indent: -9000px;
+}

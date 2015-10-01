@@ -1,0 +1,112 @@
+﻿.redeemGiftProductOrCardPopupControl {
+  height: 250px;
+  width: 600px;
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+       height: 300px;
+       width: 260px;
+    }
+}
+
+.redeemGiftCardButton {
+  float: left;
+  height: 35px;
+  margin-left: 2px;
+  margin-right: 10px;
+  margin-top: 2px;
+  width: 45%;
+  @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+    width:200px;
+  }
+  &.selected {
+    border: 3px solid #62CDF3;
+    margin-left: 0;
+    margin-top: 0;
+  }
+}
+
+.redeemGiftProductButton {
+  float: left;
+  height: 35px;
+  margin-left: 2px;
+  margin-top: 2px;
+  width: 45%;
+  @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+    width:200px;
+  }
+  &.selected {
+    border: 3px solid #62CDF3;
+    margin-left: 1px;
+    margin-top: 0;
+  }
+}
+
+.redemptionGiftOrProductCodeButton {
+	margin-top: 5px;
+}
+
+.redeemGiftProductOrCardPopupContents {
+  background: white;
+  overflow: hidden;
+  padding: 20px;
+  height: 100%;
+  width: 100%;
+}
+
+.redeemGiftProductOrCardContainerHeader {
+  font-size: 1.6em;
+}
+
+.redeemGiftCardOrProductDescription {
+  font-size: 1.1em;
+  margin: 10px 0 0;
+  @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+    width: 80%;
+  }
+}
+
+.redeemGiftCardOrProductButtonContainer {
+  float: left;
+  width: 530px;
+  margin: 15px 0 0 0;
+  @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+    width: 280px;
+  }
+}
+
+.redemptionGiftOrProductBox {
+  float: left;
+  margin-right: 5px;
+  margin-top: 2px;
+  width: 75%;
+}
+
+.redemptionCodeInputContainer {
+  float: left;
+  margin-top: 15px;
+  @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+    width: 80%;
+  }
+}
+
+.enterRedemptionCodeDescription {
+  float: left;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.redeemGiftCardButtonName, .redeemGiftProductButtonName {
+  float: left;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.redemptionCodeErrorContainer {
+  width: 93%;
+}
+
+@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+     #redemptionValidationSummary {
+        height:25px;
+        width:90%;
+    }
+}

@@ -1,0 +1,24 @@
+﻿
+// Browser support when sass is compiled
+$legacy-support-for-ie: true;
+$experimental-support-for-mozilla: true;
+$experimental-support-for-opera: true;
+$experimental-support-for-microsoft: true;
+
+$base-font-family: 'PT Sans', sans-serif, Arial, Helvetica;
+$base-font-size: 1em;
+$base-font-style: normal;
+$base-mobile-min-width: 320px;
+$base-mobile-max-width: 570px;
+
+// Overrides for Bootstrap variables
+$font-size-base: 16px;
+$font-family-base: 'PT Sans', sans-serif, Arial, Helvetica;
+$font-style-base: normal;
+
+//Video player variables
+$video-player-height: 450px;
+$video-player-width: 800px;
+
+$video-player-mobile-height: 135px;
+$video-player-mobile-width: 240px;

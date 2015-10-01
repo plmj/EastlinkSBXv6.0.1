@@ -1,0 +1,255 @@
+﻿.library-container {
+	margin-top: 10px;
+}
+.autocomplete-suggestions-menu {
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		display: none;
+    }
+}
+.startswith-filter-container,
+.sort-filter-container {
+	width: 100%;
+	float: left;
+	margin-bottom: 20px;
+}
+.library-header-title {
+	width: 100%;
+	float: left;
+	font-size: 30px;
+	margin-bottom: 10px;
+}
+.library-header-container {
+	float: left;
+	width: 100%;
+	margin: 0 0 15px 0;
+}
+.library-status-container {
+	float: left;
+	width: 100%;
+	margin-bottom: 5px;	
+}
+
+.container-left {
+    float: left;
+    width: 215px;
+    margin-right: 15px;
+
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+        float: left; 
+		width: 100%; 
+		margin: 0;
+    }
+}
+
+.filter-container {
+	float: left;
+    width: 100%;
+	@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+        display: none; float: left; width: 96%; margin: 0; top: 85px; left: 0px; z-index:10; background: rgba(255,255,255, 0.95); padding: 10px 10px 25px 10px;
+    }
+    & .filter-header {
+        @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+            border-bottom: 6px solid gray; margin-top: 16px;
+        }
+
+        & a,
+        & span {
+            @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+                font-size: 18px;
+            }
+        }
+    }
+}
+.resultCount {
+	width: 100%;
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+        font-size: 1.7em;
+		margin-left: 10px;
+    }
+}
+.mobile-filter-apply-button {
+    display: none;
+
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		display: block;
+        float: left;
+        width: 92%;
+		bottom: 0;
+		position: fixed;
+		z-index: 1;
+        height: 2.2em;
+        line-height: 2.2em;
+        vertical-align: middle;
+        text-align: center;
+        display: block;
+        outline: none;
+        cursor: pointer;
+        padding: 4px 8px;
+        -webkit-box-shadow: 0 1px 1px gray;
+        -moz-box-shadow: 0 1px 1px gray;
+        box-shadow: 0 1px 1px gray;
+        background: gray; 
+        font-weight: bold; 
+		& span {
+			color: white;
+			font-size: 2em;
+		}
+    }
+}
+.mobile-filter-expander {
+    display: none;
+	@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		position: fixed;
+        left: 0px;
+        top: 45px;
+        z-index: 10;
+        width: 100%;
+        height: 40px;
+        display: block;
+        background-color: #ccc;
+        cursor: pointer;
+    }
+	& span {
+		float: right;
+        margin: 14px 24px 0 0;
+        font-size: 1.7em;
+        color: gray;
+        font-weight: bold;
+	}
+}
+
+.library-resultlabel-container {
+    float: left;
+    line-height: 28px;
+    font-size: 13px;
+    text-transform: uppercase;
+	width: 60%;
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		width: 100%;
+    }
+}
+
+
+.library-layouticons-container {
+	display: inline;
+	float: right;
+	@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+        display: none;
+    }
+}
+.library-container #toolBar {
+    display: inline-block;
+    float: right;
+	@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		margin-right: 30px;
+    }
+}
+#productCategoryResultContainer
+{
+    width: 760px;
+	@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		width: 100%;
+		margin-left: 5px;
+		margin-top: 0px;  
+	}
+}
+#searchResultContainer
+{
+    width: 100%;
+}
+#categoryName
+{
+    text-transform: capitalize;
+}
+.productResultContainer
+{
+	min-height: 500px;
+	float:left;
+    background-repeat: no-repeat;
+	& .productComponent
+    {
+        float: left;
+		& .productImageContainer
+		{
+			width: 165px;
+			height: 225px;
+			overflow: hidden;
+		}
+    }
+	& .featuredContentIndividualItem .productTitle
+    {
+        width: 165px;
+    }
+    
+	& .pageHeader ul
+	{
+		float: left;   
+	}
+	& .selectedCategoryName
+	{
+		margin:1em 0;
+		font-size: 1.2em;
+		font-weight: bold;
+	}
+
+	& .subContainer
+	{
+		float:left;
+		width:100%;
+	}
+
+	& .title
+	{
+		font-size: 1.2em;
+		font-weight: bold;
+		margin: 1em 0;
+	}
+
+	& .subtitle
+	{
+		margin:1em 0;
+		font-size: 1.0em;
+		font-weight: normal;
+		font-weight: bold;
+	}
+	& #searchcontainer
+	{	
+		margin:3px 0;
+	}
+
+	& #searchcontainer input 
+	{
+		width:80%;	
+		float:left;
+		height:35px;
+		font-size:1.2em;
+	}
+
+	& #searchcontainer a 
+	{
+		float: left;
+		height: 31px;
+		margin: 0 0 0 1em;
+		width: 100px;    
+	}
+	 & #searchcontainer a span
+    {
+        display: block;
+        font-size: 1.0em;
+        font-weight: bold;
+        margin: 8px auto;
+    }
+    & .featuredContentIndividualItem .productTitle
+    {
+        font-size: 1.0em;
+        cursor: pointer;
+    }
+}           
+
+.partcontainer-librarynoitemsmessage {
+	float: left;
+	width: 1000px;
+	@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		width: 325px;
+	}
+}

@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Eastlink Movie Player</title>
+    <meta name="description" content="description goes here" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link href="Content/StyleSheets/cdfull_site.css" rel="stylesheet" type="text/css" />
+    <link href="Content/Fonts/font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+</head>
+<body>
+    <div id="wrapper" class="wrapperInterior">
+        <div cdtype="navigationmenu" id="navigationMenuContainer" class="navigation-menu"></div>
+        <div id="contentWrapper">
+            <div class="interiorPageWrapper">
+                <div class="contentFullPage">
+                    <div cdtype="pagemenu" cdchildtemplatename="page" id="cdPageMenu" class="pagingControl"></div>
+                    <div cd="main" id="appcontainer-cdapp" class="appcontainer appcontainer-cdapp" cdid="appcontainer-cdapp"></div>
+                </div>
+            </div>
+        </div>
+        <div cdtype="footer" id="footerWrapper" class="clearfix" style="display: none;"></div>
+    </div>
+
+    <script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+	<script type='text/javascript' src="https://eastlink.sbx1.cdops.net/html/full/v6.0.1/Scripts/contentdirect.ui.js"></script>
+	<script type="text/javascript" src="Scripts/cdfull.js"></script>
+</body>
+</html>

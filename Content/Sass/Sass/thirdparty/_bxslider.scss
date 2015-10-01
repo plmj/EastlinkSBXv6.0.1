@@ -1,0 +1,202 @@
+﻿/**
+ * BxSlider v4.0 - Fully loaded, responsive content slider
+ * http://bxslider.com
+ *
+ * Written by: Steven Wanderski, 2012
+ * http://stevenwanderski.com
+ *
+ * CEO and founder of bxCreative, LTD
+ * http://bxcreative.com
+ */
+
+/** RESET AND LAYOUT
+===================================*/
+
+.bx-wrapper {
+    position: relative;
+    margin: 10px 60px 60px;
+    padding: 0;
+    *zoom: 1;
+
+    img {
+        max-width: 100%;
+        display: block;
+
+        @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+			max-width: 95%;
+        }
+    }
+
+    .bx-viewport {
+        max-width: 97%;
+        margin-left: 33px;
+
+        @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+            max-width: 97%; 
+			margin-left: 5px;
+        }
+    }
+}
+
+/** THEME
+===================================*/
+
+.relatedMediaContainer .bx-wrapper .bx-viewport {
+  max-width: 97%;
+  margin-left: 10px;
+}
+
+.bx-wrapper {
+  .bx-pager, .bx-controls-auto {
+    width: 100%;
+  }
+  .bx-loading {
+    min-height: 50px;
+    /*background: url(../Assets/bx_loader.gif) center center no-repeat #fff;*/
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2000;
+  }
+  .bx-pager {
+    text-align: center;
+    font-size: .85em;
+    font-family: Arial;
+    font-weight: bold;
+    color: #666;
+    padding-top: 20px;
+    .bx-pager-item {
+      display: inline-block;
+      *zoom: 1;
+      *display: inline;
+    }
+  }
+  .bx-controls-auto .bx-controls-auto-item {
+    display: inline-block;
+    *zoom: 1;
+    *display: inline;
+  }
+  .bx-pager.bx-default-pager a {
+    width: 13px;
+    height: 13px;
+    display: block;
+    background: url('../Assets/bg_control_nav.png') no-repeat 0 0;
+    cursor: pointer;
+    text-indent: -9999px;
+    margin: 3px;
+    &:hover {
+      background-position: 0 -13px;
+    }
+    &.active {
+      background-position: 0 -26px;
+      cursor: default;
+    }
+  }
+  .bx-next, .bx-prev {
+    width: 52px;
+    height: 72px;
+    margin: -13px 0 0;
+    display: block;
+    background: url(../Assets/bg_direction_nav.png) no-repeat 0 0;
+    position: absolute;
+    top: 40%;
+    cursor: pointer;
+    text-indent: -9999px;
+  }
+  .bx-next {
+    background-position: -52px 0;
+    right: -54px;
+  }
+  .bx-prev {
+    background-position: 0 0;
+    left: -55px;
+    &:hover {
+      opacity: 0.8;
+      filter: alpha(opacity = 80);
+    }
+  }
+  .bx-next:hover {
+    opacity: 0.8;
+    filter: alpha(opacity = 80);
+  }
+  .bx-prev:active, .bx-next:active {
+    opacity: 0.6;
+    filter: alpha(opacity = 60);
+  }
+  .bx-controls-direction a {
+    position: absolute;
+    top: 35%;
+    margin-top: -16px;
+    outline: 0;
+    text-indent: -9999px;
+    &.disabled {
+      display: none;
+    }
+  }
+  .bx-controls-auto {
+    text-align: center;
+    .bx-start {
+      display: block;
+      text-indent: -9999px;
+      width: 10px;
+      height: 11px;
+      outline: 0;
+      background: url(../Assets/controls.png) -86px -11px no-repeat;
+      margin: 0 3px;
+      &:hover, &.active {
+        background-position: -86px 0;
+      }
+    }
+    .bx-stop {
+      display: block;
+      text-indent: -9999px;
+      width: 9px;
+      height: 11px;
+      outline: 0;
+      background: url(../Assets/controls.png) -86px -44px no-repeat;
+      margin: 0 3px;
+      &:hover, &.active {
+        background-position: -86px -33px;
+      }
+    }
+  }
+  .bx-controls.bx-has-controls-auto.bx-has-pager {
+    .bx-pager {
+      text-align: left;
+      width: 80%;
+    }
+    .bx-controls-auto {
+      right: 0;
+      width: 35px;
+    }
+  }
+  .bx-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: #666\9;
+    background: rgba(80, 80, 80, 0.75);
+    width: 100%;
+    span {
+      color: #fff;
+      font-family: Arial;
+      display: block;
+      font-size: .85em;
+      padding: 10px;
+    }
+  }
+}
+
+/* LOADER */
+
+/* PAGER */
+
+/* DIRECTION CONTROLS (NEXT / PREV) */
+
+/* AUTO CONTROLS (START / STOP) */
+
+/* PAGER WITH AUTO-CONTROLS HYBRID LAYOUT */
+
+/* IMAGE CAPTIONS */

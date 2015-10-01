@@ -1,0 +1,29 @@
+﻿.orderingBillingContent
+{
+	width:950px;
+	margin: 0px;
+	padding: 0px;
+	@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width)  {
+		width: 300px;
+		padding: 60px 0 0 0;
+	}
+}
+
+.orderingVerifyContent
+{
+	width:950px;
+	margin: 0px;
+	padding: 0px;
+	@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width)  {
+		width: 100%;
+	}
+}
+
+.orderingContent
+{
+	margin-top: -15px;
+	@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width)  {
+		width: 300px;
+		padding: 60px 0 0 0;
+	}
+}

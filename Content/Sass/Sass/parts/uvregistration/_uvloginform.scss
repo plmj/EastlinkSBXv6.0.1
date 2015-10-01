@@ -1,0 +1,31 @@
+﻿.partcontent-uvlogin {
+
+    .uvloginform-uv-link-container {
+        float: left;
+        width: 100%;
+        .uvloginform-header {
+            border-bottom: 1px solid #CBCBCB;
+            padding-bottom: 10px;
+        }
+        .uvloginform-uv-logo-container {
+            float: right;
+            margin-top: 10px;
+        }
+    }
+
+    .validationsummary-uvlogin p {
+        font-size: 18px;
+        color: green;
+        margin-bottom: 10px;
+    }
+
+    .uvlogin-master-container {
+        width: 100%;
+        text-align: center;
+    }
+    .uvlogin-iframe-container {
+        width: 336px;
+        height: 645px;
+    }
+
+}

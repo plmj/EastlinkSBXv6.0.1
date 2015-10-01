@@ -1,0 +1,32 @@
+﻿.accountContent {
+  .accountMenu {
+    float: left;
+    margin-right: 20px;
+    width: 165px;
+    a {
+      display: block;
+      height: 30px;
+    }
+  }
+  .mainCDContent {
+    float: left;
+    width: 800px;
+	@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		width:320px;
+    }
+  }
+  .accountMenu li {
+    height: 30px;
+    border: 1px dotted #828178;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding: 5px;
+    cursor: pointer;
+	@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		display:none;
+    }
+    &:hover {
+      background: #DBDBDB;
+    }
+  }
+}

@@ -1,0 +1,24 @@
+﻿#recommendedProductsContainer {
+    h1 {
+        font-size: 1.4em;
+    }
+
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		.productComponent
+		{
+			margin-right: 0px;
+			width: auto;
+		}
+    }
+}
+
+.productDetailsComponent #recommendedProductsContainer .productTitle {
+    font-size: 1.0em;
+    cursor: pointer;
+
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		font-size: 1.2em;
+		text-align: center;
+		height: 100%;
+    }
+}

@@ -1,0 +1,377 @@
+﻿@import "../../thirdparty/flexslider";
+
+
+@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width)  {
+	.featuredlist-slider
+	{
+		margin: 0 0 1.5em 0;
+	}
+}
+
+.pageImage {
+  display: none;
+}
+
+.pageTitle {
+  margin-top: 10px;
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+
+.pageContent {
+    overflow: hidden;
+
+    .featuredList, .productList {
+        float: left;
+        width: 999px;
+    }
+
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		margin-top: 30px;
+		.featuredList, .productList {
+			width: 98%;
+		}
+    }
+}
+
+.featuredPlaylist {
+  margin: 10px 0;
+  padding-bottom: 20px;
+}
+
+.featuredContentBucket {
+  overflow: hidden;
+  margin: .5em;
+  .productRequestButton {
+    cursor: pointer;
+  }
+}
+
+.featuredContentIndividualItem {
+    float: left;
+    margin-right: 17px;
+
+    li {
+        float: left;
+    }
+
+    .productImage {
+        width: 120px;
+        margin: 24px;
+    }
+
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		text-align: center;
+		height: auto;
+    }
+}
+
+.uvDownloadNowButton {
+  margin: 5px 0 0 0;
+}
+
+.uvLogo {
+  background-image: url("../Assets/UVlogoBug.png");
+  width: 24px;
+  background-repeat: no-repeat;
+  padding-left: 27px;
+  text-indent: -9000px;
+}
+
+.titleContainer {
+  width: 100%;
+  margin: 0 0 10px 0;
+  overflow: hidden;
+  .title {
+    font-size: 1.2em;
+    font-weight: bold;
+    float: left;
+  }
+  .uvLinkContainer {
+    float: right;
+  }
+}
+
+.uvCombined .uvProductContainer {
+  background: #d8d8d8; 
+}
+
+.uvMainLogo {
+  display: block;
+  cursor: pointer;
+  margin: 0 auto;
+  float: right;
+  a {
+    width: 192px;
+    height: 32px;
+  }
+}
+
+.uvInstruction {
+  h1 {
+    border-bottom: 1px solid #CBCBCB;
+    padding-bottom: 12px;
+  }
+  .uvMainLogo {
+    top: -4px;
+  }
+}
+
+.productDetailSmall.uvProductContainer[cdiscdproduct=false] {
+  background: #d8d8d8;
+}
+
+.uvProductContainer .productImage.hoverEffect {
+  &:focus, &:hover {
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    outline: none;
+    cursor: default;
+  }
+}
+
+.productDetailSmall {
+  .accessPolicies {
+    float: left;
+    display: inline-block;
+    width: 100%;
+  }
+  .accessPolicySection {
+    margin: 0 0 5px 0;
+    float: left;
+  }
+  .accessPolicyHeader {
+    font-weight: bold;
+  }
+  .detailProductInfo .shortDescription {
+    font-size: .85em;
+  }
+  .expiredCount, .remainingCount {
+    color: #F00;
+  }
+  .availability {
+    font-size: .7em;
+    clear: both;
+  }
+}
+
+.availability {
+  font-size: .7em;
+  clear: both;
+}
+
+.featuredContentIndividualItem {
+    .productTitle {
+        font-size: 1.0em;
+        text-align: center;
+        cursor: pointer;
+        width: 120px;
+
+        @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+			font-size: 1.2em;
+			text-align: center;
+			height: 100%;
+        }
+    }
+
+    .productDescription {
+        display: none;
+    }
+}
+
+.showAllButton {
+    width: 100px;
+    background-image: url("../Assets/rightarrow.png");
+    background-repeat: no-repeat;
+    background-position: 70px center;
+    font-size: 0.9em;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-shadow: 1px 1px 1px #BBB;
+
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		background-position: 50px center;
+    }
+}
+
+.rightArrow {
+  background-image: url("../Assets/right-carousel-arrow.png");
+  background-repeat: no-repeat;
+  float: left;
+  height: 25px;
+  margin-top: 3em;
+  width: 25px;
+}
+
+.leftArrow {
+  background-image: url("../Assets/left-carousel-arrow.png");
+  background-repeat: no-repeat;
+  float: left;
+  height: 25px;
+  margin-top: 3em;
+  width: 25px;
+}
+
+.countdownTimer {
+  display: inline-block;
+  width: 100%;
+  float: left;
+  margin-bottom: 10px;
+}
+
+.featureItemContainer {
+    margin: 0 0 10px 0;
+    float: left;
+    width: 100%;
+    /*height:350px;*/
+    display: block;
+    background-repeat: no-repeat;
+
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		margin: 0;
+		float: left;
+		display: block;
+		background-repeat: no-repeat;
+		height: auto;
+    }
+}
+
+.featuredItemContainer! .countdownContainer.countdownComplete {}
+
+.featureItemContainer {
+  .instantlyViewableCountdownTimerContainer, .orderedCountdownTimerContainer, .orderableCountdownTimerContainer {
+    margin: 5px 0 0 0;
+  }
+  .countdownTimer.countdownComplete! {}
+  .availableInContainer {
+    font-size: 0.7em;
+  }
+  .countdownTimer {
+    overflow: hidden;
+  }
+}
+
+.featuredProductContent {
+  overflow: hidden;
+  width: 100%;
+  min-height: 350px;
+}
+
+.featuredItemImage {
+    position: absolute;
+    height: 350px;
+    display: inline;
+    width: 990px;
+    background-repeat: no-repeat;
+
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		position: relative;
+		overflow: hidden;
+		width: 100%;
+		height: 200px;
+		background-size: cover;
+    }
+}
+
+.featuredItemLearnMore {
+    margin: 5px 0;
+    font-size: 0.9em;
+
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		overflow: hidden;
+		float: right;
+		font-size: 1.3em;
+		width: 100%;
+		a {
+			float: right;
+		}
+    }
+}
+
+@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+    .featuredItemLogin {
+        overflow: hidden;
+        margin: 1em 0;
+        float: right;
+        font-size: 1.3em;
+		a {
+            margin: 0 .5em;
+        }
+    }
+}
+
+
+.featuredItemSummary {
+    display: block;
+    float: right;
+    padding: 30px;
+    position: relative;
+    right: 25px;
+    top: 20px;
+    width: 370px;
+    *left: 0;
+    *margin-right: 30px;
+    overflow: hidden;
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		background: none transparent;
+        display: block;
+		float: none;
+		padding: 0;
+		width: auto;
+		position: static;
+        overflow:hidden;
+		top: 0;
+		left: 0;
+    }
+}
+
+.featuredItemPricing {
+    clear: both;
+    margin-top: 20px;
+    overflow: hidden;
+
+    .pricingLearnMore {
+        clear: both;
+        display: block;
+        padding-right: 21px;
+        padding-top: 10px;
+        text-align: right;
+    }
+
+    .pricingPlanComponent {
+        float: left;
+        text-align: center;
+        margin-right: 15px;
+        margin-top: 10px;
+    }
+
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		overflow: hidden;
+    }
+}
+
+.featuredItemTitle {
+    font-size: 1.3em;
+    font-weight: bold;
+    display: block;
+
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		font-size: 2em;
+		margin: .5em 0;
+		float: left;
+		width: 100%;
+    }
+}
+
+.featuredItemDescription {
+    font-size: .8em;
+    line-height: 2em;
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		font-size: 1.1em;
+		line-height: 1.6em;
+		float: left;
+    }
+}

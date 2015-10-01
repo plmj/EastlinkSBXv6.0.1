@@ -1,0 +1,15 @@
+﻿@import "../../thirdparty/bxslider";
+@import "partialproduct";
+
+.sliderListHeader {
+  display: inline-block;
+  h1 {
+    display: inline-block;
+    float: left;
+  }
+  a {
+    display: inline-block;
+    float: left;
+    margin: 5px 0 0 15px;
+  }
+}

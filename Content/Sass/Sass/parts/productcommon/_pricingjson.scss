@@ -1,0 +1,227 @@
+﻿.__BrowseOnly
+{
+    display: none;
+}
+
+.pricingInfo, .purchaseUpgradesContainer
+{
+	& .other-purchase-options {
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+	}
+    .productHeaderContainer
+    {
+        margin: 0;
+        padding: 0;
+    }
+
+    .productName
+    {
+        font-weight: bold;
+    }
+
+    .planName
+    {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        font-size: .8em;
+        font-weight: bold;
+        color: #898A83;
+    }
+	.purchase-rewards-container {
+		display: block;
+		float: none;
+		
+		& li {
+			float: left;
+			margin-left: 3px;
+
+			& span {
+				margin: 5px 0 0 0 !important;
+				color: rgb(255,192,0);
+
+				.product-details-banner-container & {
+					margin: 0 !important;
+					color: rgb(255,192,0);
+				}
+			}
+		}
+	}
+	
+    .productShortDescription
+    {
+        line-height: 20px;
+    }
+
+    .planDescription
+    {
+        line-height: 10px;
+        font-weight: bold;
+        margin-bottom: 5px;
+        font-style: italic;
+        font-size: .9em;
+    }
+
+    .productAttributes
+    {
+        float: left;
+        width: 100%;
+        background-color: #f0f0f0;
+    }
+
+    .productDetailsSmall
+    {
+        padding-bottom: 10px;
+    }
+
+    .beforeDiscountPrice
+    {
+        text-decoration: line-through;
+        color: #A1A1A1;
+    }
+
+
+    .showHidePurchaseOptionsButton
+    {
+        margin: 0 0 15px 0;
+        color: #777;
+        font-size: 14px;
+
+        & .fa
+        {
+            font-size: 16px;
+            margin-right: 3px;
+        }
+    }
+
+    .pricingPlanListComponentContainer
+    {
+        margin: 10px 0 30px 0;
+
+        &.collapsed
+        {
+            display: none;
+        }
+    }
+
+    .episodicCompleteTheSeasonHeader
+    {
+        display: block;
+        font-size: 1.0em;
+        font-weight: bold;
+        color: #555;
+        margin: 0 0 5px 0;
+    }
+
+    .pricingPlanSelectContainer h2
+    {
+        color: #696969;
+        font-size: 1.4em;
+    }
+
+
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width)
+    {
+        .pricingPlanSelectContainer
+        {
+            overflow: hidden;
+        }
+    }
+
+    .pricingPlanListContainer
+    {
+        overflow: hidden;
+        margin-left: 0;
+    }
+
+    li.pricingPlanComponent.expiredPlan, .pricingPlanComponent a.pricingPlanSelectButton.expiredPlan
+    {
+        display: none;
+    }
+
+    .pricingPlanComponent
+    {
+        float: left;
+        margin-bottom: 5px;
+        margin-right: 5px;
+        text-align: center;
+        width: 330px;
+
+        @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width)
+        {
+            margin: .5em auto; float: left; width: 100%; font-size: 1.2em;
+        }
+
+        .planName
+        {
+            color: #FFFFFF;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .planDescription
+        {
+            display: none;
+        }
+
+        .actionContainer
+        {
+            overflow: hidden;
+            position: relative;
+
+            a
+            {
+                height: 35px;
+            }
+        }
+
+        .beforeDiscountPrice
+        {
+            font-size: 0.8em;
+            left: 6px;
+            margin-bottom: 0;
+            margin-left: 0;
+            margin-right: 0;
+            padding: 0;
+            position: absolute;
+            top: -4px;
+        }
+
+        a
+        {
+            &[cduv="True"], &[cduv=true]
+            {
+                background: #494a72;
+                font-size: 0.9em;
+            }
+
+                &[cduv="True"]:hover, &[cduv=true]:hover
+                {
+                    background: #57179C;
+                }
+
+            span
+            {
+                float: left;
+            }
+        }
+
+        .uvImageContainer
+        {
+            margin: 8px 5px 0 0;
+            display: inline-block;
+            background: url('../Assets/UVlogoBug.png') no-repeat top left;
+            width: 17px;
+            height: 16px;
+        }
+
+        a .finalPrice
+        {
+            margin: 0 5px 0 0;
+        }
+    }
+}

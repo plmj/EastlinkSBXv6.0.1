@@ -1,0 +1,246 @@
+
+.product-detail-list {
+    float: left;
+    margin: 5px 0;
+    position: relative;
+    width: 100%;
+    border-bottom: 1px dotted #ccc;
+    padding-top: 10px;
+
+	& .product-list-container {
+        display: block;
+        float: right;
+        width: 88%;
+    }
+	& .product-title-container {
+        display: inline-block;
+        float: left;
+        max-width: 245px;
+    }
+	& .product-list-title {
+		font-size: 1.1em;
+		font-weight: bold;
+        color: #4691d7;
+        text-decoration: underline;
+    }
+    & .more-list-actions {
+        float: right;
+    }
+
+    & .product-list-row {
+        display: block;
+        float: left;
+        width: 100%;
+        padding-bottom: 8px;
+    }
+	.listpartialproductdetails-left-section {
+		float: left;
+		width: 70%;
+	}
+	.listpartialproductdetails-right-section {
+		float: left;
+		width: 30%;
+	}
+
+	& .product-list-viewing-badges-container,
+    & .product-list-actions-container {
+        display: inline-block;
+        float: right;
+        margin-left: 50px;
+    }
+	.listpartialproductdetails-countdowntimer {
+		float: right;
+		margin-right: 24px;
+	}
+    & .listpartialproductdetails-list-description {
+        float: left;
+        display: inline-block;
+        width: 100%;
+    }
+
+    & .detailImageContainer,
+    & .detailProductInfoList {
+        float: left;
+        overflow: hidden;
+    }
+	& div.detailImageContainer {
+        margin: 0 15px 0 0;
+    }
+	.product-thumbnail-container {
+		display: block;
+		min-height: 100px;
+		float: left;
+		margin-right: 8px;
+		width: 10%;
+		& .list-image {
+			width: 80px;
+		}
+	}	
+
+    & .detailImageContainer .mediaLibraryThumbnail {
+        width: 80px;
+        font-size: 0.7em;
+    }
+	& .purchase-date-list-container, 
+	& .reference-date-list-container {
+		float: left;
+		margin-top: 11px;
+		width:100%;
+	}
+    
+	& .purchase-upgrades-container {
+		float: right;
+		margin-right: 84px;
+	}
+    & .guidance-rating-container {
+        float: left;
+        display: inline-block;
+		margin-right: 10px;
+    }
+	& .product-list-toggle-button {
+		float: right;
+		& span {
+			text-decoration: underline;
+		}
+	}
+    & .detailProductInfoList {
+        width: 85%;
+        float: left;
+
+        & .nameContainer {
+            margin: 0 20px 5px 0;
+            width: 100%;
+            font-weight: bold;
+        }
+
+        & .metaContainer li,
+        & .metaContainer .UVLogoBugContainer {
+            margin-top: 0;
+            float: left;
+            overflow: hidden;
+        }
+
+        & .metaContainer {
+            float: left;
+            overflow: hidden;
+        }
+
+        & .libraryShortDescriptionContainer {
+            font-size: 0.8em;
+            width: 100%;
+        }
+
+        & .action-accessContainer .actionButtonsContainer {
+            width: 350px;
+        }
+
+        & .actionButtonsContainer .countdownContainer {
+            float: right;
+            margin: 5px 20px 0 0;
+        }
+
+        & .action-accessContainer .libraryWatchlistListLayout {
+            width: 170px;
+        }
+
+        & li {
+            float: left;
+            overflow: hidden;
+        }
+
+        & .accesspolicyContainer {
+            width: 100%;
+        }
+
+        & .meta-libraryContainer {
+            width: 34%;
+        }
+
+        & .action-accessContainer {
+            width: 65%;
+            font-size: 0.7em;
+            float: right;
+            overflow: hidden;
+
+            & .actionContainer {
+                width: 100%;
+
+                & .mainButton {
+                    width: 150px;
+                    margin: 0 0 0 5px;
+                    float: left;
+                    font-weight: bold;
+                }
+            }
+
+            & .accessPolicies {
+                margin: 5px 5px;
+            }
+        }
+
+
+        & .accessPolicies {
+            float: left;
+        }
+
+        & .accessPolicySection {
+            margin: 0 0 5px 0;
+            float: left;
+            width: 100%;
+        }
+
+        & .availability {
+            margin: 0 5px 0 0;
+        }
+
+        & .accessPolicyHeader {
+            font-weight: bold;
+        }
+
+        & .remainingVideoPlays {
+        }
+
+        & .shortDescription {
+            font-size: .85em;
+        }
+
+        & .dateValue,
+        & .expiredCount,
+        & .remainingCount {
+            color: #F00;
+        }
+    } 
+	& .external-product {
+		background-color: #ccc;
+	}
+	& .UVLogoBugContainer {
+		margin-right: 4px;
+	}   
+
+    & .UVLogoBugContainer {
+        background-image: url("../Assets/UVlogoBug.png");
+        width: 18px;
+        height: 17px;
+        background-repeat: no-repeat;
+        float: left;
+        text-indent: -9000px;
+        margin-top: 10px;
+    }
+	& .purchase-upgrades-container {
+		width: 200px;
+		float: right;
+		margin-right: 0px;
+		& .purchaseUpgradeListContainer {
+
+			& .pricingPlanComponent {
+				float: none;
+				width: auto;
+
+				& .pricingPlanSelectButton {
+					height: 20px;
+					font-size: 0.6em;
+				}
+			}
+		}
+	}
+}

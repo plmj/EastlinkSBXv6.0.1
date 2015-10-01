@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="P3P" content='CP="CAO DSP COR CURa ADMa DEVa TAIa PSAa PSDa IVAi IVDi CONi OUR SAMo OTRo BUS PHY ONL UNI PUR COM NAV INT DEM CNT STA PRE"' />
+	<meta http-equiv="Page-Enter" content="progid:DXImageTransform.Microsoft.Fade(Duration=0)" />
+	<meta http-equiv="Page-Exit" content="progid:DXImageTransform.Microsoft.Fade(Duration=0)" />		
+	<title>Eastlink Movie Player</title> 
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link href="Content/StyleSheets/cdfull_site.css" rel="stylesheet" type="text/css" />
+    <script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script type='text/javascript' src="https://eastlink.sbx1.cdops.net/html/full/v6.0.1/Scripts/contentdirect.ui.js"></script>		
+	<script type="text/javascript" src="Scripts/cdfull.js"></script>    
+    
+	<script type="text/javascript">        
+        var imageUrl, prodName, prodId, planId, dcCode, manifestData;
+        
+        $.cd.ready(function () {
+            ContentDirectAPI.set_afterResourcesReady(function () {
+                $('[cdid=downloadInstructionsResource]').text($.cd.getResourceValue('cff_download_instructions').replace('{0}', prodName));
+                var url = $.cd.getResourceValue('download_page_to_redirect_to', '');
+                $('[cdid=customDownloadLink]').click(function () {
+                    // if no CFF then take the user to the custom download page
+                    var validUrl = url != null && url.length > 0;
+                    var matchFound = false;
+                    var re = /^[^+(){}[\]<>;"\'\\]+$/g;
+                    if (!validUrl) {
+                        $.cd.log("Invalid file name for 'download_page_to_redirect_to'. Please specify the appropriate file name for this key in resources.js.");
+                    }
+                    else {
+                        matchFound = url.match(re) != null;
+                        if (!matchFound) {
+                            $.cd.log("The download file name, '" + url + "' may not contain the following characters: + ( ) { } [ ] < > \ : ; '.");
+                        }
+                    }
+                    if (!validUrl || !matchFound) {
+                        var pageToRedirect = contentdirect.getClientPageByName("download");
+                        var clientUrl = contentdirect._settings.clientUrl.search("http") > -1
+                                        ? contentdirect._settings.clientUrl.replace("http://", "").replace("https://", "")
+                                        : contentdirect._settings.clientUrl;
+                        url = pageToRedirect.url !== undefined
+                                ? pageToRedirect.url
+                                : (!pageToRedirect.isSecured ? "http://" : "https://") + clientUrl + (pageToRedirect.pathName).substring(1, pageToRedirect.pathName.length);
+                    }
+
+                    window.open(url, '_blank', 'width=800px,height=600px');
+                });
+            });
+	        var cdInfo = $.cd.get_containerInfo(),
+	            _buildDownloadLink = function (downloadUrl, quality, fileSize) {	                
+	                var fileSize = null != fileSize ? _bytesToSize(fileSize) : '';	                
+	                $('[cdid=fileDownloadContainer]').append('<li class="cffdownloadpopup-download-listitem"><a target="_blank" href="' + downloadUrl + '" class="cffdownloadpopup-download-link ' + quality + '"><span class="cffdownloadpopup-download-link-text" cdresource="naked_download_' + quality.toLowerCase() + '"></span><span class="uv-icon-container"></span><span class="cffdownloadpopup-download-link-text">' + fileSize + '</span></a></li>');
+	            },
+	           _bytesToSize = function(bytes) {
+	            var k = 1000;
+	            var sizes = [$.cd.getResourceValue('file_bytes', 'Bytes'), $.cd.getResourceValue('file_kilobytes', 'KB'), $.cd.getResourceValue('file_megabytes', 'MB'), $.cd.getResourceValue('file_gigabytes', 'GB'), $.cd.getResourceValue('file_terabytes', 'TB')];
+	            if (bytes === 0) return '0 Bytes';
+	            var i = parseInt(Math.floor(Math.log(bytes) / Math.log(k)),10);
+	            return (bytes / Math.pow(k, i)).toPrecision(3) + ' ' + sizes[i];
+	           };
+	        
+	    	imageUrl = $.cd.getValueFromCache("__dImg", null, true);
+	    	prodName = $.cd.getValueFromCache("__dName", null, true);
+	    	manifestData = JSON.parse($.cd.getValueFromCache("__dManifest", null, true));
+	    	$.cd.deleteValueFromCache("__dManifest", true);
+	        // Parse through manifest data and build the links
+	        try {
+	            if (null != manifestData) {
+	                $('[cdid=cffOnlyContent]').show();
+	                var i;
+	                for (i = 0; i < manifestData.length; i += 1) {
+	                    var parsedManifestData = JSON.parse(manifestData[i].value);
+	                    var manifestInfo = null != parsedManifestData.FulfillmentManifest.Manifest ?
+                                           parsedManifestData.FulfillmentManifest.Manifest :
+                                           parsedManifestData.FulfillmentManifest.item;
+	                    _buildDownloadLink(manifestInfo.LocationURL, manifestData[i].key, manifestInfo.Length)
+	                }
+	            }
+	        } catch (err) {
+	            $.cd.log("Error parsing manifest data: " + err.message);
+	            parent.window.open($.cd.getResourceValue('download_page_to_redirect_to'), '_blank', 'width=800px,height=600px');
+	            parent.$.fancybox.close();
+	            return false;
+	        }
+	    	$("[cdid=productImage]").attr("src", imageUrl);
+	    	$("[cdid=productImage]").fadeIn('fast');
+	        
+	    	var browser = $.cd.get_browserInfo().browser.toLowerCase();
+	    	if (browser === 'internet explorer' || (browser === 'mozilla' && $.cd.get_browserInfo().version === 11)) {
+	    	    $("[cdid=saveAsDownloadInstructions]").show();
+	    	}
+	    	
+            // Grabs and sets the resources.js file location
+	    	ContentDirectAPI._cdResourceUrl = parent.ContentDirectAPI._cdResourceUrl;
+	    	ContentDirectAPI.updateCDResources(false);
+	    });	  	    
+	</script>  
+</head>
+<body class="cffdownloadpopup-body">
+    <div cdid="cffPopupContainer" class="cffdownloadpopup-container">
+        <div class="cffdownloadpopup-left-section">            
+            <span class="cffdownloadpopup-header" cdresource="cff_download_header">How To Download</span>
+            <div class="cffdownloadpopup-image-container">
+                <img cdid="productImage" class="cffdownloadpopup-image" src="" alt="{Name}" style="display:none;"/>
+            </div>
+            <div class="cffdownloadpopup-download-section">
+                <span cdid="downloadInstructionsResource" class="cffdownloadpopup-download-instructions" cdresource="cff_download_instructions"></span>
+                <a cdid="customDownloadLink" class="cffdownloadpopup-dlm-link" href="#"><span cdresource="cff_how_to_download_link"></span></a>
+       
+                <div cdid="cffOnlyContent" style="display: none;">
+                    <span class="cffdownloadpopup-existing-player" cdresource="cff_already_have_preferred_player"></span>
+                    <span class="cffdownloadpopup-direct-download" cdresource="cff_download_directly"></span>
+                    <i cdid="saveAsDownloadInstructions" class="cffdownloadpopup-download-ie" cdresource="cff_download_ie" style="display:none;"></i>
+                    <ul cdid="fileDownloadContainer" class="cffdownloadpopup-naked-download-container"></ul>
+                </div>
+            </div>
+        </div>
+        <div class="cffdownloadpopup-right-section">
+            <span class="cffdownloadpopup-other-devices" cdresource="cff_other_devices_header"></span>
+            <span class="cffdownloadpopup-other-devices-instructions" cdresource="cff_other_devices_instructions"></span>
+            <span class="cffdownloadpopup-android-store"></span>
+            <span class="cffdownloadpopup-apple-store"></span>
+        </div>
+    </div>
+    <div cd="flexc" cdtype="page" cdpagetype="genericpage" cdversion="current" id="__StorefrontContainer"></div>
+</body>
+</html>

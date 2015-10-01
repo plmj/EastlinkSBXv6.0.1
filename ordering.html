@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="P3P" content='CP="CAO DSP COR CURa ADMa DEVa TAIa PSAa PSDa IVAi IVDi CONi OUR SAMo OTRo BUS PHY ONL UNI PUR COM NAV INT DEM CNT STA PRE"' />
+	<meta http-equiv="Page-Enter" content="progid:DXImageTransform.Microsoft.Fade(Duration=0)" />
+	<meta http-equiv="Page-Exit" content="progid:DXImageTransform.Microsoft.Fade(Duration=0)" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<title>Eastlink Movie Player</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link href="Content/StyleSheets/cdfull_site.css" rel="stylesheet" type="text/css" />
+    <link href="Content/Fonts/font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+	
+</head>
+<body>
+	<div id="wrapper" class="wrapperInterior">
+		<div cdtype="navigationmenu" id="navigationMenuContainer" class="navigation-menu"></div>
+        
+		<div id="contentWrapper">
+			<div class="interiorPageWrapper">
+				<div class="contentFullPage">
+					<div cdType="pageMenu" id="cdPageMenu" class="pagingControl"></div>		
+					<div id="checkoutPageTitle" style="display: none;">
+						<h1>Checkout</h1>
+					</div>		
+					<div id="contentContainer" class="orderingContent">
+						<div cd="flexf" cdtype="page" cdpagetype="genericpage" cdversion="current" id="__StorefrontContainer" style="visibility:hidden;"></div>
+					</div>
+					<div id="emptyCartPopup" class="noProductPopup" style="display: none;">
+						<ul>
+							<li class="noProductPopupTitle" cdresource="no_item_message">You have no items in your cart. <a onclick="contentdirect.redirectPage('index');">Shop</a>
+							</li>
+						</ul>
+					</div>
+                </div>
+			</div>
+		</div>
+	</div>
+    <div cdtype="footer" id="footerWrapper" class="clearfix" style="display: none;"></div>
+    <script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="Scripts/bootstrap.min.js"></script>
+	<script type='text/javascript' src="https://eastlink.sbx1.cdops.net/html/full/v6.0.1/Scripts/contentdirect.ui.js"></script>
+	<script type="text/javascript" src="Scripts/cdfull.js"></script>
+</body>
+</html>

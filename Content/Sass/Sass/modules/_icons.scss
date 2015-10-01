@@ -1,0 +1,25 @@
+﻿.icon-facebook-lg {
+	background-image: url("../Assets/facebook_icon_large.png");
+	background-repeat:no-repeat;		
+	padding: 8px 0 16px 31px;
+}
+.icon-facebook-sm {
+	background-image: url("../Assets/facebook_icon_small.png");
+	background-repeat:no-repeat;		
+	background-size: 100% 38px;
+	text-decoration: none;       
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	padding: 12px 0 12px 20px;
+	font-size:0.8em;
+}
+
+.icon-uv-learn-more {
+    height: 35px;
+    width: 200px;
+    display: block;
+    background-image: url("../Assets/UVlogo.png");
+    background-repeat: no-repeat;
+    background-position: left top;
+    // This will hide the alt text since the img is transparent
+    color: transparent;
+}

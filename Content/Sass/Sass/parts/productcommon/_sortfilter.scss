@@ -1,0 +1,45 @@
+.sort-group-button {
+	margin-bottom: 5px;
+}
+.filter-header
+{
+    border-bottom: 2px solid gray;
+    margin-bottom: 10px;   
+}
+.filter-header span
+{
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.reset-filter {
+    display: inline-block;
+    float: right;
+    font-size: 0.7em;
+    margin-top: 2px;
+}
+.toggle-filter-button {
+    display: block;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    /*text-transform: uppercase;*/
+    padding: 4px 8px;
+    -webkit-box-shadow: 0 1px 1px #ccc;
+    -moz-box-shadow: 0 1px 1px #ccc;
+    box-shadow: 0 1px 1px #ccc;
+    background: #ccc;
+    font-size: 0.8em 'PT Sans', sans-serif, Arial, Helvetica;    
+}
+.toggle-filter-button.selected {
+    background: rgb(44, 129, 203);
+    color: white;
+    box-shadow: 0 1px 1px rgb(44, 129, 203);
+}
+.toggle-filter-button:active {
+    color: rgb(44, 129, 203);
+}
+.sortfilter-dropdown {
+	width: 100%;
+	font-size: 16px;
+}

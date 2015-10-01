@@ -1,0 +1,25 @@
+﻿.relatedPeopleContainer {
+    margin-top: 30px;
+    font-size: 1.3em;
+    line-height: 22px;
+}
+
+.personalDetails {
+  margin-bottom: 20px;
+}
+
+.personDetailsComponent {
+  .featuredContentBucketTitle {
+    font-size: 1.4em;
+  }
+  .bx-wrapper .bx-viewport {
+    margin-left: 0px;
+    max-width: 100%;
+  }
+  @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+	  .personImageContainer img {
+		width: 100px;
+		font-size: 0.8em;
+	  }
+  }
+}

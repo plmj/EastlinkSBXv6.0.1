@@ -1,0 +1,15 @@
+﻿.partcontent-watchlistnoitemsmessage {
+    background-color: #2C81CB;
+    border-radius: 6px;
+    color: #FFFFFF;
+    font-size: 1.2em;
+    font-weight: bold;
+    line-height: 1.4em;
+    margin: auto;
+    padding: 35px;
+    text-align: center;
+    width: 400px;
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		width: 225px;
+    }
+}

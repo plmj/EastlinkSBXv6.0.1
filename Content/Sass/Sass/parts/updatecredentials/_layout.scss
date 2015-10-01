@@ -1,0 +1,32 @@
+﻿div.pagecontent 
+{
+    width: 85%;
+    text-align:center;
+    margin: 0 auto;
+    color:#696969;
+    h1 { font-size: 1.8em; }
+}
+.partcontent-forgotpasswordform {
+    .description  h2 {
+        color:#696969;
+        margin: 10px 0;
+    }
+}
+.partcontent {
+    width: 60%;
+    margin: 0 auto;
+    text-align:left;
+
+    label { display:block; }
+    h1 { font-size:1.6em; }
+    input { width:100%; }
+}
+.btn-action-container {
+    a {
+        float:right;
+        margin-left: 10px;
+    }
+}
+.updatecredentialsform-input-item {
+    margin-top:15px;
+}

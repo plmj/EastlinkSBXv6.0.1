@@ -1,0 +1,53 @@
+﻿.rating {
+	float: left;
+	margin-right: 2px;
+	margin-top: 10px;	
+	@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {            
+		height: 14px;
+    }	
+}
+
+.rating_G {
+    background-image: url("../Assets/RATED_G.png");
+    background-repeat: no-repeat;
+    text-indent: -9000px;
+	width: 15px;
+}
+
+.rating_PG {
+    background-image: url("../Assets/RATED_PG.png");
+    background-repeat: no-repeat;
+    text-indent: -9000px;
+	width: 22px;
+}
+
+.rating_PG-13 {
+    background-image: url("../Assets/RATED_PG-13.png");
+    background-repeat: no-repeat;
+    text-indent: -9000px;
+    width: 42px;
+}
+
+.rating_R {
+    background-image: url("../Assets/RATED_R.png");
+    background-repeat: no-repeat;
+    text-indent: -9000px;		
+	width: 15px;
+}
+
+.rating_NC-17 {
+    background-image: url("../Assets/Nc-17.png");
+    background-repeat: no-repeat;
+    text-indent: -9000px;
+    width: 10px;
+}
+
+.rating_NR {
+    background-image: url("../Assets/RATED_NR.png");
+    background-repeat: no-repeat;
+    text-indent: -9000px;
+}
+
+.rating_NA {
+    display: none;
+}

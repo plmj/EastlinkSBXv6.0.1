@@ -1,0 +1,111 @@
+.episodiclistpartialproduct-container
+{
+	float: left;
+	margin: 5px 0;
+	position: relative;
+	width: 100%;	
+	border-bottom: 1px dotted #ccc;
+    padding-top: 10px;
+
+	.left-section {
+	  display: block;
+	  float: left;
+	  width: 75%;
+	  padding: 3px;
+	}
+	.right-section {
+	  display: block;
+	  float: left;
+	  width: 25%;
+	  padding-top: 3px;
+      padding-bottom: 3px;
+	}
+	.product-list-title {
+		font-size: 1.1em;
+		font-weight: bold;
+        color: #4691d7;
+        text-decoration: underline;
+    }
+	.episodic-product-thumbnail-container {
+		display: block;
+		min-height: 100px;
+		float: left;
+		margin-right: 8px;
+		& .list-image {
+			width: 80px;
+		}
+	}
+	
+	.product-list-container-left {
+		float: left;    
+		width: 80%;
+	}
+	.UVLogoBugContainer {
+		background-image: url("../Assets/UVlogoBug.png");
+		width:18px;
+		height:17px;
+		background-repeat:no-repeat;
+		float:left;
+		text-indent: -9000px;
+		margin-top: 10px;
+	}
+	.purchase-date-container {
+	  float: left;
+	  width: 100%;
+	}
+	.close-button {
+		float:right;
+		margin-right: 10px;		
+		font-weight: bold;
+		& .fa {
+			font-size: 1.3em;
+		}		
+	}
+	.season-number-text {
+		margin-right: 2px;
+	}
+	.episodic-toggle-container {
+		float: left;
+		padding-top: 8px;
+        padding-bottom: 8px;
+        .episodic-toggle-button  {
+		    background-color: #898A93;
+		    border-radius: 5px;
+		    width: 190px;
+		    display: block;
+		    text-align: center;
+		    height: 30px;
+		    line-height: 30px;
+		    vertical-align: middle;
+	    }
+	}
+	
+	.episodic-toggle-button span {
+		color: white;
+	}
+    .episodiclistpartialproduct-episode-container {
+        width: 100%;
+    }
+    & .pricingPlanComponent {
+		width: 190px;
+		& .actionContainer a {
+			font-size: 12px;
+			height: 26px;
+            line-height: 18px;
+			& span, & .finalPrice {
+				margin: 0;
+				padding: 0;
+			}
+			& .beforeDiscountPrice,
+			& .upgradeToPrefix,
+			& .planName {
+				margin-right: 2px;
+			}
+		}
+		& .uvImageContainer {
+			padding-right: 5px;
+			margin:0;
+		}
+	}
+}
+

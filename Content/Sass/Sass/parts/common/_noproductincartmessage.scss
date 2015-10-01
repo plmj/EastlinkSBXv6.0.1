@@ -1,0 +1,31 @@
+﻿.noProductPopupTitle .uvLinkAction {
+  color: #e8e8e8;
+  text-decoration: underline;
+}
+
+.noProductPopup {
+  height: 262px;
+  text-align: left;
+  margin: 0 auto;
+  width: 496px;
+  padding: 10px;
+   @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+    width: 93%;
+  }
+}
+
+li.noProductPopupTitle {
+  a {
+    text-decoration: underline;
+  }
+  background-color: #2C81CB;
+  border-radius: 6px;
+  color: #FFFFFF;
+  font-size: 1.2em;
+  font-weight: bold;
+  line-height: 1.4em;
+  padding: 35px;
+  position: absolute;
+  text-align: center;
+  width: 400px;
+}

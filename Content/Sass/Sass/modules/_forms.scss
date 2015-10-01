@@ -1,0 +1,17 @@
+﻿select {
+	font-family: 'PT Sans', sans-serif, Arial, Helvetica;
+}
+
+input {	
+	font-family: 'PT Sans', sans-serif, Arial, Helvetica;
+}
+
+@mixin form-input-label {
+    color: #5E5E5E;
+    font-size: 0.8em;
+    font-weight: bold;
+    display: block;
+    line-height: 15px;
+    margin-bottom: 5px;
+    margin-top: 10px;
+}

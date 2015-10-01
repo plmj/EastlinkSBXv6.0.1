@@ -1,0 +1,65 @@
+﻿.uv-library-part, .uv-library-part-mobile {
+    float: left;
+
+	& .uvLinkContainer {
+		overflow:hidden;
+		display: inline-block;
+		float: left;
+		width: inherit;
+		margin-bottom: 15px;
+		background-color: #ccc;
+		border-radius: 5px;
+	}
+
+	.UVLogo {
+		height:35px; 
+		width:200px;
+		display: block;
+		background-image: url("../Assets/UVlogo.png");
+		background-repeat: no-repeat;
+		background-position: left top; 
+	 }
+
+	& .uvMainLogo {
+		display: inline-block;
+		float: left;
+		width: 100%;
+		margin: 5px;
+	}
+	
+	& .uvLinkedIconContainer {		
+		float: left;	
+		margin: 0 8px;	
+	}
+
+	& .uvNotLinkedStatementContainer,
+	& .uvLinkedStatementContainer {			
+		float: left;		
+		font-size: 12px;
+		width: 180px;
+
+		& .uvLinkedStatement {
+			float:left;
+			margin: 0 0 5px 0;
+		}
+
+		& .uv-link{
+			float: left;
+			color: #0056B0;
+			cursor: pointer;					
+			text-decoration: underline;
+			margin: 5px 0 10px 0;
+		}
+	}	
+
+	@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		display: none;
+    }
+}
+
+.uv-library-part-mobile {
+	display: none;
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		display: block;
+    }
+}

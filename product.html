@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="http://www.facebook.com/2008/fbml" >
+<head>
+	<title>Eastlink Movie Player</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />	
+	<meta http-equiv="P3P" content='CP="CAO DSP COR CURa ADMa DEVa TAIa PSAa PSDa IVAi IVDi CONi OUR SAMo OTRo BUS PHY ONL UNI PUR COM NAV INT DEM CNT STA PRE"' />
+	<meta http-equiv="Page-Enter" content="progid:DXImageTransform.Microsoft.Fade(Duration=0)" />
+	<meta http-equiv="Page-Exit" content="progid:DXImageTransform.Microsoft.Fade(Duration=0)" />
+	<meta property="og:site_name" content="Eastlink" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="fragment" content="!" />
+    <meta name="robots" content="index,follow"/>
+    <meta name="keywords" content="keywords" />
+    <meta name="googlebot" content="noarchive"/>
+    <meta name="bingbot" content="noarchive"/>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link href="Content/StyleSheets/cdfull_site.css" rel="stylesheet" type="text/css" />
+	<link href="Content/Fonts/font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+	<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+	<noscript>
+		<meta http-equiv="refresh" content="0;URL=dependency.html" />
+	</noscript>
+</head>
+<body>	
+  <div><a href="#!productpage"></a></div>
+  <div id="content"></div>
+	<div class="wrapper">
+		<div cdtype="navigationmenu" id="navigationMenuContainer" class="navigation-menu"></div>       
+		<div id="contentWrapper">
+    	<div class="interiorPageWrapper">
+				<div class="fullpagecontent">
+					<div cdtype="pagemenu" cdchildtemplatename="page" id="pagemenu" class="pagingControl"></div>
+            <div cd="flexfc" cdtype="page" cdpagetype="productpage" cdsubtype="product" id="cdPageContainer" style="display: none;"></div>
+            <div class="clientBody uvClientBody">
+              <div class="productDetailsComponent">
+              	<div class="section1and2and3Wrapper clearfix">
+	              	<div class="section1and2and3">
+		                <div class="section1">
+		                  <div cdtype="image" id="image" class="productImageContainer"></div>
+		                  <div cdtype="previewlist" cdtemplatename="previewlist" cdchildtemplatename="preview" id="preview2" class="previewComponent"></div>   
+		                  <!--<div cdtype="additionalinfo" id="additionalinfo"></div>
+		                  <!--<div cdtype="rater" id="rater" class="productRaterContainer"></div>-->
+		                  
+		                   <!--These are the additional property configurations for reference purposes.  Remove if you are not using these.-->
+		                  <!--<div cdtype="additionalproperty" cdargs="externalreference:RecentReviews" cdtemplatename="additionalproperty" cdchildtemplatename="additionalpropertyvalue" class="additionalPropertyContainer" id="recentReviews1"></div>
+		                  <div cdtype="additionalproperty" cdargs="name:Related sites" cdtemplatename="additionalproperty" cdchildtemplatename="additionalpropertyurl" class="additionalPropertyContainer" id="relatedSites1"></div>-->
+		                </div>
+		                  <!--<div class="section2and3">-->
+		                    <div class="section2">
+		                      <div cdtype="title" id="title" class="productName"></div>  
+		                      <div cdtype="metadata" id="metadata" class="productMetadata"></div> 
+		                      <div class="relatedPeople">
+		                        <div cdtype="people" cdchildtemplatename="relatedperson" cdargs="name:Actor" id="cast" class="relatedPeopleGroup"></div>
+		                        <div cdtype="people" cdchildtemplatename="relatedperson" cdargs="id:2" id="directors" class="relatedPeopleGroup"></div>
+		                      </div>                     
+		                      <div cdtype="description" id="description" class="productDescription"></div>                  
+		                    	<!--<div cdtype="rater" id="rater2" class="productRaterContainer"></div>-->
+		                    	<!--<div class="socialSharing" id="socialSharingComponent" style="display:none;">
+				                    <ul>
+					                    <li class="shareTitle"><span cdresource="share">SHARE</span></li>						
+					                    <li class="facebook"><a onclick="ContentDirectAPI.shareFacebook($('#title').text(), $('#productDescriptionText').text(), $('#productImageThumbnail').attr('src'));" >Facebook</a></li>
+					                    <li class="twitter"><a onclick="ContentDirectAPI.shareTwitter($('#title').text());">Twitter</a></li>
+				                    </ul>
+			                    </div>-->                                                                                                                
+		                    </div>
+		                    <div class="section3">
+		                    	
+		                      <div class="pricingContainer">
+		                        <div cdtype="pricingjson" cdchildtemplatename="pricingplan" id="pricing2" class="pricingInfo"></div>                                        
+														<div cdtype="purchaseupgrades"  cdchildtemplatename="purchaseupgradeplan" class="upgradesContainer" id="purchaseupgrade_mobile"></div>
+		                          <!--<div cdtype="pricingplandetails" cdchildtemplatename="pricingplandetail" id="pricingPlanDetails2" class="pricingPlanDetailsContainer" style="display:none;"></div> -->                                    
+		                      </div>  
+		                      <div class="actionsAndPolicies">                                        
+		                        <div cdtype="actionsjson" id="actionsjson2" class="actions"></div>
+		                        <div id="viewingBadgeContainer2" cdtype="viewingbadges" class="viewing-badges"></div>
+		                        <div cdtype="accesspolicies" cdchildtemplatename="accesspolicy" id="accessPoliciesContainer2" class="accessPoliciesContainer"></div>
+		                      </div>
+													<!--<div cdtype="alreadypurchased" id="alreadypurchased2" class="alreadypurchased"></div>
+													<div cdtype="parentproducts" id="parentProduct" class="parent-product-info"></div>-->
+		                    	<div class="deviceBanner notMobile" style="display:none;">
+		                    		<h1>Watch on other devices:</h1> 
+		                    		<a class="deviceBannerApple" href=""><img src="Content/Assets/app_store_badge.png" /></a>
+		                    		<a class="deviceBannerAndroid" href=""><img src="Content/Assets/google_play_app.png" /></a>
+		                    	</div>
+		                    </div>
+		                  <!--</div>-->
+		                 </div>
+		                </div>
+                    <!--<div class="section3">                                    
+                      <div class="actionsAndPolicies">
+                        <div cdtype="actionsjson" id="actionsjson" class="actions"></div>
+                        <div id="viewingBadgeContainer" cdtype="viewingbadges" class="viewing-badges"></div>
+                        <div cdtype="accesspolicies" cdchildtemplatename="accesspolicy" id="accessPoliciesContainer" class="accessPoliciesContainer"></div>
+                      </div>
+                      <!--<div cdtype="countdowntimer" id="timer" class="countdownTimerContainer"></div>--
+                      <div cdtype="alreadypurchased" id="alreadyPurchased" class="alreadypurchased"></div>                                    
+                        
+                      <div class="pricingContainer">                                        
+                        <div cdtype="pricingjson" cdchildtemplatename="pricingPlan" id="pricing" class="pricingInfo"></div>                                        
+												<div cdtype="purchaseupgrades"  cdchildtemplatename="purchaseupgradeplan" class="upgradesContainer" id="purchaseupgrade"></div>
+                        <!--<div cdtype="pricingplandetails" cdchildtemplatename="pricingplandetail" id="pricingPlanDetalis" class="pricingPlanDetailsContainer" style="display:none;"></div>-                                   
+                      </div>-->
+                      <!--<div cdtype="giftproductoption" id="giftproductoption" class="giftProductOptionContainer"></div>
+                      <div cdtype="enddates" id="enddates"></div>
+                      <!--<div cduv="true" class="uvDescription" id="uvDescriptionComponent" style="display:none;">			
+		                    <ul>
+			                    <li class="uvLogo">
+                            <img src="Content/Assets/UVlogoBug.png" />
+			                    </li>
+			                    <li id="uvinfo">
+				                    <a href='#' target='_blank' onclick="window.open('http://www.uvvu.com','_blank','width=800,height=600');return false;"><span>UltraViolet</span></a>
+			                    </li>
+                          <br />
+                          <li>
+                            <span cdresource="learn_more_about_ultraviolet">Learn more about UltraViolet.</span>
+                          </li>
+		                    </ul>
+                 			 </div>                              
+                    </div>-->  
+                    <!--<div cdtype="relatedvideos" id="relatedVideosContainer" cdchildtemplatename="relatedvideo" class="productlist-slider relatedMediaContainer"></div>
+                    <div cdtype="relatedimages" id="relatedImagesContainer" cdchildtemplatename="relatedimage" class="productlist-slider relatedMediaContainer"></div>-->
+                  <!--<div cdtype="crossselllist" id="crossSellProductsContainer" cdtemplatename="sliderlist" class="productlist-slider crossSellProducts"></div>-->
+                  <div cdtype="recommendedlist" id="recommendedProductsContainer" cdtemplatename="recommendedsliderlist" class="productlist-slider crossSellProducts"></div>
+              	</div>
+          		</div>                 
+              <div cdtype="sp" style="display:none;" class="playerControl"></div>
+              <a id="hidden_link" href="" target="_blank" style="display:none"></a>
+              <div cdtype="dlm" style="display:none;" class="dlmControl">
+                <iframe id="downloadiFrame"></iframe>
+              </div>
+              <div cdtype="cartpopup" style="display: none;" id="cartPopupContainer" class="cartPopupControl"></div>
+			    </div>				
+		    </div>
+      </div>   		
+		</div>
+		<div cdtype="footer" id="footerWrapper" class="clearfix" style="display: none;"></div>		
+	<script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="Scripts/bootstrap.min.js"></script>
+	<script type='text/javascript' src="https://eastlink.sbx1.cdops.net/html/full/v6.0.1/Scripts/contentdirect.ui.js"></script>
+	<script type="text/javascript" src="Scripts/cdfull.js"></script>
+	</body>
+</html>

@@ -1,0 +1,248 @@
+﻿<script cdscript="true" type="text/javascript">
+    cd.flex.addTemplate(
+        "uvregistrationform",
+	   null,
+       function (template, part) {
+           function populateNumericDropdown(elem, start, end) {
+               if (elem.options.length > 0) {
+                   while (elem.childNodes.length > 0) {
+                       elem.removeChild(elem.firstChild);
+                   }
+               }
+               if (elem.options.length == 0) {
+                   elem.options.add(document.createElement("OPTION"));
+                   if (start < end) {
+                       for (var i = start; i <= end; i++) {
+                           var optn = document.createElement("OPTION");
+                           optn.text = String(i).length < 2 ? '0' + i : i;
+                           optn.value = i;
+                           elem.options.add(optn);
+                       }
+                   }
+                   else {
+                       for (var i = start; i >= end; i--) {
+                           var optn = document.createElement("OPTION");
+                           optn.text = String(i).length < 2 ? '0' + i : i;
+                           optn.value = i;
+                           elem.options.add(optn);
+                       }
+                   }
+               }
+           }
+
+           var $template = part.get_templateHTMLJquery();
+           populateNumericDropdown($template.find('[cdid="uvregistrationform-subscriber-birthdateday-input"]')[0], 1, 31);
+           populateNumericDropdown($template.find('[cdid="uvregistrationform-subscriber-birthdateyear-input"]')[0], new Date().getFullYear(), 1900);
+           part.set_templateHTML($template.html());
+           part.append();
+       },
+       function (part) {
+           part.setupProperty(part.propertyKeys.accountdisplayname, '[cdid="uvregistrationform-subscriber-accountdisplayname-input"]');
+           part.setupProperty(part.propertyKeys.username, '[cdid="uvregistrationform-subscriber-username-input"]');
+           part.setupProperty(part.propertyKeys.password, '[cdid="uvregistrationform-subscriber-password-input"]');
+           part.setupProperty(part.propertyKeys.confirmpassword, '[cdid="uvregistrationform-subscriber-confirmpassword-input"]');
+           part.setupProperty(part.propertyKeys.acceptuvterms, '[cdid="uvregistrationform-subscriber-acceptuvterms-check"]');           
+           part.setupProperty(part.propertyKeys.acceptmarketingagreement, '[cdid="uvregistrationform-subscriber-acceptmarketingagreement-check"]');
+
+           part.setupProperty(part.propertyKeys.birthdatemonth, '[cdid="uvregistrationform-subscriber-birthdatemonth-input"]');
+           part.setupProperty(part.propertyKeys.birthdateday, '[cdid="uvregistrationform-subscriber-birthdateday-input"]');
+           part.setupProperty(part.propertyKeys.birthdateyear, '[cdid="uvregistrationform-subscriber-birthdateyear-input"]');
+           part.setupProperty(part.propertyKeys.birthdate, null, function () {
+               var birthDate = null;
+
+               try {
+                   birthDate = new Date($('[cdid="registrationform-subscriber-birthdateyear-input"]').val(),
+                        $('[cdid="registrationform-subscriber-birthdatemonth-input"]').val(),
+                        $('[cdid="registrationform-subscriber-birthdateday-input"]').val());
+               } catch (e) {
+
+               }
+
+               return birthDate;
+           });
+           
+           part.setupEvent(part.eventKeys.validateuvuser, 'blur [cdid="uvregistrationform-subscriber-username-input"]');
+           part.setupEvent(part.eventKeys.existinguvaccount, 'click [cdid="uvregistrationform-subscriber-existinguvaccount-check"]');
+
+           part.setupEvent(part.eventKeys.usecdpasswordforuv, 'click [cdid="uvregistrationform-subscriber-reuse-password-check"]');
+           part.setupEvent(part.eventKeys.existinguvaccount, 'click [cdid="uvregistrationform-subscriber-existinguvaccount-link"]');
+           part.setupEvent(part.eventKeys.acceptlinktocdaccount, 'click [cdid="uvregistrationform-subscriber-acceptlinktocdaccount-check"]');
+
+           part.append({
+               onbefore: function (part) {
+                   var partConfig = part.get_partConfiguration();
+                   var $template = part.get_templateHTMLJquery();
+                   if (!partConfig.hasValidationSubmitPart) {
+                       $template.find('[cdid="uvregistrationform-actionbuttongroup"]').removeClass('hidden');
+                   }
+
+                   if (partConfig.requiresBirthdate) {
+                       $template.find('[cdid="uvregistrationform-birthdaygroup"]').removeClass('hidden');
+                   } else {
+                       $template.find('[cdid="uvregistrationform-birthdaygroup"]').addClass('hidden');
+                   }
+
+                   if (partConfig.pageName === 'register') {
+                       $template.find('[cdid="uvregistrationform-existingaccount-container-link"]').addClass('hidden');
+                       $template.find('[cdid="uvregistrationform-existingaccount-container-check"]').removeClass('hidden');
+                       $template.find('[cdid="uvregistrationform-reuse-password-check"]').removeClass('hidden');
+                   } else {
+                       $template.find('[cdid="uvregistrationform-existingaccount-container-link"]').removeClass('hidden');
+                       $template.find('[cdid="uvregistrationform-existingaccount-container-check"]').addClass('hidden');
+                       $template.find('[cdid="uvregistrationform-reuse-password-check"]').addClass('hidden');
+                   }
+
+                   return $template.html();
+               },
+               onafter: function (part) {
+                   $('[cdid="uvregistrationform-sign-up-btn"]').click(part.submit);
+               }
+           });
+			part.setupState(part.stateKeys.beforeAppend, function (stateData) {
+               if (stateData.hasValidationSubmitPart) {
+                   stateData.$template.find('[cdid="uvregistrationform-actionbuttongroup"]').addClass('hidden');
+               } else {
+                   stateData.$template.find('[cdid="uvregistrationform-actionbuttongroup"]').removeClass('hidden');
+               }
+			});
+			part.setupState(part.stateKeys.showvalidationmessage, function (stateData) {
+			    if (stateData.message != null && stateData.message.length > 0) {
+			        $('[cdid="uvreglogin-validation-type-message-container"]').text(stateData.message);
+			    }
+			});
+			part.setupValidation(
+                {
+                    onbefore: function () {
+                        $('[cdid="uvregistrationform-validation-summary"]').empty();
+                    },
+                    onafter: function (validationErrors) {
+                        cd.common.hideBlocker();
+                        $.each(validationErrors, function (index, error) {
+                            $('[cdid="uvregistrationform-validation-summary"]').append('<p>' + error.message + '</p>');
+                        });
+                    }
+                }
+            );
+       }
+	  );
+</script>
+<div class="partcontent partcontent-uvregistrationform" cd-data-model="RegistrationUvSubscriber" cdlegacy="false">
+    <ul class="uvregistrationform-input-list form-horizontal">
+        <li cdid="uvregistrationform-existingaccount-container-check" class="uvregistrationform-existingaccount-container hidden form-group">
+            <div class="checkbox input-lg">
+                <label class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <input type="checkbox" cdid="uvregistrationform-subscriber-existinguvaccount-check"><span cdresource="uvregistrationform_existinguvaccount_label">I already have an existing UltraViolet account</span>
+                </div>
+            </div>
+        </li>
+        <li cdid="uvregistrationform-existingaccount-container-link" class="uvregistrationform-existingaccount-container form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <a cdid="uvregistrationform-subscriber-existinguvaccount-link"><span cdresource="uvregistrationform_existinguvaccount_label">I already have an existing UltraViolet account</span></a>
+            </div>
+        </li>
+        <li cdid="uvregistrationform-reuse-password-check" class="uvregistrationform-reuse-password-container form-group">
+            <div class="checkbox input-lg">
+                <label class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <input type="checkbox" cdid="uvregistrationform-subscriber-reuse-password-check" checked><span cdresource="uvregistrationform_reuse_password">Use the same password as above</span>
+                </div>
+            </div>
+        </li>
+        <li class="uvregistrationform-accountname-container form-group">
+            <label cdresource="uvregistrationform_accountname_label" class="col-sm-2 control-label">UltraViolet Account Name </label>
+            <div class="col-sm-10">
+                <input cdid="uvregistrationform-subscriber-accountdisplayname-input" class="form-control" cd-data-prop="AccountDisplayName" cd-data-prop-resource="ultraviolet_account_name" maxlength="50" cd-data-rule="required" />
+            </div>
+        </li>
+        <li class="uvregistrationform-username-container form-group">
+            <label cdresource="uvregistrationform_username_label" class="col-sm-2 control-label">Username </label>
+            <div class="col-sm-10">
+                <input cdid="uvregistrationform-subscriber-username-input" class="form-control" cd-data-prop="Username" maxlength="64" cd-data-rule="pattern(ultraviolet_username_pattern,error_message_enter_valid_uv_username)" />
+            </div>
+        </li>
+        <li class="uvregistrationform-password-container form-group">
+            <label cdresource="uvregistrationform_password_label" class="col-sm-2 control-label">Password </label>
+            <div class="col-sm-10">
+                <input cdid="uvregistrationform-subscriber-password-input" class="form-control" type="password" cd-data-prop="Password" cd-data-prop-resource="password" cd-data-rule="pattern(ultraviolet_password_pattern,error_message_enter_valid_uv_password)" />
+            </div>
+        </li>
+        <li class="uvregistrationform-confirmpassword-container form-group">
+            <label cdresource="uvregistrationform_confirmpassword_label" class="col-sm-2 control-label">Confirm Password </label>
+            <div class="col-sm-10">
+                <input cdid="uvregistrationform-subscriber-confirmpassword-input" class="form-control" type="password" cd-data-prop="ConfirmPassword" cd-data-prop-resource="uvregistrationform_confirmpassword_label" cd-data-rule="equalTo(Password,uvregistrationform_password_mismatch)" />
+            </div>
+        </li>
+        <li class="form-group form-group-uvregistrationform" cdid="uvregistrationform-birthdaygroup">
+            <label cdresource="uvregistrationform_birthdate_label" class="col-sm-2 control-label">Birthday </label>
+            <div class="col-sm-3">
+                <label cdresource="uvregistrationform_birthdatemonth_label" class="col-sm-2 control-label">Month </label>
+                <select cdid="uvregistrationform-subscriber-birthdatemonth-input" class="form-control form-control-uvregistrationform" cd-data-prop="BirthDateMonth" cd-data-rule="required">
+                    <option></option>
+                    <option value="00" cdresource="month_january"></option>
+                    <option value="01" cdresource="month_february"></option>
+                    <option value="02" cdresource="month_march"></option>
+                    <option value="03" cdresource="month_april"></option>
+                    <option value="04" cdresource="month_may"></option>
+                    <option value="05" cdresource="month_june"></option>
+                    <option value="06" cdresource="month_july"></option>
+                    <option value="07" cdresource="month_august"></option>
+                    <option value="08" cdresource="month_september"></option>
+                    <option value="09" cdresource="month_october"></option>
+                    <option value="10" cdresource="month_november"></option>
+                    <option value="11" cdresource="month_december"></option>
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <label cdresource="uvregistrationform_birthdateday_label" class="col-sm-2 control-label">Day </label>
+                <select cdid="uvregistrationform-subscriber-birthdateday-input" class="form-control form-control-uvregistrationform" cd-data-prop="BirthDateDay" cd-data-rule="required">
+                    <option></option>
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <label cdresource="uvregistrationform_birthdateyear_label" class="col-sm-2 control-label">Year </label>
+                <select cdid="uvregistrationform-subscriber-birthdateyear-input" class="form-control form-control-uvregistrationform" cd-data-prop="BirthDateYear" cd-data-rule="required">
+                    <option></option>
+                </select>
+            </div>
+        </li>
+        <li class="uvregistrationform-terms-container form-group">
+            <label cdresource="uvregistrationform_terms_of_use_title" class="col-sm-2 control-label">UltraViolet&trade; Service Terms Of Use</label>
+            <div class="col-sm-10">
+                <textarea id="tocText" class="form-control" rows="6" cols="" cdresource="uvregistrationform_uv_toc"></textarea>
+            </div>
+        </li>
+        <li class="uvregistrationform-acceptuvterms-container form-group">
+            <div class="checkbox input-lg">
+                <label class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <input type="checkbox" cdid="uvregistrationform-subscriber-acceptuvterms-check" cd-data-prop="AcceptUVTerms" cd-data-rule="acceptance(error_message_uv_must_accept_terms_and_conditions)"><span class="uvregistrationform-acceptuvterms-label" cdresource="uvregistrationform_terms_of_use_label">Accept UltraViolet&trade; Service Terms Of Use </span>
+                </div>
+            </div>
+        </li>
+        <li class="uvregistrationform-link-container form-group">
+            <div class="checkbox input-lg">
+                <label class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <input type="checkbox" checked cdid="uvregistrationform-subscriber-acceptlinktocdaccount-check" cd-data-prop="AcceptLinkToCdAccount"><span cdresource="uvregistrationform_uv_acceptlinktocdaccount">Link my UltraViolet account to my ContentDirect account </span>
+                </div>
+            </div>
+        </li>
+        <li class="uvregistrationform-marketing-container form-group">
+            <div class="checkbox input-lg">
+                <label class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <input type="checkbox" cdid="uvregistrationform-subscriber-acceptmarketingagreement-check" cd-data-prop="AccetMarketingAgreement"><span cdresource="uvregistrationform_uv_marketing_consent">Permit marketing </span>
+                </div>
+            </div>
+        </li>
+        <li class="form-group hidden" cdid="uvregistrationform-actionbuttongroup">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button cdid="uvregistrationform-sign-up-btn" class="btn btn-default btn-lg"><span cdresource="uvregistrationform_sign_up_button">Sign Up</span></button>
+            </div>
+        </li>
+        <li class="form-group">
+            <div cdid="uvregistrationform-validation-summary" class="col-sm-offset-2 validation-summary validationsummary-uvregistrationform"></div>
+        </li>
+    </ul>
+</div>

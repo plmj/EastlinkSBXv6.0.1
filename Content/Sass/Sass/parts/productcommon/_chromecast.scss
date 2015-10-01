@@ -1,0 +1,318 @@
+﻿
+.chromecast-video {
+    float: left;
+    width: inherit;
+    height: inherit;
+    font-family: "PT Sans", sans-serif, Arial, Helvetica;
+
+    & .product-image-container {
+        position: relative;
+        text-align: center;
+        & div {
+            position: absolute;
+            left: 0%;
+            right: 0%;
+            bottom: 0px;
+            padding: 0px;
+        }        
+        & .casting-state-background {
+            z-index: 2000;
+            bottom: 120px;           
+            width: auto;
+            max-width: 400px;
+            height: 50px;
+            color: #000;            
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+            filter: alpha(opacity=50);
+            background-color:#000;
+            opacity: 0.5;
+            font-size: 20px;
+            font-weight:bold;
+            display: none;      
+            margin: 0 auto;
+            padding: 22px 10px 10px 10px;           
+        }
+        & .casting-state-text {
+            z-index: 3000;
+            bottom: 120px;
+            width: auto;
+            max-width: 400px;
+            height: 50px;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            display: none;
+            padding: 22px 10px 10px 10px;
+            background: transparent url("../Assets/chromecast/chromecast_color.png") no-repeat 7px 2px;
+            background-size: 80px;
+            margin: 0 auto;
+            text-align: center;
+        }        
+        & .product-image
+        {
+            height: $video-player-height;
+        }
+        & .product-image-overay
+        {
+            margin-left: 40px;
+            margin-right: 0px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            width: $video-player-width;
+            height: $video-player-height;
+            background: linear-gradient( to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0) 72%, rgba(0, 0, 0, 0) 100% );
+            z-index: 0;
+            position: absolute;
+            display: none;
+        }
+        & .video {
+            display: none;
+            margin-left: 40px;
+            margin-right: auto;
+            margin-top: 20px;
+            margin-bottom: 0px;
+            width: $video-player-width;
+            height: $video-player-height;
+            background-color: #000;
+        }
+    }
+    & .mediacontrol-container {
+        position: absolute;
+        left: 0px;
+        top: 387px;
+        width: 800px;
+        z-index: 1000;        
+        padding: 0px;
+        opacity: 0.7;
+        background-color: #000;
+        transition: opacity 1s;
+        -webkit-transition: opacity 1s; /* Safari */
+        &:hover {
+            opacity: 0.7;
+        }
+        & .mediacontrol {
+        }
+
+        & .mediacontrol-play {            
+            margin: 10px 10px 10px 10px;
+            float: left;
+            width: 65px;
+            height: 40px;
+            cursor: pointer;
+            background-image: url('../Assets/chromecast/play.png');
+            &:hover {
+                background-image: url('../Assets/chromecast/play-hover.png');
+            }
+            &:press {
+                background-image: url('../Assets/chromecast/play-press.png');
+            }
+        }
+           
+        & .mediacontrol-pause{
+            display: none;
+            margin: 10px 10px 10px 10px;
+            float: left;
+            width: 65px;
+            height: 40px;
+            background-image: url('../Assets/chromecast/pause.png');
+            cursor: pointer;
+            &:hover {
+                background-image: url('../Assets/chromecast/pause-hover.png');
+            }
+            
+        }
+
+        & .progress-background {
+            margin: 20px 15px 10px 0;
+            float: left;
+            width: 500px;
+            height: 36px;
+            background-image: url('../Assets/chromecast/timeline_bg_track.png');
+            background-repeat: repeat-x;
+            cursor: pointer;
+        }
+
+        & .progress-knob {
+            margin: 20px 0 10px -520px;
+            float: left;
+            width: 1px;
+            height: 36px;
+            z-index: 10;
+            background-image: url('../Assets/chromecast/timeline_bg_progress.png');
+            background-repeat: repeat-x;
+            cursor: pointer;
+        }
+
+        & .progress-indicator {
+            margin: 20px 0 10px -520px;
+            float: left;
+            draggable: true;
+            width: 6px;
+            height: 36px;
+            z-index: 1000;
+            background-image: url('../Assets/chromecast/timeline_indicator.png');
+            background-repeat: repeat-x;
+            cursor: pointer;
+        }
+
+        & .mediacontrol-casticonactive {
+            float: right;
+            margin: 10px 17px 14px 0px;
+            width: 32px;
+            height: 32px;
+            display: none;
+            background-image: url('../Assets/chromecast/ic_media_route_on_custom.png');
+            cursor: pointer;
+        }
+
+        & .mediacontrol-casticonidle {
+            float: right;
+            width: 32px;
+            height: 32px;
+            margin: 10px 17px 14px 0px;
+            display: block;
+            background-image: url('../Assets/chromecast/ic_media_route_off_custom.png');
+            cursor: pointer;
+        }
+
+        & .mediacontrol-audio-off {
+            float: right;
+            margin: 10px 10px 10px 0px;
+            width: 32px;
+            height: 32px;
+            display: none;
+            background-image: url('../Assets/chromecast/audio_off.png');
+            cursor: pointer;
+        }
+
+        & .mediacontrol-audio-on {
+            float: right;
+            width: 32px;
+            height: 32px;
+            margin: 10px 10px 10px 0px;
+            display: block;
+            background-image: url('../Assets/chromecast/audio_on.png');
+            cursor: pointer;
+        }
+
+        & .volume-popup-background {
+            float: right;
+            opacity: 0.1;
+            width: 41px;
+            height: 124px;
+            margin: -115px 8px -10px 0px;
+            display: block;
+            background-image: url('../Assets/chromecast/audio_bg.png');
+            position: relative;
+            z-index: 10;
+            cursor: pointer;
+        }
+
+        & .volume-level-track {
+            float: right;
+            opacity: 0.0;
+            width: 16px;
+            height: 100px;
+            margin: -100px 20px -30px 0px;
+            display: block;
+            background-image: url('../Assets/chromecast/audio_bg_track.png');
+            position: relative;
+            z-index: 1000;
+            cursor: pointer;
+        }
+
+        & .volume-indicator {
+            float: right;
+            opacity: 0.0;
+            width: 16px;
+            height: 5px;
+            margin: -50px 20px -30px 0px;
+            display: none;
+            background-image: url('../Assets/chromecast/audio_indicator.png');
+            position: relative;
+            z-index: 1000;
+        }
+
+        & .volume-backgrournd-level {
+            float: right;
+            opacity: 0.0;
+            width: 16px;
+            height: 50px;
+            margin: -50px 20px -30px 0px;
+            display: block;
+            background-image: url('../Assets/chromecast/audio_bg_level.png');
+            position: relative;
+            z-index: 1000;
+            cursor: pointer;
+        }
+
+        & .mediacontrol-fullscreen-expand
+        {
+            float: right;
+            width: 32px;
+            height: 32px;
+            margin: 10px 20px 10px 0px;
+            display: block;
+            background-image: url('../Assets/chromecast/fullscreen_expand.png');
+        }
+
+        & .mediacontrol-fullscreen-collapse
+        {
+            float: right;
+            width: 32px;
+            height: 32px;
+            margin: 10px 20px 10px 0px;
+            display: none;
+            background-image: url('../Assets/chromecast/fullscreen_collapse.png');
+        }
+
+        & .mediacontrol-currenttime
+        {
+            float: left;
+            font-size:12px;
+            color: #fff;
+            width: 45px;
+            height: 32px;
+            margin: 22px 10px 10px 0;
+            display: block;
+        }
+
+        & .mediacontrol-duration
+        {
+            float: left;
+            font-size:12px;
+            color: #fff;
+            width: 45px;
+            height: 32px;
+            margin: 22px 0 10px 0;
+            display: block;
+        }
+    } 
+}
+
+.media-info-container {
+    position: absolute;
+    top: 0;
+    opacity: 0.7;
+    background-color: #000;
+    width: 100%;
+    height: 65px;
+
+    & .media-title {
+        float: left;
+        margin: 3px 0px 3px 10px;
+        padding: 0px;
+        font-size: 28px;
+        font-weight: bold;
+        width: 100%;        
+    }
+
+    & .media-subtitle {
+        float: left;
+        margin: 4px 0px 0px 11px;
+        padding: 0px;
+        font-size: 17px;
+    }
+}
+
+       

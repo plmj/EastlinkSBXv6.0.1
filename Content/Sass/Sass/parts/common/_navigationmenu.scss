@@ -1,0 +1,409 @@
+﻿@import "../../thirdparty/autocomplete";
+
+body {
+	._full { display:block; }
+	._mobile { display:none; }
+	@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width)  {
+		._full { display:none; }
+		._mobile { display:block; }
+	}
+}
+
+
+ul.topnav {
+  list-style: none;
+  padding: 0 20px;
+  margin: 0;
+  float: left;
+  li {
+    float: left;
+    margin: 0;
+    padding: 0 15px 0 0;
+    position: relative;
+    /*--Declare X and Y axis base for sub navigation--*/
+    a {
+      padding: 10px 5px;
+      display: block;
+      text-decoration: none;
+      float: left;
+      &:hover! {}
+    }
+    span {
+      /*--Drop down trigger styles--*/
+      float: left;
+      &.subhover {
+        background-position: center bottom;
+        cursor: pointer;
+      }
+    }
+    ul.subnav {
+      font-size: 0.9em;
+      font-weight: bold;
+      text-transform: none;
+      list-style: none;
+      position: absolute;
+      /*--Important - Keeps subnav from affecting main navigation flow--*/
+      right: -9px;
+      margin: 0;
+      padding: 0;
+      display: none;
+      float: left;
+      z-index: 501;
+      /*background-image: url("../Assets/popoutmenuBG.png");*/
+      background: -moz-linear-gradient(top, rgba(165, 165, 165, 0.14) 0%, rgba(165, 165, 165, 0.3) 45%, rgba(165, 165, 165, 0.3) 46%, rgba(165, 165, 165, 0.5) 48%, rgba(0, 0, 0, 0) 100%);
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(165, 165, 165, 0.14)), color-stop(45%, rgba(165, 165, 165, 0.3)), color-stop(46%, rgba(165, 165, 165, 0.3)), color-stop(48%, rgba(165, 165, 165, 0.5)), color-stop(100%, rgba(0, 0, 0, 0)));
+      background: -webkit-linear-gradient(top, rgba(165, 165, 165, 0.14) 0%, rgba(165, 165, 165, 0.3) 45%, rgba(165, 165, 165, 0.3) 46%, rgba(165, 165, 165, 0.5) 48%, rgba(0, 0, 0, 0) 100%);
+      background: #cbcbcb;
+      /* For Internet Explorer 8 */
+      background-repeat: no-repeat;
+      -moz-border-radius: 6px;
+      -webkit-border-radius: 6px;
+      border-radius: 6px;
+      width: 224px;
+      /*height: 274px;*/
+      li {
+        padding: 0;
+        clear: both;
+        margin-left: 4px;
+      }
+      .libraryButtonContainer, .watchlistButtonContainer, .accountButtonContainer {
+        padding-top: 30px;
+      }
+      .logoutButtonContainer {
+        margin-top: 30px;
+        border-top: 1px solid #8F8F8F;
+        text-transform: uppercase;
+      }
+    }
+  }
+  .menu-search-box {
+      width: 170px;
+  }
+  .searchButtonContainer {
+    input {
+      margin: 6px 0 0 0;
+      float: left;
+    }
+    a {
+      float: left;
+      background: url('../Assets/searchIcon.png') no-repeat top left;
+      height: 22px;
+      overflow: hidden;
+      line-height: 66px;
+      padding: 0;
+      margin-top: 10px;
+      margin-left: 6px;
+      margin-bottom: 10px;
+    }
+  }
+  .redemptionButtonContainer {
+    width: 100px;
+    input {
+      width: 50px;
+      float: left;
+    }
+  }
+  .validation-search-box{
+	  position:absolute;
+	  margin-top:35px;
+	  overflow:visible;
+  }
+}
+
+/*--Hover effect for trigger--*/
+
+html ul.topnav li ul.subnav li a {
+  float: left;
+  padding-left: 20px;
+  width: 190px;
+  &:hover {
+    /*--Hover effect for subnav links--*/
+    color: #363636;
+  }
+}
+
+.headerWrapper {
+  margin: 0 auto;
+  width: 1045px;
+  background-image: url(../Assets/CDfullHeader.jpg);
+  @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width)  {
+		width: 100%;
+		margin: 0 auto;
+		background-image: url(../Assets/CDfullHeader.jpg);
+		background-position: center -50px;
+		position: fixed;
+		top: 0;
+		z-index: 400;
+		.topTrigger {
+			background-image: url("../Assets/userNameDropdownArrow.png");
+			background-repeat: no-repeat;
+			background-position: right -2px;
+			padding-right: 20px;
+			z-index: 560;
+		 }
+	}
+}
+
+.header {
+  margin: 0 auto;
+  height: 94px;
+  position: relative;
+  @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width)  {
+	height: 35px;
+    ul {
+      height: 35px;
+      li {
+        height: 90%;
+        &.logo {
+          float: left;
+          background-image: url("../Assets/logo-content-direct.gif");
+          background-repeat: no-repeat;
+          background-position: 0 10px;
+          background-size: 90%;
+          width: 30%;
+          height: 35px;
+          min-width: 110px;
+          margin: 0 auto 0 10px;
+        }
+        &.menuContents {
+          float: left;
+          padding-top: 13px;
+          text-align: center;
+          width: 25%;
+        }
+        &.headerContents {
+          float: left;
+          width: 20%;
+          text-align: center;
+          padding-top: 13px;
+        }
+        &.cartContents {
+          float: right;
+          width: 15%;
+          text-align: center;
+          padding-top: 7px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width)  {
+		.cartQuantityNumber {
+		  display: block;
+		  width: 65px;
+		}
+
+		.headerNavigation {
+		  overflow: hidden;
+		  padding: 14px;
+		  text-transform: uppercase;
+		  font-weight: bold;
+		  .pagingLink {
+			float: left;
+		  }
+		  .userLink {
+			float: right;
+		  }
+		}
+}
+
+.logo {
+  background-image: url("../Assets/logo-content-direct.gif");
+  background-repeat: no-repeat;
+  float: left;
+  height: 60px;
+  margin-top: 26px;
+  width: 220px;
+}
+
+.headerContents {
+	float: right;
+	@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width)  {
+		float: none;
+	}
+  .headerButtons {
+		float: left;
+		padding: 0px;
+		margin: 7px -10px 0;
+		.topnavContainer {
+		  float: left;
+		  padding: 0px;
+		  font-size: 13px;
+		  font-weight: bold;
+		  text-transform: uppercase;
+		  margin-left: 15px;
+		    &.facebookLoginButtonContainer, &.facebookSignUpButtonContainer {
+				background-color: #3B5998;
+				display: block;
+				font-size: 0.6em;
+				height: 16px;
+				margin: 8px 10px 0;
+			  }
+			  &.facebookLoginButtonContainer a, &.facebookSignUpButtonContainer a {
+				background-image: url("../Assets/facebook_icon_small.png");
+				background-position: left top;
+				background-repeat: no-repeat;
+				color: white;
+				display: block;
+				margin: 0;
+				padding-left: 20px;
+				padding-top: 4px;
+				text-align: right;
+			  }
+		}
+		.userName {
+		  text-transform: none;
+		}
+		#feedbackButton {
+		  background-image: url(../Assets/feedback.png);
+		  height: 36px;
+		  width: 98px;
+		  display: block;
+		  text-indent: -5000px;
+		  padding-left: 0px;
+		  background-repeat: no-repeat;
+		  margin: 0px;
+		  padding-bottom: 0px;
+		}
+  }
+  .userNameContainer {
+    float: left;
+    text-align: right;
+    display: block;
+    padding-top: 50px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    max-width: 256px;
+  }
+  .topnav {
+    .userNameContainer .topTrigger {
+      padding-right: 20px;
+      background-image: url("../Assets/userNameDropdownArrow.png");
+      background-repeat: no-repeat;
+      background-position: right 6px;
+      position: relative;
+      z-index: 550;
+    }
+    .triggerHightlight {
+      background-color: #A1A1A1;
+      height: 85px;
+    }
+  }
+}
+
+#continueShopping {
+  display: none;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 540px) {
+  #continueShopping {
+    display: inline;
+  }
+}
+
+#redemptionContainer {
+  margin-bottom: 20px;
+  float: right;
+  overflow: hidden;
+  width: 240px;
+}
+
+.redemptionMenuBox {
+  float: left;
+  margin-right: 5px;
+  margin-top: 2px;
+  width: 60%;
+}
+
+.cartLogo {
+  background-image: url("../Assets/CartIcon.png");
+  background-repeat: no-repeat;
+  height: 24px;
+  width: 24px;
+}
+
+.redemptionLabel {
+  float: left;
+  font-size: 0.8em;
+  font-weight: bold;
+  line-height: 24px;
+  margin-right: 5px;
+  color: #0056B0;
+  cursor: pointer;
+}
+
+.cartLabels {
+  float: left;
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 24px;
+  margin-right: 5px;
+  & a {
+	color: #4994D9;
+  }
+  & a:hover {
+    color: #0056B0;    
+  }
+}
+
+.redemptionButton {
+  background: #888;  
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;  
+  float: left;
+  font-size: 0.9em 'PT Sans', sans-serif, Arial, Helvetica;
+  max-width: 60px;
+  min-width: 43px;  
+  overflow: hidden;
+  padding: 0px 8px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+.redemptionButton:hover {
+	background: #555;
+	color: #fff;
+}
+
+.checkoutButton {    
+	float: left;
+    font-size: 0.8em;
+    font-weight: bold;
+    line-height: 24px;
+    margin-right: 5px;
+
+	& a {
+		color: #fff;
+		cursor: pointer;
+		text-align: center;
+		text-decoration: none;
+		text-transform: uppercase;
+		padding: 4px 8px;  
+		color: #fff;  
+		border-radius: 4px;
+		font-size: 0.9em 'PT Sans', sans-serif, Arial, Helvetica;
+		background: #4994D9;  
+	}
+
+	& a:hover {
+		background-color: #024489;
+	}
+}
+
+.navigationmenu-shopping-cart-container {
+  float: right;
+}
+
+.productName {
+  font-weight: bold;
+}
+
+.planName {
+  font-size: .8em;
+  font-weight: bold;
+  color: #898A83;
+}

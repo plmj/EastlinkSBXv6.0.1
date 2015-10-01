@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <div cdpartialview="chromecast-video">
+        <div class="chromecast-video" cdid="chromecast-video">
+            <div class="product-image-container">                
+                <div class="casting-state-background" cdid="playerstatebg">IDLE</div>
+                <div class="casting-state-text" cdid="playerstate">IDLE</div>
+                <img class="product-image" src="{thumbnailUrl}" cdid="product-image">
+                <div class="product-image-overlay" cdid="product-image-overlay"></div>
+                <video class="video" cdid="video_element"></video>
+            </div>
+            <div class="media-info-container" cdid="media-info-container">
+                <div class="media-title" cdid="media-title">
+                    {productName}
+                </div>
+                <div class="media-subtitle" cdid="media-subtitle">
+                    {pricingPlanName}
+                </div>
+            </div>
+            <div class="mediacontrol-container" cdid="media_control">
+                <div class="mediacontrol mediacontrol-play" cdid="play"></div>
+                <div class="mediacontrol mediacontrol-pause" cdid="pause"></div>
+                <div class="mediacontrol mediacontrol-currenttime" cdid="currenttime">00:00:00</div>
+                <div class="progress-background" cdid="progress_bg"></div>
+                <div class="progress-knob" cdid="progress"></div>
+                <div class="progress-indicator" cdid="progress_indicator"></div>
+                <div class="mediacontrol mediacontrol-casticonactive" cdid="casticonactive" title="Stop casting video"></div>
+                <div class="mediacontrol mediacontrol-casticonidle" cdid="casticonidle" title="Start casting video"></div>
+                <div class="volume-popup-background" cdid="audio_bg"></div>
+                <div class="volume-level-track" cdid="audio_bg_track"></div>
+                <div class="volume-indicator" cdid="audio_indicator"></div>
+                <div class="volume-backgrournd-level" cdid="audio_bg_level"></div>
+                <div class="mediacontrol mediacontrol-audio-on" cdid="audio_on"></div>
+                <div class="mediacontrol mediacontrol-audio-off" cdid="audio_off"></div>
+                <div class="mediacontrol mediacontrol-duration" cdid="duration">00:00:00</div>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>

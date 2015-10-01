@@ -1,0 +1,93 @@
+﻿.previewComponent {
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+        width: 100%; float: left;
+    }
+
+    h2 {
+        margin-top: 15px;
+    }
+
+    .preview {
+        float: left;
+        width: 138px;
+        height: 77px;
+        margin: 5px 5px;
+    }
+
+    &.largePreview .preview {
+        width: 295px;
+        height: 164px;
+    }
+
+    .productImageContainer {
+        background-color: #3C3C3C;
+        box-shadow: 0 0 3px #000000;
+        margin: 2px;
+        width: 138px;
+        height: 77px;
+    }
+
+    &.largePreview .productImageContainer {
+        width: 295px;
+        height: 164px;
+    }
+
+    .previewImage {
+        position: absolute;
+        width: inherit;
+        height: inherit;
+
+        img {
+            width: inherit;
+            height: inherit;
+        }
+    }
+
+    .preview .previewOverlay .playButton {
+        background-image: url("../Assets/PlayIconSm.png");
+        background-position: 48px 17px;
+        background-repeat: no-repeat;
+        cursor: pointer;
+        width: 138px;
+        height: 77px;
+        opacity: 0.5;
+        position: absolute;
+        text-align: center;
+        text-indent: -3000px;
+
+        @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+			&:visited
+			{
+				color: #fff;
+			}
+        }
+    }
+
+    &.largePreview .preview .previewOverlay .playButton {
+        background-image: url("../Assets/PlayIcon.png");
+        background-position: 98px 32px;
+        width: 295px;
+        height: 164px;
+    }
+
+    .preview .previewOverlay .playButton:hover {
+        opacity: 1;
+    }
+
+    .customInfo {
+        display: inline-block;
+        float: left;
+        margin: 20px 0 0 0;
+
+        a {
+            text-decoration: underline;
+        }
+    }
+}
+
+@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+	.productDetailsComponent .productImageContainer img {
+		width: 100px;
+		font-size: 0.8em;
+	}
+}

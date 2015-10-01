@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:og="http://ogp.me/ns#"
+  xmlns:fb="http://www.facebook.com/2008/fbml">
+	<head>
+		<title>Eastlink Movie Player</title>	
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="P3P" content='CP="CAO DSP COR CURa ADMa DEVa TAIa PSAa PSDa IVAi IVDi CONi OUR SAMo OTRo BUS PHY ONL UNI PUR COM NAV INT DEM CNT STA PRE"' />
+		<meta http-equiv="Page-Enter" content="progid:DXImageTransform.Microsoft.Fade(Duration=0)" />
+		<meta http-equiv="Page-Exit" content="progid:DXImageTransform.Microsoft.Fade(Duration=0)" />	
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+        <link rel="icon" href="favicon.ico" type="image/x-icon">
+		<link href="Content/StyleSheets/cdfull_site.css" rel="stylesheet" type="text/css" />
+        <link href="Content/Fonts/font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+		<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+		<noscript> 
+			<meta http-equiv="refresh" content="0;URL=dependency.html" />
+		</noscript>    
+	</head>
+	<body >	
+		<div class="wrapper">
+			<div cdtype="navigationmenu" id="navigationMenuContainer" class="navigation-menu"></div>
+      	<div id="contentWrapper">
+          <div class="interiorPageWrapper">
+		        <div class="contentFullPage">
+		        	<div cdtype="pagemenu" cdchildtemplatename="page" id="pagemenu" class="pagingControl"></div>
+              <div cd="flexc" cdtype="page" cdpagetype="browsepage" id="cdPageContainer" style="display: none;"></div>
+              <div cdtype="mobilefilterexpander" id="mobileFilter"></div>        
+              <div id="browseContainer">
+                <div class="browse-header-container" style="display:none;">
+                  <div cdtype="resultlabel" id="resultlabelcontainer"></div>													
+										<div id="filterbreadcrumbs" class="clearfix" cdtype="filterbreadcrumbs"></div>																				
+	                <div cdtype="sortfilter" id="sortFilter" cdchildtemplatename="sortfilteritem" class="sort-filter-container"></div>	   
+                </div>							
+                
+                <div id="productCategoryResultContainer" class="productResultContainer" style="display:none;">  
+                	<div class="browseSideBar">     
+                		<!--<i class="fa fa-chevron-circle-left fa-3x closeBrowseSideBar"></i> -->                     
+		                <div id="result-filters" class="filter-container">    
+		                	<div class="browseFilterTitle">Filters:</div>                                
+		                	<div cdtype="categoryasfacetfilter" id="categoryasfacetfilter2" cdargs="catid:7911;"></div>                            
+		                  <div cdtype="searchfilter" id="searchfilter" class="clearfix search-filter-container"></div> 
+		                  <div cdtype="startswithfilter" id="startswithfilter" cdchildtemplatename="startswithfilterletter"></div>                                  
+		                  <div cdtype="mobilefilterexpanderapplybutton" id="mobileFilterButton"></div>
+		                  <!--<div cdtype="peerratingfilter" id="peerratingfilter"></div>-->                
+		                  <!--<div cdtype="peoplefilter" id="peoplefilter"></div>--> 
+		                  <!--<div cdtype="categoryasfacetfilter" id="categoryasfacetfilter1" cdargs="name:genre;"></div>-->
+		                  <!--<div cdtype="categorylistfilter" id="categorylistfilter1" cdargs="name:genre;"></div>-->                  
+		                  <!--<div cdtype="productfacetfilter" cdargs="catid:1;" id="productfacetfilter"></div>-->
+		                  <!--<div cdtype="peerratingfilter" id="peerratingfilter"></div--> 
+		                  <!--<div cdtype="guidanceratingfilter" cdargs="category:movies" id="guidanceratingfilter"></div>--> 
+		                  <!--<div cdtype="peoplefilter" id="peoplefilter"></div>--->
+		                </div>
+		              </div> 
+	                <div class="results subContainer">
+	                  <div class="simpleProductList" id="newResult">                                   										
+	                    <div cdtype="productlayout" cdtemplatename="productlayout" cdchildtype="partialproduct" class="" id="productlistcontainer"></div> 
+	                    <div cdtype="loadmore" class="loadNextBatchContainer" id="loadNextBatchContainerCatalog"></div>
+	                  </div>            
+                	</div>                                
+              	</div>
+								<div cdType="sp" style="display:none;" class="playerControl"></div>
+								<div cdType="dlm" style="display:none;" class="dlmControl">
+								<iframe id="downloadiFrame"></iframe> 
+							</div>
+							<div cdtype="cartpopup" style="display: none;" id="cartPopupContainer" class="cartPopupControl"></div>
+            </div>
+	        </div>				
+      	</div>
+      </div>    
+		</div>	
+		
+		<script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="Scripts/bootstrap.min.js"></script>
+        <script type='text/javascript' src="https://eastlink.sbx1.cdops.net/html/full/v6.0.1/Scripts/contentdirect.ui.js"></script>
+        <script type="text/javascript" src="Scripts/cdfull.js"></script>
+		<div cdtype="footer" id="footerWrapper" class="clearfix" style="display: none;"></div>
+	</body>
+</html>

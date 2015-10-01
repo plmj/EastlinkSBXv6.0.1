@@ -1,0 +1,107 @@
+﻿.purchaseUpgradesContainer {
+    float: left;
+	@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		width: 100%;
+    }
+	& .purchaseUpgradeLink {
+        cursor: pointer;
+		margin: 0 0 15px 0;
+		color: #777;
+		font-size: 14px;
+		& .fa {
+			font-size: 16px;
+			margin-right: 3px;
+		}
+    }
+
+    & .purchaseUpgradeText {
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+    }
+}
+
+.purchaseUpgradeListContainer {
+    margin: 10px 0 30px 0;
+
+    &.collapsed {
+        display: none;
+    }
+
+    & .purchaseUpgradeArrow {
+        background: url('../Assets/purchaseUpgradesArrow.png') no-repeat bottom left;
+    }
+
+    & .closePurchaseUpgradesButton {
+        background: url("../Assets/purchaseUpgradesCloseButton.png") no-repeat scroll 0 0 transparent;
+        cursor: pointer;
+        float: right;
+        height: 19px;
+        margin: 0 -2px 0 0;
+        width: 19px;
+    }
+
+    & .purchaseUpgradeListHeader {
+        float: left;
+        font-size: 1em;
+        font-weight: bold;
+        margin: 0 0 10px;
+    }
+
+    & .pricingPlanListContainer {
+        clear: both;
+    }
+
+    & .pricingPlanSelectButton span {
+        float: left;
+    }
+
+
+    & .planName span {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        font-size: .8em;
+        font-weight: bold;
+        color: #898A83;
+    }
+
+    & .pricingPlanComponent {
+        float: left;
+        margin-bottom: 5px;
+        margin-right: 5px;
+        text-align: center;
+        width: 304px;
+
+        @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+			width: 100%;
+        }
+
+        & .actionContainer {
+            position: relative;
+            overflow: hidden;
+        }
+
+        & .pricingPlanSelectButton {
+            height: 35px;
+            vertical-align: middle;
+            line-height: 32px;
+        }
+		& .upgradeToPrefix,
+		& .planName {
+			margin-right: 2px;
+			color: white;
+		}
+        & .beforeDiscountPrice {
+            text-decoration: line-through;
+            color: white;
+			margin-right: 2px;
+        }
+    }
+}
+    
+    
+
+        

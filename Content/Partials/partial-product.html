@@ -1,0 +1,348 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title></title>
+</head>
+<body>
+	<div cdpartialview="product" class="partial-container playerpage" cdpartialid="product">
+		<div class="productDetail" cdproductid="{Id}">
+			<div class="header">
+				<ul>
+					<li>
+						<a class="name" href="#" onclick="ContentDirectAPI.openProductDetail('{Id}', '{ProductStructureType}');return false;">
+							<span>{Name}</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+            <div class="productInfo">
+                <a href="#" onclick="ContentDirectAPI.openProductDetail('{Id}', '{ProductStructureType}');return false;" class="episode-image-link">
+                    <img alt="{Name}" src="{ThumbnailUrl}" class="episode-image" />
+                </a>
+            </div>
+			<div class="descriptionContainer">
+				<div class="description"><span>{ShortDescription}</span></div>
+			</div>
+			<div class="buttonsContainer">
+				<div id="actions" cdtype="actionsjson" class="actions"></div>
+				<div id="pricing" cdtype="pricingjson" cdchildtemplatename="pricingplan" class="pricingInfo"></div>
+			</div>
+		</div>
+	</div>
+
+	<div cdpartialview="episode" class="partial-container" cdpartialid="episode">
+		<div class="episode-product-detail" cdproductid="{Id}" cdentitled="{Entitled}">
+			<div class="episode-header">
+				<ul class="episode-header-list">
+					<!--<li class="season-number-container">
+						<span cdresource="season_number_label"></span>
+						<span>{SeasonNumber}</span>
+					</li>-->
+					<li class="episode-number">
+						<!--<span cdresource="episode_number"></span>
+						<span>{EpisodeNumber}</span>-->
+						{EpisodeNumber}.
+					</li>
+					<li class="episode-name-container">
+						<!--<a class="episode-name" href="#" onclick="ContentDirectAPI.openProductDetail('{Id}', 1);return false;">
+							<span>{Name}</span>
+						</a>-->
+						{Name}
+					</li>
+          <!---<li class="episode-uv-bug-container">
+              <div cdid="episoduvlogobugcontainer" class="UVLogoBugContainer" style="display: none;" cdisuvpricingplan="{IsUVPricingPlan}">
+                  <span cdresource="ultraviolet">
+                      UltraViolet
+                  </span>
+              </div>
+          </li>--->
+					<li class="episode-reference-data-container">
+						<!--<div class="reference-date-container" style="display: none;">-->
+						<div class="reference-date-container">
+							<!--<span cdresource="episodic_reference_date"></span>-->
+							<span>{ReferenceDate}</span>
+						</div>
+					</li>
+					
+					<!--<li class="episode-toggle-container">
+						<a id="episodeToggleButton_{Index}" class="episode-toggle-button"><span id="moreButtonText_{Index}"><span cdresource="more_button"></span><span class="fa fa-chevron-down"></span></span><span id="lessButtonText_{Index}" class="less-button-text" style="display: none;"><span cdresource="less_button"></span><span class="fa fa-chevron-up"></span></span></a>
+					</li>-->
+				</ul>
+			</div>
+			<div id="additionalInfo_{Index}" class="additionalEpisodeInfo" style="display: none;">
+				<!--<div class="episode-info">
+					<a href="#" onclick="ContentDirectAPI.openProductDetail('{Id}', '{StructureType}');return false;" class="episode-image-link">
+						<img alt="{Name}" src="{ThumbnailUrl}" class="episode-image" />
+					</a>
+				</div>-->
+				<div class="episode-buttons">
+					<div id="nonPlayActionsJson_{Index}" cdtype="nonplayactionsjson"></div>
+
+					<div class="pricingInfo">
+						<div id="pricingjson_{Index}" cdtype="pricingjson" cdchildtemplatename="pricingplan" class="episodePricingInfo"></div>
+					</div>
+				</div>
+				<div class="episode-description-container">
+					<div class="episode-description">{ShortDescription}</div>
+					<div class="episode-purchased-container">
+						<span cdresource="episode_purchased_label purchased" style="display: none;"></span>
+						<span cdresource="episode_not_purchased_label" style="display: none;"></span>
+					</div>
+				</div>
+				
+				<li class="episode-play-action-container">
+					<div id="playAction_{Index}" cdtype="playactionjson"></div>
+				</li>
+				<li class="episode-viewing-badges-container">
+					<div id="viewingBadge_{Index}" cdtype="viewingbadges" class="viewing-badges"></div>
+				</li>
+			</div>
+		</div>
+	</div>
+
+	<div cdpartialview="episodegroup" id="episodeGroup">
+		<li class="episodesContainer collapsed" cdgroupid="{Index}_{Id}">
+			<div class="episodicGroupHeader">
+				<div class="episodicGroupName">
+					<a href="#" id="episodegroup_{Index}_{Id}" class="episodic-group-name-link" cdgroupid="{Index}_{Id}">
+						<span class="season-number-label" cdresource="season_number_label"></span>
+						<span class="season-number">{Name}</span>
+					</a>
+				</div>
+			</div>
+			<div class="episodeGroupItems" style="display: none;">
+				%partials=episode%
+                <div class="noEpisodesPurchased" cdhaspurchasedepisodes="false" style="display: none;">
+					<span cdresource="no_episodes_purchased_in_this_group">There are no purchased episodes in this group.</span>
+				</div>
+			</div>
+		</li>
+	</div>
+
+	<div cdpartialview="productdetailsbanner" class="productDetailsBanner notPopulated" id="productDetailsBanner">
+		<div cdid="productdetailsbanner" class="product-details-banner-container">
+			<div class="product-top-row">
+				<a cdid="productBannerTitleLink" cdproductid="{Id}" cdproductpageredirect="true" cdproductname="{Name}" cdhtmltarget="{HtmlTarget}" cdstructuretype="{ProductStructureType}" class="product-banner-title-link">
+					<span class="product-banner-title">{Name}</span>
+				</a>
+			</div>
+			<li class="product-list-row product-list-description-row">
+					<span class="short-description-text">{ShortDescription}</span>
+				</li>
+			<li class="product-list-row">
+				<div id="actionsDiv" cdtype="actionsjson" class="actions"></div>
+			</li>
+			<li class="product-list-row">
+				<div cdtype="purchaseupgrades" cdchildtemplatename="purchaseupgradeplan" class="upgradesContainer" id="upgrade_mobile"></div>
+				<div id="pricingDiv" cdtype="pricingjson" cdchildtemplatename="pricingplan" class="pricingInfo"></div>
+			</li>
+			<!---<ul class="left-section">
+				<li class="product-list-row">
+					<ul class="icons-container">
+						<li>
+							<div cdtype="guidancerating" id="guidanceRatingContainer" class="guidance-rating-container"></div>
+						</li>
+						<li>
+							<div cdtype="displayquality" id="displayQuality"></div>
+						</li>
+						<li cdid="UVLogoBugContainer" class="UVLogoBugContainer" cdresource="ultraviolet" style="display: none;">UltraViolet</li>
+					</ul>
+				</li>
+				<li class="product-list-row">
+					<div cdtype="readonlyrater" id="readonlyrater" class="productRaterContainer"></div>
+				</li>
+				<li class="product-list-row">
+					<ul class="product-banner-movie-data">
+						<li cdid="reference-date" class="movie-data-list product-reference-date">
+							<span class="release-date-text" cdresource="reference_date"></span>
+							<span class="release-date-text">{ReferenceDate}</span>
+						</li>
+					</ul>
+				</li>
+
+				<li class="product-list-row">
+					<ul cdid="purchase-date" class="purchase-date-container" style="display: none;">
+						<li>
+							<span class="purchase-date-text" cdresource="purchase_date">Purchase Date</span>						
+							<span class="product-purchase-date">{AddedDate}</span>
+						</li>
+					</ul>
+				</li>
+				<li class="product-list-row">
+					<span class="short-description-text">{ShortDescription}</span>
+				</li>
+			</ul>
+			<ul class="right-section">
+				<li class="product-list-row">
+					<div id="viewingBadges" cdtype="viewingbadges" class="viewing-badges"></div>
+				</li>
+				<li class="product-list-row">
+					<div id="actionsDiv" cdtype="actionsjson" class="actions"></div>
+				</li>
+				<li class="product-list-row">
+					<div cdtype="purchaseupgrades" cdchildtemplatename="purchaseupgradeplan" class="upgradesContainer" id="upgrade_mobile"></div>
+					<div id="pricingDiv" cdtype="pricingjson" cdchildtemplatename="pricingplan" class="pricingInfo"></div>
+				</li>
+				<li class="product-list-row">
+					<div cdtype="accesspolicies" cdchildtemplatename="accesspolicy" id="accessPolicies" class="accessPoliciesContainer"></div>
+				</li>
+				<li class="product-list-row">
+					<div cdtype="countdowntimer" id="countdownTimer" class="countdown-timer-container"></div>
+				</li>
+			</ul>--->
+		</div>
+	</div>
+
+	<div cdpartialview="listpartialproduct" class="product-list-layout" id="productListLayout">
+		<div class="product-detail-list" cdid="productListItem_{Index}" id="productthumb_{Index}" cdelement="listpartialproduct">
+			<div class="product-title-container">
+				<a cdid="productListLink_{Index}" onclick="ContentDirectAPI.openProductDetail('{Id}', '{StructureType}');return false;" cdproductid="{Id}" cdproductname="{Name}" cdhtmltarget="{HtmlTarget}" cdstructuretype="{ProductStructureType}"><span class="product-list-title">{Name}</span></a>
+			</div>
+			<a class="mainButton accessAction buttonDownload" style="" cdhasaction="true" cdplanid="25368" cdproductid="188881" cdaction="1" cdid="buttonDownload">
+				<span cdresource="download_button_text">Download</span>
+			</a>
+			<div id="playActionJson_{Index}" cdtype="playactionjson" class="product-list-actions-container"></div>
+			
+			<!--<div class="product-title-container">
+						
+			<!---<div class="product-thumbnail-container"  >
+				<img alt="{Name}" src="{ThumbnailUrl}" class="list-image" onclick="ContentDirectAPI.openProductDetail('{Id}', '{StructureType}');return false;"/>
+			</div>--->
+			<!--<ul class="product-list-container">
+				<li class="product-list-row">
+					<div class="product-title-container">
+						<a cdid="productListLink_{Index}" onclick="ContentDirectAPI.openProductDetail('{Id}', '{StructureType}');return false;" cdproductid="{Id}" cdproductname="{Name}" cdhtmltarget="{HtmlTarget}" cdstructuretype="{ProductStructureType}"><span class="product-list-title">{Name}</span></a>
+					</div>
+					<div id="playActionJson_{Index}" cdtype="playactionjson" class="product-list-actions-container"></div>
+					
+					<div id="viewingBadge_{Index}" cdtype="viewingbadges" class="product-list-viewing-badges-container"></div>
+				</li>
+				<!--<li class="product-list-row">
+					<div cdtype="guidancerating" id="guidanceRating_{Index}" class="guidance-rating-container"></div>
+					<div cdid="UVLogoBugContainer" class="UVLogoBugContainer" cduv="true" cdresource="ultraviolet" style="display:none;">UltraViolet</div>
+					<div cdid="reference-date" class="reference-date-list-container">
+						<span class="reference-date-text" cdresource="reference_date">Reference Date</span>
+						<span class="product-reference-date">{ReferenceDate}</span>
+					</div>
+					<div cdid="purchase-date" class="purchase-date-list-container" style="display: none;">						
+						<span class="purchase-date-text" cdresource="purchase_date">Purchase Date</span>						
+						<span class="product-purchase-date">{AddedDate}</span>
+					</div>
+					<a cdid="productlisttogglebutton_{Index}" class="product-list-toggle-button hid" cdproductid="{Id}" cdsubproductid="{SubscriberProductId}" cdexternalsubprodref="{ExternalSubscriberProductReference}"><span id="moreButtonText_{Index}"><span cdresource="more_button"></span><span class="fa fa-chevron-down"></span></span><span id="lessButtonText_{Index}" class="less-button-text" style="display: none;"><span cdresource="less_button"></span><span class="fa fa-chevron-up"></span></span></a>
+				</li>--
+			</ul>
+			<div id="listPartialProductDetails_{Index}"></div>--->
+		</div>
+	</div>
+
+	<div cdpartialview="listpartialproductdetails" class="listpartialproductdetails" cdpartialid="listpartialproductdetails">
+		<ul id="listPartial_{Index}" class="product-list-container">
+			<!--<li class="listpartialproductdetails-left-section">
+				<div cdtype="displayquality" id="displayQuality_{Index}"></div>
+				<div cdid="UVLogoBugContainer" class="UVLogoBugContainer" cduv="true" cdresource="ultraviolet" style="display: none;">UltraViolet</div>
+				<div class="listpartialproductdetails-list-description"><span>{ShortDescription}</span></div>
+			</li>-->
+      <li class="listpartialproductdetails-right-section">      
+        <div cdtype="accesspolicies" cdchildtemplatename="accesspolicy" id="accessPolicies_{Index}" class="accessPoliciesContainer"></div>          
+        <div class="buttonsContainer">
+					<div id="nonplayactionsjson_{Index}" cdtype="nonplayactionsjson" class="more-list-actions"></div>
+				</div>
+				<!--<div cdtype="countdowntimer" class="listpartialproductdetails-countdowntimer" id="countdownTimer_{Index}"></div>
+                <div cdtype="purchaseupgrades" cdchildtemplatename="purchaseupgradeplan" class="purchase-upgrades-container" id="purchaseUpgrades_{Index}"></div>-->
+			</li>            
+		</ul>
+	</div>
+
+	<div cdpartialview="episodiclistpartialproduct" class="product-list-layout" id="episodicProductListLayout">
+        <div cdid="episodicproductdetailsbanner" class="episodiclistpartialproduct-container" id="productthumb_{Index}" cdsubproductid="{SubscriberProductId}">
+        	<div class="product-list-container-left">
+            <a onclick="ContentDirectAPI.openProductDetail('{Id}', '{ProductStructureType}');return false;"><span class="product-list-title">{Name}</span></a>
+          </div>
+          <div class="product-list-container-right">
+            <a onclick="ContentDirectAPI.openProductDetail('{Id}', '{ProductStructureType}');return false;">View Episodes</a>
+          </div>
+            <!---<ul class="left-section">
+                <li class="episodic-product-thumbnail-container">
+                    <img alt="{Name}" src="{ThumbnailUrl}" class="list-image" onclick="ContentDirectAPI.openProductDetail('{Id}', '{ProductStructureType}');return false;" />
+                </li>
+                <li class="product-list-container-left">
+                    <a onclick="ContentDirectAPI.openProductDetail('{Id}', '{ProductStructureType}');return false;"><span class="product-list-title">{Name}</span></a>
+                </li>
+                <!--<li class="product-list-container-left">
+                    <ul class="icons-container">
+                        <li>
+                            <div cdtype="guidancerating" id="guidanceRating_{Index}" class="guidance-rating-container"></div>
+                        </li>
+                        <li cdid="UVLogoBugContainer" class="UVLogoBugContainer" cduv="true" cdresource="ultraviolet" style="display: none;">UltraViolet</li>
+                    </ul>
+                    <div cdid="reference-date" class="reference-date-list-container">
+                        <span class="reference-date-text" cdresource="reference_date">Reference Date</span>
+                        <span class="product-reference-date">{ReferenceDate}</span>
+                    </div>
+                    <div cdid="purchase-date" class="purchase-date-list-container" style="display: none;">
+                        <span class="purchase-date-text" cdresource="purchase_date">Purchase Date</span>
+                        <span class="product-purchase-date">{AddedDate}</span>
+                    </div>
+                </li>
+                <li class="product-list-container-left">
+                    <div cdtype="accesspolicies" cdchildtemplatename="accesspolicy" id="accessPolicies_{Index}" class="accessPoliciesContainer"></div>
+                </li>--
+            </ul>
+            <!--<ul class="right-section">
+                <li class="episodic-toggle-container">
+                    <a id="viewEpisodes_{Index}" cduniqueepisodeid="{Index}" cdproductid="{Id}" cdsubproductid="{SubscriberProductId}" class="episodic-toggle-button"><span id="showEpisodes_{Index}" cdresource="view_episodes_button"></span><span id="hideEpisodes_{Index}" class="less-button-text" style="display: none;" cdresource="hide_episodes_button"></span></a>
+                </li>
+                <li cdtype="purchaseupgrades" cdchildtemplatename="purchaseupgradeplan" class="episodic-purchase-upgrades-container" id="purchaseUpgrades_{Index}"></li>
+            </ul>
+            <div id="episodes_{Index}" class="episodiclistpartialproduct-episode-container"></div>-->
+        </div>
+	</div>
+
+	<div cdpartialview="episodicdetailsbanner" class="episodicDetailsBanner" id="episodicDetailsBanner">
+		<div cdid="episodicproductdetailsbanner" class="product-details-banner-container" cdsubproductid="{SubscriberProductId}">
+			<div class="product-top-row">
+				<a id="productTitleLink" onclick="ContentDirectAPI.openProductDetail('{Id}', '4');return false;"><span class="product-banner-title">{Name}</span></a>
+			</div>
+			<div class="product-list-row product-list-description-row">
+					<span class="short-description-text">{ShortDescription}</span>
+			</div>
+			<div class="mainButton seeEpisodesButton" onclick="ContentDirectAPI.openProductDetail('{Id}', '4');return false;">See Episodes</div>
+			<!--<li cdtype="pricingjson" cdchildtemplatename="pricingPlan" id="masterPricingBundle" class="episodicdetailsbanner-pricingjson-container"></li>
+      <!--<li cdtype="purchaseupgrades" cdchildtemplatename="purchaseupgradeplan" class="episodic-purchase-upgrades-container" id="purchaseUpgrades"></li>
+			<!--<ul class="left-section episodic-header">
+                <li class="product-list-row">
+                    <ul class="icons-container">
+					    <li>
+						    <div cdtype="guidancerating" id="guidanceRatingContainer" class="guidance-rating-container"></div>
+					    </li>
+					    <li cdid="rootuvlogobugcontainer" class="UVLogoBugContainer" cduv="true" cdresource="ultraviolet" style="display: none;">UltraViolet</li>
+				    </ul>
+                </li>
+				<li class="product-list-row">
+					<div cdid="seriesNameContainer" class="series-name-container" style="display: none;">
+						<span>{SeriesName}</span>
+					</div>
+				</li>
+				<li class="product-list-row">
+					<div cdid="seasonNumberContainer" class="season-number-container" style="display: none;">
+						<span class="season-number-text" cdresource="season_label"></span><span class="season-number-text">{SeasonNumber}</span>
+					</div>
+				</li>
+                <li cdid="reference-date" class="product-list-row reference-date-list-container">
+				    <span class="reference-date-text" cdresource="reference_date">Reference Date</span>
+				    <span class="product-reference-date">{ReferenceDate}</span>
+			    </li>
+			    <li cdid="purchase-date" class="product-list-row purchase-date-list-container" style="display: none;">						
+				    <span class="purchase-date-text" cdresource="purchase_date">Purchase Date</span>						
+				    <span class="product-purchase-date">{AddedDate}</span>
+			    </li>
+			</ul>
+            <ul class="right-section episodic-header">
+                <li cdtype="pricingjson" cdchildtemplatename="pricingPlan" id="masterPricingBundle" class="episodicdetailsbanner-pricingjson-container"></li>
+                <li cdtype="purchaseupgrades" cdchildtemplatename="purchaseupgradeplan" class="episodic-purchase-upgrades-container" id="purchaseUpgrades"></li>
+            </ul>
+			<div cdtype="episodes" id="episodes"></div>-->
+		</div>
+	</div>
+</body>
+</html>

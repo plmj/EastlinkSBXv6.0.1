@@ -1,0 +1,162 @@
+﻿<div class="asc-player-container asc-player-sender-container">
+    <div class="asc-player-close-button"></div>
+    <div class="asc-player-background">
+        <div class="asc-player-background-image"></div>
+        <div class="asc-player-blackbg asc-player-playerstatebg">IDLE</div>
+        <div class="asc-player-label asc-player-playerstate">IDLE</div>
+        <img class="asc-player-video-image" />
+    </div>
+    <div class="asc-player-media-control asc-player-sender">
+        <div class="asc-player-progress-container">
+            <progress class="asc-player-progress" value="0" min="0"><span id="progress-bar"></span></progress>
+            <input class="asc-player-scrubber" type="range" step="1" value="0" />
+        </div>
+        <div class="asc-player-control-left">
+            <a class="asc-player-play"><i class="fa fa-play"></i></a>
+            <a class="asc-player-pause"><i class="fa fa-pause"></i></a>
+
+            <div class="asc-player-volume-controls">
+                <a class="asc-player-audio-on"><i class="fa fa-volume-up"></i></a>
+                <a class="asc-player-audio-off"><i class="fa fa-volume-off"></i></a>
+
+                <div class="asc-player-volume-slider-controls">
+                    <progress class="asc-player-volume-progress" min="0" max="1" value="0"></progress>
+                    <input class="asc-player-volume-slider" type="range" step=".1" min="0" max="1" value="0" />
+                </div>
+            </div>
+            <div class="asc-player-time">
+                <span class="asc-player-current-time">00:00:00</span>
+                <span>/</span>
+                <span class="asc-player-duration">00:00:00</span>
+            </div>
+        </div>
+        <div class="asc-player-control-right">
+            <a class="asc-player-acc-button"><i class="fa fa-cog"></i></a>
+            <div class="asc-player-acc-menu">
+                <div class="asc-player-acc-menu-container">
+                    <ul class="asc-player-acc-menu-left">
+                        <li>
+                            <label for="asc-player-acc-font-family">Font Family:</label>
+                            <select id="asc-player-acc-font-family" class="asc-player-acc-font-family asc-player-acc-setting">
+                                <option value="CASUAL">Casual</option>
+                                <option value="CURSIVE">Cursive</option>
+                                <option value="MONOSPACED_SANS_SERIF">Monospaced Sans Serif</option>
+                                <option value="MONOSPACED_SERIF">Monospaced Serif</option>
+                                <option value="SANS_SERIF">Sans Serif</option>
+                                <option value="SERIF">Serif</option>
+                                <option value="SMALL_CAPITALS">Small Capitals</option>
+                            </select>
+                        </li>
+                        <li>
+                            <label for="asc-player-acc-font-size">Font Size:</label>
+                            <select id="asc-player-acc-font-size" class="asc-player-acc-font-size asc-player-acc-setting">
+                                <option value="0.5">Small</option>
+                                <option value="1">Medium</option>
+                                <option value="1.5">Large</option>
+                                <option value="2">Extra Large</option>
+                            </select>
+                        </li>
+                        <li>
+                            <label for="asc-player-acc-font-style">Font Style:</label>
+                            <select id="asc-player-acc-font-style" class="asc-player-acc-font-style asc-player-acc-setting">
+                                <option value="BOLD">Bold</option>
+                                <option value="BOLD_ITALIC">Bold Italic</option>
+                                <option value="ITALIC">Italic</option>
+                                <option value="NORMAL">Normal</option>
+                            </select>
+                        </li>
+                        <li>
+                            <label for="asc-player-acc-font-color">Font Color:</label>
+                            <select id="asc-player-acc-font-color" class="asc-player-acc-font-color asc-player-acc-setting">
+                                <option class="asc-player-acc-option-white" value="#FFFFFF">White</option>
+                                <option class="asc-player-acc-option-black" value="#000000">Black</option>
+                                <option class="asc-player-acc-option-red" value="#FF0000">Red</option>
+                                <option class="asc-player-acc-option-green" value="#00FF00">Green</option>
+                                <option class="asc-player-acc-option-blue" value="#0000FF">Blue</option>
+                                <option class="asc-player-acc-option-yellow" value="#FFFF00">Yellow</option>
+                                <option class="asc-player-acc-option-magenta" value="#FF00FF">Magenta</option>
+                                <option class="asc-player-acc-option-cyan" value="#00FFFF">Cyan</option>
+                            </select>
+                        </li>
+                        <li>
+                            <label for="asc-player-acc-font-opacity">Font Opacity:</label>
+                            <select id="asc-player-acc-font-opacity" class="asc-player-acc-font-opacity asc-player-acc-setting">
+                                <option value="00">0%</option>
+                                <option value="40">25%</option>
+                                <option value="80">50%</option>
+                                <option value="C0">75%</option>
+                                <option value="FF">100%</option>
+                            </select>
+                        </li>
+                    </ul>
+                    <ul class="asc-player-acc-menu-right">
+                        <li>
+                            <label for="asc-player-acc-drop-shadow">Drop Shadow:</label>
+                            <select id="asc-player-acc-drop-shadow" class="asc-player-acc-drop-shadow asc-player-acc-setting">
+                                <option value="NONE">None</option>
+                                <option value="DEPRESSED">Depressed</option>
+                                <option value="DROP_SHADOW">Drop Shadow</option>
+                                <option value="RAISED">Raised</option>
+                                <option value="OUTLINE">Outline</option>
+                            </select>
+                        </li>
+                        <li>
+                            <label for="asc-player-acc-drop-shadow-color">Drop Shadow Color:</label>
+                            <select id="asc-player-acc-drop-shadow-color" class="asc-player-acc-drop-shadow-color asc-player-acc-setting">
+                                <option class="asc-player-acc-option-white" value="#FFFFFF">White</option>
+                                <option class="asc-player-acc-option-black" value="#000000">Black</option>
+                                <option class="asc-player-acc-option-red" value="#FF0000">Red</option>
+                                <option class="asc-player-acc-option-green" value="#00FF00">Green</option>
+                                <option class="asc-player-acc-option-blue" value="#0000FF">Blue</option>
+                                <option class="asc-player-acc-option-yellow" value="#FFFF00">Yellow</option>
+                                <option class="asc-player-acc-option-magenta" value="#FF00FF">Magenta</option>
+                                <option class="asc-player-acc-option-cyan" value="#00FFFF">Cyan</option>
+                            </select>
+                        </li>
+                        <li>
+                            <label for="asc-player-acc-drop-shadow-opacity">Drop Shadow Opacity:</label>
+                            <select id="asc-player-acc-drop-shadow-opacity" class="asc-player-acc-drop-shadow-opacity asc-player-acc-setting">
+                                <option value="00">0%</option>
+                                <option value="40">25%</option>
+                                <option value="80">50%</option>
+                                <option value="C0">75%</option>
+                                <option value="FF">100%</option>
+                            </select>
+                        </li>
+                        <li>
+                            <label for="asc-player-acc-background-color">Background Color:</label>
+                            <select id="asc-player-acc-background-color" class="asc-player-acc-background-color asc-player-acc-setting">
+                                <option class="asc-player-acc-option-white" value="#FFFFFF">White</option>
+                                <option class="asc-player-acc-option-black" value="#000000">Black</option>
+                                <option class="asc-player-acc-option-red" value="#FF0000">Red</option>
+                                <option class="asc-player-acc-option-green" value="#00FF00">Green</option>
+                                <option class="asc-player-acc-option-blue" value="#0000FF">Blue</option>
+                                <option class="asc-player-acc-option-yellow" value="#FFFF00">Yellow</option>
+                                <option class="asc-player-acc-option-magenta" value="#FF00FF">Magenta</option>
+                                <option class="asc-player-acc-option-cyan" value="#00FFFF">Cyan</option>
+                            </select>
+                        </li>
+                        <li>
+                            <label for="asc-player-acc-background-opacity">Background Opacity:</label>
+                            <select id="asc-player-acc-background-opacity" class="asc-player-acc-background-opacity asc-player-acc-setting">
+                                <option value="00">0%</option>
+                                <option value="40">25%</option>
+                                <option value="80">50%</option>
+                                <option value="C0">75%</option>
+                                <option value="FF">100%</option>
+                            </select>
+                        </li>
+                    </ul>
+                    <div class="asc-player-acc-menu-bottom">
+                        <a class="asc-player-acc-reset">Reset</a>
+                        <a class="asc-player-acc-close">Close</a>
+                    </div>
+                </div>
+            </div>
+            <a class="asc-player-closedcaptionicon"><img src="./Content/Assets/cc.svg" /></a>
+            <div class="asc-player-captions-audio"></div>
+            <a class="asc-player-casticonactive"><img src="./Content/Assets/chromecast_connected.svg" /></a>
+            <a class="asc-player-casticonidle"><img src="./Content/Assets/chromecast_notconnected.svg" /></a>
+        </div>
+    </div>
+</div>

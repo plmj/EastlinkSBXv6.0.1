@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+    <title>Content Direct Full Site</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="fragment" content="!" />
+    <meta name="robots" content="index,follow" />
+    <meta name="keywords" content="keywords" />
+    <meta name="googlebot" content="noarchive" />
+    <meta name="bingbot" content="noarchive" />
+    <meta name="description" content="description goes here" />
+    <noscript>
+        <meta http-equiv="refresh" content="0;URL=dependency.html" />
+    </noscript>
+
+    <script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type='text/javascript' src="https://storefront.cdtv.lab/html/full/current/Scripts/contentdirect.ui.js"></script>      
+    
+    <script type="text/javascript">
+        $.cd.ready(function () {
+            var target = $.cd.getQueryStringValue("target"),
+                pageToRedirectTo = "";
+            $("#ClientUrl").val("https://" + parent.$.cd.get_userSettingByName("clientUrl") + "uv/uvlinkbridge.html");
+            if (target == "toc") {
+                pageToRedirectTo = "UVTermsOfUse.aspx";
+            }
+            else if (target == "uvManageAccount") {                
+                $("#RedirectUrl").val($.cd.getQueryStringValue("UVAcctMgmtUrl"));
+                pageToRedirectTo = "UVRedirect.aspx";
+            }
+            else {
+                pageToRedirectTo = "UVInitiateSamlRequest.aspx";
+            }
+
+            var sessionCookie = $.cd.getCookie("sessionCookie");
+            if (null != sessionCookie) {
+                sessionCookie = $.cd.decodeDataForCookie(sessionCookie);
+                $('#SessionId').val($.cd.getValueFromMultiValue('sId', sessionCookie));
+                $('#SystemId').val($.cd.getValueFromMultiValue('sys', sessionCookie));
+                $('#bridgeForm').attr('action', parent.$.cd.getServerUrl(pageToRedirectTo, true));
+                $('#bridgeForm').attr('url', parent.$.cd.getServerUrl(pageToRedirectTo, true));
+                $('#bridgeForm').submit();
+            }
+        });
+    </script>
+    </head>
+    <body>
+        <form id="bridgeForm" method="post">
+            <input name="activateallcontent" id="ActivateAllContent" type="hidden" runat="server" enableviewstate="False" value="false" />
+            <input name="sessionid" id="SessionId" type="hidden" runat="server" enableviewstate="False" />
+            <input name="systemid" id="SystemId" type="hidden" runat="server" enableviewstate="False" />
+            <input name="redirecturl" id="RedirectUrl" type="hidden" runat="server" enableviewstate="False" />
+            <input name="clienturl" id="ClientUrl" type="hidden" runat="server" enableviewstate="False" />
+        </form>
+    </body>
+    </html>

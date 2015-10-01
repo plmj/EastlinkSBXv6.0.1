@@ -1,0 +1,60 @@
+﻿.promptIcon
+{
+    display: inline;
+    float: left;
+    width: 32px;
+    height: 32px;
+	&.information
+    {
+        background: url("../Assets/informationBg.png") no-repeat;        
+    }
+	&.exclamation
+    {
+        background: url("../Assets/exclamationBg.png") no-repeat;        
+    }
+	&.error
+    {
+        background: url("../Assets/errorBg.png") no-repeat;        
+    }
+}
+
+.yesNoDialog {
+  background-color: white;
+  overflow: hidden;
+  border: 2px solid;
+  	/*-moz-border-radius: 15px;
+      -webkit-border-radius: 15px;
+      border-radius: 15px;*/
+  .dialogTitle {
+    margin: 10px 0;
+    font-size: 16pt;
+    font-weight: bold;
+    display: inline-block;
+  }
+  .promptIcon {
+    margin: 6px;
+  }
+  .prompt {
+    font-size: 14pt;
+    margin: 10px 0 20px 52px;
+    width: 85%;
+  }
+  .actionButtonContainer {
+    background-color: #EEEEEE;
+    height: 25px;
+    padding: 10px;
+    a {
+      float: right;
+      margin: 0 0 0 10px;
+      width: 50px;
+    }
+	@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+	  a {
+		font-size: 1.5em;
+		width: 100px;
+	  }
+	}
+  }
+}
+
+

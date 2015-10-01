@@ -1,0 +1,490 @@
+﻿<script cdscript="true" type="text/javascript">
+    cd.flex.addTemplate(
+        "registrationform",
+	   null,
+       function (template, part) {
+           //write custom stuff
+           part.append();
+       },
+       function (part) {
+           part.setupProperty(part.propertyKeys.firstname, '[cdid="registrationform-subscriber-firstname-input"]');
+           part.setupProperty(part.propertyKeys.lastname, '[cdid="registrationform-subscriber-lastname-input"]');
+           part.setupProperty(part.propertyKeys.login, '[cdid="registrationform-subscriber-email-input"]');
+           part.setupProperty(part.propertyKeys.confirmlogin, '[cdid="registrationform-subscriber-confirmemail-input"]');
+           part.setupProperty(part.propertyKeys.password, '[cdid="registrationform-subscriber-password-input"]');
+           part.setupProperty(part.propertyKeys.confirmpassword, '[cdid="registrationform-subscriber-confirmpassword-input"]');
+           part.setupProperty(part.propertyKeys.birthdatemonth, '[cdid="registrationform-subscriber-birthdatemonth-input"]');
+           part.setupProperty(part.propertyKeys.birthdateday, '[cdid="registrationform-subscriber-birthdateday-input"]');
+           part.setupProperty(part.propertyKeys.birthdateyear, '[cdid="registrationform-subscriber-birthdateyear-input"]');
+           part.setupProperty(part.propertyKeys.birthdate, '[cdid="registrationform-subscriber-birthdate-input"]', function () {
+               var birthDate = null;
+               
+               try {
+                   birthDate = new Date($('[cdid="registrationform-subscriber-birthdateyear-input"]').val(),
+                        $('[cdid="registrationform-subscriber-birthdatemonth-input"]').val(),
+                        $('[cdid="registrationform-subscriber-birthdateday-input"]').val());
+                   if ($('[cdid="registrationform-subscriber-birthdateyear-input"]').val() === "" ||
+                       $('[cdid="registrationform-subscriber-birthdatemonth-input"]').val() === "" ||
+                       $('[cdid="registrationform-subscriber-birthdateday-input"]').val() === "") {
+                       $('[cdid="registrationform-subscriber-birthdate-input"]').val("");
+                       return null;
+                   } else if (birthDate > new Date()) {
+                       $('[cdid="registrationform-subscriber-birthdate-input"]').val("");
+                       return null;
+                   } else {
+                       $('[cdid="registrationform-subscriber-birthdate-input"]').val(birthDate);
+                       return birthDate;
+                   }
+               } catch (e) {
+
+               }
+
+               //return birthDate;
+           });
+           part.setupProperty(part.propertyKeys.passwordchallenge, null, function () {
+               return $('[cdid="registrationform-subscriber-passwordchallenge-input"] option:selected').text();
+           });
+           part.setupProperty(part.propertyKeys.passwordchallengeresponse, '[cdid="registrationform-subscriber-passwordchallengeresponse-input"]');
+
+           //part.setupProperty(part.propertyKeys.businessphone, '[cdid="registrationform-subscriber-businessphone-input"]');
+           //part.setupProperty(part.propertyKeys.homephone, '[cdid="registrationform-subscriber-homephone-input"]');
+           //part.setupProperty(part.propertyKeys.language, '[cdid="registrationform-subscriber-language-input"]');
+           //part.setupProperty(part.propertyKeys.middlename, '[cdid="registrationform-subscriber-middlename-input"]');
+           //part.setupProperty(part.propertyKeys.mobilephone, '[cdid="registrationform-subscriber-mobilephone-input"]');
+           //part.setupProperty(part.propertyKeys.suffixname, '[cdid="registrationform-subscriber-suffixname-input"]');
+           //part.setupProperty(part.propertyKeys.title, '[cdid="registrationform-subscriber-title-input"]');
+           //part.setupProperty(part.propertyKeys.driverslicensenumber, '[cdid="registrationform-subscriber-driverslicensenumber-input"]');
+           //part.setupProperty(part.propertyKeys.driverslicensestate, '[cdid="registrationform-subscriber-driverslicensestate-input"]');
+           //part.setupProperty(part.propertyKeys.gender, '[cdid="registrationform-subscriber-gender-input"]');
+           //part.setupProperty(part.propertyKeys.incomeleveltype, '[cdid="registrationform-subscriber-incomeleveltype-input"]');
+           //part.setupProperty(part.propertyKeys.leadsourcetype, '[cdid="registrationform-subscriber-leadsourcetype-input"]');
+           //part.setupProperty(part.propertyKeys.preferredcontacttype, '[cdid="registrationform-subscriber-preferredcontacttype-input"]');
+           //part.setupProperty(part.propertyKeys.race, '[cdid="registrationform-subscriber-race-input"]');
+           //part.setupProperty(part.propertyKeys.subscribestonewsletter, '[cdid="registrationform-subscriber-subscribestonewsletter-input"]');
+           //part.setupProperty(part.propertyKeys.subscribestopartners, '[cdid="registrationform-subscriber-subscribestopartners-input"]');
+           //part.setupProperty(part.propertyKeys.ssn, '[cdid="registrationform-subscriber-ssn-input"]');
+           //part.setupProperty(part.propertyKeys.instantmessenger, '[cdid="registrationform-subscriber-instantmessenger-input"]');
+           //part.setupProperty(part.propertyKeys.instantmessengertype, '[cdid="registrationform-subscriber-instantmessengertype-input"]');
+
+           //example of setting up additional properties using a dropdown, text, and boolean
+           //part.setupProperty('extRef:favoritefood', '[cdid="registrationform-subscriber-favoritefood-input"]');
+           //part.setupProperty('extRef:subscribercomments', '[cdid="registrationform-subscriber-comments-input"]');
+           //part.setupProperty('extRef:likesmovies',  null, function () {
+           //    var checked = $('[cdid="registrationform-subscriber-likesmovies-input"]').is(':checked');
+
+           //     if (checked) {
+           //         checked = "True";
+           //     } else {
+           //         checked = "False";
+           //     }
+
+           //    return checked
+           //});
+
+           part.setupProperty(part.propertyKeys.email, null, function () {
+               return $('[cdid="registrationform-subscriber-email-input"]').val();
+           });
+
+           part.setupProperty(part.propertyKeys.termsandconditionsacceptedcheck, '[cdid="registrationform-subscriber-accepttermsandconditions-input"]');
+
+           part.setupEvent(part.eventKeys.back, 'click [cdid="registrationform-back-btn"]');
+           part.setupEvent(part.eventKeys.submit, 'click [cdid="registrationform-continue-btn"]');
+
+           part.append({
+               onbefore: function (part) {
+                   var partConfig = part.get_partConfiguration();
+                   var $template = part.get_templateHTMLJquery();
+                   if (!partConfig.hasValidationSubmitPart) {
+                       $template.find('[cdid="registrationform-actionbuttongroup"]').removeClass('hidden');
+                   }
+
+                   function populateNumericDropdown(elem, start, end) {
+                       /*if (elem.options.length > 0) {
+                           while (elem.childNodes.length > 0) {
+                               elem.removeChild(elem.firstChild);
+                           }
+                       }*/
+                       if (elem.options.length == 1) {
+                           //elem.options.add(document.createElement("OPTION"));
+                           if (start < end) {
+                               for (var i = start; i <= end; i++) {
+                                   var optn = document.createElement("OPTION");
+                                   optn.text = String(i).length < 2 ? '0' + i : i;
+                                   optn.value = i;
+                                   elem.options.add(optn);
+                               }
+                           }
+                           else {
+                               for (var i = start; i >= end; i--) {
+                                   var optn = document.createElement("OPTION");
+                                   optn.text = String(i).length < 2 ? '0' + i : i;
+                                   optn.value = i;
+                                   elem.options.add(optn);
+                               }
+                           }
+                       }
+                   }
+
+                   populateNumericDropdown($template.find('[cdid="registrationform-subscriber-birthdateday-input"]')[0], 1, 31);
+                   populateNumericDropdown($template.find('[cdid="registrationform-subscriber-birthdateyear-input"]')[0], new Date().getFullYear(), 1900);
+
+                   if (partConfig.isFacebookRegistration) {
+                       part.set_propertyValue(part.propertyKeys.firstname, partConfig.facebookProperties.firstname);
+                       part.set_propertyValue(part.propertyKeys.lastname, partConfig.facebookProperties.lastname);
+                       part.set_propertyValue(part.propertyKeys.login, partConfig.facebookProperties.email);
+                       part.set_propertyValue(part.propertyKeys.confirmlogin, partConfig.facebookProperties.email);
+                       var birthdate = partConfig.facebookProperties.birthday.split("/");
+                       birthdate = new Date(birthdate[2], (birthdate[0] - 1), birthdate[1]);
+                       part.set_propertyValue(part.propertyKeys.birthdateday, birthdate.getDate().toString());
+                       var monthStr = birthdate.getMonth().toString();
+                       if (monthStr.length == 1) {
+                           monthStr = "0" + monthStr;
+                       }
+                       part.set_propertyValue(part.propertyKeys.birthdatemonth, monthStr);
+                       part.set_propertyValue(part.propertyKeys.birthdateyear, birthdate.getFullYear().toString());
+
+                       $template.find('[cdid="registrationform-subscriber-birthdateday-input"]').attr('disabled', 'disabled');
+                       $template.find('[cdid="registrationform-subscriber-birthdateyear-input"]').attr('disabled', 'disabled');
+                       $template.find('[cdid="registrationform-subscriber-birthdatemonth-input"]').attr('disabled', 'disabled');
+                       $template.find('[cdid="registrationform-subscriber-firstname-input"]').attr('disabled', 'disabled');
+                       $template.find('[cdid="registrationform-subscriber-lastname-input"]').attr('disabled', 'disabled');
+                       $template.find('[cdid="registrationform-subscriber-email-input"]').attr('disabled', 'disabled');
+                       $template.find('[cdid="registrationform-subscriber-confirmemail-input"]').attr('disabled', 'disabled');
+                   }
+
+                   return $template.html();
+               },
+               onafter: function (part) {
+
+               }
+           });
+
+           part.setupValidation(
+               {
+                   onbefore: function () {
+                       $('.partcontent-registrationform .validation-summary').empty().hide();
+                   },
+                   onafter: function (validationErrors) {
+                       cd.hideBlocker();
+                       $.each(validationErrors, function (index, error) {
+                           $('.partcontent-registrationform .validation-summary').append('<p>' + error.message + '</p>').show();
+                       });
+                   }
+               });
+       });
+</script>
+
+<div class="partcontent partcontent-registrationform" cd-data-model="Registration">
+    <div class="form-horizontal form-horizontal-registrationform">
+        <!--<div class="form-group form-group-registrationform">
+            <label cdresource="suffix_name" class="col-sm-2 control-label">Suffix </label>
+            <div class="col-sm-2">
+                <select cdid="registrationform-subscriber-suffixname-input" class="form-control form-control-registrationform" cd-data-prop="SuffixName" cd-data-prop-resource="suffix_name" cd-data-rule="required">
+                    <option></option>
+                    <option value="I">I</option>
+                    <option value="II">II</option>
+                    <option value="III">III</option>
+                    <option value="IV">IV</option>
+                    <option value="Jr">Jr</option>
+                    <option value="Sr">Sr</option>
+                    <option value="V">V</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group form-group-registrationform">
+            <label cdresource="title" class="col-sm-2 control-label">Title </label>
+            <div class="col-sm-2">
+                <select cdid="registrationform-subscriber-title-input" class="form-control form-control-registrationform" cd-data-prop="Title" cd-data-prop-resource="title" cd-data-rule="required">
+                    <option></option>
+                    <option value="Dr">Dr</option>
+                    <option value="Fr">Father</option>
+                    <option value="Miss">Miss</option>
+                    <option value="Mr">Mr</option>
+                    <option value="Mrs">Mrs</option>
+                    <option value="Ms">Ms</option>
+                    <option value="Prof">Prof</option>
+                    <option value="Rabbi">Rabbi</option>
+                    <option value="Sgt">Sgt</option>
+                </select>
+            </div>
+        </div>-->
+        <div class="form-group form-group-registrationform">
+            <label cdresource="first_name" class="col-sm-3 control-label">First Name </label>
+            <div class="col-sm-9">
+                <input cdid="registrationform-subscriber-firstname-input" class="form-control form-control-registrationform" cd-data-prop="FirstName" cd-data-prop-resource="first_name" cd-data-rule="required" />
+            </div>
+        </div>
+        <!--<div class="form-group form-group-registrationform">
+            <label cdresource="middle_name" class="col-sm-2 control-label">Middle Name </label>
+            <div class="col-sm-10">
+                <input cdid="registrationform-subscriber-middlename-input" class="form-control form-control-registrationform" cd-data-prop="MiddleName" cd-data-prop-resource="middle_name" cd-data-rule="required" />
+            </div>
+        </div>-->
+        <div class="form-group form-group-registrationform">
+            <label cdresource="last_name" class="col-sm-3 control-label">Last Name </label>
+            <div class="col-sm-9">
+                <input cdid="registrationform-subscriber-lastname-input" class="form-control form-control-registrationform" cd-data-prop="LastName" cd-data-prop-resource="last_name" cd-data-rule="required" />
+            </div>
+        </div>
+        <div class="form-group form-group-registrationform">
+            <label cdresource="email" class="col-sm-3 control-label">Email </label>
+            <div class="col-sm-9">
+                <input cdid="registrationform-subscriber-email-input" class="form-control form-control-registrationform" cd-data-prop="Login" cd-data-prop-resource="email" cd-data-rule="required;pattern(email_pattern)" />
+            </div>
+        </div>
+        <div class="form-group form-group-registrationform">
+            <label cdresource="confirm_email" class="col-sm-3 control-label">Confirm Email </label>
+            <div class="col-sm-9">
+                <input cdid="registrationform-subscriber-confirmemail-input" onpaste="return false;" class="form-control form-control-registrationform" cd-data-prop="ConfirmLogin" cd-data-prop-resource="confirm_email" cd-data-rule="required;equalTo(Login)" />
+            </div>
+        </div>
+        <div class="form-group form-group-registrationform">
+            <label cdresource="password" class="col-sm-3 control-label">Password </label>
+            <div class="col-sm-9">
+                <input type="password" cdid="registrationform-subscriber-password-input" class="form-control form-control-registrationform" cd-data-prop="Password" cd-data-prop-resource="password" cd-data-rule="required;pattern(password_pattern)" />
+            </div>
+        </div>
+        <div class="form-group form-group-registrationform">
+            <label cdresource="confirm_password" class="col-sm-3 control-label">Confirm Password </label>
+            <div class="col-sm-9">
+                <input type="password" cdid="registrationform-subscriber-confirmpassword-input" onpaste="return false;" class="form-control form-control-registrationform" cd-data-prop="ConfirmPassword" cd-data-prop-resource="confirm_password" cd-data-rule="required;equalTo(Password,registrationform_password_mismatch)" />
+            </div>
+        </div>
+        <!--<div class="form-group form-group-registrationform">
+            <label cdresource="select_password_challenge_question" class="col-sm-3 control-label">Choose a security question </label>
+            <div class="col-sm-6">
+                <select cdid="registrationform-subscriber-passwordchallenge-input" class="form-control form-control-registrationform" cd-data-prop="PasswordChallege">
+                    <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
+                    <option value="What is the name of your home planet?">What is the name of your home planet?</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group form-group-registrationform">
+            <label cdresource="password_challenge_answer" class="col-sm-3 control-label">Security Answer </label>
+            <div class="col-sm-9">
+                <input type="password" cdid="registrationform-subscriber-passwordchallengeresponse-input" class="form-control form-control-registrationform" cd-data-prop="PasswordChallengeResponse" cd-data-prop-resource="password_challenge_answer" cd-data-rule="required" />
+            </div>
+        </div>-->
+        <div class="form-group form-group-registrationform">
+            <label cdresource="birth_date" class="col-sm-3 control-label">Birthday </label>
+            <div class="col-sm-3">
+                <!--<label cdresource="month" class="col-sm-4 control-label">Month </label>-->
+                <select cdid="registrationform-subscriber-birthdatemonth-input" class="form-control form-control-registrationform" cd-data-prop="BirthDateMonth" cd-data-prop-resource="month" cd-data-rule="required">
+                    <option>Month</option>
+                    <option value="00" cdresource="month_january"></option>
+                    <option value="01" cdresource="month_february"></option>
+                    <option value="02" cdresource="month_march"></option>
+                    <option value="03" cdresource="month_april"></option>
+                    <option value="04" cdresource="month_may"></option>
+                    <option value="05" cdresource="month_june"></option>
+                    <option value="06" cdresource="month_july"></option>
+                    <option value="07" cdresource="month_august"></option>
+                    <option value="08" cdresource="month_september"></option>
+                    <option value="09" cdresource="month_october"></option>
+                    <option value="10" cdresource="month_november"></option>
+                    <option value="11" cdresource="month_december"></option>
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <!--<label cdresource="day" class="col-sm-4 control-label">Day </label>-->
+                <select cdid="registrationform-subscriber-birthdateday-input" class="form-control form-control-registrationform" cd-data-prop="BirthDateDay" cd-data-prop-resource="day" cd-data-rule="required">
+                    <option>Day</option>
+                </select>
+            </div>
+            <div class="col-sm-2">
+                <!--<label cdresource="year" class="col-sm-5 control-label">Year </label>-->
+                <select cdid="registrationform-subscriber-birthdateyear-input" class="form-control form-control-registrationform" cd-data-prop="BirthDateYear" cd-data-prop-resource="year" cd-data-rule="required">
+                    <option>Year</option>
+                </select>
+            </div>
+            <input type="hidden" cd-data-prop="BirthDate" cdid="registrationform-subscriber-birthdate-input" cd-data-rule="required(error_message_birth_date_in_future)" />
+        </div>
+        <!--<div class="form-group form-group-registrationform">
+            <label cdresource="registrationform_favoritefood_label" class="col-sm-2 control-label">Favorite Food </label>
+            <div class="col-sm-3">
+                <select cdid="registrationform-subscriber-favoritefood-input" class="form-control form-control-registrationform" cd-data-prop="extRef:favoritefood" cd-data-prop-resource="subscriber_favorite_food" cd-data-rule="required">
+                    <option></option>
+                    <option value="Pizza" cdresource="additional_property_pizza">Pizza</option>
+                    <option value="Pie" cdresource="additional_property_pie">Pie</option>
+                    <option value="Tacos" cdresource="additional_property_tacos">Tacos</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group form-group-registrationform">
+            <label cdresource="registrationform_comments_label" class="col-sm-2 control-label">Comments </label>
+            <div class="col-sm-10">
+                <input cdid="registrationform-subscriber-comments-input" class="form-control form-control-registrationform" cd-data-prop="extRef:subscribercomments" cd-data-prop-resource="subscriber_comments" cd-data-rule="required" />
+            </div>
+        </div>
+        <div class="form-group form-group-registrationform">
+            <label cdresource="registrationform_accepttermsandconditions_label" class="col-sm-2 control-label">Likes movies </label>
+            <div class="col-sm-2">
+                <input type="checkbox" cdid="registrationform-subscriber-likesmovies-input" cd-data-prop="extRef:likesmovies">
+            </div>
+        </div>
+        <div class="form-group form-group-registrationform">
+            <label cdresource="business_phone" class="col-sm-2 control-label">Business Phone </label>
+            <div class="col-sm-3">
+                <input cdid="registrationform-subscriber-businessphone-input" class="form-control form-control-registrationform" cd-data-prop="BusinessPhone" cd-data-prop-resource="business_phone" cd-data-rule="required" />
+            </div>
+        </div>
+        <div class="form-group form-group-registrationform">
+            <label cdresource="home_phone" class="col-sm-2 control-label">Home Phone </label>
+            <div class="col-sm-3">
+                <input cdid="registrationform-subscriber-homephone-input" class="form-control form-control-registrationform" cd-data-prop="HomePhone" cd-data-prop-resource="home_phone" cd-data-rule="required" />
+            </div>
+        </div>
+        <div class="form-group form-group-registrationform">
+            <label cdresource="home_phone" class="col-sm-2 control-label">Mobile Phone </label>
+            <div class="col-sm-3">
+                <input cdid="registrationform-subscriber-mobilephone-input" class="form-control form-control-registrationform" cd-data-prop="MobilePhone" cd-data-prop-resource="mobile_phone" cd-data-rule="required" />
+            </div>
+        </div>
+        <div class="form-group form-group-registrationform">
+            <label cdresource="drivers_license_number" class="col-sm-2 control-label">Driver's License Number </label>
+            <div class="col-sm-3">
+                <input cdid="registrationform-subscriber-driverslicensenumber-input" class="form-control form-control-registrationform" cd-data-prop="DriversLicenseNumber" cd-data-prop-resource="drivers_license_number" cd-data-rule="required" />
+            </div>
+        </div>
+        <div class="form-group form-group-registrationform">
+            <label cdresource="social_security_number" class="col-sm-2 control-label">SSN </label>
+            <div class="col-sm-3">
+                <input cdid="registrationform-subscriber-ssn-input" class="form-control form-control-registrationform" cd-data-prop="Ssn" cd-data-prop-resource="social_security_number" cd-data-rule="required" />
+            </div>
+        </div>
+        <div class="form-group form-group-registrationform">
+            <label cdresource="instant_messenger" class="col-sm-2 control-label">Instant Messenger Id </label>
+            <div class="col-sm-3">
+                <input cdid="registrationform-subscriber-instantmessenger-input" class="form-control form-control-registrationform" cd-data-prop="InstantMessenger" cd-data-prop-resource="instant_messenger" cd-data-rule="required" />
+            </div>
+        </div>
+        <div class="form-group form-group-registrationform">
+            <label cdresource="instant_messenger_type" class="col-sm-2 control-label">Instant Messenger Type </label>
+            <div class="col-sm-3">
+                <select cdid="registrationform-subscriber-instantmessengertype-input" class="form-control form-control-registrationform" cd-data-prop="InstantMessengerType" cd-data-prop-resource="instant_messenger_type" cd-data-rule="required">
+                    <option></option>
+                    <option value="1">Windows Live Messenger</option>
+                    <option value="2">AIM</option>
+                    <option value="3">Facebook Chat</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group form-group-registrationform">
+            <label cdresource="drivers_state_number" class="col-sm-2 control-label">Driver's License State </label>
+            <div class="col-sm-2">
+                <select cdid="registrationform-subscriber-driverslicensestate-input" class="form-control form-control-registrationform" cd-data-prop="DriversLicenseState" cd-data-prop-resource="drivers_state_number" cd-data-rule="required">
+                    <option></option>
+                    <option value="AL">Alabama</option>
+                    <option value="AK">Alaska</option>
+                    <option value="AZ">Arizona</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group form-group-registrationform">
+            <label cdresource="gender" class="col-sm-2 control-label">Gender </label>
+            <div class="col-sm-2">
+                <select cdid="registrationform-subscriber-gender-input" class="form-control form-control-registrationform" cd-data-prop="Gender" cd-data-prop-resource="gender" cd-data-rule="required">
+                    <option></option>
+                    <option value="0">Male</option>
+                    <option value="1">Female</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group form-group-registrationform">
+            <label cdresource="language_label" class="col-sm-2 control-label">Language </label>
+            <div class="col-sm-3">
+                <select cdid="registrationform-subscriber-language-input" class="form-control form-control-registrationform" cd-data-prop="Language" cd-data-prop-resource="language_label" cd-data-rule="required">
+                    <option></option>
+                    <option value="af-ZA">Afrikaans (South Africa)</option>
+                    <option value="sq-AL">Albanian (Albania)</option>
+                    <option value="ar-DZ">Arabic (Algeria)</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group form-group-registrationform">
+            <label cdresource="income_level_label" class="col-sm-2 control-label">Income Level </label>
+            <div class="col-sm-3">
+                <select cdid="registrationform-subscriber-incomeleveltype-input" class="form-control form-control-registrationform" cd-data-prop="IncomeLevelType" cd-data-prop-resource="income_level_label" cd-data-rule="required">
+                    <option></option>
+                    <option value="1">Under $25,000</option>
+                    <option value="2">$25,001 to $50,000</option>
+                    <option value="3">$50,001 to $75,000</option>
+                    <option value="4">$75,001 to $100,000</option>
+                    <option value="5">Over $100,000</option>
+                    <option value="6"> 	I would prefer not to provide this information.</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group form-group-registrationform">
+            <label cdresource="lead_source_label" class="col-sm-2 control-label">Lead Source </label>
+            <div class="col-sm-3">
+                <select cdid="registrationform-subscriber-leadsourcetype-input" class="form-control form-control-registrationform" cd-data-prop="LeadSourceType" cd-data-prop-resource="lead_source_label" cd-data-rule="required">
+                    <option></option>
+                    <option value="1">Web Advertisement</option>
+                    <option value="2">Print Advertisement</option>
+                    <option value="3">Friendly Recommendation</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group form-group-registrationform">
+            <label cdresource="preferred_contact_type" class="col-sm-2 control-label">Preferred Contact Type</label>
+            <div class="col-sm-3">
+                <select cdid="registrationform-subscriber-preferredcontacttype-input" class="form-control form-control-registrationform" cd-data-prop="PreferredContactType" cd-data-prop-resource="preferred_contact_type" cd-data-rule="required">
+                    <option></option>
+                    <option value="1">Email</option>
+                    <option value="2">Home Phone</option>
+                    <option value="3">Mobile Phone</option>
+                    <option value="4">Business Phone</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group form-group-registrationform">
+            <label cdresource="Race" class="col-sm-2 control-label">Race</label>
+            <div class="col-sm-3">
+                <select cdid="registrationform-subscriber-race-input" class="form-control form-control-registrationform" cd-data-prop="Race" cd-data-prop-resource="race" cd-data-rule="required">
+                    <option></option>
+                    <option value="1">American Indian or Alaska Native</option>
+                    <option value="2">Asian</option>
+                    <option value="3">Black or African American</option>
+                    <option value="4">Hispanic or Latino</option>
+                    <option value="5">Native Hawaiian or Other Pacific Islander</option>
+                    <option value="6">White</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group form-group-registrationform">
+            <div class="checkbox input-lg">
+                <label class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <input type="checkbox" cdid="registrationform-subscriber-subscribestonewsletter-input" cd-data-prop="SubscribesToNewsletter"><span cdresource="newsletter_subscription"></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group form-group-registrationform">
+            <div class="checkbox input-lg">
+                <label class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <input type="checkbox" cdid="registrationform-subscriber-subscribestopartners-input" cd-data-prop="SubscribesToPartners"><span cdresource="subscribe_to_partner_communications"></span>
+                </div>
+            </div>
+        </div>-->
+        <div class="form-group form-group-registrationform">
+            <div class="checkbox input-lg">
+                <label class="col-sm-3 control-label"></label>
+                <div class="col-sm-9">
+                		<label><input type="checkbox" cdid="registrationform-subscriber-accepttermsandconditions-input" cd-data-prop="TermsAndConditionsAcceptedCheck" cd-data-rule="acceptance(error_message_must_accept_terms_and_conditions)"><div cdresource="registrationform_accepttermsandconditions_label" class="registrationform-acceptterms-label">Accept terms and conditions: </div></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group form-group-registrationform hidden" cdid="registrationform-actionbuttongroup">
+        		
+            <div class="col-xs-2">
+                <button cdid="registrationform-back-btn" class="btn btn-cancel btn-registrationform-back"><span cdresource="registrationform_back_to_login">Back</span></button>
+            </div>
+            <div class="col-xs-2">
+                <button cdid="registrationform-continue-btn" class="btn btn-default btn-registrationform-continue"><span cdresource="continue_registration_button">Continue</span></button>
+            </div>
+        </div>
+    </div>
+    <div cdid="registrationform-validation-summary" class="validation-summary validationsummary-registrationform" class="col-sm-9"></div>
+</div>

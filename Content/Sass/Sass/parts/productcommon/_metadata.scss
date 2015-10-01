@@ -1,0 +1,74 @@
+﻿.productDetailsComponent {
+    .productMetadata {
+        margin: 10px 0 0 0;
+
+        li {
+            margin-bottom: 3px;
+        }
+
+        span {
+            font-size: 0.9em;
+        }
+
+        .metadata-property {
+            font-weight: bold;
+            margin-right: 3px;
+        }
+
+        .guidanceratingtag {
+			float: left;
+			width: 100%;
+            & .metadata-property {
+                display: none;
+            }
+        }
+    }
+
+    .rating {
+        display: inline-block;
+    }
+
+    .rating_G {
+        background-image: url("../../Content/Assets/RATED_G.png");
+        background-repeat: no-repeat;
+        text-indent: -9000px;
+    }
+
+    .rating_PG {
+        background-image: url("../../Content/Assets/RATED_PG.png");
+        background-repeat: no-repeat;
+        text-indent: -9000px;
+    }
+
+    .rating_PG-13 {
+        background-image: url("../../Content/Assets/RATED_PG-13.png");
+        background-repeat: no-repeat;
+        text-indent: -9000px;
+        width: 48px;
+        display: inline-block;
+    }
+
+    .rating_R {
+        background-image: url("../../Content/Assets/RATED_R.png");
+        background-repeat: no-repeat;
+        text-indent: -9000px;
+        width: 15px;
+    }
+
+    .rating_NC-17 {
+        background-image: url("../../Content/Assets/Nc-17.png");
+        background-repeat: no-repeat;
+        text-indent: -9000px;
+        width: 10px;
+    }
+
+    .rating_NR {
+        background-image: url("../../Content/Assets/RATED_NR.png");
+        background-repeat: no-repeat;
+        text-indent: -9000px;
+    }
+
+    .rating_NA {
+        display: none;
+    }
+}

@@ -1,0 +1,28 @@
+﻿@import "parts/uvregistration/uvregistrationform";
+@import "parts/uvregistration/uvloginform";
+
+// Styles for the page itself that are not tied to a part
+.pagecontent-uvregistrationpage {
+    margin-top: 20px;
+
+    .uvregistrationform-uv-link-container {
+        float: left;
+        width: 100%;
+        .uvregistrationform-header {
+            border-bottom: 1px solid #CBCBCB;
+            padding-bottom: 10px;
+        }
+        .uvregistrationform-uv-logo-container {
+            float: right;
+            margin-top: 10px;
+        }
+    }
+
+    .uvreglogin-validation-message {
+        margin-bottom: 50px;
+        display: inline-block;
+        font-weight: bold;
+        font-size: 1.2em;
+    }
+}
+

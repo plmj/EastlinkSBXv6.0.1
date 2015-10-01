@@ -1,0 +1,60 @@
+﻿.autocomplete-suggestions-menu {
+    /* Adjust for the menu suggestions dropdown box width 
+     otherwise the default is the size of the text box*/
+    width: 300px !important;
+    display: inline;
+    border: 1px solid #999;
+    background: #FFF;
+    overflow: auto;
+    font-size:14px;
+    cursor: default;
+
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		display: none;
+    }
+}
+
+.autocomplete-suggestions {
+    /* Adjust for the menu suggestions dropdown box width 
+     otherwise the default is the size of the text box
+  width: 500px !important;*/
+    display: inline;
+    border: 1px solid #999;
+    background: #FFF;
+    overflow: hidden;    
+
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		overflow: auto;
+    }
+}
+
+.autocomplete-suggestion {
+    padding: 2px 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;    
+
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		font-size: 2em;
+    }
+}
+
+.autocomplete-suggestion-image {
+    width:40px;
+    margin-right: 8px;
+    margin-left:5px;
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+
+    }
+}
+
+.autocomplete-selected {
+  background: #F0F0F0;
+  cursor:pointer;
+}
+
+.autocomplete-suggestion strong {
+  font-weight: bold;
+  color: #3399FF;
+  cursor: default;
+}

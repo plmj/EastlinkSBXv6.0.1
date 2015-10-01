@@ -1,0 +1,114 @@
+﻿.productDetailsComponent .detailsPurchasedViewHeader {
+    display: block;
+    font-size: 1.0em;
+    font-weight: bold;
+    color: #555;
+    margin: 0 0 5px 0;
+
+    & .watchHere {		
+        @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+            font-size: 15px;
+        }
+    }
+}
+.productDetailsComponent .purchasedActionContainer {
+	display: inline;
+    padding: 0 0 5px;
+	clear: both;
+    float: left;
+    margin: 0 0 15px;
+    width: 320px;
+
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		width: 100%;
+    }
+
+    .actionButtonsContainer, ul {
+        float: left;
+        height: auto;
+        margin: 0;
+
+        @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+            width: 100%;
+        }
+    }
+
+    .actionButtonsContainer {
+        margin: 0 0 0 0;
+    }
+
+	.mainButton span {
+		font-size: 1em;
+		font-weight: bold;
+	}
+}
+.chromecast-container {
+    height: 30px;
+    .chromecast-icon {
+        float: left;
+        width: 44px;
+	    height: 33px;
+	    background: url('../Assets/chromecast/cast_icon_active.png');
+	    background-repeat:no-repeat;
+	    background-size:70%;
+        margin-top: -1px;
+    }
+}
+
+.mainButton {
+  &.watchlistAddButton, &.watchlistRemoveButton {
+    background: #C35617;
+  }
+  &.watchlistAddButton span {
+    padding: 0 0 0 31px;
+    background-image: url("../Assets/addButtonBG.png");
+    background-position: left center;
+    background-repeat: no-repeat;
+  }
+  &.watchlistRemoveButton span {
+    padding: 0 0 0 31px;
+    background-image: url("../Assets/removeButtonBG.png");
+    background-position: left center;
+    background-repeat: no-repeat;
+  }
+  &.watchlistAddButton:hover, &.watchlistRemoveButton:hover {
+    background: #7E3117;
+  }
+  &.watchlistAddButton:action, &.watchlistRemoveButton:action {
+    background: #C35617;    
+    border: solid 1px #818181;
+  }
+  &.buttonChromecastPlay span {
+    padding: 0 0 0 31px;
+    background-image: url("../Assets/chromecast/cast_icon_active.png");
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: auto 15px;
+  } 
+  &.buttonPlay span, &.buttonListen span {
+    padding: 0 0 0 31px;
+    background-image: url('../Assets/playButtonBG.png');
+    background-position: left center;
+    background-repeat: no-repeat;
+  }
+  &.instantDownload, &.instantLoginToDownload, &.buttonDownload {
+    background: #888;    
+  }
+  &.instantDownload:hover, &.instantLoginToDownload:hover, &.buttonDownload:hover {
+    background: #555;
+  }
+}
+
+.instantPlay span, .instantLoginToPlay span {
+  padding: 0 0 0 31px;
+  background-image: url('../Assets/playButtonBG.png');
+  background-position: left center;
+  background-repeat: no-repeat;
+}
+
+.instantDownload span, .instantLoginToDownload span, .mainButton.buttonDownload span {
+  padding: 0 0 0 31px;
+  background-image: url("../Assets/downloadButtonBG.png");
+  background-position: left center;
+  background-repeat: no-repeat;
+}

@@ -1,0 +1,20 @@
+﻿.additionalProperty {
+    margin-top: 15px;
+    font-size: 20px;
+    font-weight: bold;
+
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+        font-size: 16px;
+    }
+
+    .additionalPropertyValue {
+        display: block;
+        margin-top: 5px;
+        font-size: 16px;
+        font-weight: normal;
+
+        @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+			font-size: 14px;
+        }
+    }
+}

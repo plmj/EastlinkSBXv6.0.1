@@ -1,0 +1,25 @@
+﻿.gift-product-action {
+	background-color: #ff9900;
+	border-radius: 4px 4px 4px 4px;
+	cursor: pointer;
+	float: left;
+	height: 37px;	
+	overflow: hidden;
+	padding: 0 12px;
+	color:#fff;
+	& .fa {
+		float: left;
+		font-size: 23px;
+		margin-right: 6px;
+		margin-top: 6px;
+	}
+	& .name {
+		float: left;
+		font-size: 14px;		
+		margin-top: 10px;
+	}
+}
+
+.gift-product-action:hover {
+	background-color: #fe800e;
+}

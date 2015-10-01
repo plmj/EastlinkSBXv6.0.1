@@ -1,0 +1,84 @@
+﻿.pageMenu {
+    width: 100%;
+    overflow: hidden;
+
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+	width: 270px;
+    overflow: hidden;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    background: #ffffff;
+    background: -moz-linear-gradient(top, white 0%, #d1d1d1 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(100%, #d1d1d1));
+    background: -webkit-linear-gradient(top, white 0%, #d1d1d1 100%);
+    .userName {
+      margin-left: 23px;
+      line-height: 30px;
+      font-weight: bold;
+		}
+    }
+}
+
+.pagingControl {
+
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		display: none;
+    }
+
+    .pagingItem {
+        background-position: -4px center;
+        background-repeat: no-repeat;
+        float: left;
+        font-size: 0.9em;
+        font-weight: bold;
+        height: 44px;
+        padding-left: 26px;
+
+        a {
+            display: block;
+            height: 48px;
+            line-height: 48px;
+            margin-right: 30px;
+            width: 100%;
+        }
+    }
+
+    .pageMenu .active {
+        background: -moz-linear-gradient(top, rgba(165, 165, 165, 0.14) 0%, rgba(165, 165, 165, 0.3) 45%, rgba(165, 165, 165, 0.3) 46%, rgba(165, 165, 165, 0.5) 48%, rgba(0, 0, 0, 0) 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(165, 165, 165, 0.14)), color-stop(45%, rgba(165, 165, 165, 0.3)), color-stop(46%, rgba(165, 165, 165, 0.3)), color-stop(48%, rgba(165, 165, 165, 0.5)), color-stop(100%, rgba(0, 0, 0, 0)));
+        background: -webkit-linear-gradient(top, rgba(165, 165, 165, 0.14) 0%, rgba(165, 165, 165, 0.3) 45%, rgba(165, 165, 165, 0.3) 46%, rgba(165, 165, 165, 0.5) 48%, rgba(0, 0, 0, 0) 100%);
+        background-color: #CCCCCC;
+        opacity: 0.9;
+        /* For Internet Explorer 8 */
+        -moz-opacity: 0.9;
+        -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99999999, endColorstr=#FFFFFFFF)";
+    }
+}
+
+@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+  .pagingItem {
+    height: 32px;
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+  }
+  .searchButtonContainer input {
+    display: none;
+    width: 10px;
+  }
+  .pagingItem {
+    &.active {
+      background: #b5c6d0;      
+    }
+    a {
+      height: 32px;
+      line-height: 32px;
+      width: 100%;
+	  padding: 0 0 0 10px;
+	  font-size: 1.3em;
+	  font-weight: bold;
+    }
+  }
+}
+
+

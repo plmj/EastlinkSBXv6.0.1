@@ -1,0 +1,9 @@
+﻿.helpContent
+{
+    padding: 20px 0 0;
+    width: 601px;
+	@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width)  {
+		width: 300px;
+		padding: 95px 0 0 0;
+	}
+}

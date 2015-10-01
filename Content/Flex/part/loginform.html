@@ -1,0 +1,124 @@
+<script cdscript="true" type="text/javascript">
+    cd.flex.addTemplate(
+        "loginform",
+	   null,
+       function (template, part) {
+           //write custom stuff
+           part.append();
+           $('[cdid="loginform-password-input"]').keydown(function (event) {
+               if (event.which == 13) {
+                   event.preventDefault();
+                   part.submit();
+               }
+           });
+           var sessionExpired = $.cd.getQueryStringValue('___sessionExpired');
+           if (sessionExpired !== '' && sessionExpired === 'true') {
+               $('[cdid="loginform-validation-summary"]').append('<p cdresource="login_session_expired"></p>');
+           }
+       },
+       function (part) {
+           part.setupProperty(part.propertyKeys.login, '[cdid="loginform-username-input"]');
+           part.setupProperty(part.propertyKeys.password, '[cdid="loginform-password-input"]');
+           part.setupProperty(part.propertyKeys.rememberme, '[cdid="loginform-remeberme-input"]');
+          
+           part.setupEvent(part.eventKeys.login, 'click [cdid="loginform-login-btn"]');
+           part.setupEvent(part.eventKeys.facebooklogin, 'click [cdid="facebook-login-btn"]');
+           part.setupEvent(part.eventKeys.facebooklogintolink, 'click [cdid="facebook-loginlink-btn"]');
+           part.setupEvent(part.eventKeys.password, 'click [cdid="loginform-forgot-password-btn"]');
+           part.setupEvent(part.eventKeys.updatecredentials, 'click [cdid="loginform-update-credentials-btn"]');
+           part.setupEvent(part.eventKeys.checkoutanonymously, 'click [cdid="guest-checkout-btn"]');
+
+           part.setupState(part.stateKeys.initialize, function (stateData) {
+               if (stateData.isAnonymousCheckoutMode) {
+                   $('[cdid = "loginform-anonymouscheckout"]').show();
+               } else {
+                   $('[cdid = "loginform-anonymouscheckout"]').fadeOut();
+               }
+
+               $('[cdid=facebook-loginlink-header]').fadeOut();
+               $('[cdid=facebook-loginlink-btn]').fadeOut();
+               $('[cdid=login-header]').fadeIn();
+               $('[cdid=facebook-login-separator]').fadeIn();
+               $('[cdid=facebook-login-btn]').fadeIn();
+               $('[cdid=loginform-login-btn]').fadeIn();
+           });
+
+           part.setupState(part.stateKeys.facebookloginexisted, function (stateData) {
+               $('[cdid=login-header]').fadeOut();
+               $('[cdid=facebook-login-separator]').fadeOut();
+               $('[cdid=facebook-login-btn]').fadeOut();
+               $('[cdid=loginform-login-btn]').fadeOut();
+               $('[cdid=facebook-loginlink-header]').fadeIn();
+               $('[cdid=facebook-loginlink-btn]').fadeIn();
+           });
+
+           part.setupValidation(
+                 {
+                     onbefore: function () {
+                         $('[cdid=loginform-validation-summary]').empty();
+                     },
+                     onafter: function (validationErrors) {
+                         cd.hideBlocker();
+                         $.each(validationErrors, function (index, error) {
+                             $('[cdid=loginform-validation-summary]').append('<p>' + error.message + '</p>');
+                         });
+                     }
+                 }
+            );
+       }
+	);
+</script>
+
+<div class="partcontent-loginform" cdlegacy="false" cd-data-model="SubscriberLogin">
+    <div>
+        <div id="existing_users_login_message" class="existing-users-login-message">
+            <h1 cdid="login-header">Welcome Back</h1>
+            
+        </div>
+        <div cdid="loginform-validation-summary" class="validation-summary validationsummary-loginform"></div>
+            <h1 cdresource="associate_existing_facebook_account" cdid="facebook-loginlink-header" style="display:none;">
+                Based on the email address associated with this Facebook account, we see that you have an account with us! Please enter your password below to link your existing account to Facebook.
+            </h1>
+        <div id="login-form-existing-users-form" class="login-form-existing-users-form">
+            <div class="clearfix">
+                <!--<label for="Username" cdresource="login_username_label" class="control-label col-xs-4">Username: </label>-->
+                <input cdid="loginform-username-input" placeholder="Email Address" class="form-control form-control-loginform col-xs-12" type="text" cd-data-prop="Login" cd-data-prop-resource="login_username_label" cd-data-rule="required;pattern(email_pattern)" />
+            </div>
+            <div class="clearfix">
+                <!---<label for="Password" cdresource="password" class="control-label col-xs-4">Password: </label>-->
+                <input cdid="loginform-password-input" placeholder="Password" class="form-control form-control-loginform col-xs-12" type="password" cd-data-prop="Password" cd-data-prop-resource="password" cd-data-rule="required;" maxlength="30" />
+            </div>
+            <div>
+                <input type="checkbox" cdid="loginform-remeberme-input" cd-data-prop="RememberMe" />
+                <span cdresource="remember_me" class="remember-me">REMEMBER ME?</span>
+            </div>
+            <div class="btn-action-container">
+                <a cdid="loginform-login-btn" class="mainButton" href="#">
+                    <span cdresource="login"></span>
+                </a>
+            </div>
+
+            <div id="facebook-loginlinkbutton-container" cdfacebook="true" cdid="loginform-facebook">
+                <h1 cdresource="or" cdid="facebook-login-separator" class="facebook-title"></h1>
+                <a cdid="facebook-login-btn" class="facebook-button" href="#">
+                    <span cdresource="facebook_login_button"></span>
+                </a>
+                <a cdid="facebook-loginlink-btn" class="facebook-button" href="#" style="display:none;">
+                    <span cdresource="facebook_login_to_link_button"></span>
+                </a>
+            </div>
+            <div id="continue_checkout_as_guest-container" class="btn-action-container" cdid="loginform-anonymouscheckout" style="display:none;">
+                <a cdid="guest-checkout-btn" class="mainButton" href="#">
+                    <span cdresource="continue_checkout_as_guest_button"></span>
+                </a>
+            </div>
+            <div id="loginform-forgotpassword-btn">
+                <a cdid="loginform-forgot-password-btn">
+                    <span cdresource="forgot_password_link" class="forgot-password-link">Forgot Password?</span>
+                </a>
+            </div>
+            
+        </div>
+
+    </div>
+</div>

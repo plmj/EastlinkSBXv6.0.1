@@ -1,0 +1,64 @@
+﻿html {
+    .partcontent-signupbuttons {
+        margin-right:30px;
+    }
+
+    .content-firsttimeuserloginsection {
+	    overflow: hidden;	
+        @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		    padding-left: 30px;
+        }
+	    .btn-action-container {
+		    float: left;
+		    width: 200px;
+            @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		    width: 100%;
+        }
+	    }
+    }
+
+    .signup-devidetext-container {
+        float:left;
+        width: 200px;
+        h1 {
+		    margin-bottom: 10px;
+		    font-size: 1.2em;
+		    font-weight: bold;
+	    }
+    }
+
+    .facebook-container {
+      float: left;
+      overflow: hidden;
+      width: 100%;
+      .facebook-title {
+        border-top: 1px dotted;
+        margin: 10px 0;
+        text-align: left;
+        padding-left: 12px;
+        width: 100%;
+      }
+      .facebook-button {
+          @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		    width: 100%;
+            padding: 12px 0 18px 56px;
+        }
+      }
+    }
+
+    .pagecontainer-registrationpage .facebook-container {
+        .btn-facebook-signup {
+            text-align:right;
+        }
+    }
+}
+
+html[dir=rtl] {    
+    .content-firsttimeuserloginsection .btn-action-container {
+        float: right;
+    }
+
+    .signup-devidetext-container {
+        float: right;
+    }
+}

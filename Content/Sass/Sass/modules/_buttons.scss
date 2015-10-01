@@ -1,0 +1,182 @@
+﻿// .btn is a class from bootstrap that we are overriding it to look like the rest of our buttons
+.btn-default,
+.mainButton {
+    //@include button-variant(#fff, #2172c2, #2172c2);
+    display: block;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;    
+    text-transform: uppercase;  
+    color: #fff;    
+    background: #2172c2;    
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 0.9em 'PT Sans', sans-serif, Arial, Helvetica;
+
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		border: none;
+    }
+
+    &:hover {
+        color: #fff;
+        text-decoration: none;
+        background: #024489;        
+    }
+
+    &:visited {
+        color: #fff;
+    }
+
+    &:link {
+        color: #fff;
+    }
+
+    &:focus {   
+        color: #fff;  
+        background: #4994d9;           
+    }
+    &.active,
+    &:active {
+        position: relative;
+        top: 1px;
+        color: #fff;        
+        background: #4994d9;        
+    }
+
+    &.accessAction {
+        font-size: 12px;
+        font-weight: bold;
+        text-align: left;
+        border: none;
+        width: 190px;
+        padding: 6px 0 8px 12px;
+        margin: 0 0 5px 0;
+		line-height:1;
+    }
+
+    &.availableSoon {
+        display: block;
+        background: none;
+        color: #555;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        border: none;
+        font-size: 0.8em;
+        font-weight: bold;
+        text-align: left;
+        padding: 0;
+    }
+}
+
+.btn-cancel,
+.cancelAction {
+    padding: 4px 8px;
+    background: #bcbcbc;        
+
+    &:hover {
+        background: #555555;
+    }
+
+    &:active {
+        background: #bcbcbc;            
+    }
+}
+
+.btn-secondary,
+.secondaryButton {
+	display: inline-block;
+	text-decoration: none;    
+	color: #4994d9;  
+	font-size: 1em;
+
+	&:visited {
+		color: #4994d9;
+	}
+
+	&:hover {
+		color: #046BC9;
+		text-decoration: underline;
+	}
+
+	&:active {
+		position: relative;
+		top: 1px;
+		color: #046BC9;
+	}
+
+	&:focus {
+	}
+}
+
+.btn-action-container {
+  float: right;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  margin: 2px 0 2px 0;
+  li {
+    margin-left: 5px;
+    display: block;
+    float: left;
+  }
+  a {
+    width: auto;
+    min-width: 120px;
+	padding: 10px;
+	font-size: 0.8em;
+	@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		font-size: 1em;
+		padding: 14px;
+    }
+  }
+}
+
+.facebook-container .facebook-button, .facebook-button
+{		
+	background-image: url("../Assets/facebook_sign_in_button.png");
+	background-repeat:no-repeat;		
+	background-size: 100% 38px;
+	text-decoration: none;       
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	padding: 12px 0 18px 20px;
+	font-size:0.8em;
+	float:left;
+	width:222px;
+}
+
+.facebook-button span 
+{			
+	color:#fff;
+	margin: 0 0 0 30px;
+	padding-right:10px;
+}
+
+.content-facebooklinkbutton {
+	.facebooklinkbutton-linked {
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+	.facebook-linked-message {
+		font-weight: bold;
+	}
+	.facebook-title {
+		float: left;
+		clear:both;
+		margin-bottom: 10px;
+		color: #5E5E5E;
+		font-weight: bold;
+		font-size: 0.8em;
+		@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+			font-size: 1em;
+		}
+	}
+	.facebook-button {
+		clear: both;
+		width: 214px;
+		font-size: 0.7em;
+		@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+			font-size: 1em;
+		}
+	}
+}

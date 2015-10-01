@@ -1,0 +1,229 @@
+.episodes-container {
+    float: left;
+    width: 100%;
+	& .pricingInfo {
+		float: left;
+	}
+	& .episodePricingInfo {
+		& .pricingPlanComponent {
+			float: left;
+			margin-bottom: 5px;
+			margin-right: 4px;
+			text-align: center;
+			width: 100%;
+			& .planName {
+				color: white;
+			}
+		}
+	}	
+	& .episodicGroupHeader {
+		margin-bottom: 20px;
+	}
+    & .episodicGroupName {
+        @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+            font-size: 14px; text-decoration: underline;
+        }
+    }
+
+    & .showHidePurchasedEpisodesContainer {
+        float: right;
+		margin-right: 12px;
+    }
+
+        & .showHidePurchasedEpisodesContainer input {
+            float: left;
+        }
+
+        & .showHidePurchasedEpisodesContainer label {
+            display: block;
+            float: left;
+            font-size: 12px;
+            font-weight: bold;
+            margin: 5px 0 0 2px;
+        }
+
+    & .episode-product-detail {
+        background: #f9f9f9;
+        border-radius: 6px;
+        clear: both;
+        float: left;
+        margin: 0 0 5px;
+        padding: 0 10px 5px 10px;
+        width: 96%;
+        border-bottom: 1px dotted #ccc;
+        display: block;
+
+        & .episode-header {
+            float: left;
+            width: 100%;
+            font-size: 1em;
+            font-weight: bold;
+            line-height: 29px;
+            cursor: pointer;
+
+            & .episode-header-list li {
+                display: inline;
+            }
+        }
+
+        & .episode-image {
+            width: 60px;
+            float: left;
+        }
+
+	   .UVLogoBugContainer {
+			background-image: url("../Assets/UVlogoBug.png");
+			width: 18px;
+			height: 17px;
+			margin-left:4px;
+			background-repeat: no-repeat;
+			float: left;
+			text-indent: -9000px;
+			margin-top: 10px;
+			display: none;
+		}
+    }
+
+    & .season-number-container,
+    & .episode-number {
+        float: left;
+        margin-right: 7px;
+        font-size: 1.0em;
+    }
+
+    & .episode-name-container {
+        float: left;
+    }
+
+    & .episode-name span {
+        text-decoration: underline;
+        color: #4691d7;
+    }
+
+    & .episode-play-action-container {
+        float: right;
+        font-size: 1.0em;
+    }
+
+    & .episode-viewing-badges-container {
+        float: right;
+        margin-right: 25px;
+        font-size: 1.0em;
+        font-weight: normal;
+    }
+
+    & .episode-toggle-container {
+        float: right;
+        width: 100%;
+        font-weight: normal;
+    }
+
+    & .episode-description {
+        display: block;
+        float: left;
+        line-height: 27px;
+        font-size: 0.9em;
+        margin: 0 0 0 0px;
+        max-width: 330px;
+        padding: 0 10px;
+
+        &.expanded {
+            display: none;
+        }
+    }
+
+    & .episode-purchased-container {
+        display: none;
+    }
+
+    & .episode-buttons {
+        float: right;
+        text-align: right;
+        width: 280px;
+        margin: 5px 0 0 0;
+    }
+
+        & .episode-buttons .accessAction {
+            float: right;            
+            margin-left: 5px;
+            padding: 7px;
+            width: 153px;
+        }
+
+    & .mainButton.listAccessAction {
+        font-size: 12px;
+        font-weight: bold;
+        text-align: left;
+        border: none;
+        margin: 0 0 5px 0;
+        height: 16px;
+        line-height: 16px;
+        vertical-align: middle;
+        display: inline;
+    }
+	& .episodic-group-name-link {
+		text-decoration: underline;
+		color: #4691d7;
+	}
+	& .episode-toggle-button {
+		float: right;
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+	}
+    & .season-number-text,
+    & .episodeName span,
+    & .episode-toggle-button span {
+        @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+            font-size: 12px; 
+			line-height: 12px; 
+			vertical-align: middle;
+        }
+    }
+    & .episode-buttons .pricingInfo {
+	    margin: 0 0 2px 0;
+		float:right;
+		width:100%;
+	}
+	
+	& .episode-buttons .pricingInfo .showHidePurchaseOptionsButton {
+	    background-size: 10px 10px;
+	    font-size: 12px;
+	}
+	
+	& .episode-buttons .pricingInfo  .showHidePurchaseOptionsButtonCollapsed,
+	& .episode-buttons .pricingInfo  .showHidePurchaseOptionsButtonExpanded
+	{
+	    display: inline-block;
+        margin: 0 0 10px;
+	    padding: 0 0 0 15px;
+		width: 153px;
+	}
+		
+	& .episode-buttons .pricingPlanComponent .uvImageContainer
+	{
+		margin: 1px 5px 0 0;
+	}
+	& .episode-buttons .detailProductInfo .accessPolicies {
+		display: none;
+	}
+
+	& .episode-buttons .pricingPlanSelectContainer .sectionHeader{
+		display:none;
+	}
+
+	& .episode-buttons .pricingInfo .actionContainer 
+	{		
+		float: right;
+		& a {
+			width: 153px;
+			font-size: 12px;
+			min-height: 16px;
+			margin-left: 5px;
+			padding: 7px;
+		}
+	}
+}

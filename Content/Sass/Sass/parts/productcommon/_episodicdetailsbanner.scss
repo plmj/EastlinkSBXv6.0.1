@@ -1,0 +1,49 @@
+.product-details-banner-container {	
+
+	& .pricingPlanComponent {
+		margin-bottom: 5px;
+
+		& .pricingPlanSelectButton {
+			text-align: left;
+		}
+		a[cduv=true] {
+			background: #494a72;
+			&:hover {
+				background: #57179C;
+			}
+		}	
+		& .uvImageContainer
+        {
+            margin: 9px 5px 0 0;
+            display: inline-block;
+            background: url('../Assets/UVlogoBug.png') no-repeat top left;
+            width: 17px;
+            height: 16px;
+        }	
+		& .beforeDiscountPrice,
+		& .finalPrice,
+		& .planName {
+			color: white;
+		}
+	}
+	& .series-name-container span {
+		margin-right: 2px;
+		font-weight: bold;
+	}
+	& .season-number-container {
+		float: left;
+		margin-right: 7px;
+		font-size: 1.0em;
+	}
+	& .season-number-text {
+		margin-right: 2px;
+	}
+    // purchase upgrades overrides
+    .purchase-upgrades-container {
+        margin-top: 5px;
+        .purchaseUpgradeLink {
+            float: right;
+        }
+    }
+    
+}

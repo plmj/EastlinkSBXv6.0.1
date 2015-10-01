@@ -1,0 +1,3208 @@
+// Updated 8/26/2014
+
+var csgEnvironments = {
+    "1": "cineplex.int4.cdops.net", // 1. INT4
+    "2": "cineplex.sbx1.cdops.net", // 2. Sandbox
+    "3": "cineplex.contentdirect.tv", // 3. Production
+    "4": "cineplex.int2.cdops.net" // 4. INT2
+};
+
+var currentCsgEnv = {
+    "currentEnv": 3,
+    "systemId": "",
+    "channelId": ""
+};
+var htmlVersion = "v5.5.1";
+
+if (currentCsgEnv.currentEnv == 1) {
+    currentCsgEnv.systemId = "21571259-b7cf-49bd-9fda-2a6076467123";
+    currentCsgEnv.channelId = "5cb2f523-37ef-4e8c-87b9-6d2b2b320d07";
+} else if (currentCsgEnv.currentEnv == 2) {
+    currentCsgEnv.systemId = "d1f56a11-8888-41ad-ac31-acc007755313";
+    currentCsgEnv.channelId = "a3ecae07-b7e2-4a5c-85a6-b0c19c1bf2e7";
+} else if (currentCsgEnv.currentEnv == 3) {
+    currentCsgEnv.systemId = "bf29323b-6657-410f-a6cf-73ce462aad51";
+    currentCsgEnv.channelId = "638fd48a-56bf-48bc-9540-fb29105e41f1";
+} else if (currentCsgEnv.currentEnv == 4) {
+    currentCsgEnv.systemId = "a2b3d424-4e2c-424c-ac60-2365c6e50617";
+    currentCsgEnv.channelId = "6666a1e1-48a8-40dc-a980-dee68881e278";
+} else {
+    alert('Invalid environment parameter');
+}
+
+
+$.cd.beforeInitialize(function () {
+
+    $.cd.set_playerVersion("v5.4.2");
+    //$.cd.set_debugMode(true);
+
+	$.cd.get_browserInfo().dataOS = [
+
+	   { string: navigator.userAgent, subString: "Android", identity: "Android", type: 16, player: 'spa', playerLocation: '' },
+
+	   { string: navigator.userAgent, subString: "iPad", identity: "iPad", type: 11, player: 'spa', playerLocation: '' },
+
+	   { string: navigator.userAgent, subString: "iPhone", identity: "iPhone/iPod", type: 10, player: 'spa', playerLocation: '' },
+
+	   { string: navigator.userAgent, subString: "Win", identity: "Windows", type: 4, player: 'sps', playerLocation: 'sl/player/%playerversion%/' },
+
+	   { string: navigator.userAgent, subString: "Mac", identity: "Mac", type: 2, player: 'sps', playerLocation: 'sl/player/%playerversion%/' },
+
+	   { string: navigator.userAgent, subString: "Win", identity: "Windows", type: 4, player: 'sph', playerLocation: 'HTMLPlayer/%htmlplayerversion%/scripts/csgPlayer.js' },
+
+	   { string: navigator.userAgent, subString: "Mac", identity: "Mac", type: 2, player: 'sph', playerLocation: 'HTMLPlayer/%htmlplayerversion%/scripts/csgPlayer.js' },
+
+	   { string: navigator.userAgent, subString: "SmartHub", identity: "Samsung/SmartHub", type: 31, player: 'spt', playerLocation: '', physicalDeviceCode: 1116 },
+
+	   { string: navigator.userAgent, subString: "NetCast", identity: "LG/NetCast", type: 30, player: 'spl', playerLocation: '', physicalDeviceCode: 1117 },
+
+	   { string: navigator.userAgent, subString: "WebOs", identity: "LG/NetCast", type: 30, player: 'spw', playerLocation: '', physicalDeviceCode: 1117 },
+
+	   { string: navigator.userAgent, subString: "Linux", identity: "Linux", type: 3, player: 'sps', playerLocation: 'sl/player/%playerversion%/' }
+
+	];
+
+
+    $.cd.showModalMessage = function (config) {
+        if ((null == config.message || config.message.length == 0) && (null == config.customHtml || config.customHtml.length == 0)) return;
+        var messageHtml;
+        config.showCloseButton = typeof config.showCloseButton !== 'undefined' ? config.showCloseButton : true;
+        config.hideOnOverlayClick = typeof config.hideOnOverlayClick !== 'undefined' ? config.hideOnOverlayClick : true;
+        config.enableEscapeButton = typeof config.enableEscapeButton !== 'undefined' ? config.enableEscapeButton : true;
+        if (null == config.customHtml) {
+            messageHtml = "<div class='modalMessagePopup'><div>" + config.message + "</div></div>";
+        } else {
+            messageHtml = config.customHtml;
+        }
+
+        $.fancybox.init();
+        $.fancybox({
+            'transitionIn': 'fade',
+            'transitionOut': 'fade',
+            'speedIn': 600,
+            'speedOut': 200,
+            'margin': 0,
+            'padding': 0,
+            'scrolling': 'no',
+            'type': config.type || 'inline',
+            'overlayOpacity': 0.4,
+            'overlayColor': '#000',
+            'href': messageHtml,
+            'onClosed': function () {
+                config.hideCallBack;
+                csgObj.csgPlayer.stopScrollUpdate();
+            },
+            'onStart': function () {
+                csgObj.csgPlayer.startScrollUpdate("260");
+            },
+            'onComplete': function () {
+                if (null != config.loadedCallback)
+                    config.loadedCallback.call();
+            },
+            'showCloseButton': config.showCloseButton,
+            'hideOnOverlayClick': config.hideOnOverlayClick,
+            'enableEscapeButton': config.enableEscapeButton
+        });
+    };
+    $.cd.showModal = function (config) {
+
+
+        config.showCloseButton = null != config.showCloseButton ? config.showCloseButton : true;
+        config.hideOnOverlayClick = null != config.hideOnOverlayClick ? config.hideOnOverlayClick : true;
+        if (null != config.width)
+            config.width = String(config.width).replace('px', '');
+
+        if (null != config.height)
+            config.height = String(config.height).replace('px', '');
+
+        if (this._modalFrameworkScript == null) {
+            _showModalEvent = function (t) {
+                $.fancybox.init();
+
+                $.fancybox({
+                    'transitionIn': 'fade',
+                    'transitionOut': 'fade',
+                    'speedIn': 600,
+                    'speedOut': 200,
+                    'margin': 0,
+                    'padding': 0,
+                    'width': config.width,
+                    'height': config.height,
+                    'autoDimensions': false,
+                    'autoScale': false,
+                    'scrolling': 'no',
+                    'type': config.type != null ? config.type : 'inline',
+                    'overlayOpacity': config.opacity != null ? config.opacity : 0.7,
+                    'overlayColor': config.opacityColor != null ? config.opacityColor : '#000',
+                    'href': config.target,
+                    'onComplete': function () {
+                        $.cd.hideBlocker();
+                        csgObj.csgPlayer.startScrollUpdate(config.height);
+                    },
+                    'onClosed': config.hideCallBack,
+                    'showCloseButton': config.showCloseButton,
+                    'hideOnOverlayClick': config.hideOnOverlayClick
+
+                });
+            };
+            var fileInfo = new Array();
+            fileInfo[0] = new Object();
+            fileInfo[0]["type"] = "javascript";
+            fileInfo[0]["fileUrl"] = this.getContentUrl("Scripts/jquery.fancybox-1.3.4.min.js");
+            fileInfo[0]["testMethod"] = "typeof $.fn.fancybox != 'undefined'"
+
+            this.loadResources(fileInfo, function () {
+                _showModalEvent.call(this, config.target);
+                if (null != config.callback)
+                    config.callback.call();
+            });
+            return true;
+        } else {
+            if (null == _showModalEvent)
+                _showModalEvent = function (t) {
+                    $.fancybox.init();
+                    $.fancybox({
+                        'transitionIn': 'fade',
+                        'transitionOut': 'fade',
+                        'speedIn': 600,
+                        'speedOut': 200,
+                        'margin': 0,
+                        'padding': 0,
+                        'width': config.width,
+                        'height': config.height,
+                        'autoDimensions': false,
+                        'autoScale': 'yes',
+                        'scrolling': 'no',
+                        'type': config.type !== undefined ? config.type : 'inline',
+                        'href': config.target,
+                        'overlayOpacity': config.opacity !== undefined ? confi.opacity : 0.7,
+                        'overlayColor': config.opacityColor !== undefined ? config.opacityColor : '#000',
+                        'onClosed': config.hideCallBack,
+                        'hideOnOverlayClick': config.hideOnOverlayClick
+                    });
+                }
+            _showModalEvent.call(this, config.target);
+            if (null != config.callback)
+                config.callback.call();
+        }
+    };
+
+    // Following will change the preferred file extension and its location
+    // $.cd.get_browserInfo().updatePlayerManifest(string:required, array:nullable, location:nullable);
+    // ex) $.cd.get_browserInfo().updatePlayerManifest("spf", ["f4v", "flv", "f4f", "f4m", "swf"], 'flash/player/%playerversion%/ClientBin');   
+
+    // Following will change preferred player type (location is no longer valid as part of 5.2.HTM.2)
+    // $.cd.updateBrowserInfo(string:required, int:required, string:required, location:nullable)
+    // $.cd.updateBrowserInfo("Win", 4, "spf");
+    // ex) $.cd.updateBrowserInfo("Mac", 2, "spf"); 
+    //$.cd.add_supportedCurrencySetting(
+    //        {
+    //            code: "GBP",
+    //            symbol: "Ã‚Â£",
+    //            format: "%s%v",   // controls output: %s = symbol, %v = value (can be object, see docs)
+    //            decimal: ".",     // decimal point separator
+    //            thousand: ",",        // thousands separator
+    //            precision: 2      // decimal places
+    //        }
+    //    );
+    //$.cd.add_supportedCurrencySettingList(
+    //    [{
+    //        code: "GBP",
+    //        symbol: "Ã‚Â£",
+    //        format: "%s%v",   // controls output: %s = symbol, %v = value (can be object, see docs)
+    //        decimal: ".",     // decimal point separator
+    //        thousand: ",",        // thousands separator
+    //        precision: 2      // decimal places
+    //    }]
+    //);
+});
+
+/*
+    Override Flex Parts
+*/
+$.cd.flexUIReady(function () {
+
+    $.cd.flex.switchProductLayout = function () {
+        $('[cdtype=loadmore]').hide();
+        $.cd.showBlocker();
+        var cachedData = $.cd.getValueFromCache("productDataCache", null, true);
+        if (cachedData != null) {
+            cachedData = JSON.parse(cachedData);
+            cachedData.AppendProducts = false;
+            var layoutElement = $('[cdtemplatename="productlayout"]').filter(':visible');
+            var layoutPart = {
+                Id: layoutElement.attr('id'),
+                templatename: layoutElement.attr('cdtemplatename'),
+                type: layoutElement.attr('cdtype'),
+                childtype: layoutElement.attr('cdchildtype'),
+                Json: [cachedData]
+            };
+            // Delete the previous cache since we are passing that in now
+            $.cd.deleteValueFromCache("productDataCache", true);
+            $.cd.flex.applyProductLayout($.cd.flex.getTemplateByName('productlayout'), layoutPart);
+
+            // Send resize to parent window
+            //postIframeResize();
+
+        }
+    };
+
+    $.cd.flex.buildDynamicProductTemplate = function (productModel, params) {
+        setTimeout(function() {
+            var dynamicBannerPart = { type: params.DynamicBannerName, name: params.DynamicBannerName };
+        // begin dynamic template logic
+        $.cd.flex.getDynamicTemplate(dynamicBannerPart, false, 0, function (partTemplate) {
+                var bannerTemplate = _.findWhere(partTemplate.otherTemplates, { name: params.DynamicBannerName });
+            // Replace the placeholder html in case it has already been used
+            $("#" + params.DynamicContainerId).html(bannerTemplate.html);
+            var basePartsInfoList = $.cd.flex.getAllParts("#" + params.DynamicContainerId, null, true);
+            var bannerHtml = "";
+            var allParts = [];
+            var dataModels = {};
+            dataModels["productModel"] = productModel;
+            var partsInfoList = $.cd.flex.cloneParts(basePartsInfoList);
+            // Massage the data
+            if (productModel.ShortDescription != null) {
+                //productModel.ShortDescription = productModel.ShortDescription.length <= 200 ? productModel.ShortDescription : productModel.ShortDescription.substring(0, 200) + "...";
+                productModel.ShortDescription = productModel.ShortDescription;
+            }
+
+            var newDate = productModel.AddedDate;
+            if (newDate != null) {
+                var findDay = newDate.match(/(sunday|monday|tuesday|wednesday|thursday|friday|saturday)+,\s/gi);
+                newDate = newDate.replace(findDay, "");
+                productModel.AddedDate = newDate;
+            }
+
+            var bannerHtml = $.cd.flex.replacePlaceholders(bannerTemplate.html, productModel, "", false);
+            var htmlString = partTemplate.html.replace(params.PartialPlaceholder, bannerHtml);
+
+            var _afterHtmlApplied = function () {
+                $.cd.flex.builder.get_currentPageBuilder().buildPage(dataModels, [], partsInfoList);
+                allParts = allParts.concat(partsInfoList);
+                $.cd.flex.removeAfterBuildCompleted();
+
+                if(params.SubProdId != null){
+                    $.cd.getProductInfo(dataModels.productModel.Id, function (result) {
+                        if (result.Runtime != undefined) {
+                            $('.runTime span:first').text(result.Runtime + ' minutes');
+                            $('.runTime').show();
+                        }
+    
+                        if (productModel.AccessPolicies.PlayAccessPolicy.AccessExpirationDateShortDate != null) {
+                            $('.rental').show();
+                        }
+    
+                        
+                    });
+                }
+                
+                if (typeof allParts !== "undefined") {
+                    $.cd.flex.applyPartsToHtml({ JsonParts: allParts }, true);
+                    // Update all of the parts cdresources once they have been added to the page
+                    $.cd.updateResources(null, '.product-details-banner-container');
+                }
+                if (params.AfterCompleteCallback != null) {
+                    params.AfterCompleteCallback(productModel, params.DynamicContainerId);
+                }
+
+                $('.productDivider').show();
+
+                
+
+            }
+            if (params.AppendToContainer == null) {
+                $.cd.flex.injectProductBanner($.cd.string_trimboth(htmlString), allParts, productModel, _afterHtmlApplied);
+            } else {
+                    $.cd.flex.appendToContainer({ Id: 'productthumb_' + params.UniqueIndex }, $.cd.string_trimboth(htmlString), true);
+            }
+
+        }, params.ExternalSubRef, params.ExternalType);
+        }, 10);
+    };
+
+
+
+    $.cd.flex.injectProductBanner = function (htmlStr, allParts, productModel, callback) {
+        var containerEl = null,
+            injectData = JSON.parse($.cd.getValueFromCache("injectData")),
+            clickedEl = $('#' + injectData.thumbId),
+            _afterInjectionEvent = function () {
+                containerEl = clickedEl.parents('.bx-wrapper');
+                // Calculate where the arrow should go .results is used within the grid and containerEl is used for the productlistexpander
+                var containerLeft = $('.results').offset() != null ? $('.results').offset().left : containerEl != null ? containerEl.offset().left : 0;
+                var clickedThumb = $('#' + injectData.thumbId).find('.hover-product-container');
+                var thumbLeft = clickedThumb.offset().left;
+                var arrowCenter = thumbLeft - containerLeft + (clickedThumb.width() / 2);
+                $('.product-details-banner-container-arrow').css('left', arrowCenter);
+
+                // Events
+                $('.close-button').click(function () {
+                    $('.product-details-banner-container').slideUp(300, function () {
+                        $('.product-details-banner-container').remove();
+                    });
+                });
+                var productTitleEl = $('[cdproductpageredirect="true"][cdproductid=' + productModel.Id + ']');
+                // Remove any previous click events
+                productTitleEl.unbind("click");
+                // Don't assign product click
+            };
+        // Determine if we can keep the previous expander
+        if ($('.product-details-banner-container:visible').length === 0 ||
+            injectData.previousInjectAfter !== injectData.injectAfter) {
+            htmlStr = $.cd.string_trimboth(htmlStr.replace(/(\r\n|\n|\r|\t)/gm, " "));
+            $('.product-details-banner-container').slideUp(300, function () {
+                $('.product-details-banner-container').remove();
+                if (contentdirect._currentPage.name === "index") {
+                    clickedEl = $('#' + injectData.thumbId);
+                    var parentEl = clickedEl.parents('.bx-viewport');
+                    $(htmlStr).insertAfter(parentEl).hide().slideDown(400, function () {
+                        if (typeof callback !== 'undefined') {
+                            callback.call();
+                        }
+                        _afterInjectionEvent();
+                    });
+
+                } else {
+                    var el = injectData.injectAfter;
+                    $(htmlStr).insertAfter('#' + el).hide().slideDown(400, function () {
+                        if (typeof callback !== 'undefined') {
+                            callback.call();
+                        }
+                        _afterInjectionEvent();
+                    });
+                }
+
+            });
+        } else {
+            $('.product-details-banner-container')[0].outerHTML = htmlStr;
+            if (typeof callback !== 'undefined') {
+                callback.call();
+            }
+            _afterInjectionEvent();
+        }
+    };
+
+    $.cd.flex.applyPartialProductEvents = function (productList, elemStartIndex) {
+        // Setup the events for this page
+        for (var pIndex in productList) {
+            var uniqueIndex = (parseInt(elemStartIndex) + parseInt(pIndex));
+            var productReferenceName = "#productthumb_" + uniqueIndex;
+            var productElement = $(productReferenceName);
+            // Parse through to see if any external products exist
+            if (typeof productList[pIndex].ExternalProduct !== "undefined" &&
+                productList[pIndex].Id == null) {
+                $(productReferenceName + " > div").addClass("external-product");
+            }
+            // Hover title click 
+            if (productList[pIndex].Id == null) {
+
+                $('[cdid="hoverProductLink_' + uniqueIndex + '"]').contents().unwrap();
+            }
+
+            if ((contentdirect._currentPage.name === "library" || contentdirect._currentPage.name === "watchlist") && productList[pIndex].ReferenceDate != null) {
+                $('#productoverlay_' + uniqueIndex).find('.product-view-status-container').show();
+            }
+            // Load the expander upon click
+            productElement.click(function () {
+                $(this).find(".loading").fadeIn("fast");
+                var structureType = parseInt($(this).attr('cdstructuretype'));
+                var id = $(this).attr('cdproductid');
+                var subProdId = $(this).attr('cdsubproductid');
+                var externalSubRef = $(this).attr('externalSubRef');
+                var externalType = $(this).attr('externalType');
+                var thumbId = $(this).attr('id');
+
+                // Find the correct element to append the product banner after
+                var currEl = $(this);
+                while (currEl != null) {
+                    // Get the next element
+                    var nextEl = currEl.next();
+                    if (nextEl.length == 0 || nextEl.offset().top != currEl.offset().top) {
+                        // If the next element is null or if they have different top locations (it's a different row)
+                        var clickAction = {
+                            thumbId: thumbId,
+                            injectAfter: currEl.attr('id')
+                        };
+                        var oldData = $.cd.getValueFromCache("injectData");
+                        if (oldData != null) {
+                            clickAction.previousInjectAfter = JSON.parse(oldData).injectAfter;
+                        }
+                        $.cd.setValueToCache("injectData", JSON.stringify(clickAction));
+                        break;
+                    } else {
+                        currEl = nextEl;
+                    }
+                }
+                try {
+                    // If it's a standard product type of 1
+                    if (structureType === 4) {
+                        $.cd.flex.buildDynamicBanner({
+                            Id: id != null && $.isNumeric(id) ? parseInt(id) : null,
+                            SubProdId: id != null && $.isNumeric(subProdId) ? parseInt(subProdId) : null,
+                            ExternalSubRef: externalSubRef,
+                            ExternalType: externalType,
+                            DynamicBannerName: "episodicdetailsbanner",
+                            DynamicContainerId: "episodicDetailsBanner",
+                            PartialPlaceholder: "%partial=episodicdetailsbanner%",
+                            AfterCompleteCallback: function (productModel) {
+                                $(".loading").fadeOut("slow");
+                                if (typeof productModel.SeriesName !== 'undefined' && productModel.SeriesName != null) {
+                                    $('[cdid=productdetailsbanner] [cdid=seriesNameContainer]').show();
+                                }
+                                if (typeof productModel.SeasonNumber !== 'undefined' && productModel.SeasonNumber != null) {
+                                    $('[cdid=productdetailsbanner] [cdid=seasonNumberContainer]').show();
+                                }
+                            }
+                        });
+
+                    } else {
+                        $.cd.flex.buildDynamicBanner({
+                            Id: id != null && $.isNumeric(id) ? parseInt(id) : null,
+                            SubProdId: id != null && $.isNumeric(subProdId) ? parseInt(subProdId) : null,
+                            ExternalSubRef: externalSubRef,
+                            ExternalType: externalType,
+                            DynamicBannerName: "productdetailsbanner",
+                            DynamicContainerId: "productDetailsBanner",
+                            PartialPlaceholder: "%partial=productdetailsbanner%",
+                            AfterCompleteCallback: function (productModel, containerId) {
+                                $(".loading").fadeOut("slow");
+
+                                // Updating AddedDates
+                                if (null != productModel.AddedDateTime) {
+                                    $('[cdid=purchase-date]').fadeIn();
+                                }
+                                if (productModel.PurchaseDate != null) {
+                                    $('[cdid=productdetailsbanner] [cdid=purchaseDateContainer]').show();
+                                }
+                                if (productModel.ReferenceDate == null) {
+                                    $(".product-reference-date").hide();
+                                }
+                                if (productModel.ExternalProduct.ExternalSubscriberProductReference != null) {
+                                    $('[cdid=productdetailsbanner] [cdid=UVLogoBugContainer]').show();
+                                }
+                                if (productModel.Id == null) {
+                                    $('[cdid=productdetailsbanner] [cdid=productBannerTitleLink]').contents().unwrap();
+                                }
+                                if (contentdirect._currentPage.name === "library") {
+                                    $('[cdid=productdetailsbanner] [cdid=viewingBadgeContainer]').show();
+                                }
+                            }
+                        });
+                    }
+                } catch (err) {
+                    $.cd.log(err);
+                    var htmlTarget = $(this).attr('cdhtmltarget');
+                    if (id != null && id != "") {
+                        ContentDirectAPI.openProductDetail(id, structureType, htmlTarget);
+                    }
+                }
+                return false;
+            });
+
+            productElement.on("mouseenter", function () {
+                var id = $(this).attr('cdproductid');
+                try {
+                    var index = parseInt($(this).attr('id').split('_')[1]);
+                    $('#productoverlay_' + index).stop(true, false).slideDown(400).show();
+                } catch (err) {
+                    $.cd.log("Error trying to display product overlay: " + err);
+                }
+                return false;
+            });
+            productElement.mouseleave(function () {
+                var id = $(this).attr('cdproductid');
+                try {
+                    var index = parseInt($(this).attr('id').split('_')[1]);
+                    $('#productoverlay_' + index).stop(true, false).slideUp(400).hide();
+                } catch (err) {
+                    $.cd.log("Error trying to hide product overlay: " + err);
+                }
+                return false;
+            });
+        }
+    };
+
+    $.cd.flex.updateTemplate('productlayout',
+        '<ul class="blank-productlist" cdsort="{Sort}" cddirection="{Direction}" cddcid="{DeliveryCapabilityGroupCode}" cdstartswith="{StartsWith}" cdlockersource="{LockerSource}" cdbatchsize="{BatchSize}" cdpagenumber="{PageNumber}">%products%</ul>',
+        function (template, part) {
+            var productHtml = "",
+                productLayoutTemplate = "",
+                jsonData = "",
+                productList = null,
+                hasListView = contentdirect._currentPage.name === "library" || contentdirect._currentPage.name === "watchlist";
+
+            var layoutToUse = $.cd.getValueFromCache("productLayout", null);
+            if (layoutToUse != null && layoutToUse === "list" && hasListView) {
+                $('[cdlayout=grid]').removeClass('selected');
+                $('[cdlayout=list]').addClass('selected');
+                part.childtype = "listpartialproduct";
+            } else {
+                $('[cdlayout=list]').removeClass('selected');
+                $('[cdlayout=grid]').addClass('selected');
+                part.childtype = "partialproduct";
+            }
+
+            if (null == part.Json) {
+                targetContainer = $.cd.flex.appendToContainer(part, "");
+                return;
+            } else {
+                jsonData = part.Json[0];
+                // Create deep copy if jsonData exists
+                productList = jsonData.ProductsJson || part.Html;
+                if (parseInt(part.Json[0].PageNumber) === 1) {
+                    $.cd.setValueToCache("productDataCache", JSON.stringify(part.Json[0]), null, true);
+                } else {
+                    // this was a load more, so grab the previous cache and prepend those products
+                    var prevCache = $.cd.getValueFromCache("productDataCache", null, true);
+                    if (prevCache != null) {
+                        var previousProducts = JSON.parse(prevCache).ProductsJson;
+                        var newProducts = part.Json[0].ProductsJson;
+                        // Concat makes a deep copy
+                        part.Json[0].ProductsJson = previousProducts.concat(newProducts);
+                    }
+                    $.cd.setValueToCache("productDataCache", JSON.stringify(part.Json[0]), null, true);
+                }
+            }
+
+            var append = jsonData.AppendProducts || false;
+
+            if (!append) {
+                // Clear out old data if switching layouts
+                $('#' + part.Id).html('');
+                productLayoutTemplate = $.cd.flex.getTemplateHtml(part);
+                productLayoutTemplate = $.cd.flex.replacePlaceholders(productLayoutTemplate, jsonData, "");
+            }
+
+            var elemStartIndex = parseInt($("[id^=productthumb_]").length);
+            var productTemplate = $.cd.flex.getTemplateHtml(part, true);
+            var isPartialTemplate = productTemplate.indexOf('%partial=') !== -1;
+            for (var pIndex in productList) {
+                // List layout uses a dynamic template to load all the required parts (actionsjson, access policies, upgrades etc)
+                if (isPartialTemplate && hasListView) {
+                    var productModel = productList[pIndex];
+                    // If it's a standard product 1 or bundle 2 or external (no product id) then use listpartial
+                    productModel.ProductStructureType === 1 ||
+                        productModel.ProductStructureType === 2 ||
+                        productModel.Id == null ? part.childtype = "listpartialproduct" :
+                        part.childtype = "episodiclistpartialproduct";
+                    var tempHtml = "";
+                    var allParts = [];
+                    var dataModels = {};
+                    dataModels["productModel"] = productModel;
+                    var afterBuiltEvent = null;
+                    if (part.childtype === "episodiclistpartialproduct") {
+                        afterBuiltEvent = function (productData) {
+                            $.cd.hideBlocker();
+                            // Load the expander upon click
+                            $('[cduniqueepisodeid=' + (elemStartIndex + parseInt(productData.ArrayIndex)) + ']').click(function () {
+                                var subProdId = $(this).attr('cdsubproductid');
+                                subProdId = subProdId != null ? parseInt(subProdId) : subProdId;
+                                var uniqueIndex = $(this).attr('cduniqueepisodeid');
+                                // Determine if we should load the episodic info or whether it has already been loaded
+                                if ($(this).hasClass('hidden')) {
+
+                                    $(this).removeClass('hidden');
+                                    $(this).addClass('showing');
+                                    $('#showEpisodes_' + uniqueIndex).hide();
+                                    $('#hideEpisodes_' + uniqueIndex).show();
+
+                                    // Has it already been populated?
+                                    var existingBanner = $('#episodes_' + uniqueIndex);
+                                    if (existingBanner.html() !== "") {
+                                        existingBanner.fadeIn('slow');
+                                    } else {
+                                        // Build out the product details
+                                        var structureType = parseInt($(this).attr('cdstructuretype'));
+                                        var id = $(this).attr('cdproductid');
+                                        var externalSubRef = $(this).attr('externalSubRef');
+                                        var externalType = $(this).attr('externalType');
+
+                                        try {
+                                            var productContext = null,
+                                                i,
+                                                cachedProducts = $.cd.getValueFromCache("productDataCache", null, true),
+                                                parsedCachedProducts = null != cachedProducts ? JSON.parse(cachedProducts).ProductsJson : null;
+                                            if (parsedCachedProducts) {
+                                                for (i = 0; i < parsedCachedProducts.length; i += 1) {
+                                                    if (parsedCachedProducts[i].ContextModel.SubscriberProductId === subProdId) {
+                                                        productContext = parsedCachedProducts[i].ContextModel;
+                                                        break;
+                                                    }
+                                                }
+                                            }
+                                            $.cd.getProductInfo(id, function (productMetaData) {
+                                                var productModel = ContentDirect.UI.Flex.Models.Product.mapToModel(productMetaData, productContext);
+                                                var partsInfoList = $.cd.flex.builder.get_currentPageBuilder().buildPage({
+                                                    'productModel': productModel
+                                                }, [], [{
+                                                    Id: 'episodes_' + uniqueIndex,
+                                                    type: 'episodes'
+                                                }]);
+                                                $.cd.flex.applyPartsToHtml({
+                                                    JsonParts: partsInfoList
+                                                }, true);
+                                            }, function (err) {
+                                                $.cd.log(err);
+                                            });
+                                        } catch (err) {
+                                            $.cd.log(err);
+                                            var htmlTarget = $(this).attr('cdhtmltarget');
+                                            if (id != null && id != "") {
+                                                ContentDirectAPI.openProductDetail(id, structureType, htmlTarget);
+                                            }
+                                        }
+                                    }
+                                } else {
+                                    // Show the view episodes button
+                                    $('#showEpisodes_' + uniqueIndex).show();
+                                    $('#hideEpisodes_' + uniqueIndex).hide();
+                                    $(this).addClass('hidden');
+                                    $(this).removeClass('showing');
+                                    $('#episodes_' + uniqueIndex).fadeOut('slow');
+                                }
+
+                                return false;
+                            });
+                        }
+                    } else {
+                        afterBuiltEvent = function (productInfo) {
+                            $.cd.hideBlocker();
+
+                            var uniqueIndex = productInfo.UniqueIndex;
+                            // Hide all productListLinks with a cdproductid of null
+                            var listTitleLink = $('[cdid="productListLink_' + uniqueIndex + '"]');
+                            if (!$.isNumeric(listTitleLink.attr('cdproductid'))) {
+                                listTitleLink.contents().unwrap();
+                            }
+
+                            if (null != productModel.AddedDateTime) {
+                                $('[cdid=purchase-date]').fadeIn();
+                            }
+                            if (productList[productInfo.ArrayIndex].ReferenceDate == null) {
+                                $('[cdid=productListItem_' + uniqueIndex + '] .purchase-date-list-container').hide();
+                            }
+                            var isUvProduct = typeof productList[productInfo.ArrayIndex].ExternalProduct !== "undefined" && null != productList[productInfo.ArrayIndex].ExternalProduct.ExternalSubscriberProductReference,
+                                isExternalOnlyProduct = typeof productList[productInfo.ArrayIndex].ExternalProduct !== "undefined" && productList[productInfo.ArrayIndex].Id == null;
+                            if (isUvProduct) {
+                                $('[cdid=productListItem_' + uniqueIndex + '] [cdid=UVLogoBugContainer]').show();
+                            }
+                            if (isExternalOnlyProduct) {
+                                $('[cdid=productListItem_' + uniqueIndex + ']').addClass("external-product");
+                            }
+                            // Add event for more/less toggle within the list view
+                            $('[cdid=productlisttogglebutton_' + uniqueIndex + ']').click(function () {
+                                var uniqueIndex = parseInt($(this).attr('cdid').split('_')[1]);
+
+                                if ($(this).hasClass('hidden')) {
+                                    $(this).removeClass('hidden');
+                                    $(this).addClass('showing');
+                                    $('#moreButtonText_' + uniqueIndex).hide();
+                                    $('#lessButtonText_' + uniqueIndex).show();
+                                    var _buildPart = function (productModel) {
+                                        var partsInfoList = $.cd.flex.builder.get_currentPageBuilder().buildPage({
+                                            'productModel': productModel
+                                        }, [], [{
+                                            Id: 'listPartialProductDetails_' + uniqueIndex,
+                                            type: 'listpartialproductdetails'
+                                        }]);
+                                        $.cd.flex.applyPartsToHtml({
+                                            JsonParts: partsInfoList
+                                        }, true);
+
+                                    };
+                                    // Has it already been populated?
+                                    var existingBanner = $('#listPartialProductDetails_' + uniqueIndex);
+                                    if (existingBanner.html() !== "") {
+                                        existingBanner.fadeIn('slow');
+                                    } else {
+                                        var subProdId = parseInt($(this).attr('cdsubproductid'));
+                                        var productId = parseInt($(this).attr('cdproductid'));
+                                        var extSubProdRef = $(this).attr('cdexternalsubprodref');
+                                        // Grab the cached product context and then do the meta data call
+                                        var productContext = null,
+                                            cachedProducts = $.cd.getValueFromCache("productDataCache", null, true),
+                                            parsedCachedProducts = null != cachedProducts ? JSON.parse(cachedProducts).ProductsJson : null;
+                                        if (null != parsedCachedProducts) {
+                                            for (i = 0; i < parsedCachedProducts.length; i += 1) {
+                                                if (typeof parsedCachedProducts[i].ContextModel !== 'undefined' && parsedCachedProducts[i].ContextModel.SubscriberProductId === subProdId) {
+                                                    productContext = parsedCachedProducts[i].ContextModel;
+                                                    break;
+                                                } else if (typeof parsedCachedProducts[i].ContextModel !== 'undefined' && parsedCachedProducts[i].ContextModel.SubscriberProductId == null && parsedCachedProducts[i].Id == null) {
+                                                    // This is for external products so they can be populated
+                                                    if (parsedCachedProducts[i].ExternalProduct.ExternalSubscriberProductReference === extSubProdRef) {
+                                                        _buildPart(parsedCachedProducts[i]);
+                                                        return false;
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        if (productContext != null) {
+                                            $.cd.getProductInfo(productContext.ProductId, function (productMetaData) {
+                                                var productModel = ContentDirect.UI.Flex.Models.Product.mapToModel(productMetaData, productContext);
+                                                _buildPart(productModel);
+                                            }, function (err) {
+                                                $.cd.log(err);
+                                            });
+                                        } else {
+                                            $.cd.getProductModel({
+                                                MetaDataArgs: {
+                                                    name: "id",
+                                                    value: productId
+                                                },
+                                                JsonArgs: {
+                                                    ProductId: productId
+                                                }
+                                            }, function (productModel) {
+                                                _buildPart(productModel);
+                                            }, function (err) {
+                                                $.cd.log(err);
+                                            });
+                                        }
+
+                                    }
+                                } else {
+                                    // Show the view episodes button
+                                    $('#moreButtonText_' + uniqueIndex).show();
+                                    $('#lessButtonText_' + uniqueIndex).hide();
+                                    $(this).addClass('hidden');
+                                    $(this).removeClass('showing');
+                                    $('#listPartialProductDetails_' + uniqueIndex).fadeOut('slow');
+                                }
+                            });
+                        };
+                    }
+
+                    var contextHtml = $.cd.flex.applyDynamicPagePartWithData(dataModels, part, true, (elemStartIndex + parseInt(pIndex)), pIndex, afterBuiltEvent);
+                    tempHtml = contextHtml.html;
+                    if (typeof productModel.ExternalProduct !== 'undefined') {
+                        tempHtml = $.cd.flex.replacePlaceholders(tempHtml, productModel.ExternalProduct, "", true);
+                    }
+                    productHtml += tempHtml.replace(/{Index}/g, elemStartIndex + parseInt(pIndex));
+                } else {
+                    var tempHtml = "";
+                    //LB- productPart will be productList[pIndex] for browse/search and productList[pIndex].Product for Library/Watchlist
+                    var productPart = typeof productList[pIndex] === 'string' ? jQuery.parseJSON(unescape(productList[pIndex])) : productList[pIndex];
+                    // Format the reference date                
+
+                    // Guidance ratings are an array
+                    var guidanceRatingPart = {
+                        TemplateName: "textonlyguidancerating"
+                    };
+                    var grHtml = $.cd.flex.parseGuidanceRatings(productPart.GuidanceRatings, $.cd.flex.getTemplate(guidanceRatingPart, false).html);
+
+                    if (!part.Json) {
+                        tempHtml = productTemplate.replace("%product%", productPart);
+                    } else {
+                        // Parse data for hover if it's a single product
+                        if (productPart.ProductStructureType === 1) {
+                            productPart = $.cd.flex.parseViewingBadges(productPart);
+                        } else {
+                            productPart.ViewStatusMessage = "";
+                        }
+                        tempHtml = $.cd.flex.replacePlaceholders(productTemplate, productPart, "", true);
+                        if (typeof productPart.ExternalProduct !== 'undefined') {
+                            tempHtml = $.cd.flex.replacePlaceholders(tempHtml, productPart.ExternalProduct, "", true);
+                        }
+                        tempHtml = tempHtml.replace(/{Index}/g, parseInt(elemStartIndex) + parseInt(pIndex));
+                    }
+                    tempHtml = tempHtml.replace('%guidanceRatings%', grHtml);
+                    productHtml += tempHtml;
+                }
+            }
+
+            if (!append) {
+                targetContainer = $.cd.flex.appendToContainer(part, productLayoutTemplate.replace("%products%", productHtml));
+            } else {
+                targetContainer = $.cd.flex.appendToContainer(part, productHtml, append, "*[cdtype='productlayout'] .blank-productlist");
+            }
+            // Fade in load more (product layout switch scenario)
+            $('[cdtype=loadmore]').fadeIn();
+            if (layoutToUse == null || layoutToUse === "grid" || !hasListView) {
+                $.cd.flex.applyPartialProductEvents(productList, elemStartIndex);
+                $.cd.hideBlocker();
+            }
+
+            // Mobile view event for expander
+            $('[cdid="mobileFilterExpander"]').off('click').on('click', function () {
+
+                var filterIconEl = $('[cdid="mobileFilterIcon"]');
+                if (filterIconEl.hasClass('fa-chevron-down')) {
+                    $("#resultlabelcontainer").hide();
+                    $("#productCategoryResultContainer").hide();
+                    $('[cdtype="footer"]').hide();
+                    $('.filter-container').slideDown(400).show();
+                    filterIconEl.removeClass('fa-chevron-down');
+                    filterIconEl.addClass('fa-chevron-up');
+                } else {
+                    $('.filter-container').slideUp(400, function () {
+                        $("#resultlabelcontainer").fadeIn('fast');
+                        $("#productCategoryResultContainer").fadeIn('fast');
+                        $('[cdtype="footer"]').fadeIn('fast');
+                    });
+                    filterIconEl.removeClass('fa-chevron-up');
+                    filterIconEl.addClass('fa-chevron-down');
+                }
+            });
+        }
+    );
+
+
+    $.cd.flex.updateTemplate('loadmore',
+        '<a href="#" class="mainButton" id="loadNextBatch" style="display: none;"><span cdresource="load_more">{Name}</span></a>',
+        function (template, part) {
+            var html = "";
+
+            if (null == part.Json) {
+                targetContainer = $.cd.flex.appendToContainer(part, "");
+                return;
+            }
+
+            html = $.cd.flex.replacePlaceholders(template.html, part.Json[0], "");
+            targetContainer = $.cd.flex.appendToContainer(part, html);
+
+            var isBrowsePage = $('#cdPageContainer').attr('cdpagetype') === "browsepage";
+            if (part.Json[0].MoreItemAvailable) {
+                $('#loadNextBatch').fadeIn('slow');
+            }
+
+            $('#loadNextBatch').click(function () {
+                try {
+                    evt.stopPropagation();
+                    evt.preventDefault();
+                } catch (e) { }
+
+                var pageNumber = parseInt($('.blank-productlist').attr('cdpagenumber'), 10) + 1 || 1;
+                $('.blank-productlist').attr('cdpagenumber', pageNumber);
+                $.cd.showBlocker();
+                var pageData = $.cd.get_pageData();
+
+                switch (pageData.PageType) {
+                    case "browsepage":
+                        var searchProductsDto = new ContentDirect.UI.Flex.DTO.SearchProducts({
+                            Categories: null != pageData.CategoryId && pageData.CategoryId.length > 0 ? [pageData.CategoryId] : null,
+                            PageNumber: pageData.PageNumber,
+                            PageSize: pageData.BatchSize,
+                            SortBy: pageData.Sort,
+                            SortDirection: pageData.Direction,
+                            SearchString: pageData.SearchString,
+                            StartsWith: pageData.StartsWith,
+                            skipResources: true,
+                            appendProducts: true,
+                            loadCategoriesAndProducts: false,
+                            filterSelection: pageData.FilterSelection
+                        });
+
+                        ContentDirectAPI.searchProductBrowsePage(searchProductsDto);
+                        break;
+                    case "searchpage":
+                        ContentDirectAPI.retrieveFlexUISearchPage(pageData.SearchString, null, null, null, pageData.PageNumber, true, true);
+                        break;
+                    case "librarypage":
+                        ContentDirectAPI.searchProductLibraryPage(
+                            new ContentDirect.UI.Flex.DTO.SearchLocker({
+                                DeliveryCapabilityGroupCode: pageData.CurrentDCId,
+                                LockerSource: pageData.SelectedLockerSource,
+                                PageNumber: pageData.PageNumber,
+                                PageSize: pageData.BatchSize,
+                                SearchString: pageData.SearchString,
+                                SortBy: pageData.Sort,
+                                SortDirection: pageData.Direction,
+                                StartsWith: pageData.StartsWith,
+                                skipResources: true,
+                                appendProducts: true,
+                                isInitialPageLoad: false
+                            }), false);
+                        break;
+                    case "watchlistpage":
+                        ContentDirectAPI.searchProductWatchListPage(
+                            new ContentDirect.UI.Flex.DTO.SearchFavoriteProducts({
+                                PageNumber: pageData.PageNumber,
+                                PageSize: pageData.BatchSize,
+                                SearchString: pageData.SearchString,
+                                SortBy: pageData.Sort,
+                                SortDirection: pageData.Direction,
+                                skipResources: true,
+                                appendProducts: true,
+                                isInitialPageLoad: false
+                            }));
+                        break;
+                    default:
+                        break;
+                }
+                return false;
+            });
+        }
+    );
+
+    $.cd.flex.updateTemplate('layouticons',
+        '<div class="layout-icons-container"><a id="gridLayout" cdlayout="grid"><i class="layout-icon fa fa-th" cdresource="grid_layout"></i></a><a id="listLayout" cdlayout="list"><i class="layout-icon fa fa-th-list" cdresource="list_layout"></i></a></div>',
+        function (template, part) {
+            $.cd.flex.appendToContainer(part, template.html);
+            // add click events to toggle between grid and list view layouts
+            $('[cdlayout=grid]').click(function () {
+                $('[cdlayout=list]').removeClass('selected');
+                $('[cdlayout=grid]').addClass('selected');
+                $.cd.setValueToCache("productLayout", "grid");
+                $.cd.flex.switchProductLayout();
+            });
+            $('[cdlayout=list]').click(function () {
+                $('[cdlayout=grid]').removeClass('selected');
+                $('[cdlayout=list]').addClass('selected');
+                $.cd.setValueToCache("productLayout", "list");
+                $.cd.flex.switchProductLayout();
+            });
+        }
+    );
+
+    $.cd.flex.updateTemplate('accesspolicy',
+        '<div class="accessPolicySection" cdpolicytype="{Type}"><ul>' +
+        '<li class="availability expiredAccess" style="display:none;"><span class="accessLabel">Expires on </span><span class="dateValue">{AccessExpirationDateShortDate}</span></li>' +
+        '</ul></div>'
+    );
+
+    $.cd.flex.updateTemplate('purchaseupgradeplan',
+        '<li cdplanid="{Id}" class="pricingPlanComponent"><div class="actionContainer"><a class="pricingPlanSelectButton mainButton" cdimageurl="{thumbnailUrl}" cdsubproductid="{SubscriberProductId}" cdplanid="{Id}" cdplanname="{Name}" cdproductname="{ProductName}" cdproductid="{ProductId}" cdisbundle="{IsBundle}" cduv="{IsUV}" onclick="ContentDirectAPI.upgradeProduct(this);"><div><span cduv="true" class="uvImageContainer" style="display:none;"></span><span class="planName">{Name}</span><span class="finalPrice">{DiscountedAmount}</span></div></a></div></li>'
+    );
+
+    $.cd.flex.updateTemplate('purchaseupgrades',
+        '<div class="purchaseUpgradesContainer"><div class="purchaseUpgradeLink"><i class="fa fa-caret-square-o-right collapsed"></i><i class="fa fa-caret-square-o-down expanded" style="display:none;"></i><span class="purchaseUpgradeText" cdresource="purchase_upgrade_text">Upgrade</span></div><div class="purchaseUpgradeListContainer" style="display:none;"><div class="purchaseUpgradeArrow"></div><ul class="pricingPlanListContainer">%purchase-upgrade-plans%</ul></div></div>',
+        function (template, part) {
+            var viewModel = part.Json[0];
+            if (null != viewModel.UpgradablePlans) {
+                var mainHtml = $.cd.flex.replacePlaceholders(template.html, viewModel, "");
+                mainHtml = $.cd.flex.replacePlaceholders(mainHtml, part, "");
+                var plansHtml = "";
+                for (var i in viewModel.UpgradablePlans) {
+                    var pricingPlan = viewModel.UpgradablePlans[i];
+                    var planHtml = $.cd.flex.getTemplateHtml(part, true);
+
+                    //BL(Review): Following needs to be reviewed
+                    if (pricingPlan.PurchaseRewards != null && pricingPlan.PurchaseRewards.length > 0 && !$.cd.get_userSettings().useShoppingCart) {
+                        var purchaseRewardsTemplate = $.cd.flex.getTemplateByName("purchasereward").html,
+                        purchaseRewardsBonusTemplate = $.cd.flex.getTemplateByName("purchaserewardbonus").html,
+                        basePoints = 0,
+                        bonusPoints = 0;
+
+                        _.each(pricingPlan.PurchaseRewards, function (purchaseReward) {
+                            if (!purchaseReward.RewardRequiresPurchase || (purchaseReward.RewardRequiresPurchase && pricingPlan.DiscountedAmountFloat > 0)) {
+                                if (purchaseReward.ProductSpecific)
+                                { bonusPoints += purchaseReward.LoyaltyPointAmount; }
+
+                                else
+                                { basePoints += purchaseReward.LoyaltyPointAmount; }
+
+                            }
+                        });
+
+                        purchaseRewardsTemplate = purchaseRewardsTemplate.replace("{LoyaltyPointAmount}", basePoints);
+                        purchaseRewardsTemplate = purchaseRewardsTemplate.replace(/{ShowPurchaseRewards}/g, (basePoints === 0 ? "style=\"display: none;\"" : ""));
+                        purchaseRewardsTemplate = purchaseRewardsTemplate.replace("{ShowPurchaseRewardsPlusSign}", (basePoints === 0 || bonusPoints === 0 ? "style=\"display: none;\"" : ""));
+                        purchaseRewardsBonusTemplate = purchaseRewardsBonusTemplate.replace("{LoyaltyPointBonusAmount}", bonusPoints);
+                        purchaseRewardsBonusTemplate = purchaseRewardsBonusTemplate.replace(/{ShowPurchaseRewardsBonus}/g, (bonusPoints === 0 ? "style=\"display: none;\"" : ""));
+
+                        planHtml = planHtml.replace("%purchaserewards%", purchaseRewardsTemplate + purchaseRewardsBonusTemplate);
+                    }
+
+                    if (null != viewModel.SubscriberProductId) {
+                        planHtml = planHtml.replace("{SubscriberProductId}", viewModel.SubscriberProductId);
+                    }
+                    plansHtml += $.cd.flex.replacePlaceholders(planHtml, pricingPlan, "");
+                }
+                mainHtml = mainHtml.replace("%purchase-upgrade-plans%", plansHtml);
+
+                $.cd.flex.appendToContainer(part, mainHtml);
+
+                //Checking to hide rewards points for non-shoppingcart scenario
+                if (!$.cd.get_userSettings().useShoppingCart)
+                { $('.purchase-rewards-container').show(); }
+
+                var puchaseUpgradesButtonsControl = (function (partId) {
+                    var _isShown = false,
+                    _elem = document.getElementById(partId),
+                    _showHideButton = $(_elem).find('.purchaseUpgradeLink'),
+                    _hide = function ()
+                    { $(_showHideButton).removeClass('showHidePurchaseUpgradesButtonExpanded').addClass('showHidePurchaseUpgradesButtonCollapsed'); $(_showHideButton).find('.expanded').hide(); $(_showHideButton).find('.collapsed').show(); $(_showHideButton).siblings('.purchaseUpgradeListContainer').fadeOut('fast'); _isShown = true; }
+
+                    ,
+                    _show = function ()
+                    { $(_showHideButton).removeClass('showHidePurchaseUpgradesButtonCollapsed').addClass('showHidePurchaseUpgradesButtonExpanded'); $(_showHideButton).find('.collapsed').hide(); $(_showHideButton).find('.expanded').show(); $(_showHideButton).siblings('.purchaseUpgradeListContainer').fadeIn('fast'); _isShown = false; }
+
+                    ;
+                    $(_showHideButton).click(function () {
+                        var purchaseOptionsVisible = $(_showHideButton).hasClass('showHidePurchaseUpgradesButtonExpanded');
+                        if (!purchaseOptionsVisible)
+                        { _show(); }
+
+                        else if (purchaseOptionsVisible)
+                        { _hide(); }
+
+                    });
+                    return { show: _show, hide: _hide };
+                })(part.Id);
+            }
+            else { $.cd.flex.appendToContainer(part, ""); }
+        }
+    );
+
+    $.cd.flex.updateTemplate('accesspolicies',
+        '<div class="accessPolicies" cdproductname="{Name}" cdproductid="{ProductId}">' +
+        '<ul>' +
+        '<li class="accesspolicyContainer videoPolicyContainer" style="display:none;">%playAccessPolicy%</li>' +
+        '</ul>' +
+        '</div>',
+        function (template, part) {
+            var html = "",
+                childTemplate = "",
+                modelHtml = "";
+            showExpired = false,
+            showRequestsRemaining = false,
+            showExpirationDate = false,
+            showTimePostInitialAccess = false,
+            showPolicyHeader = false;
+
+            var model = part.Json[0];
+            if (model == null) {
+                targetContainer = $.cd.flex.appendToContainer(part, "");
+                return;
+            }
+
+            var modelTemplate = $.cd.flex.getTemplateHtml(part);
+            modelHtml = $.cd.flex.replacePlaceholders(modelTemplate, model, "", true);
+
+            // Enable action buttons if applicable
+            if (model.PlayAccessPolicy != null && model.PlayAccessPolicy.IsAvailable) {
+                childTemplate = $.cd.flex.getTemplateHtml(part, true);
+
+                // Update date
+                var newDate = model.PlayAccessPolicy.AccessExpirationDateShortDate;
+                if (newDate != null) {
+                    var findDay = newDate.match(/(sunday|monday|tuesday|wednesday|thursday|friday|saturday)+,\s/gi);
+                    newDate = newDate.replace(findDay, "");
+                    model.PlayAccessPolicy.AccessExpirationDateShortDate = newDate;
+                }
+
+
+                tempHtml = $.cd.flex.replacePlaceholders(childTemplate, model.PlayAccessPolicy, "", true);
+                tempHtml = tempHtml.replace("{Type}", "play")
+                modelHtml = modelHtml.replace("%playAccessPolicy%", unescape(tempHtml));
+            } else {
+                modelHtml = modelHtml.replace("%playAccessPolicy%", "");
+            }
+
+            if (model.ListenAccessPolicy != null && model.ListenAccessPolicy.IsAvailable) {
+                childTemplate = $.cd.flex.getTemplateHtml(part, true);
+                tempHtml = $.cd.flex.replacePlaceholders(childTemplate, model.ListenAccessPolicy, "", true);
+                tempHtml = tempHtml.replace("{Type}", "listen")
+                modelHtml = modelHtml.replace("%listenAccessPolicy%", unescape(tempHtml));
+            } else {
+                modelHtml = modelHtml.replace("%listenAccessPolicy%", "");
+            }
+
+            if (model.DownloadAccessPolicy != null && model.DownloadAccessPolicy.IsAvailable) {
+                childTemplate = $.cd.flex.getTemplateHtml(part, true);
+                tempHtml = $.cd.flex.replacePlaceholders(childTemplate, model.DownloadAccessPolicy, "", true);
+                tempHtml = tempHtml.replace("{Type}", "download")
+                modelHtml = modelHtml.replace("%downloadAccessPolicy%", unescape(tempHtml));
+            } else {
+                modelHtml = modelHtml.replace("%downloadAccessPolicy%", "");
+            }
+
+            targetContainer = $.cd.flex.appendToContainer(part, modelHtml);
+
+            if (modelHtml.length > 0) { //LB- is this necessary?
+
+                // Show appropriate labels
+                var applyAccessPolicies = function (policy, policyName, policyContainer) {
+                    var showExpired = (policy.AfterAvailabilityEndDate &&
+                            policy.AccessExpirationDate != null) ||
+                        (policy.AccessSecondsRemaining === 0 &&
+                            policy.AccessExpirationDate != null);
+                    var showRequestsRemaining = !showExpired && policy.RequestsRemaining != null;
+                    var showExpirationDate = policy.AfterAvailabilityStartDate && policy.AccessExpirationDate != null;
+                    var showTimePostInitialAccess = policy.HasNotPlayed && policy.MaxHoursPostInitialAccess != null && String(policy.MaxHoursPostInitialAccess) !== "";
+
+                    var showPolicyHeader = showRequestsRemaining || showExpired || showExpirationDate || showTimePostInitialAccess;
+
+                    var accessPolicySection = $('#' + part.Id + ' .accessPolicySection[cdPolicyType="' + policyName + '"]').children('ul');
+                    if (showPolicyHeader) {
+                        var accessPolicyHeader = $(accessPolicySection).children('.accessPolicyHeader');
+                        $(accessPolicyHeader).show();
+                        $(accessPolicyHeader).children('.dcActionLabel[cdPolicyType="' + policyName + '"]').show();
+                    }
+
+                    if (showRequestsRemaining) {
+                        $(accessPolicySection).children('.remainingVideoPlays').show();
+                    }
+                    if (showExpired) {
+                        $(accessPolicySection).children('.expiredEnd').show();
+                    } else if (showExpirationDate) {
+                        $(accessPolicySection).children('.expiredAccess').show();
+                    }
+                    if (showTimePostInitialAccess) {
+                        $(accessPolicySection).children('.afterFirstPlay').show();
+                    }
+                    $('#' + part.Id + ' ' + policyContainer).show();
+                }
+
+                if (model.PlayAccessPolicy != null) {
+                    applyAccessPolicies(model.PlayAccessPolicy, "play", '.videoPolicyContainer');
+                }
+                if (model.ListenAccessPolicy != null) {
+                    applyAccessPolicies(model.ListenAccessPolicy, "listen", '.audioPolicyContainer');
+                }
+                if (model.DownloadAccessPolicy != null) {
+                    applyAccessPolicies(model.DownloadAccessPolicy, "download", '.downloadPolicyContainer');
+                }
+            }
+        }
+    );
+
+    $.cd.flex.updateTemplate('partialproduct',
+        '<li chris="true" id="productthumb_{Index}" cdproductid="{Id}" cdsubproductid="{SubscriberProductId}" externalSubRef="{ExternalSubscriberProductReference}" externalType="{ExternalSubscriberProductType}" cdproductname="{Name}" cdhtmltarget="{HtmlTarget}" cdstructuretype="{ProductStructureType}" class="product-layout-list-item"><div class="featuredContentIndividualItem"><div class="loading" style="display:none;"><div class="inner-loading"><span cdresource="loading"></span></div></div><a style="display:none">{Name}</a><div class="grid-product-image-container"><div class="hover-product-container"><div id="productoverlay_{Index}" style="display:none;" class="hover-text-overlay"><ul class="hover-product-data-container"><li class="hover-product-title"><a cdid="hoverProductLink_{Index}" id="hoverTitle_{Index}" title="{Name}" cdproductid="{Id}" cdhtmltarget="{HtmlTarget}" cdstructuretype="{ProductStructureType}"><span>{Name}</span></a></li><li><div class="hover-product-meta"><ul>%guidanceRatings%<li class="hover-meta-list"><span class="hover-reference-date">{ReferenceYear}</span></li><li cdid="viewingBadgeContainer" cdproductid="{Id}" cdclass="viewingbadges" class="product-view-status-container" style="display:none;"><span class="view-icon {ViewStateCss}"></span><span class="view-status-message">{ViewStatusMessage}</span></li></ul></div></li></ul><div class="hover-down-arrow-container"><span class="fa fa-chevron-down"></span></div></div><img class="hover-product-image" src="{ThumbnailUrl}" alt="{Name}" /></div></div></div></li>'
+    );
+
+    $.cd.flex.updateTemplate('resultlabel',
+        '<div class="resultCount subContainer"><span id="searchTotal" class="totalCount">{SearchTotalRecordCount}</span><span id="search-results-count-text" cdresource="{SearchResultsCountText}"></span></div>',
+        function (template, part) {
+
+            if (part.Json[0].SearchTotalRecordCount == 0) {
+                // Show default locker message
+                $('#emptyLocker').show();
+            } else {
+                $('#emptyLocker').hide();
+            }
+
+            if (part.Json.length > 0 && part.Json[0] != undefined && part.Json[0] !== "") {
+                html = $.cd.flex.replacePlaceholders(template.html, part.Json[0], "");
+                targetContainer = $.cd.flex.appendToContainer(part, html);
+            }
+
+        }
+    );
+
+    $.cd.flex.updateTemplate('textonlyguidancerating',
+        '<li class="text-only-guidance-rating-container"><span>MPAA: {ExternalCode}</span></li>'
+    );
+
+    $.cd.flex.updateTemplate('resultlabel',
+        '<div class="resultCount subContainer"><span id="searchTotal" class="totalCount">{SearchTotalRecordCount} </span><span id="search-results-count-text" cdresource="{SearchResultsCountText}"></span></div>'
+    );
+
+    $.cd.flex.updateTemplate('listpartialproductdetails',
+        '<ul class="product-list-more-details-container">%partials=listpartialproductdetails%</ul>',
+        'Content/Partials/partial-product.html',
+        function (template, part) {
+            $.cd.flex.getDynamicTemplate(part, false, 0, function (partTemplate) {
+                var productModel = part.Json[0];
+                var moreDetailsTemplate = _.findWhere(partTemplate.otherTemplates, {
+                    name: "listpartialproductdetails"
+                });
+                if (productModel.ShortDescription != null) {
+                    //productModel.ShortDescription = productModel.ShortDescription.length <= 200 ? productModel.ShortDescription : productModel.ShortDescription.substring(0, 200) + "...";
+                    productModel.ShortDescription = productModel.ShortDescription;
+                }
+                var partHtml = $.cd.flex.replacePlaceholders(moreDetailsTemplate.html, productModel, "");
+                var index = part.Id.split('_')[1];
+                var partHtml = partHtml.replace(/{Index}/g, index);
+                $.cd.flex.appendToContainer(part, partHtml);
+
+                var basePartsInfoList = $.cd.flex.getAllParts("#listPartial_" + index, null, true);
+                var partsInfoList = $.cd.flex.cloneParts(basePartsInfoList);
+                // External products render without the extra details
+                if (productModel.Id == null && productModel.SubscriberProductId == null) {
+                    partsInfoList = _.filter(partsInfoList, function (obj) {
+                        return obj.type != "nonplayactionsjson";
+                    });
+                }
+                $.cd.flex.builder.get_currentPageBuilder().buildPage({
+                    'productModel': productModel
+                }, [], partsInfoList);
+
+                //var htmlString = partTemplate.html.replace(params.PartialPlaceholder, bannerHtml);
+                $.cd.flex.removeAfterBuildCompleted();
+
+                $.cd.flex.applyPartsToHtml({
+                    JsonParts: partsInfoList
+                }, true);
+
+                $.cd.getProductInfo(productModel.Id, function (result) {
+                    if (result.Runtime != undefined) {
+                        $('#' + part.Id + ' .runTime span:first').text(result.Runtime + ' minutes');
+                        $('#' + part.Id + ' .runTime').show();
+                    }
+
+                    var getPurchaseDate = $('#' + part.Id).parent().find('.purchase-date-list-container').html();
+                    getPurchaseDate = getPurchaseDate.replace(/(sunday|monday|tuesday|wednesday|thursday|friday|saturday)+,\s/gi, "");
+
+                    $('#' + part.Id + ' .listpartialproductdetails-left-section .purchase-date-list-container-more').append(getPurchaseDate);
+                    $('.purchase-date-list-container-more').show();
+
+					if (productModel.AccessPolicies.PlayAccessPolicy != undefined) {
+                    if (productModel.AccessPolicies.PlayAccessPolicy.AccessExpirationDateShortDate != null) {
+                        $('#' + part.Id + ' .rental').show();
+						}
+                    }
+
+                    $('#' + part.Id + ' .productDivider').show();
+
+                    if ($('#' + part.Id + ' .guidance-rating-container').text() == "") {
+                        $('#' + part.Id + ' .guidance-rating-container').text('MPAA: ' + productModel.GuidanceRatings[0].ExternalCode);
+                    }
+
+                });
+
+
+
+            });
+        }
+    );
+
+    $.cd.flex.updateTemplate('uvlibrarypart',
+        '<div class="partcontent partcontent-uvlibrarypart" cduv="true"><div id="UVLinkedContainer" class="uvLinkContainer" cdresource="library_uv_linked_container">' +
+        '<ul>' +
+        '<li class="uvMainLogo">' +
+        '<a onclick="window.open(\'http://www.uvvu.com\',\'_blank\',\'width=800,height=600\')">' +
+        '<img class="UVLogo" src="Content/Assets/UVlogo.png" />' +
+        '</a>' +
+        '</li>' +
+        '<li id="UVLinkedIconContainer" style="display:none;" class="uvLinkedIconContainer"><i class="fa fa-link"></i></li>' +
+        '<li class="uvLinkedStatementContainer"  style="display:none;">' +
+        '<span class="uvLinkedStatement" cdresource="library_your_uv_account_is_linked">Your UltraViolet Account is linked.</span>' +
+        '<a cdid="uvAccountManagement" class="uv-link"><span cdresource="library_manage_your_uv_account">Manage Your UltraViolet Account</span></a>' +
+        '</li>' +
+        '<li class="uvNotLinkedStatementContainer" style="display:none;">' +
+        '<span class="uvNotLinkedStatement" cdresource="library_ultraviolet_account_not_linked_header">Your UltraViolet Account is not yet linked.</span>' +
+        '<a cdid="uvLinkOrCreate" class="uv-link"><span cdresource="library_link_uv">Link or create an UltraViolet Account</span></a>' +
+        '</li>' +
+        '</ul>' +
+        '</div></div>',
+        function (template, part) {
+	        var modelTemplate = template.html;
+	        $.cd.flex.appendToContainer(part, modelTemplate);
+	        //var isUvLinked = $.cd.get_loginInfo().isUvLinked;
+	        var isUvLinked = $.cd.getQueryStringValue('isUvLinked');
+	        if (isUvLinked=="true") {
+	            $('[cdid=UVLinkedIconContainer]').show();
+	            $('.uvLinkedStatementContainer').show();
+	            $('[cdid=uvAccountManagement]').off('click').on('click', function (event) {
+	                event.preventDefault();
+	                event.stopPropagation();
+	                $.cd.showBlocker();
+	                var uvAccountManagementUrl = $.cd.getResourceValue("uv_account_management_url");
+	                window.open(String($.cd.getServerUrl('UVBridge.aspx') + "?target=uvManageAccount" + "&UVAcctMgmtUrl=" + uvAccountManagementUrl, '_blank', 'width=1000,height=700,scrollbars=yes,resizable=yes'));
+	                $.cd.hideBlocker();
+	                return false;
+	            });
+	        }
+	        else {
+	            $('.uvNotLinkedStatementContainer').show();
+	            $('[cdid=uvLinkOrCreate]').off('click').on('click', function () {
+	                $.cd.showBlocker();
+	                contentdirect.redirectPage("uvregistration", "destination=library&" + window.location.search.substring(1));
+	                return false;
+	            });
+	        }
+	    }
+    );
+
+    $.cd.flex.updateTemplate('displayquality',
+        '<li class="displayQuality_{DisplayQuality} displayQuality"><span>{DisplayQuality}</span></li>',
+        function (template, part) {
+            var displayQualityHtml = "",
+                displayQualities = part.Json[0];
+            if (typeof displayQualities !== 'undefined' && displayQualities.length > 0) {
+                var i;
+                for (i = 0; i < displayQualities.length; i += 1) {
+                    if (displayQualities.length >= 2) {
+                        if (displayQualities[i].DisplayQuality == "HD") {
+                            displayQualityHtml += $.cd.flex.replacePlaceholders(template.html, displayQualities[i], "", true);
+                            break;
+                        }
+                    } else {
+                        displayQualityHtml += $.cd.flex.replacePlaceholders(template.html, displayQualities[i], "", true);
+                    }
+
+                }
+            }
+            $.cd.flex.appendToContainer(part, displayQualityHtml);
+        }
+    );
+
+    $.cd.flex.updateTemplate('guidancerating',
+        '<li class="rating_{ExternalCode} rating"><span>MPAA: {ExternalCode}</span></li>',
+        function (template, part) {
+            $.cd.flex.appendToContainer(part, $.cd.flex.parseGuidanceRatings(part.Json[0].GuidanceRatings, template.html));
+        }
+    );
+
+    $.cd.flex.updateTemplate('countdowntimer',
+        '<div class="countdownTimer" cdproductid="{Id}" cdplanid="{PricingPlanId}" cdsubproductid="{SubscriberProductId}" cdTimerObjId="__countdownTimer_{CountdownTimerName}" style="display:none;">' +
+                    '<ul>' +
+                        '<li class="counterSection daysCounterSection">' +
+                            '<span class="counter daysCounter">00</span>' +
+                            '<span class="counterLabel daysLabel" cdresource="countdown_timer_days">DAYS</span>' +
+                        '</li>' +
+                        '<li class="countdownTimerColon">:</li>' +
+                        '<li class="counterSection hoursCounterSection">' +
+                            '<span class="counter hoursCounter">00</span>' +
+                            '<span class="counterLabel hoursLabel" cdresource="countdown_timer_hrs">HRS</span>' +
+                        '</li>' +
+                        '<li class="countdownTimerColon">:</li>' +
+                        '<li class="counterSection minutesCounterSection">' +
+                            '<span class="counter minutesCounter">00</span>' +
+                            '<span class="counterLabel minutesLabel" cdresource="countdown_timer_min">MIN</span>' +
+                        '</li>' +
+                        '<li class="countdownTimerColon">:</li>' +
+                        '<li class="counterSection secondsCounterSection">' +
+                            '<span class="counter secondsCounter">00</span>' +
+                            '<span class="counterLabel secondsLabel" cdresource="countdown_timer_sec">SEC</span>' +
+                        '</li>' +
+                    '</ul>' +
+                '</div>' +
+                '<div class="availability available countdownContainer" cdproductid="{Id}" style="display:none;">' + //LB- rename available to availableOn?
+                    '<span class="availableOnContainer" cdresource="available_on">Available on:</span>' +
+                    '{AvailabilityStartDisplayDate}' +
+                '</div>' +
+                '<div class="availability availableUntil" cdproductid="{ProductId}" style="display:none;">' +
+                    '<span class="availableUntilContainer" cdresource="available_until">Available until:</span>' +
+                    '<span class="availableUntilContainer">{AvailabilityEndDisplayDate}</span>' +
+                '</div>' +
+                '<div class="availability offeredUntil" cdproductid="{ProductId}" style="display:none;">' +
+                    '<span class="offeredUntilContainer" cdresource="offered_until">Offered until:</span>' +
+                    '<span class="offeredUntilContainer">{OfferingEndDisplayDate}</span>' +
+                '</div>',
+        function (template, part) {
+            var model = part.Json[0];
+            if (model == null || model.PricingPlan == null) {
+                targetContainer = $.cd.flex.appendToContainer(part, "");
+                return;
+            }
+            var updateTime = model.AvailabilityStartDisplayDate;
+            updateTime = updateTime.replace(/ [0-9]+:[0-9]+:[0-9]+ [AM|PM]+/gi, "");
+            updateTime = updateTime.replace(/(sunday|monday|tuesday|wednesday|thursday|friday|saturday)+,\s/gi, "");
+            model.AvailabilityStartDisplayDate = updateTime;
+
+            var modelTemplate = $.cd.flex.getTemplateHtml(part);
+            modelTemplate = $.cd.flex.replacePlaceholders(modelTemplate, model, "", true);
+            modelTemplate = $.cd.flex.replacePlaceholders(modelTemplate, model.PricingPlan, "", true);
+
+            if (model.PricingPlan != null) {
+                // Countdown timer & available soon scenario
+                if (model.PricingPlan.Availability === ContentDirect.UI.Enums.AvailabilityEnum.AvailableSoon) {
+                    // Subscribe to countdown timer
+                    $.cd.events.unsubscribe(ContentDirect.UI.Enums.AppEvents.ProductNowAvailable, null, "infinite");
+                    $.cd.events.subscribe(ContentDirect.UI.Enums.AppEvents.ProductNowAvailable, function (eventArgs) {
+                        // When the countdown timer reaches the prefetch window or finishes, show the action buttons
+                        $('a.mainButton.availableSoon[cdproductid$=' + eventArgs.data[ContentDirect.UI.Const.PROD_ID] + '][cdplanid$=' + eventArgs.data[ContentDirect.UI.Const.PLAN_ID] + ']').fadeOut('fast', function () {
+                            if (!model.PricingPlan.RequiresAuthentication || (model.PricingPlan.RequiresAuthentication && ContentDirectAPI.get_isAuthenticated())) {
+                                $('a.mainButton.accessAction[cdproductid$=' + eventArgs.data[ContentDirect.UI.Const.PROD_ID] + '][cdplanid$=' + eventArgs.data[ContentDirect.UI.Const.PLAN_ID] + '][cdHasAction$=true]').fadeIn('fast');
+                            } else {
+                                // Show login to play button
+                                $('[cdid=buttonLoginToPlay][cdproductid$=' + eventArgs.data[ContentDirect.UI.Const.PROD_ID] + '][cdplanid$=' + eventArgs.data[ContentDirect.UI.Const.PLAN_ID] + ']').fadeIn('fast');
+                            }
+                        });
+                    }, null, "infinite");
+                    $('.availableSoon[cdproductid="' + model.Id + '"]').show();
+                    if (model.PricingPlan.CountdownSeconds != null) {
+
+                        // Apply the countdown timer part
+                        $('.countdownTimer[cdproductid="' + model.Id + '"]').show();
+
+                        var countdownTimer = new ContentDirect.UI.Subscriber.CountdownTimer(
+                            model.CountdownTimer.Seconds,
+                            model.CountdownTimer.PrefetchSeconds,
+                            model.CountdownTimer.ProductId,
+                            model.CountdownTimer.PricingPlanId,
+                            model.CountdownTimer.SubscriberProductId,
+                            model.CountdownTimer.TimerId,
+                            '__countdownTimer_' + model.CountdownTimerName
+                        );
+                        window['__countdownTimer_' + model.CountdownTimerName] = countdownTimer;
+                        countdownTimer.initialize();
+
+                    }
+                }
+
+                // Availability labels
+                if (model.AvailabilityStartDisplayDate != null &&
+                    (model.PricingPlanType === ContentDirect.UI.Flex.PricingPlanTypeEnum.InstantlyViewable
+                        || model.PricingPlanType === ContentDirect.UI.Flex.PricingPlanTypeEnum.OrderableLiveEvent)
+                    ) {
+                    $('.available[cdproductid="' + model.Id + '"]').show();
+                }
+
+                if (model.AvailabilityEndDisplayDate != null) {  // Show for all plans
+                    $('.availableUntil[cdproductid="' + model.Id + '"]').show();
+                }
+
+                if (model.OfferingEndDisplayDate != null) {  // Show for all plans
+                    $('.offeredUntil[cdproductid="' + model.Id + '"]').show();
+                }
+            }
+
+            $.cd.flex.appendToContainer(part, modelTemplate);
+
+            $('.availableSoon[cdproductid="' + model.Id + '"]').show();
+
+        }
+
+    );
+
+    $.cd.flex.updateTemplate('actionsjson',
+        '<div class="detailsPurchasedViewHeader" cdproductid="{ProductId}"></div>' +
+        '<div class="purchasedActionContainer">' +
+        '<div class="actionButtonsContainer" cdproductid="{ProductId}" cdplanid="{Id}" >' +
+        '<a cdid="buttonLoginToPlay" class="mainButton accessAction instantLoginToPlay" cdaction="0" cdproductid="{ProductId}" cdplanid="{Id}" style="display:none;"><span cdresource="login_to_play">Login to Play</span></a>' +
+        '<a cdid="buttonPlay" class="mainButton accessAction buttonPlay" cdaction="20" cdproductid="{ProductId}" cdplanid="{Id}" cdHasAction="{HasPlayAction}" style="display:none;"><span>Watch</span></a>' +
+        '<a cdid="buttonListen" class="mainButton accessAction buttonListen" cdaction="22" cdproductid="{ProductId}" cdplanid="{Id}" cdHasAction="{HasListenAction}" style="display:none;"><span cdresource="listen_button_text">Listen Now</span></a>' +
+        '<a cdid="buttonDownload" class="mainButton accessAction buttonDownload" cdaction="1" cdproductid="{ProductId}" cdplanid="{Id}" cdHasAction="{HasDownloadAction}" style="display:none;"><span>Download</span></a>' +
+        '<a cdid="buttonAvailableSoon" class="availableSoon" cdproductid="{ProductId}" cdplanid="{Id}" style="display:none;"><span>Coming Soon</span></a>' +
+        '<a cdid="externalButtonPlay_{ExternalSubscriberProductReference}" class="mainButton accessAction buttonPlay" onclick="contentdirect.showUvRedirectPopup(\'{ExternalPlayLink}\');return false;" style="display:none;"><span cdresource="uv_stream_button_text">Stream Now</span></a>' +
+        '</div>' +
+        '</div>',
+        function (template, part) {
+            var model = part.Json[0];
+            if (model == null || (model.EntitledPricingPlan == null && model.SubscriberProductId == null)) {
+                if (model.ExternalProduct != null) {
+                    // See if there's a stream now or download link if we don't have a product id
+                    if (model.Id == null && (model.ExternalProduct.ExternalPlayLink || model.ExternalProduct.ExternalDownloadLink)) {
+                        var externalProductModel = model.ExternalProduct;
+                        $.cd.flex.appendToContainer(part, $.cd.flex.replacePlaceholders(template.html, externalProductModel, "", true));
+                        if (null != externalProductModel.ExternalPlayLink) {
+                            $('[cdid="externalButtonPlay_' + externalProductModel.ExternalSubscriberProductReference + '"]').show();
+                        }
+                        var hasManifestLinks = null != externalProductModel.ExternalManifestLinks && externalProductModel.ExternalManifestLinks.length !== 0;
+                        if (null != externalProductModel.ExternalDownloadLink || hasManifestLinks) {
+                            var externalDownloadSelector = $('[cdid="externalButtonDownload_' + externalProductModel.ExternalSubscriberProductReference + '"]');
+                            if (externalDownloadSelector.length !== 0) {
+                                externalDownloadSelector.show();
+                                externalDownloadSelector.click(function () {
+                                    ContentDirectAPI.downloadProduct({
+                                        Selector: $(this),
+                                        ProductName: model.Name,
+                                        ThumbnailUrl: model.ThumbnailUrl || model.ImageUrl
+                                    });
+                                });
+                                // Set data for downloads
+                                if (hasManifestLinks) {
+                                    externalDownloadSelector.attr('cdmanifests', JSON.stringify(model.ExternalProduct.ExternalManifestLinks));
+                                }
+                            }
+                        }
+                        return;
+                    }
+                } else {
+                    targetContainer = $.cd.flex.appendToContainer(part, "");
+                    return;
+                }
+            } else if (model != null && model.EntitledPricingPlan == null) {
+                targetContainer = $.cd.flex.appendToContainer(part, "");
+                return;
+            }
+            var modelTemplate = $.cd.flex.getTemplateHtml(part);
+            if (model.PricingPlan != null) {
+                modelTemplate = $.cd.flex.replacePlaceholders(modelTemplate, model.PricingPlan, "", true);
+            } else {
+                modelTemplate = $.cd.flex.replacePlaceholders(modelTemplate, { ProductId: model.Id }, "", true);
+            }
+            var productAction = null != model.PricingPlan ? model.PricingPlan.ProductAction : null;
+            if (productAction == null) {
+                if (model.AccessPolicies != null) {
+                    productAction = {};
+                } else {
+                    return;
+                }
+            }
+            var actionAvailability = {};
+            var hasPlayAction = productAction.PlayAction != null,
+                hasListenAction = productAction.ListenAction != null,
+                hasDownloadAction = productAction.DownloadAction != null;
+            if (hasPlayAction || hasListenAction || hasDownloadAction) {
+                actionAvailability.HasPlayAction = hasPlayAction,
+                actionAvailability.HasListenAction = hasListenAction,
+                actionAvailability.HasDownloadAction = hasDownloadAction,
+                actionAvailability.HasRenewAction = productAction.IsRenewable();
+            } else if (model.AccessPolicies != null) {
+                var accessPolicies = model.AccessPolicies,
+                    i;
+                if (typeof accessPolicies.PlayAccessPolicy !== 'undefined') {
+                    if (accessPolicies.PlayAccessPolicy.IsAvailable) {
+                        $.cd.log("Access Policy for: " + model.Name);
+                        actionAvailability.HasPlayAction = accessPolicies.PlayAccessPolicy.IsAvailable;
+                        productAction.PlayAction = {
+                            PricingPlanId: null != model.EntitledPricingPlan ? model.EntitledPricingPlan.Id : null,
+                            PricingPlanName: null != model.EntitledPricingPlan ? model.EntitledPricingPlan.Name : null,
+                            IsAvailable: accessPolicies.PlayAccessPolicy.IsAvailable
+                        };
+                    }
+                }
+                if (typeof accessPolicies.ListenAccessPolicy !== 'undefined') {
+                    if (accessPolicies.ListenAccessPolicy.IsAvailable) {
+                        actionAvailability.HasListenAction = accessPolicies.ListenAccessPolicy.IsAvailable;
+                    }
+                }
+                if (typeof accessPolicies.DownloadAccessPolicy !== 'undefined') {
+                    if (accessPolicies.DownloadAccessPolicy.IsAvailable) {
+                        actionAvailability.HasDownloadAction = accessPolicies.DownloadAccessPolicy.IsAvailable;
+                    }
+                }
+            }
+            modelTemplate = $.cd.flex.replacePlaceholders(modelTemplate, actionAvailability, "", true);
+            targetContainer = $.cd.flex.appendToContainer(part, modelTemplate);
+            var buildActionButton = function (actionCode, productId, callback, isAvailable) {
+                    var actionSelector = '[cdproductid=' + productId + '] *[cdaction=' + actionCode + ']',
+                            clickAction = function() { checkSilverlightClientsNotSupported(function(isSupported){
+                                    if(isSupported){
+                                        callback();
+                                    }else {
+                                        $.cd.showModalMessage({
+                                            message: defaultsettings.silverlightClientsNotSupported.notSupportedMessage,
+                                            hideOnOverlayClick: false,
+                                            enableEscapeButton: false
+                                        });
+                                    }
+                                });
+                            };
+                             // Set data for downloads
+                            if (actionCode === 1 && null != model.ExternalProduct.ExternalManifestLinks && model.ExternalProduct.ExternalManifestLinks.length !== 0) {
+                                $(actionSelector).attr('cdmanifests', JSON.stringify(model.ExternalProduct.ExternalManifestLinks));
+                            }
+                            if (isAvailable) {
+                                $(actionSelector).show();
+                            }
+                            if ($(actionSelector).length > 0) {
+                                $(actionSelector).unbind('click');
+                                $(actionSelector).bind('click', clickAction);
+                            }
+            },
+                _getActionAvailability = function () {
+                    // Instantly viewable products won't have an entitled pricing plan for list view, but they are available
+                    return model.EntitledPricingPlan == null || model.EntitledPricingPlan.Availability !== ContentDirect.UI.Enums.AvailabilityEnum.AvailableSoon;
+                };
+            if ((model.EntitledPricingPlan != null && model.PricingPlan.Type == ContentDirect.UI.Flex.PricingPlanTypeEnum.InstantlyViewable
+                && model.PricingPlan.RequiresAuthentication) && !ContentDirectAPI.get_isAuthenticatedOrUnauthenticated()) {
+                buildActionButton(0, model.Id, function () {
+                    contentdirect.redirectPage('login', 'destination=' + window.location.href, null, true);
+                    return false;
+                }, !ContentDirectAPI.get_isAuthenticated() && _getActionAvailability());
+                return;
+            }
+            // Show/hide watchlist buttons
+            if (null != model.EnableWatchlistButtons && ContentDirectAPI.get_isAuthenticatedOrUnauthenticated() && 
+                (productAction.PlayAction != null || productAction.ListenAction != null || productAction.DownloadAction != null)) {
+                if (model.DisplayWatchlistButtonsLast) {
+                    $('.watchlistButtonsContainer[cdproductid="' + model.Id.toString() + '"]').insertAfter('.purchasedActionContainer');
+                }
+                var addButtonSelector = '[cdbuttontype=addwatchlist][cdproductid$=' + model.Id.toString() + ']';
+                var removeButtonSelector = '[cdbuttontype=removewatchlist][cdproductid$=' + model.Id.toString() + ']';
+                if (model.IsFavorite) {
+                    $(removeButtonSelector).show();
+                }
+                else {
+                    $(addButtonSelector).show();
+                }
+                $(addButtonSelector).bind("click", function () {
+                    ContentDirectAPI.addProductToWatchlist($(this).attr("cdproductid"), $(this).attr("cdproductname"));
+                    $(addButtonSelector).hide();
+                    $(removeButtonSelector).fadeIn();
+                    return false;
+                });
+                $(removeButtonSelector).bind("click", function () {
+                    var id = $(this).attr('cdproductid');
+                    ContentDirectAPI.removeProductFromWatchlist(id, $(this).attr("cdproductname"));
+                    if (contentdirect._currentPage.name === "watchlist") {
+                        var layoutToUse = $.cd.getValueFromCache("productLayout");
+                        var productElement = layoutToUse === 'list' ? $(this).parents('[cdelement=listpartialproduct]') : $('.product-details-banner-container');
+                        productElement.slideUp('slow', function () { productElement.remove(); });
+                        // Remove from cache 
+                        var prevCache = JSON.parse($.cd.getValueFromCache("productDataCache", "", true));
+                        var productsArray = prevCache.ProductsJson;
+                        // Remove product
+                        prevCache.ProductsJson = _.without(productsArray, _.findWhere(productsArray, { Id: parseInt(id) }));
+                        // Save again
+                        $.cd.setValueToCache("productDataCache", JSON.stringify(prevCache), null, true);
+                        var watchlistitem = $('.product-layout-list-item[cdproductid="' + id + '"]');
+                        $(watchlistitem).slideUp('slow', function () { $(watchlistitem).remove(); });
+                        //TODO: update the watchlist results label       
+                        var newTotalCount = parseInt($('.totalCount').text()) - 1;
+                        $('.totalCount').text(newTotalCount);
+                        if (newTotalCount !== 1) {
+                            $('#search-results-count-text').attr('cdresource', 'search_results_count_text');
+                            $('#search-results-count-text').text($.cd.getCDResource('search_results_count_text'));
+                        }
+                        else {
+                            $('#search-results-count-text').attr('cdresource', 'search_results_count_text_singular');
+                            $('#search-results-count-text').text($.cd.getCDResource('search_results_count_text_singular'));
+                        }
+                    }
+                    else {
+                        $(removeButtonSelector).hide();
+                        $(addButtonSelector).fadeIn();
+                    }
+                    return false;
+                });
+            }
+            // Enable action buttons if applicable
+            if (null != productAction) {
+                buildActionButton(50, model.Id, function () {
+                    ContentDirectAPI.renewProduct(model.PricingPlan.ProductId, model.PricingPlan.Id, model.PricingPlan.ProductAction.SubscriberProductId, model.PricingPlan.ProductName, model.PricingPlan.Name);
+                }, productAction.IsRenewable ? productAction.IsRenewable() : false);
+            }
+            if (null != productAction && productAction.PlayAction) {
+                var playAction = productAction.PlayAction,
+                    isPlayAvailable = productAction.PlayAction.IsAvailable;
+                if (isPlayAvailable) {
+                    isPlayAvailable = _getActionAvailability();
+                }
+                buildActionButton(20, model.Id, function (evnt) {
+                    ContentDirectAPI.playProduct(model.Id,
+                                                playAction.PricingPlanId,
+                                                model.Name + "_" + playAction.PricingPlanName,
+                                                playAction.DeliveryCapabilityCode,
+                                                "",
+                                                playAction.SubscriberProductId, model.Name);
+                    return false;
+                }, isPlayAvailable);
+                $('[cdproductid=' + model.Id + '] .watchHere').show();
+            }
+            else {
+                $('[cdproductid=' + model.Id + '] .watchHere').hide();
+            }
+            if (null != productAction && productAction.ListenAction) {
+                var listenAction = productAction.ListenAction,
+                    isListenAvailable = productAction.ListenAction.IsAvailable;
+                if (isListenAvailable) {
+                    isListenAvailable = _getActionAvailability();
+                }
+                buildActionButton(22, model.Id, function () {
+                    ContentDirectAPI.playProduct(model.Id,
+                                                    listenAction.PricingPlanId,
+                                                    model.Name + "_" + listenAction.PricingPlanName,
+                                                    listenAction.DeliveryCapabilityCode,
+                                                    model.ImageUrl,
+                                                    listenAction.SubscriberProductId,
+                                                    model.Name);
+                    return false;
+                }, isListenAvailable);
+            }
+            var hasManifestLinks = null != model.ExternalProduct &&
+                                   null != model.ExternalProduct.ExternalManifestLinks &&
+                                   model.ExternalProduct.ExternalManifestLinks.length !== 0;
+            if ((null != productAction && null != productAction.DownloadAction) || hasManifestLinks) {
+                var downloadAction = null != productAction ? productAction.DownloadAction : null,
+                    isDownloadAvailable = null != downloadAction ? downloadAction.IsAvailable : false || hasManifestLinks;
+                if (isDownloadAvailable) {
+                    isDownloadAvailable = hasManifestLinks || _getActionAvailability();
+                }
+                buildActionButton(1, model.Id, function () {
+                    ContentDirectAPI.downloadProduct({
+                        Selector: $(this),
+                        ProductName: model.Name,
+                        ThumbnailUrl: model.ThumbnailUrl || model.ImageUrl
+                    });                                                                  
+                    return false;
+                }, isDownloadAvailable);
+                if (!productAction.PlayAction) {
+                    $('.detailsPurchasedViewHeader[cdproductid="' + model.Id.toString() + '"] .downloadHere').show();
+                }
+            }
+        }
+    );
+
+    $.cd.flex.updateTemplate('lockersource',
+        '<div class="partcontent partcontent-lockersource" cduv="true">' +
+        '<div class="filter-header"><span>UltraViolet</span><a cdfilter="lockersource" class="secondaryButton reset-filter" cdresource="reset_text">Reset</a></div>' +
+        '<ul id="locker-groups">' +
+        '<li class="locker-group"><a id="uv-products-only" class="locker-group-button toggle-filter-button">UltraViolet Content Only</a></li>' +
+        '<li class="locker-group"><a id="cd-products-only" class="locker-group-button toggle-filter-button">Cineplex Content Only</a></li>' +
+        '</ul>' +
+        '</div>'
+    );
+
+    $.cd.flex.updateTemplate('playactionjson',
+        '<div class="detailsPurchasedViewHeader" cdproductid="{ProductId}">' +
+        '<div class="purchasedActionContainer">' +
+        '<div class="actionButtonsContainer" cdproductid="{ProductId}" cdplanid="{Id}" >' +
+        '<a cdid="buttonLoginToPlay" class="mainButton listAccessAction instantLoginToPlay" cdaction="0" cdproductid="{ProductId}" cdplanid="{Id}" style="display:none;"><span cdresource="login_to_play">Login to Play</span></a>' +
+        '<a cdid="buttonPlay" class="mainButton listAccessAction buttonPlay" cdaction="20" cdproductid="{ProductId}" cdplanid="{Id}" cdHasAction="{HasPlayAction}" style="display:none;"><span>Watch</span></a>' +
+        '</div>'
+    );
+
+    $.cd.flex.updateTemplate('nonplayactionsjson',
+        '<div class="detailsPurchasedViewHeader" cdproductid="{ProductId}">' +
+        '<div class="purchasedActionContainer">' +
+        '<div class="actionButtonsContainer" cdproductid="{ProductId}" cdplanid="{Id}" >' +
+        '<a cdid="buttonListen" class="mainButton accessAction buttonListen" cdaction="22" cdproductid="{ProductId}" cdplanid="{Id}" cdHasAction="{HasListenAction}" style="display:none;"><span cdresource="listen_button_text">Listen Now</span></a>' +
+        '<a cdid="buttonDownload" class="mainButton accessAction buttonDownload" cdaction="1" cdproductid="{ProductId}" cdplanid="{Id}" cdHasAction="{HasDownloadAction}" style="display:none;"><span>Download</span></a>' +
+        '<a cdid="buttonAvailableSoon" class="availableSoon" cdproductid="{ProductId}" cdplanid="{Id}" style="display:none;"><span>Coming Soon</span></a>' +
+        '</div>' +
+        '</div>'
+    );
+
+});
+
+/*
+    Settings
+*/
+var clientUrl;
+if (document.domain == "cdchicago.com") {
+    // CSG hosted
+    clientUrl = document.domain + location.pathname.substr(0, location.pathname.lastIndexOf("/")) + "/";
+} else {
+    // Thinkwrap UAT/PROD
+    clientUrl = document.domain + "/" + location.pathname.split("/")[1] + "/"
+}
+
+var defaultsettings = {
+    systemId: currentCsgEnv.systemId,
+    channelId: currentCsgEnv.channelId,
+    language: "en-CA",
+    clientUrl: clientUrl,
+    customCssUrl: "https://" + clientUrl + "Content/StyleSheets/cdfull_iframe.css",
+    customDLMXAPLocation: "http://" + clientUrl + "ClientBin/CineplexDLM.xap",
+    resourceUrl: "https://" + clientUrl + "Scripts/resources.js",
+    crossDomainStoragePageUrl: "https://" + clientUrl + "crossdomainstorage.html",
+    convivaId: "c3.CSG",
+    useShoppingCart: false,
+    supportsUV: true,
+    uvRetailerMode: false,
+    defaultGiftCardProductId: 13737,
+    enableSEO: true,
+    jsonpCrossDomainMillisecondsTimeout: 1500,
+    searchStringValidationRegex: /^[a-zA-Z0-9\ÃƒÂ¡\ÃƒÂ©\ÃƒÂ­\ÃƒÂ³\ÃƒÂº\ÃƒÂ¼\ÃƒÂ±,\-'][a-zA-Z0-9-\ÃƒÂ¡\ÃƒÂ©\ÃƒÂ­\ÃƒÂ³\ÃƒÂº\ÃƒÂ¼\ÃƒÂ±,\-' ]+[a-zA-Z0-9\ÃƒÂ¡\ÃƒÂ©\ÃƒÂ­\ÃƒÂ³\ÃƒÂº\ÃƒÂ¼\ÃƒÂ±,\-']?$/,
+    searchStringFormatRegex: /[^a-zA-Z0-9\ÃƒÂ¡\ÃƒÂ©\ÃƒÂ­\ÃƒÂ³\ÃƒÂº\ÃƒÂ¼\ÃƒÂ±\-\s',]/,
+    enableJoinExistingSession: true,
+    silverlightClientsNotSupported: {
+        windows: {
+            browser: [
+				{
+					name: "Chrome",
+					version: "42"
+				}
+			]	
+			
+        },
+        mac: {
+            browser: [
+                {
+                    name: "Chrome",
+                    version: "39"
+                }
+            ]
+        },
+        notSupportedMessage: "Streaming of content is not currently supported on the Chrome browser. In order to stream, please use a different browser. We are making updates in the near future that will allow for the streaming of content via the Chrome browser."        
+    },
+    facebook: {
+        appId: 435539959846742,
+        clientCode: 10000,
+        scope: "email, user_birthday",
+        clientUrl: clientUrl
+    },
+    detail: {
+        browser: {
+            minimumIEVersion: 8,
+            popupWidth: '800px',
+            popupHeight: '600px'
+        },
+        commonCommandCallBack: onCommandExecuted,
+        error: {
+            overrideWholeErrorHandling: false,
+            onErrorOccured: onErrorCallBack,
+            pagesToReloadWhenSessionExpired: ["index", "product", "episodicproduct", "seriesproduct", "bundleproduct", "search", "browse", "giftcard", "help", "register"]
+        },
+        pagelist: [{
+            name: "dependency",
+            isSecured: false,
+            pathName: "/dependency.html"
+        }, {
+            name: "index",
+            isSecured: false,
+            isCrawlable: true,
+            isIndex: true,
+            handlePlay: false,
+            pathName: "/index.html",
+            overrideCommands: [{
+                name: 'AfterInitialized',
+                afterMethod: function (result) {
+                    var pageId = $.cd.getQueryStringValue("pageId");
+                    ContentDirectAPI.retrieveFlexUIPlayerPage(pageId, contentdirect.get_settings().useShoppingCart);
+                }
+            }, {
+                name: 'NavigateCompleted',
+                beforeMethod: function (result) {
+                    if (null != result.message.BackgroundImageUrl) {
+                        $('body')[0].style.backgroundSize = 'cover';
+                        $('body').css('backgroundImage', 'url("' + result.message.BackgroundImageUrl + '")');
+                    }
+                    f
+
+                    if (!ContentDirectAPI.get_isAuthenticated()) {
+                        //contentdirect.redirectPage('login');
+                    } else {
+                        var user = ContentDirectAPI.get_loginInfo();
+                        $('#welcomeUser a').text('Welcome, ' + user.name);
+
+                    }
+                }
+            }]
+        }, {
+            name: "login",
+            isSecured: true,
+            pathName: "/handler.html",
+            overrideCommands: {}
+
+        }, {
+            name: "register",
+            isSecured: true,
+            pathName: "/login.html",
+            overrideCommands: {}
+        }, {
+            name: "product",
+            isSecured: false,
+            isCrawlable: true,
+            handlePlay: false,
+            pathName: "/product.html",
+            overrideCommands: {}
+        }, {
+            name: "promotionalproduct",
+            isSecured: false,
+            pathName: "/promotionalproduct.html",
+            overrideCommands: {}
+        }, {
+            name: "episodicproduct",
+            isSecured: false,
+            handlePlay: false,
+            pathName: "/episodicproduct.html",
+            overrideCommands: {}
+        }, {
+            name: "seriesproduct",
+            isSecured: false,
+            handlePlay: false,
+            pathName: "/seriesproduct.html",
+            overrideCommands: {}
+        }, {
+            name: "bundleproduct",
+            isSecured: false,
+            handlePlay: false,
+            pathName: "/bundleproduct.html",
+            overrideCommands: {}
+        }, {
+            name: "bundleoptions",
+            isSecured: false,
+            pathName: "/bundleoptions.html",
+            overrideCommands: [
+                {
+                    name: 'AfterInitialized',
+                    onBeforeMethod: function (result) {
+                        joinExistingSession(function () {
+
+                        });
+
+                    }
+                },
+                {
+                    name: 'PageSizeChanged',
+                    onAfterMethod: function (result) {
+                        postIframeResize();
+
+                    }
+                }
+
+            ]
+        }, {
+            name: "person",
+            isSecured: false,
+            isCrawlable: true,
+            handlePlay: false,
+            pathName: "/person.html",
+            overrideCommands: {}
+        }, {
+            name: "help",
+            isSecured: false,
+            pathName: "/help.html",
+            overrideCommands: {}
+        }, {
+            name: "shoppingcart",
+            isSecured: true,
+            pathName: "/shoppingcart.html",
+            overrideCommands: {}
+        }, {
+            name: "checkout",
+            isSecured: true,
+            pathName: "/ordering.html",
+            overrideCommands: [{
+                name: 'BeforeLongInitialize',
+                method: function (result) {
+                    //This is a fix for IE11 not keeping the redemption code around for potential issue.
+
+                    $.cd.deleteCookie(ContentDirect.UI.Const.REDEMPT_CODE);
+                    contentdirect.hideStorefrontContainer(true);
+
+                }
+            }, {
+                name: 'AfterInitialized',
+                onBeforeMethod: function (result) {
+                    joinExistingSession(function () {
+                        var product = contentdirect.getProductInfo();
+
+                        if (!contentdirect.get_settings().useShoppingCart) {
+                            if ($.cd.getCookie("cd_purchased") == product.productId + "_" + product.pricingId) {
+                                $.cd.deleteCookie("cd_purchased");
+                                contentdirect.redirectPage("index");
+                                return;
+                            }
+                        }
+                                var isUvLinked = $.cd.getQueryStringValue('isUvLinked');
+
+                        var continueCheckoutAsGuest = $.cd.getQueryStringBooleanValue("continueCheckoutAsGuest", false);
+                                //var isUvStepRequired = (product.isUvPr && !(isUvLinked=="true"));
+								var isUvStepRequired = false;
+                        if (isUvStepRequired) {
+                                    contentdirect.redirectPage("uvregistration", "destination=checkout&" + window.location.search.substring(1));
+                            return;
+                        } else if (ContentDirectAPI.get_loginInfo().authenticateMode != ContentDirect.UI.AuthenticateMode.Authenticated && !continueCheckoutAsGuest) {
+                            contentdirect.redirectPage("login", "destination=checkout&" + product.query);
+                        } else {
+                            ContentDirectAPI.get_loginInfo().renew();
+                            var subscriberInfo = ContentDirectAPI.createSubscriberInfo(null, ContentDirectAPI.get_loginInfo().userName);
+                            if ((null != product.productId && null != product.pricingId) &&
+                                (product.productId != "null" && product.pricingId != "null")) {
+                                var rCd = $.cd.getCookie(ContentDirect.UI.Const.REDEMPT_CODE); // Redemption code will be populated in a non-shopping cart scenario
+
+                                var productInfo = ContentDirectAPI.createProductInfoWithId(product.productId, product.pricingId, null != rCd ? rCd : null, false, null, null, null, null, product.isSingleProductCheckout, product.isGiftOrder, product.isUpgradeOrder);
+                                if (null != product.subProdId) {
+                                    productInfo.subscriberProductId = product.subProdId;
+                                    productInfo.orderType = "Renew";
+                                }
+
+                                if (contentdirect.get_settings().useShoppingCart && (productInfo.orderType != "Renew") && !productInfo.isSingleProductCheckout) {
+                                    ContentDirectAPI.navigateToShoppingCartCheckout(subscriberInfo, productInfo, {}, {});
+                                } else {
+                                    ContentDirectAPI.navigateToSimpleCheckOutDirect(subscriberInfo, productInfo, {}, {});
+                                }
+                                $.cd.deleteCookie(ContentDirect.UI.Const.REDEMPT_CODE);
+                            } else if (contentdirect.get_settings().useShoppingCart) {
+                                ContentDirectAPI.navigateToShoppingCartCheckout(subscriberInfo, {}, {}, {});
+                            } else {
+                                contentdirect.redirectPage("library");
+                            }
+                        }
+
+                    });
+                },
+                afterMethod: function (result) {
+
+
+                }
+            }, {
+                name: 'NavigateCompleted',
+                method: function (result) {
+                    $.cd.getCDResources();
+                    contentdirect.showStorefrontContainer(true, true);
+
+                    $('#continue').fadeIn('slow');
+
+                    $('#continue').click(function () {
+                        var redirect;
+
+                        if (parent.window.location.href.indexOf('cineplex.com') >= 0) {
+                            redirect = "/store";
+                        } else {
+                            var path = window.location.pathname;
+                            redirect = path.substr(0, path.lastIndexOf('/'));
+
+                        }
+
+                        parent.window.location.href = redirect;
+
+                    });
+
+                },
+                beforeMethod: function (result) {
+                    switch (result.data) {
+                        case ContentDirect.UI.Page.CheckoutBilling:
+                            contentdirect.trackPage('/checkout/billing');
+                            $('#orderWelcome').fadeIn("slow");
+                            $('#contentContainer').removeClass().addClass("orderingBillingContent");
+                            break;
+                        case ContentDirect.UI.Page.CheckoutVerify:
+                            contentdirect.trackPage('/checkout/verify');
+                            $('#orderWelcome').hide();
+                            $('#contentContainer').removeClass().addClass("orderingVerifyContent");
+                            break;
+                        case ContentDirect.UI.Page.ShoppingCartCheckout:
+                            $('#emptyCartPopup').hide();
+                            $('#continueShopping').hide();
+                            var cartCount = parseInt(result.message, 10);
+                            if (cartCount == 0) {
+                                $.cd.hideBlocker();
+                                $('#emptyCartPopup').fadeIn('slow');
+                            } else {
+                                if ($.cd.get_isMediaQueryEnabled())
+                                    $('#continueShopping').fadeIn('slow');
+                            }
+                            // don't update the cart count when renewing
+                            if (cartCount != -1) {
+                                $.cd.setCookie(ContentDirect.UI.Const.SHOPPING_CART_ITEM_COUNT, cartCount, 600000);
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }, {
+                name: 'PageSizeChanged',
+                method: function (result) {
+                    var urlProtocol = window.location.protocol;
+                    urlProtocol = urlProtocol.replace(":", "://");
+                    setTimeout(function () {
+                        var height = result.data.height + 100;
+                        var width = $('.content').width();
+
+                        parent.postMessage({
+                            pageDimensions: {
+                                height: height,
+                                width: width
+                            }
+                        }, urlProtocol + defaultsettings.clientUrl.substr(0, defaultsettings.clientUrl.indexOf('.com') + 4));
+                    }, 250);
+                }
+            }, {
+                name: 'OrderCompleted',
+                beforeMethod: function (result) {
+                    //contentdirect.handleOrderCompletedBeforeMethod(result);
+                    // $.cd.flex.storage.clear(true);def
+                    if (!contentdirect.get_settings().useShoppingCart) {
+                        var product = contentdirect.getProductInfo()
+                        $.cd.setCookie("cd_purchased", product.productId + "_" + product.pricingId, 10);
+                    }
+                    $.cd.deleteCookie(ContentDirect.UI.Const.REDEMPT_CODE);
+                },
+                afterMethod: function (result) {
+                    // contentdirect.handleOrderCompletedAfterMethod(result);
+                    var hasSubscriptionGoods = result.data.HasSubscriptionGoods;
+                    var hasDigitalGoods = result.data.HasDigitalGoods;
+                    var orderId = result.data.orderid;
+                    var isQuickCheckout = String(result.data[ContentDirect.UI.Const.IS_QUICK_CHECKOUT]).toBoolean();
+                    var hasPromotionalProduct = String(result.data[ContentDirect.UI.Const.HAS_PROMOTIONAL_PRODUCT]).toBoolean();
+                    var isAnonymousOrder = String(result.data[ContentDirect.UI.Const.IS_ANONYMOUS_ORDER]).toBoolean();
+                    var isGiftOrder = String(result.data[ContentDirect.UI.Const.IS_GIFT_ORDER]).toBoolean();
+
+                    if (hasPromotionalProduct) {
+                        ContentDirectAPI.logAnalytics(null, ContentDirect.UI.AnalyticSection.Product, ContentDirect.UI.AnalyticAction.RedeemedPromotionalProduct, null);
+                        var promotionalProductId = parseInt(result.data[ContentDirect.UI.Const.PROMOTIONAL_PRODUCT_ID]);
+                        //contentdirect.redirectPage("promotionalproduct", "productId=" + promotionalProductId);
+                    }
+
+
+                    // handle custom redirect
+                    var redirectPage = $.cd.getQueryStringValue('return_url');
+
+                    if (redirectPage != "") {
+                        var queryString = "";
+                        var productResults = JSON.parse(result.data.jsonOrder);
+                        var delay = 3000;
+
+                        setTimeout(function () {
+                            window.location = decodeURIComponent(redirectPage) + "?orderId=" + productResults.OrderId;
+                        }, delay);
+
+                    } else {
+                        contentdirect.redirectPage("orderdetails", "destination=orderdetails&orderId=" + orderId + "&showCrossSell=true");
+                    }
+
+                }
+            }
+
+            ]
+        }, {
+            name: "account",
+            isSecured: true,
+            pathName: "/accountmanagement.html",
+            overrideCommands: [{
+                name: 'PageSizeChanged',
+                method: function (result) {
+                    postIframeResize();
+                }
+            },
+            {
+                name: 'AfterInitialized',
+                afterMethod: function (result) {
+                    joinExistingSession(function () {
+                        if (ContentDirectAPI.get_loginInfo().authenticateMode != ContentDirect.UI.AuthenticateMode.Authenticated) {
+                            contentdirect.redirectPage("login", "destination=account");
+                        }
+                        else {
+                            ContentDirectAPI.get_loginInfo().renew();
+                            var subscriberInfo = ContentDirectAPI.createSubscriberInfo(null, ContentDirectAPI.get_loginInfo().userName);
+
+                            var destination = $.cd.getQueryStringValue("redirect");
+                            var accountPageInfo = contentdirect.getClientPageByName(destination);
+
+                            switch (destination) {
+                                case "orders":
+                                    var batchSize = accountPageInfo.resultBatchSize || 15;
+                                    ContentDirectAPI.navigateToAccountManagementDirect(subscriberInfo, ContentDirect.UI.Page.Orders, "batch=" + batchSize);
+                                    break;
+                                case "orderdetails":
+                                    var orderId = $.cd.getQueryStringValue("orderId");
+                                    var showCrossSell = $.cd.getQueryStringValue("showCrossSell") || false;
+                                    ContentDirectAPI.navigateToOrderDetails(subscriberInfo, ContentDirect.UI.Page.OrderDetails, orderId, showCrossSell);
+                                    break;
+                                case "payments":
+                                    ContentDirectAPI.navigateToAccountManagementDirect(subscriberInfo, ContentDirect.UI.Page.Payments);
+                                    break;
+                                case "addresses":
+                                    ContentDirectAPI.navigateToAccountManagementDirect(subscriberInfo, ContentDirect.UI.Page.Addresses);
+                                    break;
+                                case "subscriptions":
+                                    ContentDirectAPI.navigateToAccountManagementDirect(subscriberInfo, ContentDirect.UI.Page.Subscriptions);
+                                    break;
+                                case "devices":
+                                    ContentDirectAPI.navigateToAccountManagementDirect(subscriberInfo, ContentDirect.UI.Page.Devices);
+                                    break;
+                                case "households":
+                                    ContentDirectAPI.navigateToAccountManagementDirect(subscriberInfo, ContentDirect.UI.Page.Households);
+                                    break;
+                                case "profile":
+                                default:
+                                    var isTempPassword = $.cd.getCookie(ContentDirect.UI.Const.IS_TEMP_PASSWORD);
+                                    if (null != isTempPassword && isTempPassword.toBoolean() == true)
+                                        ContentDirectAPI._request(ContentDirect.UI.Command.Navigate, ContentDirect.UI.Page.TempPassword);
+                                    else
+                                        ContentDirectAPI._request(ContentDirect.UI.Command.Navigate, ContentDirect.UI.Page.Profile);
+                                    break;
+                            };
+                        }
+                    });
+                }
+            },
+            {
+                name: 'NavigateCompleted',
+                beforeMethod: function (result) {
+                    $.cd.getCDResources();
+
+                    var height = result.arg.height;
+                    var width = $('.content').width();
+                    ContentDirectAPI.sendMessage(ContentDirect.UI.Command.PageSizeChanged, {
+                        height: height,
+                        width: width
+                    }, 'Page Loaded');
+
+                    switch (result.data) {
+                        case ContentDirect.UI.Page.Profile:
+                            $(".partcontainer-facebooklinkbutton").show();
+                            break;
+                        default:
+                            $(".partcontainer-facebooklinkbutton").hide();
+                            break;
+                    }
+
+                }
+            }, {
+
+                name: 'AfterInitialized',
+                afterMethod: function (result) {
+
+
+                    if (ContentDirectAPI.get_loginInfo().authenticateMode != ContentDirect.UI.AuthenticateMode.Authenticated) {
+                        contentdirect.redirectPage("login", "destination=account");
+                    } else {
+                        ContentDirectAPI.get_loginInfo().renew();
+                        var subscriberInfo = ContentDirectAPI.createSubscriberInfo(null, ContentDirectAPI.get_loginInfo().userName);
+
+                        var destination = $.cd.getQueryStringValue("redirect") || $.cd.getQueryStringValue("destination");
+                        var accountPageInfo = contentdirect.getClientPageByName(destination);
+                        postIframeResize();
+
+                        switch (destination) {
+                            case "orders":
+                                var batchSize = accountPageInfo.resultBatchSize || 15;
+                                ContentDirectAPI.navigateToAccountManagementDirect(subscriberInfo, ContentDirect.UI.Page.Orders, "batch=" + batchSize);
+                                break;
+                            case "orderdetails":
+                                var orderId = $.cd.getQueryStringValue("orderId");
+                                var showCrossSell = $.cd.getQueryStringValue("showCrossSell") || false;
+                                ContentDirectAPI.navigateToOrderDetails(subscriberInfo, ContentDirect.UI.Page.OrderDetails, orderId, showCrossSell);
+                                break;
+                            case "payments":
+                                ContentDirectAPI.navigateToAccountManagementDirect(subscriberInfo, ContentDirect.UI.Page.Payments);
+
+                                break;
+                            case "addresses":
+                                ContentDirectAPI.navigateToAccountManagementDirect(subscriberInfo, ContentDirect.UI.Page.Addresses);
+                                break;
+                            case "subscriptions":
+                                ContentDirectAPI.navigateToAccountManagementDirect(subscriberInfo, ContentDirect.UI.Page.Subscriptions);
+                                break;
+                            case "devices":
+                                ContentDirectAPI.navigateToAccountManagementDirect(subscriberInfo, ContentDirect.UI.Page.Devices);
+                                break;
+                            case "households":
+                                ContentDirectAPI.navigateToAccountManagementDirect(subscriberInfo, ContentDirect.UI.Page.Households);
+                                break;
+                            case "profile":
+                            default:
+                                var isTempPassword = $.cd.getCookie(ContentDirect.UI.Const.IS_TEMP_PASSWORD);
+                                if (null != isTempPassword && isTempPassword.toBoolean() == true)
+                                    ContentDirectAPI._request(ContentDirect.UI.Command.Navigate, ContentDirect.UI.Page.TempPassword);
+                                else
+                                    ContentDirectAPI._request(ContentDirect.UI.Command.Navigate, ContentDirect.UI.Page.Profile);
+                                break;
+                        };
+
+
+
+                    }
+                }
+            }]
+        }, {
+            name: "profile",
+            isSecured: true,
+            pathName: "/accountmanagement.html",
+            overrideCommands: {}
+        }, {
+            name: "payments",
+            isSecured: true,
+            pathName: "/accountmanagement.html",
+            overrideCommands: {}
+        }, {
+            name: "orders",
+            isSecured: true,
+            resultBatchSize: 15,
+            pathName: "/accountmanagement.html",
+            overrideCommands: {}
+        }, {
+            name: "orderdetails",
+            isSecured: true,
+            pathName: "/accountmanagement.html",
+            overrideCommands: {}
+        }, {
+            name: "addresses",
+            isSecured: true,
+            pathName: "/accountmanagement.html",
+            overrideCommands: {}
+        }, {
+            name: "subscriptions",
+            isSecured: true,
+            pathName: "/accountmanagement.html",
+            overrideCommands: {}
+        }, {
+            name: "devices",
+            isSecured: true,
+            pathName: "/accountmanagement.html",
+            overrideCommands: {}
+        }, {
+            name: "households",
+            isSecured: true,
+            pathName: "/accountmanagement.html",
+            overrideCommands: {}
+        }, {
+            name: "uvregistration",
+                isSecured: false,
+            pathName: "/uvregistration.html",
+                overrideCommands: [
+                	{
+	                	name: 'AfterInitialized',
+	                	method: function (result) {
+	                		joinExistingSession(function () {
+		                		if (ContentDirectAPI.get_loginInfo().authenticateMode != ContentDirect.UI.AuthenticateMode.Authenticated) {
+		                			contentdirect.redirectPage("login", "destination=" + $.cd.getQueryStringValue("destination") + "&isUvPr=" + $.cd.getQueryStringValue("isUvPr"));
+		                		} else {
+		                		    ContentDirectAPI.navigateToUvRegistration(true);
+		                		}
+		                	});
+	                	}
+	                },
+					{
+						name: 'Navigate',
+						method: function (result) {
+						    if (result.data == 'MediaLocker') {
+								alert('library redirect');
+								contentdirect.redirectPage("library");
+						    }
+						}
+					},
+					{
+	                    name: 'PageSizeChanged',
+	                    onAfterMethod: function (result) {
+	                        postIframeResize();
+	                    }
+	                },
+					{
+                        name: 'NavigateCompleted',
+                        beforeMethod: function (result) {
+                            $.cd.getCDResources();
+                            var height = result.arg.height;
+                            var width = $('.content').width();
+                            ContentDirectAPI.sendMessage(ContentDirect.UI.Command.PageSizeChanged, {
+                                height: height,
+                                width: width
+                            }, 'Page Loaded');
+                        }
+                    }
+                ]
+        }, {
+            name: "search",
+            isSecured: false,
+            sortDirection: "ascending",
+            sortBy: "productweight",
+            resultBatchSize: 15,
+            pathName: "/search.html",
+            overrideCommands: {}
+        }, {
+            name: "library",
+            isSecured: false,
+            resultBatchSize: 20,
+            wireRequired: true,
+            sortBy: "referencedate",
+            sortDirection: "descending",
+            pathName: "/mylibrary.html",
+            overrideCommands: [{
+                name: 'AfterInitialized',
+                method: function (result) {
+
+                    joinExistingSession(function () {
+
+                        if (!ContentDirectAPI.get_isAuthenticatedOrUnauthenticated()) {
+                            $.cd.showBlocker();
+                            contentdirect.redirectPage("login", "destination=library");
+                        } else {
+                            var sort = contentdirect.getSortByIntValue(contentdirect._currentPage.sortBy);
+                            var direction = contentdirect.getSortDirectionByIntValue(contentdirect._currentPage.sortDirection);
+                            var batchSize = contentdirect._currentPage.resultBatchSize;
+                            var pageNumber = 1;
+
+                            ContentDirectAPI.navigateToLibraryPage(
+                                new ContentDirect.UI.Flex.DTO.SearchLocker({
+                                    DeliveryCapability: null,
+                                    DeliveryCapabilityGroupCode: null,
+                                    IncludeEntitlementContext: true,
+                                    IncludeOrderablePricingPlans: true,
+                                    IncludePreferences: true,
+                                    IncludeViewingContext: true,
+                                    ModifiedSince: null,
+                                    PageNumber: pageNumber,
+                                    PageSize: batchSize,
+                                    SearchString: "",
+                                    SortBy: sort,
+                                    SortDirection: direction,
+                                    StartsWith: null,
+                                    skipResources: false,
+                                    appendProducts: false,
+                                    isInitialPageLoad: true
+                                })
+                            );
+                        }
+                    });
+
+                }
+            }, {
+                name: 'NavigateCompleted',
+                beforeMethod: function (result) {
+                    if (!ContentDirectAPI.get_isAuthenticatedOrUnauthenticated()) {
+                        $.cd.showBlocker();
+                        contentdirect.redirectPage("login", 'destination=library');
+                    }
+
+                    $('.UVLogo').click(function () {
+                        var section = ContentDirect.UI.AnalyticSection.UltraViolet;
+                        var action = ContentDirect.UI.AnalyticAction.SelectUltraVioletLearnMoreLink;
+
+                        ContentDirectAPI.logAnalytics(window.location.host + window.location.pathname, section, action, null);
+                    });
+
+                    switch (result.data) {
+                        case ContentDirect.UI.Page.UVLogin:
+                            $.cd.hideBlocker();
+                            $('#contentContainer').css('height', '');
+                            $('#contentContainer').removeClass().addClass("uvLoginContent");
+                            break;
+                        case ContentDirect.UI.Page.UVRegister:
+                            $.cd.hideBlocker();
+                            $('#contentContainer').css('height', '');
+                            if (!$('#contentContainer').hasClass("mylibraryContent"))
+                                $('#contentContainer').removeClass().addClass("mylibraryContent");
+                            break;
+                        default:
+                            $('#mylibraryWelcome').fadeIn('slow');
+                            $('#footerWrapper').fadeIn();
+                            break;
+                    }
+
+
+
+
+                },
+                onAfterMethod: function (result) {
+                    var urlProtocol = window.location.protocol;
+                    urlProtocol = urlProtocol.replace(":", "://");
+                    var width = $('.content').width();
+                    var loadHeight = $('.content').height();
+                    parent.postMessage({
+                        pageDimensions: {
+                            height: loadHeight,
+                            width: width
+                        }
+                    }, urlProtocol + defaultsettings.clientUrl.substr(0, defaultsettings.clientUrl.indexOf('.com') + 4));
+
+                    setInterval(function () {
+                        var currentHeight = $('.content').height();
+                        if (currentHeight != loadHeight) {
+                            // adjust the iframe's size     
+                            var urlProtocol = window.location.protocol;
+                            urlProtocol = urlProtocol.replace(":", "://");
+                            var height = currentHeight;
+                            width = $('.content').width();
+                            parent.postMessage({
+                                pageDimensions: {
+                                    height: height,
+                                    width: width
+                                }
+                            }, urlProtocol + defaultsettings.clientUrl.substr(0, defaultsettings.clientUrl.indexOf('.com') + 4));
+                            loadHeight = currentHeight;
+
+
+                        }
+                    }, 300);
+
+
+                            $('#libraryContainer').fadeIn('slow');
+                }
+            }
+
+            ]
+        }, {
+            name: "browse",
+            resultBatchSize: 15,
+            isSecured: false,
+            pathName: "/browse.html",
+            overrideCommands: {}
+        }, {
+            name: "watchlist",
+            resultBatchSize: 20,
+            wireRequired: true,
+            sortDirection: "ascending",
+            sortBy: "name",
+            isSecured: false,
+            pathName: "/mywatchlist.html",
+            overrideCommands: {}
+        }, {
+            name: "deviceregistration",
+            isSecured: false,
+            pathName: "/branded.html",
+            overrideCommands: {}
+        }, {
+            name: "error",
+            isSecured: false,
+            pathName: "/error.html",
+            overrideCommands: [{
+                name: 'BeforeLongInitialize',
+                beforeMethod: function (result) {
+                    var errorTypeId = $.cd.getQueryStringValue("___errorTypeId") || 1;
+                    errorTypeId = parseInt(errorTypeId);
+                    switch (errorTypeId) {
+                        case 2: // productnotfound || pricingplannotfound || pagenotfound
+                            $('#notAvailableErrorMessage').show();
+                            break;
+                        case 3: // cdhf_error
+                            var ___errorMsg = decodeURIComponent($.cd.getQueryStringValue("___errorMsg"));
+                            $('#customCDErrorMessage').html("<h2>" + ___errorMsg + "</h2>");
+                            $('#customCDErrorMessage').show();
+                            break;
+                        case 4: // no countries configured
+                            var ___errorMsg = decodeURIComponent($.cd.getQueryStringValue("___errorMsg"));
+                            $('#customCDErrorMessage').html("<h2>" + ___errorMsg + "</h2>");
+                            $('#customCDErrorMessage').show();
+                            break;
+                        case 5: // invalid product id
+                            $('#productNotFoundErrorMessage').show();
+                            break;
+                        case 6: // accessdenied / anonymous proxy user
+                            $('#accessDeniedErrorMessage').show();
+                            break;
+                        default:
+                            $('#tempUnavailableErrorMessage').show();
+                            break;
+                    }
+                }
+            }, {
+                name: 'AfterInitialized',
+                afterMethod: function (result) {
+                    $('#footerWrapper').fadeIn();
+                    contentdirect.showStorefrontContainer();
+                    $.cd.hideBlocker();
+                    $('#errorContainerSection').fadeIn('slow');
+
+                    var urlProtocol = window.location.protocol;
+                    urlProtocol = urlProtocol.replace(":", "://");
+
+                    // adjust the iframe's size                                             
+                    var height = $('.content').height();
+                    width = $('.content').width();
+                    parent.postMessage({
+                        pageDimensions: {
+                            height: height,
+                            width: width
+                        }
+                    }, urlProtocol + defaultsettings.clientUrl.substr(0, defaultsettings.clientUrl.indexOf('.com') + 4));
+
+
+
+
+                }
+            }
+
+
+            ]
+        }, {
+            name: "player",
+            isSecured: false,
+            pathName: "/player.html",
+            overrideCommands: {}
+        }, {
+            name: "redemption",
+            isSecured: false,
+            pathName: "/redemption.html",
+            overrideCommands: {}
+        }, {
+            name: "download",
+            isSecured: false,
+            pathName: "/download.html",
+            overrideCommands: {}
+        }, {
+            name: "customdownload",
+            isSecured: false,
+            pathName: "/customdownload.html",
+            overrideCommands: {}
+        }, {
+            name: "serverbusy",
+            isSecured: false,
+            pathName: "/serverbusy.html"
+        }, {
+            name: "giftcard",
+            isSecured: true,
+            pathName: "/giftcard.html"
+        }, {
+            name: "giftproduct",
+            isSecured: true,
+            pathName: "/giftproduct.html"
+        }, {
+            name: "giftproductredemptioncheckout",
+            isSecured: true,
+            pathName: "/giftproductredemptioncheckout.html"
+        }, {
+            name: "anonymousorderdetails",
+            isSecured: true,
+            pathName: "/anonymousorderdetails.html"
+        }, {
+            name: "giftproductorderdetails",
+            isSecured: true,
+            pathName: "/giftproductorderdetails.html"
+        }
+
+        ],
+        selectors: [{
+            name: "footer",
+            selectorName: "#footerWrapper"
+        }, {
+            name: "authenticatedContainer",
+            selectorName: "._authenticated"
+        }, {
+            name: "anonymousContainer",
+            selectorName: "._anonymous"
+        }, {
+            name: "userName",
+            selectorName: ".userName"
+        }, {
+            name: "headerContents",
+            selectorName: ".headerContents"
+        }, {
+            name: "accountMenu",
+            selectorName: ".accountMenu"
+        }, {
+            name: "topnav",
+            selectorName: ".topnav"
+        }, {
+            name: "subnav",
+            selectorName: ".subnav"
+        }, {
+            name: "subhover",
+            selectorName: ".subhover"
+        }, {
+            name: "topTrigger",
+            selectorName: "a.topTrigger"
+        }, {
+            name: "cdPageMenu",
+            selectorName: "#cdPageMenu"
+        }, {
+            name: "menuKeyword",
+            selectorName: "#menuKeyword"
+        }, {
+            name: "anonymousMenuKeyword",
+            selectorName: "#anonymousMenuKeyword"
+        }, {
+            name: "suggestionMenu",
+            selectorName: "#autocomplete-suggestions-menu"
+        }, {
+            name: "pageHeader",
+            selectorName: ".pageHeader"
+        }, {
+            name: "productGrid",
+            selectorName: "#productgrid"
+        }, {
+            name: "noProductContainer",
+            selectorName: ".noProductContainer"
+        }, {
+            name: "totalCount",
+            selectorName: "#totalCount"
+        }, {
+            name: "ofText",
+            selectorName: "#ofText"
+        }, {
+            name: "categoryList",
+            selectorName: "#categoryList"
+        }, {
+            name: "browseSelectCategoryContainer",
+            selectorName: "#browseSelectCategoryContainer"
+        }, {
+            name: "contentWrapper",
+            selectorName: "#contentWrapper"
+        }, {
+            name: "socialSharingComponent",
+            selectorName: "#socialSharingComponent"
+        }, {
+            name: "bodyWrapper",
+            selectorName: "#bodyWrapper"
+        }, {
+            name: "uvDescriptionComponent",
+            selectorName: "#uvDescriptionComponent"
+        }, {
+            name: "deviceRegistrationMain",
+            selectorName: "#deviceRegistrationMain"
+        }, {
+            name: "redemptionContainer",
+            selectorName: "#redemptionContainer"
+        }, {
+            name: "pricingContainer",
+            selectorName: ".pricingContainer"
+        }]
+    }
+}
+
+function handleRedirect(redirectPath) {
+    ContentDirectAPI.get_loginInfo().renew();
+    var subscriberInfo = ContentDirectAPI.createSubscriberInfo(null, ContentDirectAPI.get_loginInfo().userName);
+    ContentDirectAPI.navigateToAccountManagementDirect(subscriberInfo, ContentDirect.UI.Page.Payments);
+
+}
+
+function onCommandExecuted(result) {
+
+    // Example section for catching and logging analytics
+    /*    if (typeof result.analytic != "undefined") {
+        if (window.console && window.console.log) {
+            logBaseAnalytic(result);
+            if (result.analytic.detail != null) {
+                if (typeof result.analytic.detail.pageTitle != "undefined") {
+                    console.log("Page Title: " + result.analytic.detail.pageTitle);
+                }
+                if (typeof result.analytic.detail.productName != "undefined") {
+                    console.log("Product Name: " + result.analytic.detail.productName);
+                }
+                if (typeof result.analytic.detail.searchKeyword != "undefined") {
+                    console.log("Keyword: " + result.analytic.detail.searchKeyword);
+                }
+                if (typeof result.analytic.detail.bucketContentName != "undefined") {
+                    console.log("Bucket Content Name: " + result.analytic.detail.bucketContentName);
+                }
+                if (typeof result.analytic.detail.featuredPlaylistName != "undefined") {
+                    console.log("Featured Playlist Name: " + result.analytic.detail.featuredPlaylistName);
+                }
+                if (typeof result.analytic.detail.pricingPlanName != "undefined") {
+                    console.log("Pricing Plan Name: " + result.analytic.detail.pricingPlanName);
+                }
+                if (typeof result.analytic.detail.firstName != "undefined") {
+                    console.log("First Name: " + result.analytic.detail.firstName);
+                }
+                if (typeof result.analytic.detail.lastName != "undefined") {
+                    console.log("Last Name: " + result.analytic.detail.lastName);
+                }
+                if (typeof result.analytic.detail.userName != "undefined") {
+                    console.log("User Name: " + result.analytic.detail.userName);
+                }
+                if (typeof result.analytic.detail.isUvLinked != "undefined") {
+                    console.log("Is Uv Linked: " + result.analytic.detail.isUvLinked);
+                }
+                if (typeof result.analytic.detail.isUvAccountCreated != "undefined") {
+                    console.log("Is Uv Account Created: " + result.analytic.detail.isUvAccountCreated);
+                }
+                if (typeof result.analytic.detail.couponCode != "undefined") {
+                    console.log("Coupon Code: " + result.analytic.detail.couponCode);
+                }
+                if (typeof result.analytic.detail.orderId != "undefined") {
+                    console.log("Order Id: " + result.analytic.detail.orderId);
+                }
+                if (typeof result.analytic.detail.isPaymentCreditCard != "undefined") {
+                    console.log("Order Payment Is Credit Card: " + result.analytic.detail.isPaymentCreditCard);
+                }
+                if (typeof result.analytic.detail.isPaymentPayPal != "undefined") {
+                    console.log("Order Payment Is PayPal: " + result.analytic.detail.isPaymentPayPal);
+                }
+                if (typeof result.analytic.detail.orderItems != "undefined") {
+                    _.each(result.analytic.detail.orderItems,
+                        function (item) {
+                            console.log("Order Product Name: " + item.productName);
+                            console.log("Order Pricing Plan Name: " + item.pricingPlanName);
+                            console.log("Order Product Amount: " + item.amount);
+                        });
+                }
+                if (typeof result.analytic.detail.totalAmount != "undefined") {
+                    console.log("Order Total Amount: " + result.analytic.detail.totalAmount);
+                }
+                if (typeof result.analytic.detail.deliveryCapabilityGroupName != "undefined") {
+                    console.log("Delivery Capability Group Name: " + result.analytic.detail.deliveryCapabilityGroupName);
+                }
+                if (typeof result.analytic.detail.personName != "undefined") {
+                    console.log("Person Name: " + result.analytic.detail.personName);
+                }
+            }
+        }
+    }
+    
+    function logBaseAnalytic(result) {
+        console.log("Action: " + result.analytic.action);
+        console.log("Category: " + result.analytic.section);
+        console.log("Page View: " + result.analytic.pageView);
+    };*/
+}
+
+function onErrorCallBack(error) {
+
+}
+
+/*
+    Initialize
+*/
+$.cd.ready(function () {
+
+    ContentDirectAPI.downloadProduct = function (config) {
+
+        ContentDirectAPI.getSessionId(function (session) {
+            $.cd.setCookie("__sId", session.data);
+
+            $.cd.setValueToCache("__dImg", config.ThumbnailUrl || '', null, true);
+            $.cd.setValueToCache("__dName", config.ProductName || '', null, true);
+
+            $.cd.showBlocker();
+            if (!ContentDirectAPI.get_isAuthenticated() || session.data == "") {
+                contentdirect.redirectPage("login", "destination=library");
+                return;
+            } else {
+                var _successCallback = function (data) {
+                    if (data.ModelName == null) {
+                        $.cd.setValueToCache("__dManifest", null != data ? JSON.stringify(data) : null, null, true);
+
+                        $.cd.showModalMessage({
+                            customHtml: 'download.html',
+                            type: 'iframe'
+                        });
+                    } else {
+                        $.cd.hideBlocker();
+                        _nonCFFDownload();
+                    }
+                },
+                    _errorCallback = function (jqXHR, textStatus, errorThrown) {
+                        $.cd.hideBlocker();
+                        $.cd.log(errorThrown);
+                        _nonCFFDownload();
+                    },
+                    _nonCFFDownload = function () {
+
+                        //Uncomment this section to open in Fancybox 
+                        var url = "customdownload.html";
+                        if ($('a#launchDLM').length <= 0) {
+                            $('body').append('<a id="launchDLM"></a>');
+                        }
+
+                        $('a#launchDLM').click(function () {
+                            $.fancybox({
+                                type: 'iframe',
+                                href: url,
+                                width: 800,
+                                height: 500,
+                                scrolling: 'no',
+                                'onClosed': function () {
+                                    csgObj.csgPlayer.stopScrollUpdate();
+                                },
+                                'onStart': function () {
+                                    csgObj.csgPlayer.startScrollUpdate("260");
+                                },
+                            });
+                        });
+
+                        $('a#launchDLM').trigger('click');
+
+                    };
+                ContentDirectAPI.knownRequest(ContentDirect.UI.Command.KnownRequest, "", ContentDirect.UI.Request.PingSession,
+                    function (data) {
+                        var manifestUrls = null;
+                        $.cd.setValueToCache("__dImg", config.ThumbnailUrl || '', null, true);
+                        $.cd.setValueToCache("__dName", config.ProductName || '', null, true);
+                        // See if we have any manifest urls
+                        if (config.Selector != null && config.Selector.length !== 0) {
+                            manifestUrls = config.Selector.attr('cdmanifests');
+                        }
+                        var browserType = $.cd.get_browserInfo().type;
+                        if ((null != manifestUrls && manifestUrls !== 'undefined') &&
+                            (browserType === 2 || browserType === 4)) {
+                            ContentDirectAPI.parseManifests(manifestUrls, _successCallback, _errorCallback);
+                        } else {
+                            $.cd.hideBlocker();
+                            _nonCFFDownload();
+                        }
+                    }, function (data) {
+                        // If the ping throws a SessionExpired error 
+                        if (data.data === ContentDirect.UI.ErrorType.SessionExpired) {
+                            var loginInfo = ContentDirectAPI.get_loginInfo();
+                            loginInfo.clear();
+                            contentdirect.redirectPage("login", "___sessionExpired=true&destination=" + window.location.href);
+                        }
+                    });
+            }
+
+        });
+
+    },
+
+    ContentDirectAPI.searchProductLibraryPage = function (searchLockerDto, showBlocker) {
+        ContentDirectAPI.set_handlePartsRequestCallback(function (result) {
+            if (result.data.PageBuiltStatus == ContentDirect.UI.Flex.PageBuildStatusEnum.FullPageBuilt) {
+                var pageView = window.location.host + window.location.pathname;
+                var section = ContentDirect.UI.Page.LibraryPage;
+                var action = ContentDirect.UI.AnalyticAction.SearchProduct;
+                ContentDirectAPI.logAnalytics(pageView, section, action, $.cd.createSearchProductDetailAnalytic(searchLockerDto.SearchString));
+
+                $.cd.hideBlocker();
+                result.command = ContentDirect.UI.Command.SearchProductCompleted;
+                result.message = result.data;
+                ContentDirectAPI._page = result.data;
+                ContentDirectAPI._eventManager.execute("result", result);
+
+                postIframeResize();
+
+            }
+        });
+        if (showBlocker == null) {
+            showBlocker = true;
+        }
+        ContentDirectAPI.retrieveFlexUILibraryPage(searchLockerDto, showBlocker);
+    };
+
+
+    /*$.cd.showBlocker = function (afterHandler, hideLoading, opacity, opacityColor) {
+        var url = window.location.pathname;
+        var pageName = url.substring(url.lastIndexOf('/') + 1);
+
+        if (pageName.indexOf('handler.html') < 0) {
+            parent.postMessage({
+                triggerLoader: {
+                    visible: true
+                }
+            }, "http://" + defaultsettings.clientUrl.substr(0,defaultsettings.clientUrl.indexOf('.com')+4));
+        }
+
+
+    },
+    $.cd.hideBlocker = function (afterHandler, hideLoading, opacity, opacityColor) {
+        var url = window.location.pathname;
+        var pageName = url.substring(url.lastIndexOf('/') + 1);
+
+        if (pageName.indexOf('handler.html') < 0) {
+            parent.postMessage({
+                triggerLoader: {
+                    visible: false
+                }
+            }, "http://" + defaultsettings.clientUrl.substr(0,defaultsettings.clientUrl.indexOf('.com')+4));
+        }
+
+    },*/
+    $.cd.showBlocker = function (afterHandler, hideLoading, opacity, opacityColor) {
+        var url = window.location.pathname;
+        var pageName = url.substring(url.lastIndexOf('/') + 1);
+
+        if (pageName.indexOf('handler.html') < 0) {
+            // fancybox users a timer to animate their loading gif, but we don't want it for custom loaders
+            var runTimerAnimation = true;
+            if (null != $.fancybox) {
+                try {
+                    $('#fancybox-overlay').focus();
+                } catch (e) { }
+
+                if ($('#fancybox-overlay').length <= 0) {
+                    $.fancybox.init();
+                }
+                var isSinglePageApplication = null != $.cd._userSettings && $.cd._userSettings.singlePageApplication;
+                if (isSinglePageApplication) {
+                    $('#fancybox-overlay').css("z-index", "902");
+                }
+
+                $.fancybox.showOverlay(hideLoading | false, opacity, opacityColor, runTimerAnimation);
+                if (afterHandler != null)
+                    afterHandler.call();
+            }
+        }
+
+    },
+     contentdirect.proceedUpgradeProductSinglePurchase = function (result) {
+         var params = result.arg;
+         var userId = $.cd.getQueryStringValue("__u");
+         var sessionId = $.cd.getQueryStringValue("__s");
+         var firstName = $.cd.getQueryStringValue("__fn");
+         var lastName = $.cd.getQueryStringValue("__ln");
+         var email = $.cd.getQueryStringValue("__em");
+         var returnUrl = $.cd.getQueryStringValue("returnURL");
+
+         contentdirect.setProductInfo(params.productId, params.pricingId);
+         $.cd.deleteCookie("cd_purchased");
+         ContentDirectAPI.get_loginInfo().updateCartInfo(null, null, params.isUvPr, contentdirect._settings.useShoppingCart);
+         contentdirect.redirectPage("checkout", "productId=" + params.productId + "&subProdId=" + params.subProdId + "&pricingId=" + params.pricingId + "&isUvPr=" + params.isUvPr + "&isUpgrade=true" + "&isSingleProductCheckout=true" + "&__u=" + userId + "&__s=" + sessionId + "&__fn=" + firstName + "&__ln=" + lastName + "&__em=" + email + "&return_url=" + returnUrl);
+     },
+     contentdirect.proceedNormalProductSinglePurchase = function (result) {
+         var params = result.arg;
+         contentdirect.setProductInfo(params.productId, params.pricingId);
+         $.cd.deleteCookie("cd_purchased");
+         ContentDirectAPI.get_loginInfo().updateCartInfo(null, null, params.isUvPr, contentdirect._settings.useShoppingCart);
+         var url = window.location.href;
+         var pageName = url.substring(0, url.lastIndexOf('/') + 1);
+         var sessionId = csgObj.getQueryStringVar(url, "__s");
+         var returnUrl = csgObj.getQueryStringVar(url, "return_url");
+         var subId = csgObj.getQueryStringVar(url, "__u");
+         var firstName = csgObj.getQueryStringVar(url, "__fn");
+         var lastName = csgObj.getQueryStringVar(url, "__ln");
+         var email = csgObj.getQueryStringVar(url, "__em");
+         //var customUrl = pageName + "handler.html?__s=" + sessionId + "&__u=" + subId + "&redirect=checkout&productId=" + params.productId + "&pricingId=" + params.pricingId + "&subProdId=" + params.subProdId + "&isUvPr=" + params.isUvPr + "&return_url=" + returnUrl;
+
+         //window.location = customUrl;
+         contentdirect.redirectPage("checkout", "__s=" + sessionId + "&__u=" + subId + "&__fn=" + firstName + "&__ln=" + lastName + "&__em=" + email + "&__byPassJoin=true" + "&productId=" + params.productId + "&pricingId=" + params.pricingId + "&subProdId=" + params.subProdId + "&isUvPr=" + params.isUvPr + "&isSingleProductCheckout=" + !contentdirect._settings.useShoppingCart + "&return_url=" + returnUrl);
+     },
+     contentdirect.handleCommonCommand = function (result) {
+         switch (result.command) {
+             case ContentDirect.UI.Command.BeforeLongInitialize:
+                 contentdirect.hideStorefrontContainer();
+                 break;
+             case ContentDirect.UI.Command.AfterInitialized:
+                 if (ContentDirectAPI.get_isAuthenticatedOrUnauthenticated()) {
+                     ContentDirectAPI.get_loginInfo().renew();
+                 }
+                 break;
+             case ContentDirect.UI.Command.LogoutCompleted:
+                 //window.location.reload(true);
+                 break;
+             case ContentDirect.UI.Command.Logout:
+
+
+
+                 break;
+             case ContentDirect.UI.Command.LoginCompleted:
+                 contentdirect.redirectPage("index");
+                 break;
+             case ContentDirect.UI.Command.LoginRequested:
+                 contentdirect.redirectPage("login");
+                 break;
+             case ContentDirect.UI.Command.RegisterRequested:
+                 if ($.cd.getQueryStringValue("destination") == "checkout") {
+                     var queryString = {
+                         destination: "register",
+                         finalDestination: "checkout"
+                     };
+                     contentdirect.redirectPage('register', $.cd.convertObjectToQueryString(queryString), null, true);
+                 } else {
+                     contentdirect.redirectPage('register', "destination=register", null, true);
+                 }
+                 break;
+             case ContentDirect.UI.Command.ProductRequested:
+                 contentdirect.redirectPage("product", "productId=" + result.data.id, result.data.htmlTarget);
+                 break;
+             case ContentDirect.UI.Command.PersonRequested:
+                 contentdirect.redirectPage("person", "personId=" + result.data.id, result.data.htmlTarget);
+                 break;
+             case ContentDirect.UI.Command.EpisodicProductRequested:
+                 contentdirect.redirectPage("episodicproduct", "productId=" + result.data.id, result.data.htmlTarget);
+                 break;
+             case ContentDirect.UI.Command.SeriesProductRequested:
+                 contentdirect.redirectPage("seriesproduct", "productId=" + result.data.id, result.data.htmlTarget);
+                 break;
+             case ContentDirect.UI.Command.BundleProductRequested:
+                 contentdirect.redirectPage("bundleproduct", "productId=" + result.data.id, result.data.htmlTarget);
+                 break;
+             case ContentDirect.UI.Command.PageRequested:
+                 var pageId = result.message;
+                 contentdirect.redirectPage("index", "pageId=" + pageId, result.data.htmlTarget);
+                 break;
+             case ContentDirect.UI.Command.BundleSelected:
+                 contentdirect.setProductInfo(result.arg.productId, result.arg.pricingId);
+                 contentdirect.redirectPage("bundleoptions", "productId=" + result.arg.productId + "&pricingId=" + result.arg.pricingId)
+                 break;
+             case ContentDirect.UI.Command.FacebookSignUpRequested:
+                 var finalDestination = $.cd.getQueryStringValue("destination");
+                 contentdirect.redirectPage("login", "destination=register&finalDestination=" + finalDestination);
+                 break;
+             case ContentDirect.UI.Command.PricingPlanSelected:
+                 contentdirect.handlePricingPlanSelected(result);
+                 break;
+             case ContentDirect.UI.Command.GiftingProductSelected:
+                 var shoppingCart = new ContentDirect.UI.ShoppingCartDTO(result.data);
+                 var shoppingCartModel = new ContentDirect.UI.ShoppingCartModel(shoppingCart);
+                 var shoppingCartItem = shoppingCart.OrderItems[0];
+
+                 var jsonString = JSON.stringify(shoppingCart);
+
+                 $.cd.setValueToCache(ContentDirect.UI.Const.SHOPPING_CART_DTO, jsonString);
+                 //should only have one item in the shopping cart for gift products and gift cards.
+                 var shoppingCartDto = new ContentDirect.UI.ShoppingCartItemDTO(shoppingCartModel.get_firstShoppingCartItem());
+
+                 if (shoppingCartDto.IsGiftProduct) {
+                     contentdirect.proceedGiftProductPurchase(shoppingCartModel.get_firstShoppingCartItem());
+                 } else {
+                     contentdirect.proceedGiftCardPurchase(shoppingCartModel.get_firstShoppingCartItem());
+                 }
+
+                 break;
+             case ContentDirect.UI.Command.EditGiftingProductInCheckoutSelected:
+                 if (result.data.IsGiftProduct) {
+                     contentdirect.redirectPage('giftproduct', "productId=" + result.data.ProductId, null, true);
+                 } else {
+                     if (ContentDirectAPI.get_loginInfo().authenticateMode != ContentDirect.UI.AuthenticateMode.Authenticated) {
+                         contentdirect.redirectPage('giftcard', "productId=" + result.data.ProductId + '&continueCheckoutAsGuest=true', null, true);
+                     } else {
+                         contentdirect.redirectPage('giftcard', "productId=" + result.data.ProductId, null, true);
+                     }
+                 }
+                 break;
+             case ContentDirect.UI.Command.DownloadModalClosed:
+                 ContentDirectAPI.pageReload(result.data.page, result.data.productId, result.data.pricingId);
+                 break;
+             case ContentDirect.UI.Command.BrowseCategory:
+                 contentdirect.redirectPage("browse", "catId=" + result.message, null, null, false);
+                 break;
+             case ContentDirect.UI.Command.NavigateCompleted:
+                 contentdirect.showStorefrontContainer();
+
+                 break;
+             case ContentDirect.UI.Command.UVError:
+                 ContentDirectAPI.navigateToUvRegistration(true);
+                 if (result.message == "ProcessedForDifferentSubscriber") {
+                     $.cd.showModalMessage($.cd.getCDResource("uv_error_differentuser", "UltraViolet error occurred."));
+                 }
+                 break;
+             case ContentDirect.UI.Command.UVCompleted:
+        	//https://cdchicago.com/LAB/cineplex/SBX/v5.5HTM1/digital/uvregistration.htmlÃ¢â‚¬Â¦_u=273649&__fn=Chris&__ln=Avila&__em=chris.avila@csgi.com&isDebugMode=true
+			var destination = $.cd.getQueryStringValue("destination");
+
+			var params = window.location.search.substring(1);
+			params = params.replace(/destination=[a-z]*&/,'');
+			params = params.replace(/&isUvLinked=false/,'&isUvLinked=true');
+
+			contentdirect.redirectPage(destination, params);
+                 break;
+             case ContentDirect.UI.Command.CheckoutFromShoppingCart:
+                 contentdirect.deleteProductInfo();
+                 contentdirect.redirectPage("checkout");
+                 break;
+             default:
+                 break;
+         }
+     };
+
+
+    if (contentdirect != null && contentdirect.initialize != null) {
+        contentdirect.initialize(defaultsettings);
+    }
+}, defaultsettings);
+
+function joinExistingSession(callback) {
+    //var cookies = $.cd.getCookie('csgLogin');
+    //var splitCookies = cookies.split('&');
+    var csgValues = {};
+
+    /*for(var i=0; i < splitCookies.length; i++) {
+      var value = splitCookies[i].match(/__\w+/gi);
+      splitCookies[i] = splitCookies[i].replace(/__\w+=/gi,'');
+      csgValues[value] = splitCookies[i];
+    }*/
+
+
+    var currentHtmlUser = $.cd.getCookie('csgCurrentSubId');
+    csgValues["__u"] = $.cd.getQueryStringValue("__u");
+    csgValues["__em"] = $.cd.getQueryStringValue("__em");
+    csgValues["__fn"] = $.cd.getQueryStringValue("__fn");
+    csgValues["__ln"] = $.cd.getQueryStringValue("__ln");
+    csgValues["__s"] = $.cd.getQueryStringValue("__s");
+	csgValues["__isUvLinked"] = $.cd.getQueryStringValue("isUvLinked") != "" ? $.cd.getQueryStringValue("isUvLinked") : false;
+
+    if (csgValues["__u"] != currentHtmlUser) {
+        $.cd.setCookie('csgCurrentSubId', csgValues["__u"], 60000);
+        ContentDirectAPI.sendMessage(ContentDirect.UI.Command.Teardown, null);
+    }
+
+    var currentUser = ContentDirectAPI.get_loginInfo();
+
+    ContentDirectAPI.updateSubscriberInfo(
+        csgValues["__u"],
+        csgValues["__em"],
+        csgValues["__fn"],
+        csgValues["__ln"],
+        Boolean(csgValues["__isUvLinked"]),
+        function (dataObj) {
+        	currentUser.update(csgValues["__em"], csgValues["__fn"], true, true, csgValues["__u"], ContentDirect.UI.AuthenticateMode.Authenticated, Boolean(csgValues["__isUvLinked"]));
+		ContentDirectAPI.setContextFieldItem("cntry", "CAN");
+            return callback();
+        },
+        null,
+        null,
+        csgValues["__s"],
+		"CAN"
+    );
+
+}
+
+function postIframeResize() {
+    var urlProtocol = window.location.protocol;
+    urlProtocol = urlProtocol.replace(":", "://");
+    setTimeout(function () {
+        var height = $('.content').height();
+        var width = $('.content').width();
+        parent.postMessage({
+            pageDimensions: {
+                height: height,
+                width: width
+            }
+        }, urlProtocol + defaultsettings.clientUrl.substr(0, defaultsettings.clientUrl.indexOf('.com') + 4));
+    }, 600);
+}
+function checkSilverlightClientsNotSupported(callback) {
+    var userBrowserInfo = $.cd.get_browserInfo();
+    var notSupportedArray = "";
+    var isSupported = true;
+    switch(userBrowserInfo.OS) {
+        case "Windows":
+            notSupportedArray = defaultsettings.silverlightClientsNotSupported.windows.browser;
+            break;
+        case "Mac":
+            notSupportedArray = defaultsettings.silverlightClientsNotSupported.mac.browser;
+            break;
+    }
+    if(notSupportedArray != "" && notSupportedArray.length > 0) {
+        // Check browser name and version.  If exists... return false
+        notSupportedArray.forEach(function(browser) {
+            if(userBrowserInfo.browser == browser.name && userBrowserInfo.version >= browser.version) {
+                isSupported = false;
+                return;
+            }
+        });
+    } 
+    return callback(isSupported);
+}

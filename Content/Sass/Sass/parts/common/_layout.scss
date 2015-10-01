@@ -1,0 +1,114 @@
+﻿@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+	html{
+			font-size: 80%;
+		}
+}
+
+body *[cduv="true"], body *[cduv="True"]
+{
+	display:block;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    color: #696969;
+    background-color: #fff;
+    background-image: url(../Assets/CDfullBG.jpg);
+    background-repeat: repeat-x;
+	line-height: 1;
+
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		background-position: center -50px;
+		font-size: 85%;
+    }
+}
+
+.wrapper {
+	width: 100%;
+	background-repeat: no-repeat;
+	background-position: center top;
+	min-width:1000px;
+
+	@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width)  {
+		width: 100%;
+		min-width:300px;
+	}
+}
+
+@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width)  {
+	#wrapper {
+		width: 100%;
+		min-width:300px;
+	}
+}
+
+.interiorPageWrapper 
+{
+    background-image: url(../Assets/pageMenuBG.png);
+    background-position: center top;
+    background-repeat: repeat-x;
+	@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width)  {
+		background: none;
+		background-position: center -14px;
+	}
+}
+
+#contentWrapper {
+	width: 100%;
+	background-position: center 0;
+	background-repeat:no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+	@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width)  {
+		background-position: center 33px;
+	}
+}
+
+.content {
+    margin: 15px auto 0;    
+    width:990px;
+    overflow:hidden;
+	@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width)  {
+		margin: 40px 0 0 0;    
+		max-width:100%;
+		width: 100%;
+	}
+}
+
+#contentContainer 
+{
+	margin: 0 auto;	
+}
+
+#cartPopupContainer {
+    width: 550px;
+    height: 200px;
+
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		width: 300px;
+	    height: 220px;
+    }
+}
+
+#uvRedirectContainer
+{
+	width: 550px;
+	height: 200px;
+	@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		width: 300px;
+	    height: 220px;
+    }
+}
+
+#continueShopping
+{
+    display: none;
+
+	@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width)  {
+		display: inline;
+	}
+
+}

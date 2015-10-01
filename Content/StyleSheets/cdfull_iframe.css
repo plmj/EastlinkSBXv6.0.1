@@ -1,0 +1,1615 @@
+/*Following code will hide Entire UV related items */
+body *[cduv="true"], body *[cduv="True"] {
+  display: block;
+}
+
+/*Following code will hide Entire Facebook related items */
+body *[cdFacebook="true"], body *[cdFacebook="True"] {
+  display: block;
+}
+input[type="text"], input[type="password"],
+select {
+	width: 93%;
+}
+.mainButton {
+	background: #332A86;
+}
+.mainButton:hover {
+	background: #332A86;
+}
+.hoverEffect:hover {
+	border: 0px;
+}
+a.mainButton, a.mainButton:visited, a.mainButton:active, a.mainButton:focus {
+	color: #fff;
+	background: #332A86;
+}
+a.cancelAction, a.cancelAction:visited, a.cancelAction:active, a.cancelAction:focus {
+	color: #fff;
+	background: #555;
+}
+
+.facebook-container.top {
+  display: none;
+}
+
+#checkoutBackButton {
+  display: none;
+}
+
+/* Functional Style */
+body ._messageOnly {
+  display: none;
+}
+
+body ._redirect {
+  display: block;
+}
+
+.dependencyContainer {
+  width: 600px;
+  height: auto;
+  padding: 30px;
+  margin: 0 auto;
+}
+
+/* Following code will show/hide Quantity field in Order Summary */
+/*body ._showQuantity
+{
+    display:block;
+}
+*/
+/*** Help Page ***/
+.chat-link-url-container {
+	display: none;
+}
+#submitSupportEmailForm input {
+	width: 92%;
+}
+/*** Ordering Page ***/
+
+.rightColumn #termsAndConditionsContainer {
+    margin: 0 auto;
+    text-align: center;
+    width: 40%;
+    margin-bottom: 5px;
+}
+
+.rightColumn #termsAndConditionsContainer label {
+    display: inline-block;
+    font-size: 12px;
+    line-height: 18px;
+}
+.rightColumn #termsAndConditionsContainer a {
+	font-size: 12px;
+	padding-left: 3px;
+}
+.simplecheckout .screenTitle{
+	display: none;
+}
+#simpleCreditCardNewHeaderContainer h2 {
+	display: none;
+}
+#simpleCreditCardDetailsFormContainer {
+	margin-left: 15px;
+	width: 46%;
+}
+#simpleCreditButtonContainer {
+	margin: 15px 15px 15px 0;
+}
+#orderItemsHeader{
+	background: none;
+	color: #5e5e5e;
+	padding: 0px;
+	font-size: 14px;
+	line-height: 42px;
+	margin: 0 0 0px 15px;
+}
+#simpleBillingSection .simpleCheckoutHeader {
+	background: none;
+	color: #5e5e5e;
+	padding: 0px;
+	font-size: 14px;
+	line-height: 42px;
+	padding: 0 0 0px 15px;
+	border: 1px solid #ccc;
+	border-radius: 6px 6px 0 0px;
+	-webkit-border-radius: 6px 6px 0 0px;
+	width: auto;
+	display: none;
+}
+#orderItemsColumnHeaders {
+	display: none;
+}
+#simpleOrderTotalsPartialContainer .lineitems {
+}
+#simpleCheckout .simpleCheckoutSection {
+	margin: 0px;
+	background: none;
+	
+}
+#simpleBillingMenuContainer {
+	margin: 0px;
+	background: none;
+	color: #5e5e5e;
+	padding: 0px;
+	font-size: 14px;
+	line-height: 32px;
+	padding: 0;
+	border-bottom: 1px solid #ccc;
+	width: auto;
+}
+#simpleBillingMenuContainer .simpleBillingOptionButton {
+  float: left;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  color: #757575;
+  border-radius: 0;
+  background: none;
+  text-align: center;
+  box-shadow: none;
+  width: 50%;
+  font-size: 14px;
+	line-height: 40px;
+}
+#simpleBillingMenuContainer .selected {
+    color: #434343;
+    border-radius: 0;
+    background: none;
+}
+.external-bill-account-nickname span, .external-bill-will-be-used-container span {
+	font-size: 14px;
+	line-height: 42px;
+}
+#simpleCreditCardDisplayContainer .cardInfo .nameOnCard,
+#simpleCreditCardDisplayContainer .cardInfo .cardNumberContainer,
+#simpleCreditCardDisplayContainer .cardInfo .expDate,
+#simpleCreditCardDisplayContainer .address .addressLine1, 
+#simpleCreditCardDisplayContainer .address .addressLine2, 
+#simpleCreditCardDisplayContainer .address .addressCityStatePostal, 
+#simpleCreditCardDisplayContainer .address .addressCountry
+.external-bill-account-name-on-account,
+.external-bill-account-number {
+	font-size: 12px;
+	line-height: 28px;
+}
+
+#simpleBillingMenuContainer .simpleBillingOptionButton.selected a {
+	font-size: 14px;
+	line-height: 40px;
+	color: #332A86;
+}
+#simpleShippingButtonContainer ul li, #simpleCreditButtonContainer ul li, #simplePayPalButtonContainer ul li {
+	float: right;
+}
+#simpleCheckout #simpleCouponSection {
+	margin: 0px;
+	width: auto;
+	border: 1px solid #ccc;
+	border-top: 0px;
+	border-bottom: 0px;
+}
+#simpleBillingPartialsContainer {
+	width: 100%;
+	padding: 0px;
+	background: none;
+	border-bottom: none;
+	border-radius: 0 0px;
+	-webkit-border-radius: 0 0px;
+	border-top: 0px;
+}
+#simpleBillingForm {
+	border: 1px solid #ccc;
+	border-radius: 6px 6px 0 0px;
+	-webkit-border-radius: 6px 6px 0 0px;
+}
+.simpleExternalBillForm {
+	min-height: 0px;
+}
+#ExternalBillAccountDetailsContainer li {
+	padding-left: 15px;
+}
+#billingFormContainer {
+	margin: 0px;
+	width: auto;
+	border-top: 0px;
+	border-bottom: 0px;
+	
+}
+.defaultExternalBillPaymentCheckContainer {
+	display: none !important;
+}
+.external-bill-will-be-used-container {
+	padding-left: 15px;
+}
+#simpleExternalBillButtonContainer {
+	float: none;
+	margin: 0px auto 20px;
+	width: 200px;
+}
+#simpleCreditCardSelectHeaderContainer {
+	display: none;
+}
+#simpleCreditCardCreateNewButton {
+    float: right;
+    background-image: none;
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding: 0px 15px 0px 0px;
+    color: #332A86;
+    font-size: 14px;
+}
+.simpleShippingAddress .action, .simpleBillingCreditCard .action, .simpleBillingECheck .action {
+    padding: 2px 5px 4px;
+    float: right;
+    background-color: #332A86;
+    border-radius: 0px 4px;
+}
+#simpleCouponFormContainer {
+	margin: 0px;
+	width: 100%;
+	padding: 0px;
+	border: 0px;
+	border-radius: 0px;
+	-webkit-border-radius: 0px;
+}
+#simpleCreditCardChangeButton,
+#simpleCreditCardDisplayPartialContainer .cardInfo .nameOnCard {
+	font-size: 14px;
+	line-height: 42px;
+}
+#simpleCreditCardChangeButton {
+	margin-right: 5px;
+	color: #332A86;
+}
+#simpleCreditCardDisplayPartialContainer .payment {
+	margin: 0 0 15px 15px;
+	width: 20%;
+}
+#simpleCreditCardDisplayPartialContainer .address {
+	margin: 42px 0 15px 0px;
+	padding: 0px;
+}
+#simpleCouponFormContainer .minorLabel {
+	font-size: 12px;
+	line-height: 42px;
+	margin: 0 0 0px 15px;
+}
+#simpleCouponFormContainer label {
+	font-size: 14px;
+	line-height: 42px;
+	margin: 0 0 0px 15px;
+}
+#simpleCouponFormContainer #couponCode {
+	margin: 0 0 15px 15px;
+}
+#simpleCouponSection #applyCouponButton {
+	margin: 0 0 15px 15px;
+	line-height: 38px;
+	color: #332A86;
+}
+#simpleCheckout #shoppingCartContainer {
+	border: 1px solid #ccc;
+	width: auto;
+	border-radius: 0 0px 0px 0px;
+	-webkit-border-radius: 0 0px 0px 0px;
+}
+#simpleCheckout #orderItemsContainer {
+	margin: 0px;
+	float: none;
+	padding-bottom: 10px;
+}
+#simpleCheckout #orderItemsContainer .productRow {
+	border: 0px;
+}
+#orderItemsContainer .productImage {
+	max-height: 80px;
+	max-width: 1000px;
+	padding: 0px;
+	margin: 0 0 15px 15px;
+}
+#orderItemsContainer .productName{
+	font-size: 14px;
+}
+#orderItemsContainer .planName {
+	font-size: 12px;
+}
+#shoppingCartContainer .thirdColumn {
+	font-size: 14px;
+}
+#orderItemsContainer .productContainer .productImageContainer {
+	margin-right: 15px;
+}
+#orderSummary {
+	border: 0px;
+	background: none;
+	box-shadow: none;
+	-webkit-box-shadow: none;
+	padding: 0px;
+	margin: 0px;
+	width: 100%;
+	clear: both;
+}
+#simpleCheckout #orderSummary .secondaryHeader {
+	color: #5e5e5e;
+	font-size: 14px;
+	border-bottom: 0px;
+	line-height: 42px;
+	padding: 0px;
+	margin-left: 15px;
+}
+#simpleCheckout #orderSummary .label {
+	margin: 0px 0px 0px 15px;
+	font-size: 14px;
+	line-height: 24px;
+	width: auto;
+	text-align: left;
+	font-weight: normal;
+	float: left;
+	display: inline-block;
+	clear: left;
+}
+#simpleCheckout #orderSummary .value {
+	margin: 0px 15px 0px 0px;
+text-align: right;
+width: auto;
+font-size: 14px;
+line-height: 24px;
+display: inline-block;
+float: right;
+clear: right;
+}
+#simpleCheckout .total {
+	color: #332A86;
+}
+#simpleCheckout #orderSummary .lineitems .label {
+	font-size: 10px;
+}
+#simpleCheckout #orderSummary .lineitems .value {
+	font-size: 10px;
+}
+#simpleCheckout .leftColumn {
+	margin: 0 auto;
+	float:none;
+	width: 100%;
+	min-width: 300px;
+}
+#simpleCheckout .rightColumn {
+	margin: 0 auto;
+	border: 1px solid #ccc;
+	float: none;
+	width: auto;
+	min-width: 300px;
+	border-top: 0px;
+	border-radius: 0 0px 6px 6px ;
+	-webkit-border-radius: 0 0px 6px 6px;
+}
+.simplecheckout {
+	width: 100%;
+	max-width: 990px;
+	margin: 0 auto;
+}
+#simpleCheckout #simpleOrderTotalsPartialContainer {
+	margin: 0px;
+}
+#submitOrderButton {
+	margin: 0px auto 15px;
+	text-align: center;
+	width: 40%;
+	min-width: 200px;
+	background: #332A86;
+	
+}
+/*** Registration Page ***/
+html .partcontainer-registrationform .partcontent-registrationform {
+	width: 80%;
+	float: none;
+	max-width: 900px;
+	margin: 0 auto;
+	min-width: 300px;
+	margin-top: 30px;
+}
+.partcontainer-registrationform-title {
+	margin-bottom: 15px;
+}
+.partcontent-registrationform label {
+	font-size: 14px;
+}
+.pagecontainer-registrationpage .partcontent {
+	width: 80%;
+	float: none;
+	max-width: 900px;
+	margin: 0 auto;
+	min-width: 300px;
+	margin-top: 30px;
+	box-shadow: none;
+	-webkit-box-shadow: none;
+}
+.partcontent-validationsubmit .form-group {
+	float: right;
+	width: auto;
+}
+.partcontent-validationsubmit .form-group div{
+	display: inline-block;
+}
+/*** Login ****/
+#forgotPasswordTitle,
+#helpPageTitle,
+html .existing-users-login-message,
+#checkoutPageTitle {
+	font-size: 28px;
+	line-height: 68px;
+	background: #fcfcfc;
+	border-top: 1px solid #e5e5e5;
+	border-bottom: 1px solid #e5e5e5;
+	text-align: center;
+	font-weight:normal;
+	color: #000;
+}
+#forgotPasswordTitle h1,
+#helpPageTitle h1,
+html .existing-users-login-message h1,
+#checkoutPageTitle h1 {
+	font-weight: normal;
+	font-size: 28px;
+	line-height: 68px;
+	color: #000;
+	margin: 0px;
+}
+.pagecontainer-loginpage {
+	width: 100%;
+	margin: 0 auto;
+}
+.login-form-existing-users-form {
+	text-align: right;
+	max-width: 400px;
+	margin: 0 auto;
+}
+.login-form-existing-users-form input[type="radio"],
+.login-form-existing-users-form input[type="checkbox"] {
+	vertical-align: middle;
+	margin: 0px;
+}
+
+.login-form-existing-users-form div {
+	margin-bottom: 10px;
+}
+.login-form-existing-users-form .btn-action-container a,
+.login-form-existing-users-form .btn-action-container {
+	float: none;
+	margin: 0px;
+}
+#loginform-forgotpassword-btn {
+	font-size: 12px;
+	text-align: center;
+	margin-top: 15px;
+}
+.login-form-existing-users-form label {
+	line-height: 34px;
+	font-size: 14px;
+}
+.forgotpassword {
+	width: 100%;
+	max-width: 990px;
+	margin: 0 auto;
+	
+}
+html .partcontent-loginform {
+}
+
+html #loginform-forgotpassword-btn a {
+  display: block;
+  text-align: center;
+  font-size: 14px;
+}
+.remember-me {
+	font-size: 12px;
+}
+html #continue_checkout_as_guest-container {
+  clear: both;
+  margin-bottom: 20px;
+}
+html #login_form_existing_users_buttons {
+  margin: 15px 0 30px 0;
+  clear: both;
+}
+html #login_form_existing_users_buttons .btn-action-container a {
+  float: left;
+  width: 80%;
+}
+html #facebook-loginlinkbutton-container {
+  clear: both;
+  border-top: 1px dotted #000;
+  padding: 20px 0 15px 0;
+  overflow: hidden;
+}
+html #facebook-loginlinkbutton-container h1 {
+  text-align: center;
+  margin: 0 0 15px 0;
+}
+html #facebook-loginlinkbutton-container a {
+  text-indent: 0;
+}
+html #loginSessionExpired {
+  background-color: #8A0A0A;
+  clear: both;
+  float: none;
+  font-size: 11px;
+  line-height: 15px;
+  margin: 20px auto -10px;
+  overflow-x: hidden;
+  padding: 5px;
+  text-align: center;
+  border-radius: 4px;
+  -moz-border-radius: 4px 4px 4px 4px;
+  width: 425px;
+  color: #C4C4C4;
+}
+html[dir=rtl] #login_form_existing_users_buttons .btn-action-container {
+  float: right;
+}
+html[dir=rtl] .facebook-container .facebook-button, html[dir=rtl] .facebook-button {
+  float: right;
+}
+html[dir=rtl] #facebook-loginlinkbutton-container h1 {
+  text-align: right;
+}
+
+html .partcontent-signupbuttons {
+}
+html .content-firsttimeuserloginsection {
+  overflow: hidden;
+  max-width: 400px;
+  margin: 0 auto;
+  background: none repeat scroll 0 0 #fcfcfc;
+}
+
+.content-firsttimeuserloginsection h1 {
+	font-size: 16px;
+	line-height: 33px;
+	float: right;
+}
+.content-firsttimeuserloginsection a {
+ float: right;
+}
+html .content-firsttimeuserloginsection .mainButton {
+	float: none;
+	display:inline-block;
+	margin: 15px 0;
+}
+html .content-firsttimeuserloginsection h1 {
+	float: none;
+	display:inline-block;
+	margin: 15px 0;
+}
+html .content-firsttimeuserloginsection .btn-action-container {
+  float: left;
+  width: 100%;
+  border: 1px solid #e5e5e5;
+  
+}
+html .signup-devidetext-container {
+  float: left;
+  width: 200px;
+}
+html .signup-devidetext-container h1 {
+  margin-bottom: 10px;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+html .facebook-container {
+  float: left;
+  overflow: hidden;
+  width: 100%;
+}
+html .facebook-container .facebook-title {
+  border-top: 1px dotted;
+  margin: 10px 0;
+  text-align: left;
+  padding-left: 12px;
+  width: 100%;
+}
+html .pagecontainer-registrationpage .facebook-container .btn-facebook-signup {
+  text-align: right;
+}
+
+html[dir=rtl] .content-firsttimeuserloginsection .btn-action-container {
+  float: right;
+}
+html[dir=rtl] .signup-devidetext-container {
+  float: right;
+}
+
+.isDefault {
+	font-size: 14px;
+	background: none;
+}
+.container {
+	margin-top: 10px;
+}
+.content {
+	padding: 0px;
+}
+.screenTitle {
+	padding: 0px;
+}
+/*** Account Management *****/
+#accountInformation {
+	font-size: 14px;
+	margin-top: 10px;
+}
+#accountInformation .communicationPreferencesContainer {
+	display: none;
+}
+#accountInformation .securityQuestionsContainer {
+	display: none;
+}
+#accountInformation .containerHeader{
+	margin-bottom: 15px;
+}
+#accountInformation #editProfileButton {
+    margin: 0px 0px 0px;
+    display: none;
+}
+#accountInformation #editEmailButton,
+#accountInformation #editSecurityButton,
+#accountInformation #editPasswordButton {
+	margin-top: 10px;
+	display: none;
+}
+#accountInformation label {
+	font-size: 14px;
+	display: inline;
+}
+
+#accountInformation .secondarycontainerHeader {
+	display: none;
+}
+#accountInformation .content {
+	padding: 0px;
+}
+#accountInformation .secondaryButton,
+#accountInformation a {
+	color: #332A86;
+	font-size: 14px;
+}
+#accountInformation .loginContainer {
+	display: none;
+}
+#accountInformation .birthdayContainer {
+	display: none;
+}
+#personalInformation {
+	padding: 0px;
+}
+#personalInformation .leadSourceContainer {
+	display: none;
+}
+#personalInformation .genderContainer {
+	display: none;
+}
+#personalInformation .communicationContainer h1{
+	display: none;
+}
+#personalInformation li {
+	padding-bottom: 10px;
+}
+#loginInformation h1[cdresource="change_login_need_password_title"] {
+	display: none;
+}
+#loginInformation li {
+	padding: 0px;
+}
+#loginInformation label {
+	display: inline;
+	font-size: 14px;
+	line-height: 28px;
+	margin: 0px;
+}
+/*** Order History *****/
+#orderHistory .containerHeader {
+	float: left;
+	line-height: 33px;
+	margin-bottom: 15px;
+}
+#orderHistory {
+	margin-top: 10px;
+}
+#orderHistory .divider {
+	display: none;
+}
+#orderHistory .orderHistoryList {
+	font-size: 14px;
+	border-top: 1px solid #C9C9C9; 
+	line-height: 24px;
+}
+#orderHistory .dateLabel, #orderDetail .dateLabel {
+	margin-top: 0px;
+}
+#orderHistory #orderHistoryOrderNumber {
+	color: #4E4A47;
+}
+#orderHistory .productName,
+#orderHistory .planName {
+	color: #4E4A47;
+	font-size: 14px;
+}
+#orderHistory .statusLabel {
+	color: #4E4A47;
+	font-size: 14px;
+}
+#orderHistory .dateLabel{
+	color: #4E4A47;
+	font-size: 14px;
+}
+#orderHistory .totalCostLabel {
+	color: #4E4A47;
+	font-size: 14px;
+}
+#orderHistory .totalCost {
+	font-size: 14px;
+	color: #4E4A47;
+	font-weight: normal;
+}
+#orderHistory .secondaryButton {
+	color: #332A86;
+	font-size: 14px;
+}
+#orderHistory .secondaryButton:hover {
+	text-decoration: none;
+}
+#orderHistory .mainButton {
+	background: #332A86;
+}
+#orderHistory .filterTimePeriod li:first-child{
+	display: none;
+}
+#orderHistory .filterOrderStatus li:first-child{
+	display:none;
+}
+#orderHistory .filterTimePeriod{
+	float: left;
+}
+#orderHistory .filterOrderStatus{
+	float: left;
+}
+#orderHistory .filter .screenActionButtonContainer {
+	clear: none;
+	float: right;
+	margin: 2px 0px 0 0;
+}
+#orderHistory .productDetailsSmall {
+	padding: 0px;
+}
+
+#orderHistory .detail {
+  float: left;
+  margin-bottom: 0px;
+  width: 240px;
+  line-height: 24px;
+}
+#orderHistory .row {
+  clear: both;
+  overflow: hidden;
+  padding: 10px 0px;
+  border-bottom: 1px solid #C9C9C9;
+}
+#orderHistory #orderHistoryProductList {
+  clear: both;
+  float: left;
+  overflow: hidden;
+  padding-right: 0px;
+  padding-top: 0px;
+  width: 100%;
+}
+/*** Order Detail ****/
+#orderDetail .productDetailsSmall {
+	padding: 10px 0;
+	margin-left: 15px;
+	font-size: 14px;
+	line-height: 28px;
+}
+#orderDetail .productDetailsSmall a{
+	color: #332A86;
+	font-size: 14px;
+	line-height: 28px;
+}
+#orderDetail .price {
+	text-align: right;
+	margin-right: 15px;
+	font-size: 14px;
+	line-height: 28px;
+	margin-top: 10px;
+}
+#orderDetail .payment-method-applied {
+	display: none;
+}
+#orderDetail .taxesNonZero .lineitems{
+	display: none;
+}
+#orderDetail .containerHeader{
+	display:none;
+}
+#orderDetail #orderHistoryOrderNumber {
+    color: #332A86;
+    display: inline-block;
+    float: left;
+    font-weight: bold;
+    width: auto;
+    font-size: 24px;
+}
+#orderDetail .itemPriceContainer {
+	display: none;
+}
+#orderDetail .status, #orderDetail .date{
+	font-size: 12px;
+	color: #4E4A47;
+	font-weight: normal;
+	line-height: 18px;
+}
+#orderDetail .statusLabel, #orderDetail .dateLabel {
+	font-size: 13px;
+	color: #4E4A47;
+	font-weight: bold;
+	line-height: 18px;
+}
+#orderDetail #orderHistoryProductList {
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+}
+#orderDetail #orderSummary {
+	float: none;
+	width: auto;
+	border: 1px solid #cccccc;
+	border-top: 0px;
+	border-radius: 0 0px 6px 6px;
+	-webkit-border-radius: 0 0px 6px 6px;
+}
+#orderDetail #orderSummary .secondaryHeader {
+	border-bottom: 0px;
+	color: #555;
+	padding: 0px;
+	line-height: 28px;
+	font-size: 14px;
+	margin-left: 15px;
+}
+#orderDetail #PaymentandShippingContainer {
+	padding-bottom: 0px;
+	border: 1px solid #ccc;
+	border-radius: 6px 6px 0 0px;
+	-webkit-border-radius: 6px 6px 0 0px;
+}
+#orderSummary .label {
+	text-align: left;
+	margin: 0px;
+	padding: 0px;
+	font-size: 14px;
+	line-height: 28px;
+	margin-left: 30px;
+}
+#orderDetail #orderSummary .label[cdresource="discount"] + div,
+#orderDetail #orderSummary .label[cdresource="discount"]{
+	display: none;
+} 
+#orderSummary .value {
+	text-align: right;
+	margin: 0px;
+	padding: 0px;
+	font-size: 14px;
+	line-height: 28px;
+	margin-right: 15px;
+}
+#orderDetail .screenActionButtonContainer .mainButton {
+	background: #555;
+	margin-top: 30px;
+}
+#orderDetail .screenActionButtonContainer .mainButton:hover,
+#orderDetail .screenActionButtonContainer .mainButton:active,
+#orderDetail .screenActionButtonContainer .mainButton:focus {
+	background: #888;
+}
+#orderDetail .PaymentMethodContainer {
+	width: 99%;
+	padding: 0px;
+	margin: 0px;
+	border: 0px;
+}
+#orderDetail .PaymentMethodContainer .boxHeader {
+	color: #555;
+	font-size: 14px;
+	line-height: 28px;
+	margin-left: 15px;
+}
+#orderDetail .individualPaymentContainer{
+	margin-left: 30px;
+}
+#orderDetail .individualPaymentContainer .cardInfo,
+#orderDetail .individualPaymentContainer .cardInfo .nameOnCard {
+	font-size: 14px;
+	line-height: 28px;
+}
+#orderHistoryProductList .row {
+	padding: 0px;
+	border: 1px solid #c9c9c9;
+	border-top: 0px;
+}
+/*** Payment Insturment ****/
+#payments {
+	margin-top: 10px;
+}
+#payments #GiftCardStoredValueContainer {
+	display: none;
+}
+#payments #createECheckButton {
+	display: none;
+}
+#payments #eChecks {
+	display: none;
+}
+#payments #externalBills {
+
+}
+#payments .externalBillsContainer .detail {
+	width: auto;
+}
+.external-bill-account-name span {
+	font-size: 14px;
+}
+#payments .row {
+  margin: 0px;
+  padding: 15px 0px;
+  width: 100%;
+  font-size: 14px;
+	line-height: 18px;
+}
+#payments a {
+	background: #332A86;
+}
+#payments .secondaryButton {
+	background: none;
+	color: #332A86;
+	font-size: 14px;
+}
+#payments .savedPaymentsContainer {
+	width: 100%;
+	padding: 0px;
+ 	border-top: 1px solid #c9c9c9;
+}
+#payments .action li {
+	text-align: right;
+	line-height: 28px;
+	padding: 0px;
+}
+#payments .action .viewHistory {
+	margin-top: 0px;
+}
+#payments .actionsButtonsContainer .isDefault {
+	line-height: 28px;
+	padding: 0px;
+}
+#paymentForm .address #createNewPaymentAddressButton {
+	margin-top: 15px;
+}
+#paymentForm .payment,
+#paymentForm .address {
+	width: 49%;
+}
+.emptyPaymentContainer {
+	background: none;
+	font-size: 14px;
+	
+}
+#paymentForm .screenActionButtonContainer li {
+	float: right;
+}
+
+#payments .containerHeader {
+    float: left;
+    margin-bottom: 15px;
+    width: 100%;
+}
+#payments .address {
+	font-size: 14px;
+	display: inline-block;
+}
+#payments .payment {
+	margin: 0px 30px 0 0;
+	display: inline-block;
+	min-width: 200px;
+	float: left;
+}
+#payments .cardInfo {
+	font-size: 14px;
+	line-height: 28px;
+}
+#payments #creditcards .detail, #payments #eChecks .detail {
+	width: 50%;
+}
+#payments .externalBillsContainer .actionButtonsContainer {
+	width: auto;
+}
+#payments .cardInfo .nameOnCard {
+	font-size: 14px;
+	line-height: 28px;
+}
+#confirmDeletePayment .content{
+	background: #fcfcfc;
+  border: 1px solid #e5e5e5;
+  padding: 10px;
+  float: left;
+}
+#confirmDeletePayment #primaryActionButtons li {
+	float: right;
+	margin-left: 0px;
+	margin-right: 5px;
+}
+#confirmDeletePayment .content #primaryActionButtons {
+	float: left;
+}
+#confirmDeletePayment .content #primaryActionButtons #removeCreditCard{
+	float: right;
+}
+#transactionHistory .backButton,
+#confirmDeletePayment .content #primaryActionButtons #doNotRemoveCreditCardButton{
+	margin: 0px;
+	background: #555;
+	float: left;
+}
+#confirmDeletePayment .address {
+	display: none;
+}
+#confirmDeletePayment .payment .cardInfo {
+	font-size: 14px;
+	line-height: 28px;
+}
+#transactionHistory .backButton:active,
+#transactionHistory .backButton:hover,
+#transactionHistory .backButton:focus,
+#confirmDeletePayment .content #primaryActionButtons #doNotRemoveCreditCardButton:active,
+#confirmDeletePayment .content #primaryActionButtons #doNotRemoveCreditCardButton:focus,
+#confirmDeletePayment .content #primaryActionButtons #doNotRemoveCreditCardButton:hover{
+	margin: 0px;
+	background: #888;
+}
+#transactionHistory .tableTransactionHistoryHeader {
+	background: #fcfcfc;
+    border-top: 1px solid #e5e5e5;
+    font-size: 13px;
+    border-bottom: 1px solid #e5e5e5;
+}
+#transactionHistory .row, #transactionHistory .alt {
+	font-size: 12px;
+}
+/**** Addresses ****/
+.content #address{
+	margin-top: 10px;
+	width: auto;
+}
+#address .screenActionButtonContainer a {
+  background: #332A86;
+}
+#address .action .isDefault:first-child {
+	display: none;
+}
+#address .actionButtonsContainer .action {
+  float: right;
+  overflow: hidden;
+  line-height: 21px;
+  font-size: 14px;
+  text-align: right;
+}
+#address .isDefault span {
+  float: left;
+  font-size: 14px;
+  line-height: 28px;
+  margin-left: 0;
+  width: 100%;
+  height: auto;
+}
+#address .row {
+  clear: both;
+  overflow: hidden;
+  padding: 0px 0 15px 0;
+  border-bottom: 1px solid #C9C9C9;
+    
+}
+#address .screenActionButtonContainer li{
+	float: right;
+}
+#address .screenActionButtonContainer #cancelCreateAddress,
+#address .screenActionButtonContainer #cancelEditAddress{
+	background: #555;
+}
+#address .screenActionButtonContainer #cancelCreateAddress:hover,
+#address .screenActionButtonContainer #cancelCreateAddress:active,
+#address .screenActionButtonContainer #cancelCreateAddress:focus,
+#address .screenActionButtonContainer #cancelEditAddress:hover,
+#address .screenActionButtonContainer #cancelEditAddress:active,
+#address .screenActionButtonContainer #cancelEditAddress:focus{
+	background: #888;
+}
+#deleteAddress {
+	background: #fcfcfc;
+  border: 1px solid #e5e5e5;
+  padding: 10px;
+  float: left;
+}
+.addressShipToName,
+.addressDisplay {
+	font-size: 14px;
+	line-height: 28px;
+}
+.simpleBillingCreditCard .detail .nameOnCard, 
+.simpleBillingCreditCard .detail .cardTypeLabel, 
+.simpleBillingCreditCard .detail .cardNumber, 
+.simpleBillingCreditCard .detail .expDate, 
+.simpleBillingCreditCard .detail .addressShipToName, 
+.simpleBillingCreditCard .detail .addressLine1, 
+.simpleBillingCreditCard .detail .addressLine2, 
+.simpleBillingCreditCard .detail .addressCityStatePostal, 
+.simpleBillingCreditCard .detail .addressCountry,
+#simpleCreditCardSelectPartialContainer .addressShipToName,
+#simpleCreditCardSelectPartialContainer .addressDisplay{
+	font-size: 12px;
+	line-height: 16px;
+	font-weight: normal;
+}
+#simpleBillingMenuContainer .simpleBillingOptionButton a {
+	color: #ccc;
+}
+#simpleCreateNewBillingAddressButton {
+  float: right;
+  background-image: none;
+  background-repeat: no-repeat;
+  background-position: left center;
+  padding: 0px 0px 0px 21px;
+  margin-right: 8px;
+  color: #332A86;
+  margin-top: 5px;
+}
+#simpleCreditCardEditHeaderContainer {
+	display: none !important;
+}
+#deleteAddress #primaryActionButtons {
+	float: left;
+}
+
+#deleteAddress #primaryActionButtons .submitButton{
+	float: right;
+}
+#deleteAddress #primaryActionButtons .cancelButton{
+	margin: 0px;
+}
+#address .addressShipToName {
+	font-size: 14px;
+	line-height: 21px;
+}
+#address .addressDisplay {
+	font-size: 14px;
+	line-height: 28px;
+}
+#address .containerHeader {
+  border-bottom: 1px solid #C9C9C9;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+}
+#address .isDefault {
+	padding: 0px;
+}
+#address .secondaryButton {
+  display: block;
+  font-size: 14px;
+  color: #332A86;
+  line-height: 28px;
+  margin: 0px;
+}
+#address .secondaryButton:hover {
+  text-decoration: none;
+}
+#address .screenActionButtonContainer {
+	margin-top: 10px;
+}
+#defaultShippingCheckContainer {
+	display: none !important;
+}
+#paymentForm #defaultPaymentCheckContainer #defaultPaymentCheck {
+	
+}
+#paymentForm #defaultPaymentCheckContainer .labelAlignment{
+	margin: 0px;
+}
+/*** Devices *****/
+#devicesContainer {
+	margin-top: 10px;
+}
+#devicesContainer #devicesColumnHeaders {
+	display: none;
+}
+#devicesContainer .subscriberDeviceNameContainer .deviceInformation {
+	margin-top: 0px;
+}
+#devicesContainer .subscriberDeviceNameContainer .subscriberDeviceNickname {
+	line-height: 43px;
+	font-size: 14px;
+	color: #000;
+}
+#devicesContainer .editActionButtons {
+	float: right;
+	margin-top: 4px;
+}
+#devicesContainer .editActionsButtons .saveButton {
+	float: right;
+}
+#devicesContainer .subscriberDeviceRow .deviceImage {
+	margin-left: 10px;
+}
+#devicesContainer .subscriberDeviceNameContainer .subscriberDeviceStartDate {
+	line-height: 48px;
+	padding: 0px;
+	font-size: 14px;
+	font-style: normal;
+}
+#devicesContainer .subscriberDeviceOptions .editButton {
+	height: 48px;
+	line-height: 48px;
+	color: #332A86;
+	display:none !important;
+}
+#devicesContainer .subscriberDeviceOptions {
+	margin: 0px;
+	float: right;
+}
+#devicesContainer .subscriberDeviceOptions .removeButton {
+	vertical-align: middle;
+}
+#devicesContainer #deviceListContainer {
+	border-top: 1px solid #C9C9C9;
+}
+#devicesContainer .containerHeader {
+	margin-bottom: 10px;
+}
+#devicesContainer .row {
+  clear: both;
+  overflow: hidden;
+  padding: 10px 0;
+  border-bottom: 1px solid #C9C9C9;
+}
+#devicesContainer .subscriberDeviceNameContainer .subscriberDeviceStartDate span {
+	font-style: italic;
+}
+#devicesContainer .saveButton {
+	float: right;
+	margin-left: 5px;
+}
+#devicesContainer .inlinePrompt {
+	background: #fcfcfc;
+	border: 1px solid #e5e5e5;
+	padding: 15px;
+}
+#devicesContainer .inlinePrompt .inlinePromptButtons {
+	margin-left: 0px;
+}
+#devicesContainer .inlinePrompt span {
+	font-size: 12px;
+}
+#devicesContainer .subscriberDeviceRow input {
+    float: left;
+    width: 300px;
+}
+#devicesContainer .inlinePrompt .inlinePromptButtons .cancelButton {
+	margin-left: 0px;
+}
+.noItems {
+	background: none;
+	font-size: 14px;
+	color: #000;
+}
+/**** JUNK *****/
+
+
+
+html .pagecontent {
+  text-align: center;
+  margin: 0 auto;
+}
+html .pagecontent .title h1 {
+  font-size: 1.8em;
+  margin: 0 0 20px -20px;
+  text-align: center;
+}
+html .partcontent {
+  float: left;
+  width: 45%;
+  text-align: left;
+}
+
+html .partcontent label {
+  display: block;
+}
+html .partcontent input[type="text"] {
+  width: 100%;
+}
+html .partcontent input[type="password"] {
+  width: 100%;
+}
+html .partcontent .partcontent-loginform {
+  border-left: 1px solid #4E4A47;
+  padding-left: 30px;
+}
+html #loginWelcome {
+  text-align: center;
+  margin: 0 auto;
+  padding: 60px 0 0 0;
+}
+html #loginWelcome p {
+  color: #777777;
+  font-size: 1.25em;
+  font-weight: bold;
+  margin: 0 0 8px;
+}
+
+html[dir=rtl] .partcontent, html[dir=rtl] .pagecontent {
+  text-align: right;
+}
+
+
+.partcontent-forgotpasswordform .description h2 {
+  color: #4E4A47;
+  margin: 10px 0;
+}
+
+.partcontent {
+  width: 60%;
+  margin: 0 auto;
+  text-align: left;
+}
+.partcontent label {
+  display: block;
+}
+.partcontent h1 {
+  font-size: 1.6em;
+}
+
+.btn-action-container a {
+  float: right;
+  margin-left: 10px;
+}
+
+.updatecredentialsform-input-item {
+  margin-top: 15px;
+}
+
+.facebook-container {
+  float: left;
+  overflow: hidden;
+  width: 100%;
+  margin: 10px 0;
+}
+.facebook-container .btn-facebook-signup {
+  float: right;
+}
+
+.partcontent-registrationform .registrationform-acceptterms-label {
+	font-size: 12px;
+}
+
+.partcontent-uvregistrationform .uvregistrationform-uv-link-container {
+  float: left;
+  width: 100%;
+}
+.partcontent-uvregistrationform .uvregistrationform-uv-link-container .uvregistrationform-header {
+  border-bottom: 1px solid #CBCBCB;
+  padding-bottom: 10px;
+}
+.partcontent-uvregistrationform .uvregistrationform-uv-link-container .uvregistrationform-uv-logo-container {
+  float: right;
+  margin-top: 10px;
+}
+.partcontent-uvregistrationform .uvregistrationform-acceptuvterms-label {
+}
+
+.partcontent-uvlogin .uvloginform-uv-link-container {
+  float: left;
+  width: 100%;
+}
+.partcontent-uvlogin .uvloginform-uv-link-container .uvloginform-header {
+  border-bottom: 1px solid #CBCBCB;
+  padding-bottom: 10px;
+}
+.partcontent-uvlogin .uvloginform-uv-link-container .uvloginform-uv-logo-container {
+  float: right;
+  margin-top: 10px;
+}
+.partcontent-uvlogin .validationsummary-uvlogin p {
+  font-size: 18px;
+  color: green;
+  margin-bottom: 10px;
+}
+.partcontent-uvlogin .uvlogin-master-container {
+  width: 100%;
+  text-align: center;
+}
+.partcontent-uvlogin .uvlogin-iframe-container {
+  width: 336px;
+  height: 645px;
+}
+
+.helpContent {
+  padding: 20px 0 0;
+  width: 601px;
+}
+
+.partcontent-forgotpasswordform .description h2 {
+  color: #4E4A47;
+  margin: 10px 0;
+}
+
+.btn-action-container a {
+  float: right;
+  margin-left: 10px;
+}
+.btn-action-container a#backToLogin {
+  background-color: #C5C9CC;
+}
+.btn-action-container a#backToLogin:hover {
+  background-color: #9EA0A3;
+}
+.btn-action-container .btn-signup {
+	display: inline;
+  float: none;
+  font-size: 16px;
+  line-height: 33px;
+  margin: 0;
+  padding: 0;
+  width: auto;
+}
+html[dir=rtl] .partcontent {
+  text-align: right;
+}
+
+.deviceImage.Android_Phone,
+.subscriberDeviceRow .deviceImage.Android_Mobile_-_Phone,
+.subscriberDeviceRow .deviceImage.Android_Mobile_Phone {
+  background-image: url("../Assets/androidphone.png");
+}
+.subscriberDeviceRow .deviceImage.Android_Mobile_-_Tablet, 
+.subscriberDeviceRow .deviceImage.Android_Tablet {
+  background-image: url("../Assets/androidtablet.png");
+}
+.subscriberDeviceRow .deviceImage.Apple_iOS_-_Apple_TV, 
+.subscriberDeviceRow .deviceImage.Mac {
+  background-image: url("../Assets/applelogo.png");
+}
+.subscriberDeviceRow .deviceImage.Flash_-_PC, 
+.subscriberDeviceRow .deviceImage.PC_Mac_-_Flash {
+  background-image: url("../Assets/computer.png");
+}
+.iPad .deviceImage,
+.subscriberDeviceRow .deviceImage.Apple_IOS_-_iPad {
+  background-image: url("../Assets/ipad.png");
+}
+.iPhone .deviceImage,
+.subscriberDeviceRow .deviceImage.Apple_IOS_-_iPhone_iTouch {
+  background-image: url("../Assets/iphone.png");
+}
+.subscriberDeviceRow .deviceImage.Apple_IOS_-_iPod {
+  background-image: url("../Assets/ipod.png");
+}
+.subscriberDeviceRow .deviceImage.Roku_Box {
+  background-image: url("../Assets/roku.png");
+}
+.subscriberDeviceRow .deviceImage.Flash_-_TV, .subscriberDeviceRow .deviceImage.Google_TV_-_Flash, .subscriberDeviceRow .deviceImage.Samsung_TV {
+  background-image: url("../Assets/tv.png");
+}
+.subscriberDeviceRow .deviceImage.Unknown {
+  background-image: url("../Assets/device.png");
+}
+.subscriberDeviceRow .deviceImage.Windows_8_Mobile {
+  background-image: url("../Assets/windowslogo.png");
+}
+.subscriberDeviceRow .deviceImage.Windows_PC {
+  background-image: url("../Assets/windowspc.png");
+}
+.subscriberDeviceRow .deviceImage.Windows_Phone_7, .subscriberDeviceRow .deviceImage.Windows_8_Mobile {
+  background-image: url("../Assets/windowsphone.png");
+}
+.subscriberDeviceRow .deviceImage.Windows_8_PC_Tablet {
+  background-image: url("../Assets/windowstablet.png");
+}
+.subscriberDeviceRow .deviceImage.Xbox {
+  background-image: url("../Assets/xbox.png");
+}
+
+.validation-summary-errors {
+	color: #8A0A0A;
+	background: #fff;
+	border: 1px solid #8A0A0A;
+	font-size: 14px;
+}
+.validation-summary-errors li {
+	color: #8A0A0A;
+	font-size: 14px;
+}
+#externalBills .bottom-border-separator {
+	display: none;
+}
+
+@media only screen and (min-width: 300px) and (max-width: 736px) {
+	.clientBody, #clientBody {
+		width: 95%;
+		margin: 0 auto;
+	}
+	/* No uv link for mobile view in my library*/
+  .libraryContainer #UVNotLinkedContainer {
+    display: none;
+  }
+  #payments .savedPaymentsContainer {
+  	border: 0px;
+  }
+  #cvvContainer {
+    float: left;
+	}
+	input[type="text"], input[type="password"], select {
+    padding: 6px 12px;
+	}
+	#paymentForm .payment, #paymentForm .address {
+    width: 95%;
+	}
+	.screenTitle {
+	    font-size: 24px;
+	    line-height: 48px;
+	    padding: 0;
+	    text-align: center;
+	}
+	#accountInformation .secondaryButton, #accountInformation a {
+    color: #332a86;
+    font-size: 14px;
+    padding: 0;
+	}
+	#accountInformation .screenActionButtonContainer li {
+		text-align: center;
+		line-height: 48px;
+	}
+	#accountInformation .section {
+    overflow: hidden;
+    padding-bottom: 20px;
+    text-align: center;
+	}
+	#orderHistory .secondaryButton, #orderHistory .mainButton {
+    width: 100px;
+	}
+	.subscriberDeviceNameContainer {
+    float: left;
+    width: 90%;
+	}
+	#devicesContainer .subscriberDeviceOptions {
+    float: right;
+    margin: 0;
+    width: 10%;
+	}
+	#devicesContainer .subscriberDeviceOptions .removeButton {
+		margin-top: 8px;
+	}
+	#orderHistory .statusLabel {
+		width: auto;
+	}
+	#orderDetail .statusLabel {
+		width: 120px;
+	}
+	#orderHistory .detail {
+	    float: right;
+	    line-height: 24px;
+	    margin-bottom: 0;
+	    width: 50%;
+	}
+	#orderHistory .action {
+    clear: both;
+    float: right;
+	}
+	.subscriberDeviceNickname {
+    float: left;
+    width: 70px;
+	}
+}

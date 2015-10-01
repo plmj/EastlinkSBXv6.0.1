@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="http://www.facebook.com/2008/fbml" >
+<head>
+	<title>Eastlink Movie Player</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />	
+	<meta http-equiv="P3P" content='CP="CAO DSP COR CURa ADMa DEVa TAIa PSAa PSDa IVAi IVDi CONi OUR SAMo OTRo BUS PHY ONL UNI PUR COM NAV INT DEM CNT STA PRE"' />
+	<meta http-equiv="Page-Enter" content="progid:DXImageTransform.Microsoft.Fade(Duration=0)" />
+	<meta http-equiv="Page-Exit" content="progid:DXImageTransform.Microsoft.Fade(Duration=0)" />
+	<meta property="og:site_name" content="Eastlink" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="fragment" content="!" />
+    <meta name="robots" content="index,follow"/>
+    <meta name="keywords" content="keywords" />
+    <meta name="googlebot" content="noarchive"/>
+    <meta name="bingbot" content="noarchive"/>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link href="Content/StyleSheets/cdfull_site.css" rel="stylesheet" type="text/css" />
+	<link href="Content/Fonts/font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+	<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+	<noscript>
+		<meta http-equiv="refresh" content="0;URL=dependency.html" />
+	</noscript>
+</head>
+<body>	
+  <div><a href="#!productpage"></a></div>
+  <div id="content"></div>
+	<div class="wrapper">
+		<div cdtype="navigationmenu" id="navigationMenuContainer" class="navigation-menu"></div>      
+		<div id="contentWrapper">
+      <div class="interiorPageWrapper">
+		    <div class="content">
+			    <div cdtype="pagemenu" cdchildtemplatename="page" id="pagemenu" class="pagingControl"></div>
+          <div cd="flexc" cdtype="page" cdpagetype="personpage" cdsubtype="person" id="cdPageContainer" style="display: none;"></div>
+          <div class="clientBody uvClientBody">
+            <div class="productDetailsComponent personDetailsComponent">
+              <!--<div class="section1">
+                <div cdtype="image" id="image" class="productImageContainer"></div>  
+                <div cdtype="additionalinfo" class="additionalInfoContainer" id="additionalinfo"></div>
+                <div cdtype="people" cdchildtemplatename="relatedperson" id="relatedPeople" class="relatedPeopleContainer"></div>
+              </div>-->
+              <div class="section2and3">
+                <div class="section2">
+                  <div cdtype="title" id="title" class="productName"></div>  
+                  <div class="personalDetails">
+                    <!--<div cdtype="image" id="image2" class="productImageContainer"></div>  -->
+                    <div cdtype="hometown" id="hometown"></div>
+                    <div cdtype="birthdate" id="birthdate"></div>
+                    <!--<div cdtype="additionalinfo" class="additionalInfoContainer" id="additionalinfo2"></div>
+                    <div cdtype="people" cdchildtemplatename="relatedperson" id="relatedPeople2" class="relatedPeopleContainer"></div>-->
+                  </div>
+                  <div cdtype="description" id="description" class="productDescription"></div>  
+                </div>
+                <!--<div cdtype="relatedvideos" id="relatedVideosContainer" cdchildtemplatename="relatedvideo" class="productlist-slider relatedMediaContainer"></div>
+                <div cdtype="relatedimages" id="relatedImagesContainer" cdchildtemplatename="relatedimage" class="productlist-slider relatedMediaContainer"></div>-->
+                <div cdtype="relatedproducts" id="relatedProductsContainer" cdtemplatename="sliderlist" cdchildtemplatename="partialproduct" class="productlist-slider crossSellProducts"></div>
+              </div>
+            </div>
+          </div>            
+                    
+                    
+          <div cdType="sp" style="display:none;" class="playerControl"></div>
+          <a id="hidden_link" href="" target="_blank" style="display:none"></a>
+          <div cdType="dlm" style="display:none;" class="dlmControl">
+              <iframe id="downloadiFrame"></iframe> 
+          </div>
+          <div cdtype="cartpopup" style="display: none;" id="cartPopupContainer" class="cartPopupControl"></div>
+		    </div>				
+	    </div>
+    </div>
+    <div cdtype="footer" id="footerWrapper" class="clearfix" style="display: none;"></div>
+	</div>		
+	<script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="Scripts/bootstrap.min.js"></script>
+	<script type='text/javascript' src="https://eastlink.sbx1.cdops.net/html/full/v6.0.1/Scripts/contentdirect.ui.js"></script>
+	<script type="text/javascript" src="Scripts/cdfull.js"></script>
+</body>
+</html>

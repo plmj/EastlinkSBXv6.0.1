@@ -1,0 +1,72 @@
+﻿//@import "layout";
+//@import "loginwelcome";
+//@import "sessionexpired";
+//@import "firsttimeuserloginsection";
+//@import "registrationheader";
+
+@import "loginform";
+@import "signupbuttons";
+
+
+html {
+    .pagecontent 
+    {
+        width: 85%;
+        text-align:center;
+        margin: 0 auto;
+
+        .title { 
+            @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		    margin-top: 20px;
+        }
+            h1 { 
+                font-size: 1.8em; 
+                margin: 0 0 20px -20px;
+                text-align:center;
+            }
+        }        
+    }
+
+    .partcontent {
+        float:left;
+        width:45%;
+        text-align:left;
+        @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		    width: 86%;
+        }
+        label { display:block; }
+        h1 { font-size:1.6em; }
+        input[type="text"] { width:100%; }
+        input[type="password"] { width:100%; }
+
+        
+        .partcontent-loginform {
+            border-left:1px solid #696969;
+            padding-left:30px;
+        }
+    }
+
+    #loginWelcome {
+	    text-align:center;
+	    margin: 0 auto;	
+	    padding: 60px 0 0 0;
+        p {
+	        color: #777777;
+            font-size: 1.25em;
+            font-weight: bold;
+            margin: 0 0 8px;
+        }	
+	    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width)  {
+		    margin: 0;
+		    padding-top: 60px;
+	    }	
+    }
+    
+
+}
+
+html[dir=rtl] {
+    .partcontent, .pagecontent {
+        text-align:right;
+    }
+}

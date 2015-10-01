@@ -1,0 +1,12 @@
+﻿.additionalInfoLink span
+{
+	font-size: 1.0em;
+}
+
+@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+	.productDetailsComponent .additionalInfoLink
+	{
+		width: 46%;
+		float: left;
+	}
+}

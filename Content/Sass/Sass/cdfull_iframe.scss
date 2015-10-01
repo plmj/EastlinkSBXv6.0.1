@@ -1,0 +1,54 @@
+﻿/*Following code will hide Entire UV related items */
+body *[cduv="true"], body *[cduv="True"]
+{
+	display:block;
+}
+
+/*Following code will hide Entire Facebook related items */
+body *[cdFacebook="true"], body *[cdFacebook="True"]
+{
+	display:block;
+}
+
+.facebook-container.top
+{
+	display:none;
+}
+
+#checkoutBackButton {
+	display:none;
+}
+
+/* Functional Style */
+body ._messageOnly 
+{
+    display:none;
+}
+
+body ._redirect 
+{
+    display:block;
+}
+
+.dependencyContainer
+{
+    width: 600px;
+    height: auto;
+    padding: 30px;
+    margin: 0 auto;
+}
+
+/* Following code will show/hide Quantity field in Order Summary */
+/*body ._showQuantity
+{
+    display:block;
+}
+*/
+@media only screen and (min-width: 320px) and (max-width: 540px)
+{
+    /* No uv link for mobile view in my library*/    
+    .libraryContainer #UVNotLinkedContainer
+    {		
+        display:none;
+    }
+}

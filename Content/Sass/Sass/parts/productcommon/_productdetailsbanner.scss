@@ -1,0 +1,214 @@
+@import "viewingbadges";
+
+
+.product-details-banner-container {
+    position: relative;
+    float: left;    
+    background-color: #e6e7e8;
+    min-height: 50px;
+	padding: 0.8em 0.5em 0.5em 1em;
+    margin-bottom: 10px;
+	border-radius: 5px;
+	display:inline-block;
+	width: 100%;
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+        width: 90%;
+    }
+	& .mainButton.accessAction {
+		@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+			font-size: 10px;
+        }		
+	}
+    & .product-details-banner-container-arrow {
+        bottom: 100%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+        border-color: rgba(136, 183, 213, 0);
+        border-bottom-color: #E6E7E8;
+        border-width: 15px;
+        left: 50%;
+        margin-left: -15px;
+    }
+
+    & .icons-container li {
+        float: left;
+    }
+
+    & .left-section {        
+        float: left;        
+        width: 65%;        
+		
+		font-size: 0.85em;
+        @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+            width: 100%;
+        }
+    }
+
+    & .right-section {        
+        float: right;
+        width: 30%;
+        margin-right: 15px;
+
+        @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+            float: left;
+			width: 100%;
+        }
+    }
+
+    & .noRatingsContainer,
+    & .averageRatingContainer {
+        display: none;
+    }
+
+    & .product-top-row {
+        display: block;
+        float: left;
+        width: 100%;
+    }
+
+    & .product-list-row {        
+        float: left;
+        width: 100%;
+		margin-bottom: 10px;
+    }    
+
+    & .purchase-upgrades-container {
+        float: right;
+        display: inline-block;
+    }
+
+    & .product-title-container {
+        display: inline-block;
+        float: left;
+        max-width: 245px;
+    }
+
+    & .more-list-actions {
+        float: right;
+    }
+
+    & .grid-product-image-container {
+        width: 165px;
+        height: 225px;
+        overflow: hidden;
+        cursor: pointer;
+    }
+
+    & .product-banner-title {
+        font-size: 1.3em;
+		font-weight: bold;
+        color: #4691d7;
+        text-decoration: underline;
+
+        @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+            line-height: 22px; 
+			font-size: 1.7em; 
+			color: #4691d7; 
+			-ms-text-overflow: ellipsis; 
+			-o-text-overflow: ellipsis; 
+			text-overflow: ellipsis; 
+			white-space: nowrap; 
+			overflow: hidden; 
+			display: block; 
+			width: 90%;
+        }
+    }
+
+    & .movie-data-list {
+        display: inline;
+    }
+
+    & .product-banner-movie-data {
+        float: left;
+    }
+
+    & .run-time-text {
+        margin-right: 20px;
+    }
+
+    & .actions {
+        float: left;
+    }
+
+    & .purchase-date-container {
+        float: left;
+        width: 100%;
+    }
+
+	& .close-button {
+		float:right;
+		margin-right: 5px;		
+		font-weight: bold;
+		& .fa {
+			font-size: 1.3em;
+		}		
+	}
+    & .season-number-text {
+        margin-right: 2px;
+    }
+
+    & .purchase-date-text {
+    }
+
+    & .short-description-text {
+        line-height:1.4em;
+    }
+
+    & .release-date-text {
+        margin-right: 3px;
+		@media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+			font-size: 15px;
+        }
+    }
+
+    & .product-details-action-container {
+        float: left;
+        width: 30%;
+        padding: 5px;
+        background-color: grey;
+    }
+
+    & .view-status {
+        float: right;
+    }       
+
+    & .UVLogoBugContainer {
+        background-image: url("../Assets/UVlogoBug.png");
+        width: 18px;
+        height: 17px;
+        background-repeat: no-repeat;
+        float: left;
+        text-indent: -9000px;
+        margin-top: 10px;
+    }
+
+	& .pricingPlanComponent {
+		width: 200px;
+		& .actionContainer a {
+			font-size: 12px;
+			height: 26px;
+            line-height: 18px;
+			& span, & .finalPrice {
+				margin: 0;
+				padding: 0;
+			}
+			& .beforeDiscountPrice,
+			& .upgradeToPrefix,
+			& .planName {
+				margin-right: 2px;
+			}
+		}
+		& .uvImageContainer {
+			padding-right: 5px;
+			margin:0;
+		}
+	}
+}
+
+
+
+

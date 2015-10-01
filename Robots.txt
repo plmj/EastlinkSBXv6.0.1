@@ -1,0 +1,19 @@
+﻿User-Agent: *
+Disallow: /ordering.html
+Disallow: /accountmanagement.html
+Disallow: /browse.html
+Disallow: /ecopy.html
+Disallow: /download.html
+Disallow: /dependency.html
+Disallow: /bundleproduct.html
+Disallow: /bundleoptions.html
+Disallow: /ecopylogin.html
+Disallow: /ecopyuvregistration.html
+Disallow: /episodicproduct.html
+Disallow: /error.html
+Disallow: /search.html
+Disallow: /seriesproduct.html
+Disallow: /shoppingcart.html
+Disallow: /uvregistration.html
+Disallow: /redemption.html
+http://cdfull.cdtv.lab/web_sitemap_131b5b79.xml.gz # Added by Google Sitemap Generator

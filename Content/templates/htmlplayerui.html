@@ -1,0 +1,170 @@
+<link href="Content/Fonts/font-awesome-4.0.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<div class="asc-player-container asc-player-htmlplayer-container">
+    <div class="asc-player-media-control asc-player-htmlplayer">
+        <div class="asc-player-progress-container">
+            <progress class="asc-player-progress" value="0" min="0"><span id="progress-bar"></span></progress>
+            <input class="asc-player-scrubber" type="range" step="1" value="0" />
+        </div>
+        <div class="asc-player-control-left">
+            <a class="asc-player-play"><i class="fa fa-play"></i></a>
+            <a class="asc-player-pause"><i class="fa fa-pause"></i></a>
+            <a class="asc-player-stop"><i class="fa fa-stop"></i></a>
+            <div class="asc-player-volume-controls">
+                <a class="asc-player-audio-on"><i class="fa fa-volume-up"></i></a>
+                <a class="asc-player-audio-off"><i class="fa fa-volume-off"></i></a>
+                <div class="asc-player-volume-slider-controls">
+                    <progress class="asc-player-volume-progress" min="0" max="100" value="0"></progress>
+                    <input class="asc-player-volume-slider" type="range" step="1" min="0" max="100" value="0" />
+                </div>
+            </div>
+            <div class="asc-player-time">
+                <span class="asc-player-current-time">00:00:00</span>
+                <span>/</span>
+                <span class="asc-player-duration">00:00:00</span>
+            </div>
+        </div>
+        <div class="asc-player-control-right">
+            <div class="asc-player-quality-indicator" style="display: none;">
+                <div class="asc-player-quality-hd asc-player-icon-container"><img src="Content/Assets/hdicon.png" /></div>
+                <div class="asc-player-quality-bars asc-player-icon-container"><div class="asc-player-quality-bars-icon"></div></div>
+            </div>
+            <a class="asc-player-acc-button"><i class="fa fa-cog"></i></a>
+            <div class="asc-player-acc-menu">
+                <div class="asc-player-acc-menu-container">
+                    <ul class="asc-player-acc-menu-left">
+                        <li>
+                            <label for="asc-player-acc-font-family" cdresource="label_font_family">Font Family:</label>
+                            <select id="asc-player-acc-font-family" class="asc-player-acc-font-family asc-player-acc-setting">
+                                <option value="Arial, Helvetica, sans-serif" cdresource="option_arial">Arial</option>
+                                <option value="Verdana, Geneva, sans-serif" cdresource="option_verdana">Verdana</option>
+                                <option value="&quot;Times New Roman&quot;, Times, serif" cdresource="option_times_new_roman">Times New Roman</option>
+                                <option value="Georgia, serif" cdresource="option_georgia_font">Georgia</option>
+                                <option value="&quot;Courier New&quot;, Monaco, monospace" cdresource="option_courier_new">Courier New</option>
+                                <option value="Impact, Charcoal, sans-serif" cdresource="option_impact">Impact</option>
+                            </select>
+                        </li>
+                        <li>
+                            <label for="asc-player-acc-font-size" cdresource="label_font_size">Font Size:</label>
+                            <select id="asc-player-acc-font-size" class="asc-player-acc-font-size asc-player-acc-setting">
+                                <option value="0.5em" cdresource="option_small">Small</option>
+                                <option value="1.0em" cdresource="option_medium">Medium</option>
+                                <option value="1.5em" cdresource="option_large">Large</option>
+                                <option value="2.0em" cdresource="option_extra_large">Extra Large</option>
+                            </select>
+                        </li>
+                        <li>
+                            <label for="asc-player-acc-font-style" cdresource="label_font_style">Font Style:</label>
+                            <select id="asc-player-acc-font-style" class="asc-player-acc-font-style asc-player-acc-setting">
+                                <option value="italic" cdresource="option_italic">Italic</option>
+                                <option value="normal" cdresource="option_normal">Normal</option>
+                            </select>
+                        </li>
+                        <li>
+                            <label for="asc-player-acc-font-weight" cdresource="label_font_weight">Font Weight:</label>
+                            <select id="asc-player-acc-font-weight" class="asc-player-acc-font-weight asc-player-acc-setting">
+                                <option value="normal" cdresource="option_normal">Normal</option>
+                                <option value="bold" cdresource="option_bold">Bold</option>
+                                <option value="bolder" cdresource="option_bolder">Bolder</option>
+                                <option value="lighter" cdresource="option_lighter">Lighter</option>
+                            </select>
+                        </li>
+                        <li>
+                            <label for="asc-player-acc-font-color" cdresource="label_font_color">Font Color:</label>
+                            <select id="asc-player-acc-font-color" class="asc-player-acc-font-color asc-player-acc-setting">
+                                <option class="asc-player-acc-option-white" value="#FFFFFF" cdresource="option_white">White</option>
+                                <option class="asc-player-acc-option-black" value="#000000" cdresource="option_black">Black</option>
+                                <option class="asc-player-acc-option-red" value="#FF0000" cdresource="option_red">Red</option>
+                                <option class="asc-player-acc-option-green" value="#00FF00" cdresource="option_green">Green</option>
+                                <option class="asc-player-acc-option-blue" value="#0000FF" cdresource="option_blue">Blue</option>
+                                <option class="asc-player-acc-option-yellow" value="#FFFF00" cdresource="option_yellow">Yellow</option>
+                                <option class="asc-player-acc-option-magenta" value="#FF00FF" cdresource="option_magenta">Magenta</option>
+                                <option class="asc-player-acc-option-cyan" value="#00FFFF" cdresource="option_cyan">Cyan</option>
+                            </select>
+                        </li>
+                    </ul>
+                    <ul class="asc-player-acc-menu-right">
+                        <li>
+                            <label for="asc-player-acc-font-opacity" cdresource="label_font_opacity">Font Opacity:</label>
+                            <select id="asc-player-acc-font-opacity" class="asc-player-acc-font-opacity asc-player-acc-setting">
+                                <!--<option value="0" cdresource="option_0_percent">0%</option>-->
+                                <option value="0.25" cdresource="option_25_percent">25%</option>
+                                <option value="0.5" cdresource="option_50_percent">50%</option>
+                                <option value="0.75" cdresource="option_75_percent">75%</option>
+                                <option value="1" cdresource="option_100_percent">100%</option>
+                            </select>
+                        </li>
+                        <li>
+                            <label for="asc-player-acc-drop-shadow" cdresource="label_drop_shadow">Drop Shadow:</label>
+                            <select id="asc-player-acc-drop-shadow" class="asc-player-acc-drop-shadow asc-player-acc-setting">
+                                <option value="0" cdresource="option_none">None</option>
+                                <option value="1px 1px 1px rgba(150, 150, 150, 1)" cdresource="option_drop_shadow">Drop Shadow</option>
+                                <option value="1px 1px 0px rgba(150, 150, 150, 1)" cdresource="option_raised">Raised</option>
+                                <option value="-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" cdresource="option_outline">Outline</option>
+                            </select>
+                        </li>
+                        <li>
+                            <label for="asc-player-acc-background-color" cdresource="label_background_color">Background Color:</label>
+                            <select id="asc-player-acc-background-color" class="asc-player-acc-background-color asc-player-acc-setting">
+                                <option class="asc-player-acc-option-white" value="#FFFFFF" cdresource="option_white">White</option>
+                                <option class="asc-player-acc-option-black" value="#000000" cdresource="option_black">Black</option>
+                                <option class="asc-player-acc-option-red" value="#FF0000" cdresource="option_red">Red</option>
+                                <option class="asc-player-acc-option-green" value="#00FF00" cdresource="option_green">Green</option>
+                                <option class="asc-player-acc-option-blue" value="#0000FF" cdresource="option_blue">Blue</option>
+                                <option class="asc-player-acc-option-yellow" value="#FFFF00" cdresource="option_yellow">Yellow</option>
+                                <option class="asc-player-acc-option-magenta" value="#FF00FF" cdresource="option_magenta">Magenta</option>
+                                <option class="asc-player-acc-option-cyan" value="#00FFFF" cdresource="option_cyan">Cyan</option>
+                            </select>
+                        </li>
+                        <li>
+                            <label for="asc-player-acc-background-opacity" cdresource="label_background_opacity">Background Opacity:</label>
+                            <select id="asc-player-acc-background-opacity" class="asc-player-acc-background-opacity asc-player-acc-setting">
+                                <option value="0" cdresource="option_0_percent">0%</option>
+                                <option value="0.25" cdresource="option_25_percent">25%</option>
+                                <option value="0.5" cdresource="option_50_percent">50%</option>
+                                <option value="0.75" cdresource="option_75_percent">75%</option>
+                                <option value="1" cdresource="option_100_percent">100%</option>
+                            </select>
+                        </li>
+                    </ul>
+                    <div class="asc-player-acc-menu-bottom">
+                        <a type="button" class="asc-player-acc-reset" cdresource="reset_text">Reset</a>
+                        <a type="button" class="asc-player-acc-close" cdresource="close_text">Close</a>
+                    </div>
+                </div>
+            </div>
+            <a class="asc-player-closedcaptionicon"><img src="Content/Assets/cc.png" /></a>
+            <div class="asc-player-captions-audio"></div>
+            <a class="asc-player-fullscreen-expand"><img src="Content/Assets/fullscreen_expand.png" /></a>
+            <a class="asc-player-fullscreen-collapse"><img src="Content/Assets/fullscreen_collapse.png" /></a>
+        </div>
+    </div>
+    <div class="asc-player-message-box" style="display: none;">
+        <div class="asc-player-message-box-message-container">
+            <span class="asc-player-message-box-message">Message text goes here</span>
+        </div>
+        <div class="asc-player-message-box-button-container">
+            <a class="asc-player-message-box-ok-button" style="display: none;"><span cdresource="ok">OK</span></a>
+            <a class="asc-player-message-box-cancel-button" style="display: none;"><span cdresource="cancel">Cancel</span></a>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    // The HTML player UI controller can be accessed as follows:
+    window.ascendon.htmlplayer.events.on('htmlplayer.readytoplaycompleted', function (e) {
+        /*ascendon.htmlplayer.uiController.setCaptionStyles({
+         'font-family': 'Verdana, sans-serif',
+         'font-size': '1.2em',
+         'font-style': 'normal',
+         'color': 'orangered',
+         'opacity': '0.5'
+         'text-shadow': '2px 2px #fff',
+         'font-weight': 'bold',
+         'background-color': '#ffd800',
+         });*/
+
+        // Reset captions
+        /*ascendon.htmlplayer.uiController.resetCaptionStyles();*/
+    });
+
+</script>

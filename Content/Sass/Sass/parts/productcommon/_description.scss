@@ -1,0 +1,9 @@
+﻿.productDetailsComponent .productDescription {
+    display: inline;
+    font-size: .9em;
+    line-height: 29px;
+
+    @media only screen and (min-width: $base-mobile-min-width) and (max-width: $base-mobile-max-width) {
+		font-size: 1.2em;
+    }
+}

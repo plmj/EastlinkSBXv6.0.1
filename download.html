@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="P3P" content='CP="CAO DSP COR CURa ADMa DEVa TAIa PSAa PSDa IVAi IVDi CONi OUR SAMo OTRo BUS PHY ONL UNI PUR COM NAV INT DEM CNT STA PRE"' />
+	<meta http-equiv="Page-Enter" content="progid:DXImageTransform.Microsoft.Fade(Duration=0)" />
+	<meta http-equiv="Page-Exit" content="progid:DXImageTransform.Microsoft.Fade(Duration=0)" />		
+	<title>Eastlink Movie Player</title> 
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+	<link href="Content/StyleSheets/cdfull_site.css" rel="stylesheet" type="text/css" />
+  <script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script type='text/javascript' src="https://eastlink.sbx1.cdops.net/html/full/v6.0.1/Scripts/contentdirect.ui.js"></script>		
+	<script type="text/javascript" src="Scripts/cdfull.js"></script>  
+    
+	<script type="text/javascript">
+	    var imageUrl, prodName, prodId, planId, dcCode;
+	    $.cd.ready(function () {
+	        var cdInfo = $.cd.get_containerInfo();
+	        imageUrl = $.cd.getValueFromCache("__dImg", null, true);
+	        prodName = $.cd.getValueFromCache("__dName", null, true);
+
+	        var browserInfo = $.cd.get_browserInfo();
+	        if (browserInfo.hasSilverlight) {
+	            StorefrontInternalAPI = new ContentDirect.UI.Storefront(cdInfo.containerId, "sdlm");
+	            StorefrontScriptAPI = new ContentDirect.UI.Storefront.ClientAPI();
+	            StorefrontScriptAPI.RegisterEventCallback("DLMEventListener");
+	            StorefrontInternalAPI.initialize();
+	        }
+	        else {
+	            $("#Step1").addClass("active");
+
+	            $("#installProductImage").attr("src", imageUrl);
+	            $("#installProductName").text(prodName);
+
+	            $("#deviceNameForm").hide();
+	            $("#silverlightInstall").show();
+	            $("#installInstructions").show();
+	        }
+	    });
+	    $.cd.playerReady(function () {
+	        var containerId = $('body').find('[cd]').attr('id');
+
+	        var systemId = $.cd.getQueryStringValue('systemId', $.cd.getCookie('cd_systemId'));
+	        var chId = $.cd.getQueryStringValue('channelId', $.cd.getCookie('cd_channelId'));
+	        var language = $.cd.getQueryStringValue('language', $.cd.getCookie('cd_language'));
+	        var sessionId = $.cd.getCookie("__sId");
+	        var initParams = "XapUrl={0},Language={7},Width={1},Height={2},ProductIdToPlay={3},PricingPlanIdToPlay={4},SessionId={5},Login={6},DeliveryCapabilityId={8},SubscriberId={9}";
+	        initParams = initParams.replace("{0}", defaultsettings.customDLMXAPLocation);
+	        initParams = initParams.replace("{1}", 200);
+	        initParams = initParams.replace("{2}", 26);
+	        initParams = initParams.replace("{3}", $.cd.getQueryStringValue("___pId"));
+	        initParams = initParams.replace("{4}", $.cd.getQueryStringValue("___pPlanId"));
+	        initParams = initParams.replace("{5}", sessionId);
+	        initParams = initParams.replace("{6}", $.cd.getQueryStringValue("___l"));
+	        initParams = initParams.replace("{7}", language);
+	        initParams = initParams.replace("{8}", dcCode);
+	        initParams = initParams.replace("{9}", $.cd.get_loginInfo().subId);
+	        $('#' + containerId).attr('initParams', initParams);
+	    });
+	</script>
+    <script type="text/javascript">
+        function DLMEventListener(type, target, keyword) {
+            switch (type) {
+                case "InstallState":
+                    if (keyword == 'NotInstalled') {
+                        //$("#deviceNameForm").show();
+                        $("#silverlightInstall").hide();
+                        $("#installInstructions").show();
+                        $('#txtDeviceNickname').focus();
+                        $('#txtDeviceNickname').focusout(onSetDeviceNickname);
+                        $("#dlmAppContainer").addClass("active");
+                    }
+                    else if (keyword == 'Installing') {
+                        $("#cancelBtn").hide();
+                    }
+                    else if (keyword == 'Installed') {
+                        $("#queuedProductImage").attr("src", imageUrl);
+                        $("#queuedProductName").text(prodName + '.');
+                        $("#queueInstructions").show();
+                        $("#installInstructions").hide();
+                    }
+                    else {
+                    }
+                    break;
+                case "QueueForDownload":
+                    if (keyword == 'Queued') {
+                    }
+                    else if (keyword == 'Duplicate') {
+                    }
+                    break;
+                case "Error":
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        function onSetDeviceNickname() {
+            if ($('#txtDeviceNickname').val() != "") {
+                if (StorefrontScriptAPI && StorefrontScriptAPI.get_IsReady()) {
+                    StorefrontScriptAPI.SetDeviceNickname($('#txtDeviceNickname').val());
+                }
+            }
+            else {
+                alert('Please enter a device nickname.');
+                $('#txtDeviceNickname').focus();
+            }
+        }
+
+        function installSilverlight() {
+            window.open('http://www.microsoft.com/getsilverlight/Get-Started/Install/Default.aspx');
+            //need to call this on the parent page
+            parent.$.cd.hideModal()
+        }
+
+        function hideModal() {
+            parent.$.cd.hideModal()
+        }
+
+    </script>   
+</head>
+<body id="downloadBody">
+    <div id="dlmInstructions">
+        <div id="installInstructions" style="display:none;">
+        		<img class="downloadLogo" src="Content/Assets/logo-eastlink-square.png" />
+            <h1>Enjoy watching your purchases anytime, anywhere. Install the Eastlink Media Manager to download titles to your device.</h1>
+						
+            <div id="deviceNameForm" style="display:none;">
+                <label>Device Name</label>
+                <input type="text" name="txtDeviceNickname" id="txtDeviceNickname" value="Laptop" class="formInput" width="280"/>
+            </div>
+            
+            <div id="silverlightInstall" class="silverlightPopup" style="display:none;">
+			        <ul>
+				        <li class="silverlightTitle">Silverlight Plugin is required.</li>
+				        <li class="instruction">Click the install button below to install the Silverlight plugin.</li>
+				        <li class="installSilverlightButton">
+					        <a href="javascript:installSilverlight();" class="mainButton">Install Silverlight</a>
+				        </li>
+	                    <li class="instruction">Clicking the button above will take you to a new window where you can quickly download and install Silverlight.  Once the installation process is complete, return to this page and complete your download.</li>
+			        </ul>
+		        </div>
+        </div>
+        <div id="queueInstructions" style="display:none;">
+            <img class="downloadLogo" src="Content/Assets/logo-eastlink-square.png" />
+            <h1>Launch the Eastlink Media Manager to download titles to your device.</h1>
+            <h1>Enjoy your purchases on the go with our mobile apps!</h1>
+            <a class="deviceDownloadApple" href=""><img src="Content/Assets/app_store_badge.png" /></a>
+		        <a class="deviceDownloadAndroid" href=""><img src="Content/Assets/google_play_app.png" /></a>
+        </div>
+        <div id="dlmAppContainer">
+	            <div cd="sps" cdType="sdlm" initParams="" id="dlmApp"></div>
+	            <!--<div class="cancel-btn-wrapper">
+	                <a id="cancelBtn" href="javascript:window.close();" class="mainButton cancelAction" style="display:none;">Cancel</a>
+	            </div>-->
+	        	</div>
+    </div>
+    
+</body>
+</html>
